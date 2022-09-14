@@ -1,0 +1,6 @@
+.delete_row{
+    text-align: center;
+}
+.delete_row > img{
+    width: 30px;
+}

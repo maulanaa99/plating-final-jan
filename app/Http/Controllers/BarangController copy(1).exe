@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Barang;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\DataTables;
+
+
+class BarangController extends Controller
+{
+    public function index()
+    {
+        $barang = Barang::all();
+        return view('barang', compact('barang'));
+    }
+
+    public function tambah()
+    {
+        return view('barang-tambah');
+    }
+
+    public function simpan(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'harga' => 'required',
+            'qty' => 'required'
+        ]);
+
+        DB::table('barang')->insert([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'qty' => $request->qty
+        ]);
+        return redirect()->route('barang')->with('success', 'Data Berhasil Disimpan!');
+    }
+
+    public function edit($id)
+    {
+        $barang = DB::table('barang')->where('id', $id)->first();
+        return view('barang-edit', ['barang' => $barang]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        DB::table('barang')->where('id', $request->barang_id)->update([
+            'nama' => $request->nama,
+            'harga' => $request->harga,
+            'qty' => $request->qty
+        ]);
+        return redirect('barang')->with('success', 'Data berhasil diperbarui');
+    }
+
+    public function delete($id)
+    {
+        $barang = Barang::find($id);
+        $barang->delete();
+        return redirect()->back();
+    }
+}
