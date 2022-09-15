@@ -70,8 +70,7 @@
 
                                         <div class="col-md-6">
                                             <label>Kirim Assy</label>
-                                            <input type="text" id="kirim_assy" name="kirim_assy" class="form-control"
-                                                >
+                                            <input type="text" id="kirim_assy" name="kirim_assy" class="form-control">
                                         </div>
 
                                     </div>
@@ -110,6 +109,17 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function () {
+            $('#qty_troly').keyup(function(){
+                var qty_troly = $('#qty_troly').val();
+                var qty_trolly = $('#qty_trolly').val();
+                var kirim_assy = $('#kirim_assy').val();
+
+                $('#jumlah_kirim').val(qty_trolly);
+            });
+        });
+    </script>
 
 
     <script type="text/javascript">
@@ -144,9 +154,10 @@
                 var std_qty = $('#qty_trolly').val();
                 var stok = $('#stok').val();
 
-                var total_kirim = if(parseInt(qty_troly)<parseInt(std_qty)){
-                    parseInt(std_qty) == parseInt(qty_troly)
-                };
+                var total_kirim =
+                    if (parseInt(qty_troly) < parseInt(std_qty)) {
+                        parseInt(std_qty) == parseInt(qty_troly)
+                    };
                 console.log('total_kirim')
             });
         });

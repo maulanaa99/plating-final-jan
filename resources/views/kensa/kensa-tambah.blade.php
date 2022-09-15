@@ -294,7 +294,7 @@
                                             Submit</button>
                                         <button class="btn btn-danger mr-1" type="reset"> <i
                                                 class="fa fa-trash-restore"></i> Reset</button>
-                                        <a href="#" class="btn btn-icon icon-left btn-warning">
+                                        <a href="{{ route('kensa') }}" class="btn btn-icon icon-left btn-warning">
                                             <i class="fas fa-arrow-left"></i> Kembali</a>
                                     </div>
                                 </div>
