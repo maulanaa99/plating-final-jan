@@ -46,41 +46,46 @@
 
                                         <div id="detail_part"></div>
 
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-6">
                                             <label>Qty Trolly</label>
                                             <div class="input-group">
                                                 <input type="text" id="qty_troly" name="qty_troly"
-                                                    value="{{ $d->qty_troly }}" class="form-control">
+                                                    value="{{ $d->qty_troly }}" placeholder="Masukkan Qty Trolly ..." class="form-control">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">Pcs </span>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="col-md-6">
                                             <label>No Kartu</label>
-                                            <input type="text" id="no_kartu" name="no_kartu" class="form-control">
+                                            <input type="text" id="no_kartu" name="no_kartu" value="{{ $kode }}"
+                                                class="form-control">
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <label>Jumlah Kirim</label>
-                                            <input type="text" id="jumlah_kirim" name="jumlah_kirim" class="form-control"
-                                                readonly>
+                                        <div class="col-md-6 mt-2">
+                                            <label>Kirim <b class="font-italic">Assembly</b></label>
+                                            <input type="text" id="kirim_assy" name="kirim_assy" onkeyup="sum();" class="form-control" value="{{ 0 }}" />
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <label>Kirim Assy</label>
-                                            <input type="text" id="kirim_assy" name="kirim_assy" class="form-control">
+                                        <div class="col-md-6 mt-2">
+                                            <label>Kirim <b class="font-italic">Painting</b></label>
+                                            <input type="text" id="kirim_painting" name="kirim_painting" onkeyup="sum();" class="form-control" value="{{ 0 }}" />
                                         </div>
 
+                                        <div class="col-md-12 mt-2">
+                                            <label>Total Kirim</label>
+                                            <input type="text" id="total_kirim" name="total_kirim" class="form-control" 
+                                                placeholder="Total Kirim ..."  readonly/>
+                                        </div>
                                     </div>
 
                                     <div class="container mt-3 text-center">
-                                        <button class="btn btn-primary mr-1" type="submit"><i class="fa fa-save"></i>
+                                        <button class="btn btn-primary mr-1" name="submit" type="submit"><i
+                                                class="fa fa-save"></i>
                                             Submit</button>
                                         <button class="btn btn-danger mr-1" type="reset"> <i
                                                 class="fa fa-trash-restore"></i> Reset</button>
-                                        <a href="#" class="btn btn-icon icon-left btn-warning">
+                                        <a href="{{ route('kensa.pengiriman') }}" class="btn btn-icon icon-left btn-warning">
                                             <i class="fas fa-arrow-left"></i> Kembali</a>
                                     </div>
 
@@ -103,24 +108,13 @@
 @endpush
 
 @push('after-script')
+@include('sweetalert::alert')
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('.masterdata-js').select2();
         });
     </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#qty_troly').keyup(function(){
-                var qty_troly = $('#qty_troly').val();
-                var qty_trolly = $('#qty_trolly').val();
-                var kirim_assy = $('#kirim_assy').val();
-
-                $('#jumlah_kirim').val(qty_trolly);
-            });
-        });
-    </script>
-
 
     <script type="text/javascript">
         $.ajaxSetup({
@@ -147,19 +141,14 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#qty_troly').keyup(function() {
-                var qty_troly = $('#qty_troly').val();
-                var std_qty = $('#qty_trolly').val();
-                var stok = $('#stok').val();
-
-                var total_kirim =
-                    if (parseInt(qty_troly) < parseInt(std_qty)) {
-                        parseInt(std_qty) == parseInt(qty_troly)
-                    };
-                console.log('total_kirim')
-            });
-        });
-    </script>
+    <script>
+        function sum() {
+              var kirim_assy = document.getElementById('kirim_assy').value;
+              var kirim_painting = document.getElementById('kirim_painting').value;
+              var result = parseInt(kirim_assy) + parseInt(kirim_painting);
+              if (!isNaN(result)) {
+                 document.getElementById('total_kirim').value = result;
+              }
+        }
+        </script>
 @endpush

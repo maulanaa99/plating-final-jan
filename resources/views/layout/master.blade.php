@@ -54,7 +54,7 @@
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-dark navbar-light">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -124,18 +124,12 @@
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li>
             </ul>
         </nav>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-info elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
                 <img src="{{ asset('assets/dist/img/sri2.jpg') }}" alt="AdminLTE Logo"
@@ -222,8 +216,8 @@
                         </li>
 
                         
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item {{ Route::is('kensa*') ? 'active menu-open' : '' }}">
+                            <a href="#tr" class="nav-link {{ Route::is('kensa*') ? 'active menu-open' : '' }}">
                                 <i class="nav-icon fas fa-search-plus"></i>
                                 <p>
                                     Kensa
@@ -232,21 +226,33 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('kensa') }}" class="nav-link @if(request()->routeIs('kensa*')) active @else '' @endif">
+                                    <a href="{{ route('kensa.utama') }}" class="nav-link @if(request()->routeIs('kensa.utama')) active @else '' @endif">
+                                        <i class="nav-icon far fa-circle nav-icon"></i>
+                                        <p>Menu Utama</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('kensa') }}" class="nav-link @if(request()->routeIs('kensa')) active @else '' @endif">
                                         <i class="nav-icon far fa-circle nav-icon"></i>
                                         <p>Kensa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('kensa.tambah') }}" class="nav-link">
+                                    <a href="{{ route('kensa.tambah') }}" class="nav-link @if(request()->routeIs('kensa.tambah')) active @else '' @endif" >
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Input Stock</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('kensa.printKanban') }}" class="nav-link">
+                                    <a href="{{ route('kensa.printKanban') }}" class="nav-link @if(request()->routeIs('kensa.printKanban')) active @else '' @endif">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Print Kanban</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('kensa.pengiriman') }}" class="nav-link @if(request()->routeIs('kensa.pengiriman')) active @else '' @endif">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Pengiriman</p>
                                     </a>
                                 </li>
                             </ul>
@@ -323,7 +329,7 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.0.1
+                <b>Version</b> 1.04.10.22
             </div>
             <strong>Copyright &copy; 2022 <a href="https://adminlte.io">Maulana Malik Ibrahim</a>.</strong> All rights
             reserved.

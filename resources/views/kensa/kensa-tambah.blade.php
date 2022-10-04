@@ -22,12 +22,20 @@
 
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
-                                                <label>Tanggal Jam</label>
-                                                <input type="datetime-local" name="tanggal_k"
-                                                    value="<?= date('Y-m-d h:i:s') ?>" class="form-control">
+                                                <label>Tanggal</label>
+                                                <input type="date" name="tanggal_k"
+                                                    value="<?= date('Y-m-d') ?>" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Jam</label>
+                                                <input type="time" name="waktu_k"
+                                                    value="<?= date('H:i:s') ?>" class="form-control">
                                             </div>
                                         </div>
 
@@ -317,6 +325,7 @@
 @endpush
 
 @push('after-script')
+@include('sweetalert::alert')
     <script type="text/javascript">
         $(document).ready(function() {
             $('.masterdata-js').select2();

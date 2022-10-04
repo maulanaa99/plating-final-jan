@@ -15,19 +15,19 @@ class PegawaiSeeder extends Seeder
      */
     public function run()
     {
-        // data faker indonesia
         $faker = Faker::create('id_ID');
  
-        // membuat data dummy sebanyak 10 record
-        for($x = 1; $x <= 10; $x++){
+    	for($i = 1; $i <= 20; $i++){
  
-        	// insert data dummy pegawai dengan faker
-        	DB::table('pegawais')->insert([
-        		'nama' => $faker->name,
-        		'alamat' => $faker->address,
-        	]);
+    	      // insert data ke table pegawai menggunakan Faker
+    		DB::table('pegawai')->insert([
+    			'nama' => $faker->name,
+    			'email' => $faker->email,
+    			'alamat' => $faker->address,
+    			'telepon' => $faker->phoneNumber,
+    			'pekerjaan' => 'karyawan'
+    		]);
  
-        }
- 
+    	}
     }
 }

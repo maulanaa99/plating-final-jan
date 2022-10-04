@@ -27,7 +27,6 @@
                     <tr>
                         <th>#</th>
                         <th>Tgl Racking</th>
-                        <th>Waktu in Racking</th>
                         <th>No Bar</th>
                         <th>Part Name</th>
                         <th>No Part</th>
@@ -45,8 +44,7 @@
                     @foreach ($plating as $no => $racking)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($racking->tanggal_r)->format('d-m-Y') }}</td>
-                            <td>{{ $racking->waktu_in_r }}</td>
+                            <td>{{ \Carbon\Carbon::parse($racking->tanggal_r)->format('d-m-Y') }} {{ $racking->waktu_in_r }}</td>
                             <td>{{ $racking->no_bar }}</td>
                             <td>{{ $racking->part_name }}</td>
                             <td>{{ $racking->no_part }}</td>

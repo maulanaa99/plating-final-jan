@@ -16,6 +16,7 @@ class MasterDataController extends Controller
     public function index()
     {
         $masterdata = MasterData::all();
+        
         return view('masterdata.index', ['masterdata' => $masterdata]);
     }
 
@@ -74,6 +75,11 @@ class MasterDataController extends Controller
     public function edit($id){
 		$masterdata = DB::table('masterdata')->where('id',$id)->first();
 		return view('masterdata.masterdata-edit',['masterdata' => $masterdata]);
+    }
+
+    public function show($id){
+		$masterdata = DB::table('masterdata')->where('id',$id)->first();
+		return view('masterdata.masterdata-show',['masterdata' => $masterdata]);
     }
 
     //hapus data
@@ -146,4 +152,10 @@ class MasterDataController extends Controller
 
         return $datas;  
     }
+
+    public function downloadPDF(Request $request, $id){
+        $data['masterdata'] = MasterData::find($id);
+        dd($data);
+    }
+
 }

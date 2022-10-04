@@ -109,4 +109,10 @@ class UnrackingController_T extends Controller
     public function exportexcel(){
         return Excel::download(new UnrackingExport, 'Unracking.xlsx');
     }
+
+    public function unrackingPrint(Request $request, $id)
+    {
+        $unracking = unracking_t::where('plating_id',$id)->first();
+        return view('unracking_t.unracking_t-print',compact('unracking'));
+    }
 }

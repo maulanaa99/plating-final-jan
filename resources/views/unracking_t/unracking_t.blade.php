@@ -17,27 +17,19 @@
             </div>
         </div>
     </div>
-
-    
-
     <div class="card-body">
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Tgl Racking</th>
-                    <th>Waktu in Racking</th>
                     <th>Tgl Unracking</th>
-                    <th>Waktu In Unracking</th>
                     <th>No.Bar</th>
                     <th>Part Name</th>
                     <th>No.Part</th>
-                    {{-- <th>Katalis</th> --}}
                     <th>Channel</th>
-                    {{-- <th>Grade Color</th> --}}
                     <th>Qty Bar</th>
                     <th>Qty Aktual</th>
-                    {{-- <th>Tgl Lot Prod Mldg</th> --}}
                     <th>Cycle</th>
                     <th>Action</th>
                 </tr>
@@ -46,10 +38,8 @@
                 @foreach ($plating as $no => $unracking)
                     <tr>
                         <td>{{ $no + 1 }}</td>
-                        <td>{{ \Carbon\Carbon::parse($unracking->tanggal_r)->format('d-m-Y') }}</td>
-                        <td>{{ $unracking->waktu_in_r }}</td>
-                        <td>{{ \Carbon\Carbon::parse($unracking->tanggal_u)->format('d-m-Y') }}</td>
-                        <td>{{ $unracking->waktu_in_u }}</td>
+                        <td>{{ \Carbon\Carbon::parse($unracking->tanggal_r)->format('d-m-Y') }} {{ $unracking->waktu_in_r }}</td>
+                        <td>{{ \Carbon\Carbon::parse($unracking->tanggal_u)->format('d-m-Y') }} {{ $unracking->waktu_in_u }}</td>
                         <td>{{ $unracking->no_bar }}</td>
                         <td>{{ $unracking->part_name }}</td>
                         <td>{{ $unracking->no_part }}</td>
@@ -63,6 +53,8 @@
                         <td>
                             <a href="{{ route('unracking_t.edit', $unracking->plating_id) }}" 
                             class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
+                            <a href="{{ route('unracking_t.print', $unracking->plating_id) }}" 
+                            class="btn btn-icon btn-sm btn-primary" target="_blank" ><i class="fas fa-print"></i> Print </a>
                         </td>
                     </tr>
                 @endforeach

@@ -16,8 +16,8 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>No Part</th>
-                    <th>Part Name</th>
+                    <th class="align-middle text-center">No Part</th>
+                    <th class="align-middle text-center">Part Name</th>
                     <th>Qty Bar</th>
                     <th>Qty Trolly</th>
                     <th>Bagian</th>

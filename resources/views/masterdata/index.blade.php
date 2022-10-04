@@ -48,11 +48,13 @@
                         <td>{{ $data->grade_color }}</td>
                         <td>{{ $data->qty_bar }}</td>
                         <td class="align-middle text-center">
+                            <a href="{{ route('master.show', $data->id) }}" class="btn btn-icon btn-sm btn-primary"><i
+                                    class="far fa-eye"></i></a>
                             <a href="{{ route('master.edit', $data->id) }}" class="btn btn-icon btn-sm btn-warning"><i
-                                    class="far fa-edit"></i> Edit </a>
+                                    class="far fa-edit"></i></a>
                             <a href="#" data-id="{{ $data->id }}"
                                 class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="fas fa-times"></i>
-                                Delete
+                                
                                 <form action="{{ route('master.delete', $data->id) }}" id="delete{{ $data->id }}"
                                     method="POST">
                                     @csrf
@@ -62,18 +64,6 @@
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>#</th>
-                    <th class="align-middle text-center">No. Part</th>
-                    <th class="align-middle text-center">Part Name</th>
-                    <th class="align-middle text-center">Katalis</th>
-                    <th class="align-middle text-center">Channel</th>
-                    <th class="align-middle text-center">Grade Color</th>
-                    <th class="align-middle text-center">Qty Bar</th>
-                    <th class="align-middle text-center">Action</th>
-                </tr>
-            </tfoot>
         </table>
         <br>
         {{-- {!! $masterdata->links() !!} --}}
@@ -134,7 +124,7 @@
         });
     </script>
 
-    
+
 
     <script>
         $(".swal-confirm").click(function(e) {

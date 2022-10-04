@@ -14,9 +14,14 @@ class Stok extends Model
         'total_ok',
         'total_ng',
         'stok',
+        'total_kirim',
         'no_kartu',
         'kirim_painting',
         'kirim_assy',
     ];
+
+    public function getTotal(){
+        return $this->kirim_painting + $this->kirim_assy;
+   }
 
 }

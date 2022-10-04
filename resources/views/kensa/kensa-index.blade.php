@@ -28,7 +28,7 @@
     <div class="card-header">
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{ route('kensa.tambah') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i>
+                <a href="{{ route('kensa.tambah') }}" class="btn btn-icon icon-left btn-info"><i class="fas fa-plus"></i>
                     Tambah Data</a>
             </div>
         </div>
@@ -78,12 +78,12 @@
                 @foreach ($kensa as $no => $kensha)
                     <tr>
                         <td>{{ $no + 1 }}</td>
-                        <td>{{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y H:i:s') }}</td>
-                        <td>{{ $kensha->part_name }}</td>
+                        <td >{{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }} {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
+                        <td >{{ $kensha->part_name }}</td>
                         <td>{{ $kensha->no_bar }}</td>
                         <td>{{ $kensha->qty_bar }}</td>
                         <td>{{ $kensha->cycle }}</td>
-                        <td>{{ $kensha->nikel }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->nikel }}</td>
                         <td>{{ $kensha->butsu }}</td>
                         <td>{{ $kensha->hadare }}</td>
                         <td>{{ $kensha->hage }}</td>
@@ -112,6 +112,33 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4"> <center> <b> Total </center> </b></td>
+                    <td colspan="2" ><b>{{$sum_qty_bar}}</b> </td>
+                    <td><b>{{ $sum_nikel }}</b></td>
+                    <td><b>{{ $sum_butsu }}</b></td>
+                    <td><b>{{ $sum_hadare }}</b></td>
+                    <td><b>{{ $sum_hage }}</b></td>
+                    <td><b>{{ $sum_moyo }}</b></td>
+                    <td><b>{{ $sum_fukure }}</b></td>
+                    <td><b>{{ $sum_crack }}</b></td>
+                    <td><b>{{ $sum_henkei }}</b></td>
+                    <td><b>{{ $sum_hanazaki }}</b></td>
+                    <td><b>{{ $sum_kizu }}</b></td>
+                    <td><b>{{ $sum_kaburi }}</b></td>
+                    <td><b>{{ $sum_other }}</b></td>
+                    <td><b>{{ $sum_gores }}</b></td>
+                    <td><b>{{ $sum_regas }}</b></td>
+                    <td><b>{{ $sum_silver }}</b></td>
+                    <td><b>{{ $sum_hike }}</b></td>
+                    <td><b>{{ $sum_burry }}</b></td>
+                    <td><b>{{ $sum_others }}</b></td>
+                    <td><b>{{ $sum_total_ok }}</b></td>
+                    <td><b>{{ $sum_total_ng }}</b></td>
+                    <td colspan="3" ></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
     <br>

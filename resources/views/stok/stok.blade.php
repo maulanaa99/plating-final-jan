@@ -13,8 +13,6 @@
     <div class="card-header">
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{ route('stok.tambah') }}" class="btn btn-icon icon-left btn-primary">
-                    <i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
     </div>
@@ -29,6 +27,7 @@
                     <th>Total OK</th>
                     <th>Total NG</th>
                     <th>Stok</th>
+                    <th>Total Kirim</th>
                     <th>No Kartu</th>
                     <th>Kirim Painting</th>
                     <th>Kirim Assy</th>
@@ -39,18 +38,33 @@
                 @php $no = 1; @endphp
                 @foreach ($stok as $row)
                     <tr>
-                        <td>{{ $no++ }}</td>
+                        <td> <center> {{ $no++ }} </center></td>
                         <td>{{ $row->no_part }}</td>
                         <td>{{ $row->part_name }}</td>
                         <td>{{ $row->total_ok }} </td>
                         <td>{{ $row->total_ng }} </td>
                         <td>{{ $row->stok }} </td>
+                        <td>{{ $row->getTotal() }} </td>
                         <td>{{ $row->no_kartu }} </td>
                         <td>{{ $row->kirim_painting }} </td>
                         <td>{{ $row->kirim_assy }} </td>
                     </tr>
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                        <center> <b> Total </b> </center>
+                    </td>
+                    <td> <b> {{ $sum_total_ok }}</b></td>
+                    <td> <b> {{ $sum_total_ng }}</b></td>
+                    <td> <b> {{ $sum_stok }}</b></td>
+                    <td>{{ $total_kirim }}</td>
+                    <td></td>
+                    <td> <b> {{ $sum_kirim_painting }}</b></td>
+                    <td> <b> {{ $sum_kirim_assy }}</b></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
     <br>

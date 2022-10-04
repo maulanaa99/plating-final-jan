@@ -44,6 +44,18 @@
                 class="form-control" readonly>
         </div>
 
+        <div class="col-md-2">
+            <label>Model</label>
+            <input type="text" id="model" name="model" value="{{ $d->model }}"
+                class="form-control" readonly>
+        </div>
+
+        <div class="col-md-2">
+            <label>Bagian</label>
+            <input type="text" id="bagian" name="bagian" value="{{ $d->bagian }}"
+                class="form-control" readonly>
+        </div>
+
 @endforeach
 
 

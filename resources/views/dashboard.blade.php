@@ -18,9 +18,8 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3></h3>
-
-                            <p>RACKING</p>
+                            <h3>{{ $racking }} Bar</h3>
+                            <p>PRODUKSI RACKING</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -34,9 +33,9 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3></h3>
+                            <h3>{{ $unracking }} Bar</h3>
 
-                            <p>UNRACKING</p>
+                            <p>PRODUKSI UNRACKING</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -50,14 +49,15 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3></h3>
+                            <h3>{{ $kensa }} Bar </h3>
 
-                            <p>KENSA</p>
+                            <p>PENGECEKAN KENSA</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('kensa') }}" class="small-box-footer">Lihat <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -65,18 +65,16 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3></h3>
+                            <h3>{{ $stok }}</h3>
 
-                            <p>STOCK</p>
+                            <p>DATA PART</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Lihat <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('stok') }}" class="small-box-footer">Lihat <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-
-                    
-                    
                 </div>
                 <!-- ./col -->
             </div>
@@ -85,5 +83,4 @@
 @endsection
 
 @push('after-script')
-
 @endpush

@@ -1,27 +1,12 @@
 <?php
 
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\BarangMasukController;
-use App\Http\Controllers\DataPartController;
-use App\Http\Controllers\DikiController;
-use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KensaController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\MasterKensaController;
-use App\Http\Controllers\OtentikasiController;
-use App\Http\Controllers\PegawaiController;
-use App\Http\Controllers\PenggunaController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RackingController;
 use App\Http\Controllers\RackingController_T;
-use App\Http\Controllers\RekapUnrackingController;
-use App\Http\Controllers\StockInController;
 use App\Http\Controllers\StokController;
-use App\Http\Controllers\SupplyManageController;
-use App\Http\Controllers\UnrackingController;
 use App\Http\Controllers\UnrackingController_T;
-use App\Http\Controllers\WebController;
-use App\Models\MasterData;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,15 +27,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 
-Route::get('/', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/tes', function () {
+    return view('tes');
+})->name('tes');
+
+Route::get('/', [DashboardController::class, 'home'])->name('dashboard');
+
+
 
 Route::get('masterdata', [MasterDataController::class, 'index'])->name('master');
 Route::get('masterdata/tambah', [MasterDataController::class, 'tambah'])->name('master.tambah');
 Route::post('masterdata', [MasterDataController::class, 'simpan'])->name('master.simpan');
 Route::post('masterdata/{id}', [MasterDataController::class, 'delete'])->name('master.delete');
 Route::get('masterdata/{id}/edit', [MasterDataController::class, 'edit'])->name('master.edit');
+Route::get('masterdata/{id}/show', [MasterDataController::class, 'show'])->name('master.show');
 Route::patch('masterdata/{id}', [MasterDataController::class, 'update'])->name('master.update');
 Route::get('masterdata/export_excel', [MasterDataController::class, 'exportexcel'])->name('master.export');
 Route::post('masterdata/import_excel', [MasterDataController::class, 'importexcel'])->name('master.import');
@@ -83,6 +73,7 @@ Route::get('unracking_t/export_excel', [UnrackingController_T::class, 'exportexc
 Route::get('unracking_t/autocomplete1', [UnrackingController_T::class, 'autocomplete1'])->name('autocomplete1_t');
 Route::get('unracking_t/search', [UnrackingController_T::class, 'search'])->name('unracking_t.search');
 Route::get('unracking_t/searchdater', [UnrackingController_T::class, 'searchDater'])->name('unracking_t.searchdater');
+Route::get('unracking_t/print/{id}', [UnrackingController_T::class, 'unrackingPrint'])->name('unracking_t.print');
 
 // ==========================KENSA=====================================================================
 Route::get('kensa', [KensaController::class, 'index'])->name('kensa');
@@ -95,37 +86,17 @@ Route::get('kensa/export_excel', [KensaController::class, 'exportexcel'])->name(
 Route::get('kensa/autocomplete/{id}', [KensaController::class, 'autocomplete'])->name('autocomplete_t');
 Route::get('kensa/search', [KensaController::class, 'search'])->name('kensa.search');
 Route::get('kensa/searchdater', [KensaController::class, 'searchDater'])->name('kensa.searchDate');
+Route::get('kensa/pengiriman', [KensaController::class, 'pengiriman'])->name('kensa.pengiriman');
 Route::get('kensa/print_kanban', [KensaController::class, 'printKanban'])->name('kensa.printKanban');
 Route::post('kensa/print_kanban/simpan', [KensaController::class, 'kanbansimpan'])->name('kensa.kanban-simpan');
 Route::get('kensa/print_kanban/ajax', [KensaController::class, 'ajaxKanban'])->name('kensa.ajaxKanban');
 Route::get('kensa/ajax', [KensaController::class, 'ajax'])->name('kensa.ajax');
+Route::get('kensa/print_kanban/cetak_kanban/{id}', [KensaController::class, 'cetak_kanban'])->name('kensa.cetak_kanban');
+Route::get('kensa/utama', [KensaController::class, 'utama'])->name('kensa.utama');
 
 
 //=====================STOCK==============================================================================
 Route::get('stok', [StokController::class, 'index'])->name('stok');
-
-
 Route::get('masterkensa', [MasterKensaController::class, 'index'])->name('msterkensa');
+Route::get('masterdata/downloadPDF/{id}', [MasterDataController::class, 'downloadPDF'])->name('masterdata.downloadPDF');
 
-
-
-
-
-
-
-
-
-
-// 
-
-Route::get('stok/tambah', [StokController::class, 'tambah'])->name('stok.tambah');
-Route::post('stok', [StokController::class, 'simpan'])->name('stok.simpan');
-
-Route::get('datapart', [DataPartController::class, 'index'])->name('datapart');
-Route::post('datapart/simpan', [DataPartController::class, 'simpan'])->name('datapart.simpan');
-Route::post('/datapart/{id}/update', [DataPartController::class, 'update']);
-Route::get('/datapart/{id}/delete', [DataPartController::class, 'delete']);
-
-Route::get('stokin', [StockInController::class, 'index'])->name('stokin');
-Route::get('stokin/tambah', [StockInController::class, 'tambah'])->name('stokin.tambah');
-Route::post('stokin/simpan', [StockInController::class, 'simpan'])->name('stokin.simpan');
