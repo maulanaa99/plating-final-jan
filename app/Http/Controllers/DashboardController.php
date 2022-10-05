@@ -7,6 +7,7 @@ use App\Models\racking_t;
 use App\Models\Stok;
 use App\Models\unracking_t;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {

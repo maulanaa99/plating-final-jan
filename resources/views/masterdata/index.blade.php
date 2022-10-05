@@ -114,7 +114,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "pageLength": 75,
+                "pageLength": 10,
                 "lengthMenu": [
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]

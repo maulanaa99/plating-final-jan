@@ -17,7 +17,7 @@ class MasterDataController extends Controller
     {
         $masterdata = MasterData::all();
         
-        return view('masterdata.index', ['masterdata' => $masterdata]);
+        return view('masterdata.index', compact('masterdata'));
     }
 
     //tambah data

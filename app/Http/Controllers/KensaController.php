@@ -44,7 +44,7 @@ class KensaController extends Controller
         $sum_total_ng = DB::table('kensa')->get()->sum('total_ng');
         $avg_p_total_ok = DB::table('kensa')->get()->average('p_total_ok');
         $avg_p_total_ng = DB::table('kensa')->get()->average('p_total_ng');
-        
+
         $masterdata = MasterData::all();
 
         return view('kensa.kensa-index', compact(
@@ -327,49 +327,49 @@ class KensaController extends Controller
         // $moyo = kensa::select('moyo')->count();
         // return view('ikan')->with('moyo', $moyo);
 
-        $date = date('Y-m-d');
+        $date = date('d-m-Y',strtotime("-1 days"));
 
         $sum_qty_bar = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('qty_bar');
         $sum_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ng');
         $sum_nikel = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('nikel');
-        $nikel = ($sum_nikel / $sum_qty_bar) * 100;
+        $nikel = $sum_nikel != 0 && $sum_qty_bar != 0 ? (($sum_nikel / $sum_qty_bar) * 100) : 0;
         $sum_butsu = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('butsu');
-        $butsu = ($sum_butsu / $sum_qty_bar) * 100;
+        $butsu = $sum_butsu != 0 && $sum_qty_bar != 0 ? (($sum_butsu / $sum_qty_bar) * 100) : 0;
         $sum_hadare = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hadare');
-        $hadare = ($sum_hadare / $sum_qty_bar) * 100;
+        $hadare = $sum_hadare != 0 && $sum_qty_bar != 0 ? (($sum_hadare / $sum_qty_bar) * 100) : 0;
         $sum_hage = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hage');
-        $hage = ($sum_hage / $sum_qty_bar) * 100;
+        $hage = $sum_hage != 0 && $sum_qty_bar != 0 ? (($sum_hage / $sum_qty_bar) * 100) : 0;
         $sum_moyo = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('moyo');
-        $moyo = ($sum_moyo / $sum_qty_bar) * 100;
+        $moyo = $sum_moyo != 0 && $sum_qty_bar != 0 ? (($sum_moyo / $sum_qty_bar) * 100) : 0;
         $sum_fukure = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('fukure');
-        $fukure = ($sum_fukure / $sum_qty_bar) * 100;
+        $fukure = $sum_fukure != 0 && $sum_qty_bar != 0 ? (($sum_fukure / $sum_qty_bar) * 100) : 0;
         $sum_crack = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('crack');
-        $crack = ($sum_crack / $sum_qty_bar) * 100;
+        $crack = $sum_crack != 0 && $sum_qty_bar != 0 ? (($sum_crack / $sum_qty_bar) * 100) : 0;
         $sum_henkei = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('henkei');
-        $henkei = ($sum_henkei / $sum_qty_bar) * 100;
+        $henkei = $sum_henkei != 0 && $sum_qty_bar != 0 ? (($sum_henkei / $sum_qty_bar) * 100) : 0;
         $sum_hanazaki = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hanazaki');
-        $hanazaki = ($sum_hanazaki / $sum_qty_bar) * 100;
+        $hanazaki = $sum_hanazaki != 0 && $sum_qty_bar != 0 ? (($sum_hanazaki / $sum_qty_bar) * 100) : 0;
         $sum_kizu = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kizu');
-        $kizu = ($sum_kizu / $sum_qty_bar) * 100;
+        $kizu = $sum_kizu != 0 && $sum_qty_bar != 0 ? (($sum_kizu / $sum_qty_bar) * 100) : 0;
         $sum_kaburi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kaburi');
-        $kaburi = ($sum_kaburi / $sum_qty_bar) * 100;
+        $kaburi = $sum_kaburi != 0 && $sum_qty_bar != 0 ? (($sum_kaburi / $sum_qty_bar) * 100) : 0;
         $sum_other = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('other');
-        $other = ($sum_other / $sum_qty_bar) * 100;
+        $other = $sum_other != 0 && $sum_qty_bar != 0 ? (($sum_other / $sum_qty_bar) * 100) : 0;
         $sum_gores = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('gores');
-        $gores = ($sum_gores / $sum_qty_bar) * 100;
+        $gores = $sum_gores != 0 && $sum_qty_bar != 0 ? (($sum_gores / $sum_qty_bar) * 100) : 0;
         $sum_regas = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('regas');
-        $regas = ($sum_regas / $sum_qty_bar) * 100;
+        $regas = $sum_regas != 0 && $sum_qty_bar != 0 ? (($sum_regas / $sum_qty_bar) * 100) : 0;
         $sum_silver = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('silver');
-        $silver = ($sum_silver / $sum_qty_bar) * 100;
+        $silver = $sum_silver != 0 && $sum_qty_bar != 0 ? (($sum_silver / $sum_qty_bar) * 100) : 0;
         $sum_hike = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hike');
-        $hike = ($sum_hike / $sum_qty_bar) * 100;
+        $hike = $sum_hike != 0 && $sum_qty_bar != 0 ? (($sum_hike / $sum_qty_bar) * 100) : 0;
         $sum_burry = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('burry');
-        $burry = ($sum_burry / $sum_qty_bar) * 100;
+        $burry = $sum_burry != 0 && $sum_qty_bar != 0 ? (($sum_burry / $sum_qty_bar) * 100) : 0;
         $sum_others = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('others');
-        $others = ($sum_others / $sum_qty_bar) * 100;
+        $others = $sum_others != 0 && $sum_qty_bar != 0 ? (($sum_others / $sum_qty_bar) * 100) : 0;
         $sum_total_ok = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ok');
-        $total_ok = ($sum_total_ok / $sum_qty_bar) * 100;
-        $total_ng = ($sum_total_ng / $sum_qty_bar) * 100;
+        $total_ok = $sum_total_ok != 0 && $sum_qty_bar != 0 ? (($sum_total_ok / $sum_qty_bar) * 100) : 0;
+        $total_ng = $sum_total_ng != 0 && $sum_qty_bar != 0 ? (($sum_total_ng / $sum_qty_bar) * 100) : 0;
         $kensa_today = kensa::where('tanggal_k', '=', $date)->count();
 
         return view('kensa.kensa_menu_utama', compact(

@@ -12,7 +12,27 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            <form action="" method="GET">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="">Tanggal</label>
+                        <input type="date" class="form-control" name="tgl" id="tgl">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="">.</label> <br>
+                        <button type="submit" class="btn btn-primary" >Filter</button>
+                    </div>
+                </div>
+            </form>
+            {{ $date }}
+
             <!-- Small boxes (Stat box) -->
+            {{-- <form action="showDate.jsp">
+                <label for="datepicker">Enter date:</label>
+                <input type="text" name="selDate" id="datepicker">
+
+                <input type="submit" value="Submit">
+            </form> --}}
             <h1><b>Summary</b></h1>
             <hr>
             <div class="row">
@@ -21,7 +41,9 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{ number_format($total_ok, 2) }}%</h3>
-                            <p> <font size="5"> Total OK </font></p>
+                            <p>
+                                <font size="5"> Total OK </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-check"></i>
@@ -34,7 +56,9 @@
                     <div class="small-box bg-danger">
                         <div class="inner">
                             <h3>{{ number_format($total_ng, 2) }}%</h3>
-                            <p> <font size="5"> Total NG </font></p>
+                            <p>
+                                <font size="5"> Total NG </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-dumpster"></i>
@@ -47,7 +71,9 @@
                     <div class="small-box bg-primary">
                         <div class="inner">
                             <h3>{{ $kensa_today }} Bar</h3>
-                            <p> <font size="5"> Jumlah Pengecekan Hari ini </font></p>
+                            <p>
+                                <font size="5"> Jml Pengecekan Hari ini </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-search"></i>
@@ -64,8 +90,10 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ number_format($nikel,2) }}%</h3>
-                            <p> <font size="5"> NIKEL </font></p>
+                            <h3>{{ number_format($nikel, 2) }}%</h3>
+                            <p>
+                                <font size="5"> NIKEL </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-virus"></i>
@@ -77,8 +105,10 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ number_format($butsu,2) }}%</h3>
-                            <p> <font size="5"> BUTSU </font></p>
+                            <h3>{{ number_format($butsu, 2) }}%</h3>
+                            <p>
+                                <font size="5"> BUTSU </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-bars"></i>
@@ -90,8 +120,10 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ number_format($hadare,2) }}%</h3>
-                            <p> <font size="5"> HADARE </font></p>
+                            <h3>{{ number_format($hadare, 2) }}%</h3>
+                            <p>
+                                <font size="5"> HADARE </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-unlink"></i>
@@ -103,8 +135,10 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ number_format($hage,2) }}%</h3>
-                            <p> <font size="5"> HAGE </font></p>
+                            <h3>{{ number_format($hage, 2) }}%</h3>
+                            <p>
+                                <font size="5"> HAGE </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-trash"></i>
@@ -117,8 +151,10 @@
                     <!-- small box -->
                     <div class="small-box bg-purple">
                         <div class="inner">
-                            <h3>{{ number_format($moyo,2) }}%</h3>
-                            <p> <font size="5"> MOYO </font></p>
+                            <h3>{{ number_format($moyo, 2) }}%</h3>
+                            <p>
+                                <font size="5"> MOYO </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-trailer"></i>
@@ -130,8 +166,10 @@
                     <!-- small box -->
                     <div class="small-box bg-grey">
                         <div class="inner">
-                            <h3>{{ number_format($fukure,2) }}%</h3>
-                            <p> <font size="5"> FUKURE </font></p>
+                            <h3>{{ number_format($fukure, 2) }}%</h3>
+                            <p>
+                                <font size="5"> FUKURE </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-times-circle"></i>
@@ -143,8 +181,10 @@
                     <!-- small box -->
                     <div class="small-box bg-primary">
                         <div class="inner">
-                            <h3>{{ number_format($crack,2) }}%</h3>
-                            <p> <font size="5"> CRACK </font></p>
+                            <h3>{{ number_format($crack, 2) }}%</h3>
+                            <p>
+                                <font size="5"> CRACK </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-terminal"></i>
@@ -156,8 +196,10 @@
                     <!-- small box -->
                     <div class="small-box bg-orange">
                         <div class="inner">
-                            <h3>{{ number_format($henkei,2) }}%</h3>
-                            <p> <font size="5"> HENKEI </font></p>
+                            <h3>{{ number_format($henkei, 2) }}%</h3>
+                            <p>
+                                <font size="5"> HENKEI </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-sun"></i>
@@ -169,8 +211,10 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ number_format($hanazaki,2) }}%</h3>
-                            <p> <font size="5"> HANAZAKI </font></p>
+                            <h3>{{ number_format($hanazaki, 2) }}%</h3>
+                            <p>
+                                <font size="5"> HANAZAKI </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-subscript"></i>
@@ -182,8 +226,10 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ number_format($kizu,2) }}%</h3>
-                            <p> <font size="5"> KIZU </font></p>
+                            <h3>{{ number_format($kizu, 2) }}%</h3>
+                            <p>
+                                <font size="5"> KIZU </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-stop-circle"></i>
@@ -195,8 +241,10 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>{{ number_format($kaburi,2) }}%</h3>
-                            <p> <font size="5"> KABURI </font></p>
+                            <h3>{{ number_format($kaburi, 2) }}%</h3>
+                            <p>
+                                <font size="5"> KABURI </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-star-of-life"></i>
@@ -208,8 +256,10 @@
                     <!-- small box -->
                     <div class="small-box bg-white">
                         <div class="inner">
-                            <h3>{{ number_format($other,2) }}%</h3>
-                            <p> <font size="5"> OTHER </font></p>
+                            <h3>{{ number_format($other, 2) }}%</h3>
+                            <p>
+                                <font size="5"> OTHER </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-spray-can"></i>
@@ -225,8 +275,10 @@
                     <!-- small box -->
                     <div class="small-box bg-primary">
                         <div class="inner">
-                            <h3>{{ number_format($gores,2) }}%</h3>
-                            <p> <font size="5"> GORES </font></p>
+                            <h3>{{ number_format($gores, 2) }}%</h3>
+                            <p>
+                                <font size="5"> GORES </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-slash"></i>
@@ -238,8 +290,10 @@
                     <!-- small box -->
                     <div class="small-box bg-secondary">
                         <div class="inner">
-                            <h3>{{ number_format($regas,2) }}%</h3>
-                            <p> <font size="5"> REGAS </font></p>
+                            <h3>{{ number_format($regas, 2) }}%</h3>
+                            <p>
+                                <font size="5"> REGAS </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-shield-virus"></i>
@@ -251,8 +305,10 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>{{ number_format($silver,2) }}%</h3>
-                            <p> <font size="5"> SILVER </font></p>
+                            <h3>{{ number_format($silver, 2) }}%</h3>
+                            <p>
+                                <font size="5"> SILVER </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-ruler"></i>
@@ -264,8 +320,10 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ number_format($hike,2) }}%</h3>
-                            <p> <font size="5"> HIKE </font></p>
+                            <h3>{{ number_format($hike, 2) }}%</h3>
+                            <p>
+                                <font size="5"> HIKE </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-recycle"></i>
@@ -277,8 +335,10 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>{{ number_format($burry,2) }}%</h3>
-                            <p> <font size="5"> BURRY </font></p>
+                            <h3>{{ number_format($burry, 2) }}%</h3>
+                            <p>
+                                <font size="5"> BURRY </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-percent"></i>
@@ -290,15 +350,17 @@
                     <!-- small box -->
                     <div class="small-box bg-white">
                         <div class="inner">
-                            <h3>{{ number_format($others,2) }}%</h3>
-                            <p> <font size="5"> OTHERS </font></p>
+                            <h3>{{ number_format($others, 2) }}%</h3>
+                            <p>
+                                <font size="5"> OTHERS </font>
+                            </p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-pager"></i>
                         </div>
                     </div>
                 </div>
-                
+
                 <br>
             </div>
         </div>
@@ -308,5 +370,15 @@
     </section>
 @endsection
 
+@push('page-script')
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+@endpush
+
 @push('after-script')
+    <script>
+        $(function() {
+            $("#datepicker").datepicker();
+        });
+    </script>
 @endpush
