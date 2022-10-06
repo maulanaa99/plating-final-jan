@@ -12,19 +12,18 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            <form action="" method="GET">
+            <form action="{{ route('kensa.utama') }}" method="GET">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="">Tanggal</label>
-                        <input type="date" class="form-control" name="tgl" id="tgl">
+                        <label for="">Tanggal </label>
+                        <input type="date" class="form-control" name="tanggal" id="tanggal">
                     </div>
                     <div class="col-md-4">
                         <label for="">.</label> <br>
-                        <button type="submit" class="btn btn-primary" >Filter</button>
+                        <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
                 </div>
             </form>
-            {{ $date }}
 
             <!-- Small boxes (Stat box) -->
             {{-- <form action="showDate.jsp">

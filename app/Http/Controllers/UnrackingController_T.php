@@ -7,6 +7,7 @@ use App\Models\racking_t;
 use App\Models\unracking_t;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -68,7 +69,9 @@ class UnrackingController_T extends Controller
         DB::table('plating')->where('plating_id', $request->id)->update([
             'tanggal_u' => $request->tanggal_u,
             'waktu_in_u' => $request->waktu_in_u,
-            'qty_aktual' => $request->qty_aktual
+            'qty_aktual' => $request->qty_aktual,
+            'updated_by' => Auth::user()->name,
+            'updated_at' => Carbon::now(),
         ]);
         return redirect()->route('unracking_t')->with('toast_success', 'Data Berhasil Diupdate!');
     }

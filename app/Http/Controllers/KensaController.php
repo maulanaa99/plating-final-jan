@@ -8,6 +8,7 @@ use App\Models\Pengiriman;
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -16,34 +17,38 @@ class KensaController extends Controller
     //tampil data
     public function index()
     {
+        $date = date('Y-m-d');
+        $day = Carbon::now()->isoFormat('dddd D MMMM Y');
+
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->select('kensa.*', 'masterdata.part_name', 'masterdata.qty_bar')
             ->orderBy('tanggal_k', 'desc')->orderBy('waktu_k', 'desc')
+            ->where('tanggal_k', '=', $date)
             ->get();
 
-        $sum_qty_bar = DB::table('kensa')->get()->sum('qty_bar');
-        $sum_nikel = DB::table('kensa')->get()->sum('nikel');
-        $sum_butsu = DB::table('kensa')->get()->sum('butsu');
-        $sum_hadare = DB::table('kensa')->get()->sum('hadare');
-        $sum_hage = DB::table('kensa')->get()->sum('hage');
-        $sum_moyo = DB::table('kensa')->get()->sum('moyo');
-        $sum_fukure = DB::table('kensa')->get()->sum('fukure');
-        $sum_crack = DB::table('kensa')->get()->sum('crack');
-        $sum_henkei = DB::table('kensa')->get()->sum('henkei');
-        $sum_hanazaki = DB::table('kensa')->get()->sum('hanazaki');
-        $sum_kizu = DB::table('kensa')->get()->sum('kizu');
-        $sum_kaburi = DB::table('kensa')->get()->sum('kaburi');
-        $sum_other = DB::table('kensa')->get()->sum('other');
-        $sum_gores = DB::table('kensa')->get()->sum('gores');
-        $sum_regas = DB::table('kensa')->get()->sum('regas');
-        $sum_silver = DB::table('kensa')->get()->sum('silver');
-        $sum_hike = DB::table('kensa')->get()->sum('hike');
-        $sum_burry = DB::table('kensa')->get()->sum('burry');
-        $sum_others = DB::table('kensa')->get()->sum('others');
-        $sum_total_ok = DB::table('kensa')->get()->sum('total_ok');
-        $sum_total_ng = DB::table('kensa')->get()->sum('total_ng');
-        $avg_p_total_ok = DB::table('kensa')->get()->average('p_total_ok');
-        $avg_p_total_ng = DB::table('kensa')->get()->average('p_total_ng');
+        $sum_qty_bar = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('qty_bar');
+        $sum_nikel = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('nikel');
+        $sum_butsu = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('butsu');
+        $sum_hadare = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hadare');
+        $sum_hage = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hage');
+        $sum_moyo = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('moyo');
+        $sum_fukure = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('fukure');
+        $sum_crack = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('crack');
+        $sum_henkei = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('henkei');
+        $sum_hanazaki = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hanazaki');
+        $sum_kizu = DB::table('kensa')->get()->where('tanggal_k', '=', $date)->sum('kizu');
+        $sum_kaburi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kaburi');
+        $sum_other = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('other');
+        $sum_gores = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('gores');
+        $sum_regas = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('regas');
+        $sum_silver = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('silver');
+        $sum_hike = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hike');
+        $sum_burry = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('burry');
+        $sum_others = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('others');
+        $sum_total_ok = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ok');
+        $sum_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ng');
+        $avg_p_total_ok = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->average('p_total_ok');
+        $avg_p_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->average('p_total_ng');
 
         $masterdata = MasterData::all();
 
@@ -72,7 +77,9 @@ class KensaController extends Controller
             'sum_total_ok',
             'sum_total_ng',
             'avg_p_total_ok',
-            'avg_p_total_ng'
+            'avg_p_total_ng',
+            'date',
+            'day'
         ));
     }
 
@@ -121,7 +128,9 @@ class KensaController extends Controller
             'total_ok' => $request->total_ok,
             'total_ng' => $request->total_ng,
             'p_total_ok' => $request->p_total_ok,
-            'p_total_ng' => $request->p_total_ng
+            'p_total_ng' => $request->p_total_ng,
+            'created_by' => Auth::user()->id,
+            'created_at' => Carbon::now(),
         ]);
         $masterdata = MasterData::find($request->id_masterdata);
         $masterdata->stok += $request->total_ok;
@@ -285,6 +294,9 @@ class KensaController extends Controller
                 'next_process' => $request->next_process,
                 'kirim_painting' => $request->kirim_painting,
                 'kirim_assy' => $request->kirim_assy,
+                'created_by' => Auth::user()->name,
+                'created_at' => Carbon::now(),
+
             ]);
 
             $masterdata->stok -= $request->kirim_assy;
@@ -327,7 +339,7 @@ class KensaController extends Controller
         // $moyo = kensa::select('moyo')->count();
         // return view('ikan')->with('moyo', $moyo);
 
-        $date = date('d-m-Y',strtotime("-1 days"));
+        $date = date('Y-m-d');
 
         $sum_qty_bar = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('qty_bar');
         $sum_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ng');
@@ -400,6 +412,7 @@ class KensaController extends Controller
             'date',
             'sum_qty_bar',
             'kensa_today'
+            // 'date'
         ));
     }
 }

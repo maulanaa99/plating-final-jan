@@ -42,7 +42,7 @@
                                     <th colspan="3">PART TAG</th>
                                 </tr>
                                 <tr>
-                                    <th colspan="3">{!! DNS1D::getBarcodeHTML($pengiriman->no_part, 'C128', 1.3, 22) !!}
+                                    <th colspan="3"> <center> {!! DNS1D::getBarcodeHTML($pengiriman->no_part, 'C128', 1.3, 22) !!}</center>
                                         <font size="1">{{ $pengiriman->no_part }}</font>
                                     </th>
                                     <th colspan="1">
@@ -65,9 +65,9 @@
 
                             <tbody>
                                 <tr>
-                                    <td class="align-middle text-center">{{ $pengiriman->model }}</td>
-                                    <td class="align-middle text-center">{{ $pengiriman->qty_troly }}</td>
-                                    <td class="align-middle text-center">{{ $pengiriman->tgl_kanban }}</td>
+                                    <td class="align-middle text-center"> <font size="3" > <b> {{ $pengiriman->model }} </b> </font> </td>
+                                    <td class="align-middle text-center"><font size="4" > <b> {{ $pengiriman->qty_troly }} </b> </font> </td>
+                                    <td class="align-middle text-center"<font size="4" > <b> {{ $pengiriman->tgl_kanban }} </b> </font> </td>
                                     <td></td>
                                 </tr>
                             </tbody>

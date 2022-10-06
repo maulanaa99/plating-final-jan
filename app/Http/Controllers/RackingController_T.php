@@ -7,6 +7,7 @@ use App\Models\Racking;
 use App\Models\racking_t;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class RackingController_T extends Controller
@@ -77,7 +78,9 @@ class RackingController_T extends Controller
             'qty_bar' => $request->qty_bar,
             'waktu_in_r' => $request->waktu_in_r,
             'tgl_lot_prod_mldg' => $request->tgl_lot_prod_mldg,
-            'cycle' => $request->cycle
+            'cycle' => $request->cycle,
+            'created_by' => Auth::user()->name,
+            'created_at' => Carbon::now(),
         ]);
         return redirect()->route('racking_t.tambah')->with('toast_success', 'Data Berhasil Disimpan!');
     }
@@ -113,7 +116,9 @@ class RackingController_T extends Controller
             'qty_bar' => $request->qty_bar,
             'waktu_in_r' => $request->waktu_in_r,
             'tgl_lot_prod_mldg' => $request->tgl_lot_prod_mldg,
-            'cycle' => $request->cycle
+            'cycle' => $request->cycle,
+            'updated_by' => Auth::user()->id,
+            'updated_at' => Carbon::now(),
         ]);
         return redirect()->route('racking_t')->with('message', 'Data berhasil di update');
     }

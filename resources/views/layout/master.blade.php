@@ -149,15 +149,16 @@
             <div class="sidebar">
                 <!-- SidebarSearch Form -->
                 <nav>
-                    <ul>
+                    <ul style="
+                    padding-left: 15px;
+                ">
                         <li class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu"
                             data-accordion="false">
                             <a href="#">
                                 <?php
-                                $tanggal = mktime(date('m'), date('d'), date('Y'));
-                                echo 'Tanggal : <b>' . date('d-M-Y', $tanggal) . '</b> ';
-                                date_default_timezone_set('Asia/Jakarta');
+                                $today = Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y');
                                 ?>
+                                Tanggal : <b> {{ $today }} </b>
                             </a>
                             <a href="#"> Jam : <b><span id="jam"></span></b></a>
                         </li>

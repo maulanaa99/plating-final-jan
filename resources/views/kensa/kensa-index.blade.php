@@ -34,11 +34,22 @@
         </div>
     </div>
 
-    <div class="card-body mt-3">
+    <div class="card-body"
+        style="
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 0px;
+    padding-top: 0px;
+">
+        <h4>Tanggal : {{ $day }}</h4>
+    </div>
+    <div class="card-body mt-3" style="
+    padding-top: 0px;
+">
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
             <thead>
                 <tr>
-                    <th rowspan="2" class="align-middle text-center" >#</th>
+                    <th rowspan="2" class="align-middle text-center">#</th>
                     <th rowspan="2" class="align-middle text-center">Tanggal</th>
                     <th rowspan="2" class="align-middle text-center">Part Name</th>
                     <th rowspan="2" class="align-middle text-center">No Bar</th>
@@ -78,8 +89,9 @@
                 @foreach ($kensa as $no => $kensha)
                     <tr>
                         <td>{{ $no + 1 }}</td>
-                        <td >{{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }} {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
-                        <td >{{ $kensha->part_name }}</td>
+                        <td>{{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
+                            {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
+                        <td>{{ $kensha->part_name }}</td>
                         <td>{{ $kensha->no_bar }}</td>
                         <td>{{ $kensha->qty_bar }}</td>
                         <td>{{ $kensha->cycle }}</td>
@@ -114,8 +126,10 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4"> <center> <b> Total </center> </b></td>
-                    <td colspan="2" ><b>{{$sum_qty_bar}}</b> </td>
+                    <td colspan="4">
+                        <center> <b> Total </center> </b>
+                    </td>
+                    <td colspan="2"><b>{{ $sum_qty_bar }}</b> </td>
                     <td><b>{{ $sum_nikel }}</b></td>
                     <td><b>{{ $sum_butsu }}</b></td>
                     <td><b>{{ $sum_hadare }}</b></td>
@@ -136,7 +150,7 @@
                     <td><b>{{ $sum_others }}</b></td>
                     <td><b>{{ $sum_total_ok }}</b></td>
                     <td><b>{{ $sum_total_ng }}</b></td>
-                    <td colspan="3" ></td>
+                    <td colspan="3"></td>
                 </tr>
             </tfoot>
         </table>
