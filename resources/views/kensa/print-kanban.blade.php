@@ -46,36 +46,11 @@
 
                                         <div id="detail_part"></div>
 
-                                        <div class="col-md-6">
-                                            <label>Qty Trolly</label>
-                                            <div class="input-group">
-                                                <input type="text" id="qty_troly" name="qty_troly"
-                                                    value="{{ $d->qty_troly }}" placeholder="Masukkan Qty Trolly ..." class="form-control">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Pcs </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
+                                        
+                                        <div class="col-md-6 mt-2">
                                             <label>No Kartu</label>
                                             <input type="text" id="no_kartu" name="no_kartu" value="{{ $kode }}"
                                                 class="form-control">
-                                        </div>
-
-                                        <div class="col-md-6 mt-2">
-                                            <label>Kirim <b class="font-italic">Assembly</b></label>
-                                            <input type="text" id="kirim_assy" name="kirim_assy" onkeyup="sum();" class="form-control" value="{{ 0 }}" />
-                                        </div>
-
-                                        <div class="col-md-6 mt-2">
-                                            <label>Kirim <b class="font-italic">Painting</b></label>
-                                            <input type="text" id="kirim_painting" name="kirim_painting" onkeyup="sum();" class="form-control" value="{{ 0 }}" />
-                                        </div>
-
-                                        <div class="col-md-12 mt-2">
-                                            <label>Total Kirim</label>
-                                            <input type="text" id="total_kirim" name="total_kirim" class="form-control" 
-                                                placeholder="Total Kirim ..."  readonly/>
                                         </div>
                                     </div>
 

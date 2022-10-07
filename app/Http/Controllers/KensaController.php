@@ -15,9 +15,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 class KensaController extends Controller
 {
     //tampil data
-    public function index()
+    public function index(Request $request)
     {
-        $date = date('Y-m-d');
+        $date = Carbon::parse($request->date)->format('Y-m-d');
         $day = Carbon::now()->isoFormat('dddd D MMMM Y');
 
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
@@ -334,12 +334,9 @@ class KensaController extends Controller
         return view('kensa.pengiriman-index', compact('pengiriman', 'masterdata'));
     }
 
-    public function utama()
+    public function utama(Request $request)
     {
-        // $moyo = kensa::select('moyo')->count();
-        // return view('ikan')->with('moyo', $moyo);
-
-        $date = date('Y-m-d');
+        $date = Carbon::parse($request->date)->format('Y-m-d');
 
         $sum_qty_bar = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('qty_bar');
         $sum_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ng');
@@ -412,7 +409,6 @@ class KensaController extends Controller
             'date',
             'sum_qty_bar',
             'kensa_today'
-            // 'date'
         ));
     }
 }

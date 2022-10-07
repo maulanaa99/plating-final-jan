@@ -1,6 +1,6 @@
 @foreach ($ajax_barang as $d)
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-6">
             <div class="form-group">
                 <label>No. Part</label>
                 <input type="text" id="no_part" name="no_part" value="{{ $d->no_part }}"
@@ -8,7 +8,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="form-group">
                 <label> Part Name</label>
                 <input type="text" id="part_name" name="part_name" value="{{ $d->part_name }}"
@@ -19,8 +19,8 @@
         <div class="col-md-2 col-sm-12">
             <label>Stok</label>
             <div class="input-group">
-                <input type="text" id="stok" name="stok" value="{{ $d->stok }}"
-                    class="form-control" readonly>
+                <input type="text" id="stok" name="stok" value="{{ $d->stok }}" class="form-control"
+                    readonly>
                 <div class="input-group-prepend">
                     <span class="input-group-text">Pcs </span>
                 </div>
@@ -46,16 +46,55 @@
 
         <div class="col-md-2">
             <label>Model</label>
-            <input type="text" id="model" name="model" value="{{ $d->model }}"
-                class="form-control" readonly>
+            <input type="text" id="model" name="model" value="{{ $d->model }}" class="form-control"
+                readonly>
         </div>
 
         <div class="col-md-2">
             <label>Bagian</label>
-            <input type="text" id="bagian" name="bagian" value="{{ $d->bagian }}"
-                class="form-control" readonly>
+            <input type="text" id="bagian" name="bagian" value="{{ $d->bagian }}" class="form-control"
+                readonly>
         </div>
 
+        @if ($d->next_process == 'ASSEMBLY' || $d->next_process == 'PPIC')
+            <div class="col-md-2 col-sm-12">
+                <label>Kirim <b class="font-italic">Assembly</label>
+                <div class="input-group">
+                    <input type="text" id="kirim_assy" name="kirim_assy" class="form-control">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
+                </div>
+            </div>
+        @elseif ($d->next_process == 'PAINTING')
+            <div class="col-md-2 col-sm-12">
+                <label>Kirim <b class="font-italic">Painting</label>
+                <div class="input-group">
+                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
+                </div>
+            </div>
+        @elseif ($d->next_process == '')
+            <div class="col-md-2 col-sm-12">
+                <label>Kirim <b class="font-italic">Assembly</label>
+                <div class="input-group">
+                    <input type="text" id="kirim_assy" name="kirim_assy" class="form-control">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-12">
+                <label>Kirim <b class="font-italic">Painting</label>
+                <div class="input-group">
+                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
+                </div>
+            </div>
+        @endif
 @endforeach
-
-

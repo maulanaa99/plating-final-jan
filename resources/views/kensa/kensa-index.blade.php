@@ -25,24 +25,37 @@
     </section>
 @endsection
 @section('content')
-    <div class="card-header">
+    <div class="card-header" style="
+    padding-left: 10px;
+">
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
                 <a href="{{ route('kensa.tambah') }}" class="btn btn-icon icon-left btn-info"><i class="fas fa-plus"></i>
                     Tambah Data</a>
             </div>
         </div>
+        <form action="{{ route('kensa') }}" method="GET">
+            <div class="row">
+                <div class="col-md-4">
+                    <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
     </div>
 
-    <div class="card-body"
+    <div class="row"
         style="
     padding-bottom: 0px;
     padding-left: 20px;
     padding-right: 0px;
     padding-top: 0px;
 ">
-        <h4>Tanggal : {{ $day }}</h4>
     </div>
+
+
     <div class="card-body mt-3" style="
     padding-top: 0px;
 ">

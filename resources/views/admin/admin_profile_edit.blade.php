@@ -50,7 +50,7 @@
                                     <div class="row mb-3">
                                         <label for="" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
-                                            <img id="showImage" class="user-image img-circle elevation-2"
+                                            <img id="showImage" class="roundede"
                                                 src="{{ !empty($editData->profile_images) ? url('upload/admin_images/' . $editData->profile_images) : url('upload/no_image.jpg') }}">
                                         </div>
                                     </div>

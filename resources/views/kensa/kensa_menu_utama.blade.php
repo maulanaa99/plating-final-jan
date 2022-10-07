@@ -15,11 +15,11 @@
             <form action="{{ route('kensa.utama') }}" method="GET">
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="">Tanggal </label>
-                        <input type="date" class="form-control" name="tanggal" id="tanggal">
+                        <label for="">Tanggal</label>
+                        <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
                     </div>
                     <div class="col-md-4">
-                        <label for="">.</label> <br>
+                        <label for="" class="text-white">Filter</label> <br>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
                 </div>
