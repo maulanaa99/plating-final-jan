@@ -17,12 +17,11 @@ class Pengiriman extends Model
         'part_name',
         'model',
         'bagian',
-        'qty_troly',
-        'total_kirim',
         'no_kartu',
         'next_process',
         'kirim_painting',
         'kirim_assy',
+        'qty_kirim',
         'created_at',
         'updated_at',
     ];
@@ -30,4 +29,7 @@ class Pengiriman extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
+    public function getTotal(){
+        return $this->kirim_painting + $this->kirim_assy;
+   }
 }

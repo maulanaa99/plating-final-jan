@@ -35,7 +35,10 @@ class MasterDataController extends Controller
             'channel' => 'required',
             'grade_color' => 'required',
             'qty_bar' => 'required',
-            'stok' => 'required',
+            'qty_trolly' => 'required',
+            'bagian' => 'required',
+            'next_process' => 'required',
+            'model' => 'required',
 
           ], [
 
@@ -45,7 +48,10 @@ class MasterDataController extends Controller
             'channel.required' => 'Channel Harus Diisi!',
             'grade_color.required' => 'Grade Color Harus Diisi!',
             'qty_bar.required' => 'Qty Bar Harus Diisi!',
-            'stok.required' => 'Stok Harus Diisi!',
+            'qty_trolly.required' => 'Qty Trolly Harus Diisi!',
+            'bagian.required' => 'Bagian Harus Diisi!',
+            'next_process.required' => 'Next Process Harus Diisi!',
+            'model.required' => 'Model Harus Diisi!',
 
         ]);
 
@@ -56,7 +62,10 @@ class MasterDataController extends Controller
             'channel' => $request->channel,
             'grade_color' => $request->grade_color,
             'qty_bar' => $request->qty_bar,
-            'stok' => $request->stok
+            'qty_trolly' => $request->qty_trolly,
+            'bagian' => $request->bagian,
+            'next_process' => $request->next_process,
+            'model' => $request->model,
         ]);
         
         // DB::table('masterdata')->insert([
@@ -157,5 +166,7 @@ class MasterDataController extends Controller
         $data['masterdata'] = MasterData::find($id);
         dd($data);
     }
+
+    
 
 }

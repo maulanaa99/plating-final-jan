@@ -11,8 +11,20 @@
 @section('content')
     {{-- <marquee direction="left" scrollamount="8" align="center">SELAMAT DATANG DI APLIKASI RACKING <br> UTAMAKAN KESELAMATAN KERJA</marquee> --}}
     <div class="card-header">
-        <div class="row float-right">
+        <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
+            <form action="{{ route('stok') }}" method="GET">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Tanggal</label>
+                            <input type="date" class="form-control" name="date" id="date" value="{{ $date }}" >
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="text-white">Filter</label> <br>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -45,9 +57,9 @@
                         <td>{{ $row->total_ng }} </td>
                         <td>{{ $row->stok }} </td>
                         <td>{{ $row->getTotal() }} </td>
-                        <td>{{ $row->no_kartu }} </td>
-                        <td>{{ $row->kirim_painting }} </td>
-                        <td>{{ $row->kirim_assy }} </td>
+                        <td>{{ $row->no_kartu??0 }} </td>
+                        <td>{{ $row->kirim_painting??0 }} </td>
+                        <td>{{ $row->kirim_assy??0  }} </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -59,7 +71,7 @@
                     <td> <b> {{ $sum_total_ok }}</b></td>
                     <td> <b> {{ $sum_total_ng }}</b></td>
                     <td> <b> {{ $sum_stok }}</b></td>
-                    <td>{{ $total_kirim }}</td>
+                    <td> <b> {{ $sum_total_kirim }} </b> </td>
                     <td></td>
                     <td> <b> {{ $sum_kirim_painting }}</b></td>
                     <td> <b> {{ $sum_kirim_assy }}</b></td>

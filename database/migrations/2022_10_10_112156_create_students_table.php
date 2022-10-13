@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRackingTable extends Migration
+class CreateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateRackingTable extends Migration
      */
     public function up()
     {
-        Schema::create('racking', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('tanggal');
-            $table->integer('no_bar');
-            $table->string('part_name');
-            $table->date('waktu_in');
-            $table->dateTime('tgl_lot_prod_mldg');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('username');
+            $table->string('phone');
+            $table->string('dob');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateRackingTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('racking');
+        Schema::dropIfExists('students');
     }
 }

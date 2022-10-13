@@ -42,8 +42,6 @@
                     <th>Tanggal Kanban</th>
                     <th class="align-middle text-center">No Part</th>
                     <th class="align-middle text-center">Part Name</th>
-                    <th class="align-middle text-center">Qty Trolly / Box</th>
-                    <th>Total Kirim</th>
                     <th>No Kartu</th>
                     <th>Next Process</th>
                     <th>Kirim Painting</th>
@@ -59,8 +57,6 @@
                         <td >{{ \Carbon\Carbon::parse($row->tgl_kanban)->format('d-m-Y') }}</td>
                         <td >{{ $row->no_part }}</td>
                         <td >{{ $row->part_name }}</td>
-                        <td>{{ $row->qty_troly }}</td>
-                        <td>{{ $row->total_kirim }}</td>
                         <td>{{ $row->no_kartu }}</td>
                         <td >{{ $row->next_process }}</td>
                         <td>{{ $row->kirim_painting }}</td>
@@ -68,6 +64,8 @@
                         <td>
                             <a href="{{ route('kensa.cetak_kanban', $row->id) }}"
                                 class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a>
+                                <a href="{{ route('kensa.cetak_kanbane')}}"
+                                    class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a>
                         </td>
                     </tr>
                 @endforeach

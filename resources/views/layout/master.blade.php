@@ -154,13 +154,13 @@
                 ">
                         <li class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu"
                             data-accordion="false">
-                            <a href="#">
+                            <span class="text-light text-sm ">
                                 <?php
                                 $today = Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y');
                                 ?>
                                 Tanggal : <b> {{ $today }} </b>
-                            </a>
-                            <a href="#"> Jam : <b><span id="jam"></span></b></a>
+                            </span>
+                            <center><span class="text-light"> Jam :<b> <span id="jam"></span></b></pre> </span>
                         </li>
                     </ul>
                 </nav>

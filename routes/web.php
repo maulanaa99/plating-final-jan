@@ -7,6 +7,7 @@ use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\MasterKensaController;
 use App\Http\Controllers\RackingController_T;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UnrackingController_T;
 use Illuminate\Support\Facades\Route;
 
@@ -35,7 +36,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
-Route::controller(AdminController::class)->middleware(['auth'])->group(function(){
+Route::controller(AdminController::class)->middleware(['auth'])->group(function () {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
     Route::get('/admin/profile', 'profile')->name('admin.profile');
     Route::get('/admin/edit/profile', 'editprofile')->name('edit.profile');
@@ -102,6 +103,7 @@ Route::controller(KensaController::class)->middleware(['auth'])->group(function 
     Route::get('kensa/print_kanban/ajax', 'ajaxKanban')->name('kensa.ajaxKanban');
     Route::get('kensa/ajax', 'ajax')->name('kensa.ajax');
     Route::get('kensa/print_kanban/cetak_kanban/{id}', 'cetak_kanban')->name('kensa.cetak_kanban');
+    Route::get('kensa/print_kanban/cetak_kanbane/', 'cetak_kanbane')->name('kensa.cetak_kanbane');
     Route::get('kensa/utama', 'utama')->name('kensa.utama');
 });
 
@@ -109,7 +111,8 @@ Route::get('stok', [StokController::class, 'index'])->name('stok');
 Route::get('masterkensa', [MasterKensaController::class, 'index'])->name('msterkensa');
 Route::get('masterdata/downloadPDF/{id}', [MasterDataController::class, 'downloadPDF'])->name('masterdata.downloadPDF');
 
-
+Route::get('students', [StudentController::class, 'index']);
+Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
 
 
 

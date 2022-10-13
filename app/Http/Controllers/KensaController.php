@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\Pengiriman;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Mike42\Escpos\CapabilityProfile;
+use Mike42\Escpos\ImagickEscposImage;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class KensaController extends Controller
@@ -241,19 +247,7 @@ class KensaController extends Controller
 
         $masterdata = MasterData::all();
 
-        $q = DB::table('pengiriman')->select(DB::raw('MAX(RIGHT(no_kartu,4)) as kode'));
-        $kode = "";
-        if ($q->count() > 0) {
-            foreach ($q->get() as $k) {
-                $tmp = ((int)$k->kode) + 1;
-                $kode = sprintf("%04s", $tmp);
-            }
-        } else {
-            $kode = "0001";
-        }
-        // return "NBM-".$kd;
-
-        return view('kensa.print-kanban', compact('pengiriman', 'masterdata', 'kode'));
+        return view('kensa.print-kanban', compact('pengiriman', 'masterdata'));
     }
 
     public function ajax(Request $request)
@@ -268,8 +262,19 @@ class KensaController extends Controller
     {
         $id_masterdata['id_masterdata'] = $request->id_masterdata;
         $ajax_barang = MasterData::where('id', $id_masterdata)->get();
+        $date = Carbon::parse($request->date)->format('Y-m-d') ?? date('Y-m-d');
+        $q = DB::table('pengiriman')->select(DB::raw('MAX(RIGHT(no_kartu,4)) as kode'))->where('tgl_kanban', '=', $date)->where('id_masterdata', '=', $id_masterdata);
+        $kode = "";
+        if ($q->count() > 0) {
+            foreach ($q->get() as $k) {
+                $tmp = ((int)$k->kode) + 1;
+                $kode = sprintf("%04s", $tmp);
+            }
+        } else {
+            $kode = "0001";
+        }
 
-        return view('kensa.print-kanban-ajax', compact('ajax_barang'));
+        return view('kensa.print-kanban-ajax', compact('ajax_barang','kode'));
     }
 
     public function kanbansimpan(Request $request)
@@ -288,12 +293,11 @@ class KensaController extends Controller
                 'part_name' => $request->part_name,
                 'model' => $request->model,
                 'bagian' => $request->bagian,
-                'qty_troly' => $request->qty_troly,
-                'total_kirim' => $request->total_kirim,
                 'no_kartu' => $request->no_kartu,
                 'next_process' => $request->next_process,
                 'kirim_painting' => $request->kirim_painting,
                 'kirim_assy' => $request->kirim_assy,
+                'qty_kirim' => $request->qty_kirim,
                 'created_by' => Auth::user()->name,
                 'created_at' => Carbon::now(),
 
@@ -312,17 +316,55 @@ class KensaController extends Controller
         }
     }
 
-    public function export()
-    {
-        $data = PDF::loadview('kensa.print_kanban_pdf', ['data' => 'ini adalah contoh laporan PDF']);
-        return $data->download('kanban.pdf');
-    }
 
-    public function cetak_kanban(Request $request, $id)
+    public function cetak_kanban($id)
     {
         $pengiriman = Pengiriman::where('id', $id)->first();
-        $masterdata = MasterData::all();
-        return view('kensa.cetak-kanban', compact('pengiriman', 'masterdata'));
+
+        $data = [];
+        $pdf = Pdf::loadView('kensa.cetak-kanban', $data)->setPaper([0.0, 0.0, 311.811, 226.772], 'portrait');
+
+        // Gunakan ini jika ingin view blade
+        // return view('kensa.cetak-kanban', $data); 
+
+        // Gunakan ini jika ingin view PDF stream
+        // return $pdf->stream();
+
+        // Save sementara di storage path. Nanti bisa di hapus lagi jika sudah tidak digunakan.
+        $pdf->save(storage_path('app/' . md5($id) . '.pdf'));
+
+        /**
+         * PRINTING
+         */
+        $pdf = storage_path('app/' . md5($id) . '.pdf');
+        $connector = new WindowsPrintConnector("TM-T82II");
+        $printer = new Printer($connector);
+
+        try {
+            $pages = ImagickEscposImage::loadPdf($pdf);
+            foreach ($pages as $page) {
+                $printer->graphics($page);
+            }
+            $printer->cut();
+        } catch (Exception $e) {
+            dd($e->getMessage());
+        } finally {
+            $printer->close();
+        }
+        return view('kensa.cetak-kanban', compact('pengiriman'));
+    }
+
+    public function cetak_kanbane()
+    {
+        $profile = CapabilityProfile::load("simple");
+        $connector = new WindowsPrintConnector("TM-T82II");
+        $printer = new Printer($connector, $profile);
+
+        $printer->text("Hello World!\n");
+
+        $printer->feed(4);
+        $printer->cut();
+        $printer->close();
     }
 
     public function pengiriman()

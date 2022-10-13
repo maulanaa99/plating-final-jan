@@ -46,10 +46,15 @@
 
                                         <div id="detail_part"></div>
 
-                                        
-                                        <div class="col-md-6 mt-2">
-                                            <label>No Kartu</label>
-                                            <input type="text" id="no_kartu" name="no_kartu" value="{{ $kode }}"
+                                        <div class="col-md-3 mt-2">
+                                            <label>Qty Kirim</label>
+                                            <input type="text" id="qty_kirim" name="qty_kirim" readonly onkeyup="sum();"
+                                                class="form-control">
+                                        </div>
+
+                                        <div class="col-md-3 mt-2">
+                                            <label>Jumlah Print</label>
+                                            <input type="text" id="jml_kirim" readonly 
                                                 class="form-control">
                                         </div>
                                     </div>
@@ -99,22 +104,36 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#id_masterdata').change(function() {
-                var id_masterdata = $('#id_masterdata').val();
-                $.ajax({
-                    type: "GET",
-                    url: "/kensa/print_kanban/ajax",
-                    data: "id_masterdata=" + id_masterdata,
-                    cache: false,
-                    success: function(data) {
-                        $('#detail_part').html(data);
-                    }
-                });
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#id_masterdata').change(function() {
+            var id_masterdata = $('#id_masterdata').val();
+            var tgl_kanban = $('#tgl_kanban').val();
+            $.ajax({
+                type: "GET",
+                url: "/kensa/print_kanban/ajax",
+                data: "id_masterdata=" + id_masterdata + "&tgl_kanban=" + tgl_kanban, 
+                cache: false,
+                success: function(data) {
+                    $('#detail_part').html(data);
+                }
             });
         });
-    </script>
+        $('#tgl_kanban').change(function() {
+            var id_masterdata = $('#id_masterdata').val();
+            var tgl_kanban = $('#tgl_kanban').val();
+            $.ajax({
+                type: "GET",
+                url: "/kensa/print_kanban/ajax",
+                data: "id_masterdata=" + id_masterdata + "&tgl_kanban=" + tgl_kanban, 
+                cache: false,
+                success: function(data) {
+                    $('#detail_part').html(data);
+                }
+            });
+        });
+    });
+</script>
 
     <script>
         function sum() {
@@ -122,7 +141,12 @@
               var kirim_painting = document.getElementById('kirim_painting').value;
               var result = parseInt(kirim_assy) + parseInt(kirim_painting);
               if (!isNaN(result)) {
-                 document.getElementById('total_kirim').value = result;
+                 document.getElementById('qty_kirim').value = result;
+              }
+              var std_qty = document.getElementById('qty_trolly').value;
+              var total_kirim = parseInt(result) / parseInt(std_qty);
+              if (!isNaN(total_kirim)) {
+                 document.getElementById('jml_kirim').value = (Math.round(total_kirim));
               }
         }
         </script>

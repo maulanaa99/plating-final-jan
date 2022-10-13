@@ -58,29 +58,31 @@
 
         @if ($d->next_process == 'ASSEMBLY' || $d->next_process == 'PPIC')
             <div class="col-md-2 col-sm-12">
-                <label>Kirim <b class="font-italic">Assembly</label>
+                <label>Qty Troly</label>
                 <div class="input-group">
-                    <input type="text" id="kirim_assy" name="kirim_assy" class="form-control">
+                    <input type="number" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();" value="{{ 0 }}" >
         @elseif ($d->next_process == 'PAINTING')
             <div class="col-md-2 col-sm-12">
-                <label>Kirim <b class="font-italic">Painting</label>
+                <label>Qty Troly</label>
                 <div class="input-group">
-                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control">
+                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
                     </div>
                 </div>
             </div>
+            <input type="hidden" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();" value="{{ 0 }}" >
         @elseif ($d->next_process == '')
             <div class="col-md-2 col-sm-12">
                 <label>Kirim <b class="font-italic">Assembly</label>
                 <div class="input-group">
-                    <input type="text" id="kirim_assy" name="kirim_assy" class="form-control">
+                    <input type="text" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();" value="{{ 0 }}">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
                     </div>
@@ -90,11 +92,16 @@
             <div class="col-md-2 col-sm-12">
                 <label>Kirim <b class="font-italic">Painting</label>
                 <div class="input-group">
-                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control">
+                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();" value="{{ 0 }}" >
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
                     </div>
                 </div>
             </div>
         @endif
+        <div class="col-md-3 mt-2">
+            <label>No Kartu</label>
+            <input type="text" id="no_kartu" name="no_kartu" value="{{ $kode }}"
+                class="form-control">
+        </div>
 @endforeach
