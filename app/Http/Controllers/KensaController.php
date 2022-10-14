@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Mike42\Escpos\CapabilityProfile;
+use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\ImagickEscposImage;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
@@ -23,9 +24,8 @@ class KensaController extends Controller
     //tampil data
     public function index(Request $request)
     {
-        $date = Carbon::parse($request->date)->format('Y-m-d');
-        $day = Carbon::now()->isoFormat('dddd D MMMM Y');
 
+        $date = Carbon::parse($request->date)->format('Y-m-d');
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->select('kensa.*', 'masterdata.part_name', 'masterdata.qty_bar')
             ->orderBy('tanggal_k', 'desc')->orderBy('waktu_k', 'desc')
@@ -84,8 +84,7 @@ class KensaController extends Controller
             'sum_total_ng',
             'avg_p_total_ok',
             'avg_p_total_ng',
-            'date',
-            'day'
+            'date'
         ));
     }
 
@@ -262,23 +261,28 @@ class KensaController extends Controller
     {
         $id_masterdata['id_masterdata'] = $request->id_masterdata;
         $ajax_barang = MasterData::where('id', $id_masterdata)->get();
-        $date = Carbon::parse($request->date)->format('Y-m-d') ?? date('Y-m-d');
-        $q = DB::table('pengiriman')->select(DB::raw('MAX(RIGHT(no_kartu,4)) as kode'))->where('tgl_kanban', '=', $date)->where('id_masterdata', '=', $id_masterdata);
-        $kode = "";
-        if ($q->count() > 0) {
-            foreach ($q->get() as $k) {
-                $tmp = ((int)$k->kode) + 1;
-                $kode = sprintf("%04s", $tmp);
-            }
-        } else {
-            $kode = "0001";
-        }
 
-        return view('kensa.print-kanban-ajax', compact('ajax_barang','kode'));
+        $date = Carbon::parse($request->tgl_kanban)->format('Y-m-d');
+
+        // $q = DB::table('pengiriman')->select(DB::raw('MAX(RIGHT(no_kartu,4)) as kode'))->where('tgl_kanban', '=', $date)->where('id_masterdata', '=', $id_masterdata);
+        $q = $ajax_barang->first()->pengirimans()->where('tgl_kanban', '=', $date)->orderBy('id', 'desc')->first();
+        $kode = $q ? $q->no_kartu + 1 : '0001';
+        // $kode = "";
+        // if ($q->count() > 0) {
+        //     foreach ($q->get() as $k) {
+        //         $tmp = ((int)$k->kode) + 1;
+        //         $kode = sprintf("%04s", $tmp);
+        //     }
+        // } else {
+        //     $kode = "0001";
+        // }
+
+        return view('kensa.print-kanban-ajax', compact('ajax_barang', 'kode'));
     }
 
     public function kanbansimpan(Request $request)
     {
+
         $masterdata = MasterData::find($request->id_masterdata);
 
         if ($masterdata->stok < $request->kirim_assy) {
@@ -286,7 +290,7 @@ class KensaController extends Controller
         } else if ($masterdata->stok < $request->kirim_painting) {
             return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
         } else {
-            Pengiriman::create([
+            $pengiriman = Pengiriman::create([
                 'tgl_kanban' => $request->tgl_kanban,
                 'id_masterdata' => $request->id_masterdata,
                 'no_part' => $request->no_part,
@@ -297,7 +301,7 @@ class KensaController extends Controller
                 'next_process' => $request->next_process,
                 'kirim_painting' => $request->kirim_painting,
                 'kirim_assy' => $request->kirim_assy,
-                'qty_kirim' => $request->qty_kirim,
+                'std_qty' => $request->std_qty,
                 'created_by' => Auth::user()->name,
                 'created_at' => Carbon::now(),
 
@@ -312,59 +316,66 @@ class KensaController extends Controller
             $masterdata->no_kartu = $request->no_kartu;
             $masterdata->save();
 
-            return redirect()->route('kensa.printKanban')->with('toast_success', 'Data berhasil disimpan');
+            return redirect()->route('kensa.cetak_kanban',  ['id' => $pengiriman->id]);
+
+            // return redirect()->route('kensa.printKanban')->with('toast_success', 'Data berhasil disimpan');
         }
     }
 
-
-    public function cetak_kanban($id)
+    public function cetak_kanban(Request $request, $id)
     {
-        $pengiriman = Pengiriman::where('id', $id)->first();
+        $pengiriman = $data['pengiriman'] = Pengiriman::findOrFail($id);
 
-        $data = [];
-        $pdf = Pdf::loadView('kensa.cetak-kanban', $data)->setPaper([0.0, 0.0, 311.811, 226.772], 'portrait');
-
-        // Gunakan ini jika ingin view blade
-        // return view('kensa.cetak-kanban', $data); 
-
-        // Gunakan ini jika ingin view PDF stream
-        // return $pdf->stream();
-
-        // Save sementara di storage path. Nanti bisa di hapus lagi jika sudah tidak digunakan.
-        $pdf->save(storage_path('app/' . md5($id) . '.pdf'));
+        // $masterdata = MasterData::all();
+        // return view('kensa.cetak-kanban', compact('pengiriman', 'masterdata'));
+        $filepath = storage_path('app/' . md5($id));
 
         /**
-         * PRINTING
+         * PDF
          */
-        $pdf = storage_path('app/' . md5($id) . '.pdf');
-        $connector = new WindowsPrintConnector("TM-T82II");
-        $printer = new Printer($connector);
 
-        try {
-            $pages = ImagickEscposImage::loadPdf($pdf);
-            foreach ($pages as $page) {
-                $printer->graphics($page);
+        $jumlah = $pengiriman->kirim_assy + $pengiriman->kirim_painting;
+        $print = ceil($jumlah / $pengiriman->std_qty);
+        $sisa = $jumlah;
+        $jml_print = $pengiriman->no_kartu + $print - 1;
+
+        foreach (range($pengiriman->no_kartu, $jml_print) as $i) {
+            $data['no_kartu'] = $i;
+            $data['qty'] = $sisa >= $pengiriman->std_qty ? $pengiriman->std_qty : $sisa;
+            $sisa = $jumlah - $pengiriman->std_qty;
+
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('kensa.cetak-kanban', $data)->setPaper([0.0, 0.0, 226.772, 311.811], 'landscape');
+            $pdf->save($filepath . '_' . $i . '.pdf');
+            $pdf = new \Spatie\PdfToImage\Pdf($filepath . '_' . $i . '.pdf');
+            $pdf->setOutputFormat('png')
+                ->width(800)
+                ->saveImage($filepath . '_' . $i . '.png');
+
+            $sourceImage = new \Imagick($filepath . '_' . $i . '.png');
+            $sourceImage->rotateImage(new \ImagickPixel(), 90);
+            $sourceImage->writeImage($filepath . '_' . $i . '.png');
+
+            unlink($filepath . '_' . $i . '.pdf');
+
+            /**
+             * PRINTING
+             */
+            $connector = new WindowsPrintConnector("TM-T82II");
+            $printer = new Printer($connector);
+
+            try {
+                $tux = EscposImage::load($filepath . '_' . $i . '.png', false);
+                $printer->graphics($tux);
+                $printer->cut();
+            } catch (Exception $e) {
+                dd($e->getMessage());
+            } finally {
+                $printer->close();
             }
-            $printer->cut();
-        } catch (Exception $e) {
-            dd($e->getMessage());
-        } finally {
-            $printer->close();
         }
-        return view('kensa.cetak-kanban', compact('pengiriman'));
-    }
-
-    public function cetak_kanbane()
-    {
-        $profile = CapabilityProfile::load("simple");
-        $connector = new WindowsPrintConnector("TM-T82II");
-        $printer = new Printer($connector, $profile);
-
-        $printer->text("Hello World!\n");
-
-        $printer->feed(4);
-        $printer->cut();
-        $printer->close();
+        $pengiriman->no_kartu = $jml_print;
+        $pengiriman->save();
+        return redirect()->route('kensa.printKanban')->with('toast_success', 'Data Berhasil Di Print');
     }
 
     public function pengiriman()
@@ -431,21 +442,35 @@ class KensaController extends Controller
             'hadare',
             'sum_hadare',
             'hage',
+            'sum_hage',
             'moyo',
+            'sum_moyo',
             'fukure',
+            'sum_fukure',
             'crack',
+            'sum_crack',
             'henkei',
+            'sum_henkei',
             'hanazaki',
+            'sum_hanazaki',
             'kizu',
+            'sum_kizu',
             'kaburi',
+            'sum_kaburi',
             'other',
+            'sum_other',
             'gores',
             'sum_gores',
             'regas',
+            'sum_regas',
             'silver',
+            'sum_silver',
             'hike',
+            'sum_hike',
             'burry',
+            'sum_burry',
             'others',
+            'sum_others',
             'total_ok',
             'total_ng',
             'date',

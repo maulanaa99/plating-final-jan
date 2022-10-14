@@ -21,7 +21,7 @@ class Pengiriman extends Model
         'next_process',
         'kirim_painting',
         'kirim_assy',
-        'qty_kirim',
+        'std_qty',
         'created_at',
         'updated_at',
     ];
@@ -29,7 +29,13 @@ class Pengiriman extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
-    public function getTotal(){
+    public function getTotal()
+    {
         return $this->kirim_painting + $this->kirim_assy;
-   }
+    }
+
+    public function pengirimans()
+    {
+        return $this->hasMany(Pengiriman::class,'id_masterdata','id');
+    }
 }

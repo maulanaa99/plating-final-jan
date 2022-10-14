@@ -64,8 +64,8 @@
                         <td>
                             <a href="{{ route('kensa.cetak_kanban', $row->id) }}"
                                 class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a>
-                                <a href="{{ route('kensa.cetak_kanbane')}}"
-                                    class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a>
+                                {{-- <a href="{{ route('kensa.cetak_kanbane')}}"
+                                    class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a> --}}
                         </td>
                     </tr>
                 @endforeach

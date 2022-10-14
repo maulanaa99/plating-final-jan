@@ -142,7 +142,7 @@
             <a href="/dashboard" class="brand-link">
                 <img src="{{ asset('assets/dist/img/sri2.jpg') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">PT. Sakae Riken IDN</span>
+                <span class="brand-text font-weight-light">PT. SAKAE RIKEN IDN</span>
             </a>
 
             <!-- Sidebar -->

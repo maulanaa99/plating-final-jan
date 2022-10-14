@@ -54,8 +54,7 @@
 
                                         <div class="col-md-3 mt-2">
                                             <label>Jumlah Print</label>
-                                            <input type="text" id="jml_kirim" readonly 
-                                                class="form-control">
+                                            <input type="text" id="jml_kirim" readonly class="form-control">
                                         </div>
                                     </div>
 
@@ -65,7 +64,8 @@
                                             Submit</button>
                                         <button class="btn btn-danger mr-1" type="reset"> <i
                                                 class="fa fa-trash-restore"></i> Reset</button>
-                                        <a href="{{ route('kensa.pengiriman') }}" class="btn btn-icon icon-left btn-warning">
+                                        <a href="{{ route('kensa.pengiriman') }}"
+                                            class="btn btn-icon icon-left btn-warning">
                                             <i class="fas fa-arrow-left"></i> Kembali</a>
                                     </div>
 
@@ -88,7 +88,7 @@
 @endpush
 
 @push('after-script')
-@include('sweetalert::alert')
+    @include('sweetalert::alert')
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -104,50 +104,51 @@
         });
     </script>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#id_masterdata').change(function() {
-            var id_masterdata = $('#id_masterdata').val();
-            var tgl_kanban = $('#tgl_kanban').val();
-            $.ajax({
-                type: "GET",
-                url: "/kensa/print_kanban/ajax",
-                data: "id_masterdata=" + id_masterdata + "&tgl_kanban=" + tgl_kanban, 
-                cache: false,
-                success: function(data) {
-                    $('#detail_part').html(data);
-                }
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_masterdata').change(function() {
+                var id_masterdata = $('#id_masterdata').val();
+                var tgl_kanban = $('#tgl_kanban').val();
+                $.ajax({
+                    type: "GET",
+                    url: "/kensa/print_kanban/ajax",
+                    data: "id_masterdata=" + id_masterdata + "&tgl_kanban=" + tgl_kanban,
+                    cache: false,
+                    success: function(data) {
+                        $('#detail_part').html(data);
+                    }
+                });
+            });
+            $('#tgl_kanban').change(function() {
+                var id_masterdata = $('#id_masterdata').val();
+                var tgl_kanban = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "/kensa/print_kanban/ajax",
+                    data: "id_masterdata=" + id_masterdata + "&tgl_kanban=" + tgl_kanban,
+                    cache: false,
+                    success: function(data) {
+                        $('#detail_part').html(data);
+                    }
+                });
             });
         });
-        $('#tgl_kanban').change(function() {
-            var id_masterdata = $('#id_masterdata').val();
-            var tgl_kanban = $('#tgl_kanban').val();
-            $.ajax({
-                type: "GET",
-                url: "/kensa/print_kanban/ajax",
-                data: "id_masterdata=" + id_masterdata + "&tgl_kanban=" + tgl_kanban, 
-                cache: false,
-                success: function(data) {
-                    $('#detail_part').html(data);
-                }
-            });
-        });
-    });
-</script>
+    </script>
 
-    <script>
-        function sum() {
-              var kirim_assy = document.getElementById('kirim_assy').value;
-              var kirim_painting = document.getElementById('kirim_painting').value;
-              var result = parseInt(kirim_assy) + parseInt(kirim_painting);
-              if (!isNaN(result)) {
-                 document.getElementById('qty_kirim').value = result;
-              }
-              var std_qty = document.getElementById('qty_trolly').value;
-              var total_kirim = parseInt(result) / parseInt(std_qty);
-              if (!isNaN(total_kirim)) {
-                 document.getElementById('jml_kirim').value = (Math.round(total_kirim));
-              }
-        }
-        </script>
+<script>
+    function sum() {
+          var kirim_assy = document.getElementById('kirim_assy').value;
+          var kirim_painting = document.getElementById('kirim_painting').value;
+          var result = parseInt(kirim_assy) + parseInt(kirim_painting);
+          if (!isNaN(result)) {
+             document.getElementById('qty_kirim').value = result;
+          }
+          var std_qty = document.getElementById('std_qty').value;
+          var total_kirim = parseInt(result) / parseInt(std_qty);
+          if (!isNaN(total_kirim)) {
+             document.getElementById('jml_kirim').value = Math.ceil(total_kirim);
+             console.log(total_kirim);
+          }
+    }
+    </script>
 @endpush

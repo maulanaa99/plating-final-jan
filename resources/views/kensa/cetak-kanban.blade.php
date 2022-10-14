@@ -202,26 +202,28 @@
     <table>
         <tr>
             <td colspan="3">
-                <font size="5" class="text-strong">PT. XYZ</font>
+                <font size="3" class="text-strong">PT. SAKAE RIKEN INDONESIA</font>
             </td>
             <td rowspan="2">
-                <font size="6" class="text-strong serif">{{ $pengiriman->no_kartu }}</font>
+                <font size="6" class="text-strong serif">{{ $no_kartu }}</font>
             </td>
         </tr>
         <tr>
             <td colspan="3">
-                <font size="5" class="text-strong">PART TAG</font>
+                <font size="3" class="text-strong">PART TAG</font>
             </td>
         </tr>
         <tr>
+            @php
+                $no_parts = preg_replace("/[^A-Za-z0-9 ]/", "", $pengiriman->no_part);
+            @endphp
             <td colspan="3">
                 <font size="2" class="text-left"> PART NO. </font>
-                {{-- <div class="centring"> {!! DNS1D::getBarcodeHTML(($pengiriman->no_part), 'C128', 1.3, 30) !!} </div> --}}
-                <div class="centring"> <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($pengiriman->no_part, 'C39') }}" 
+                <div class="centring"> <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($no_parts, 'C39') }}" 
                     alt="{{ $pengiriman->no_part }}"
                     width="180"
                     height="30"> </div>
-                <font size="2"> {{ $pengiriman->no_part }} - {{ $pengiriman->qty_kirim }} </font>
+                <font size="2"> {{ preg_replace("/[^A-Za-z0-9 ]/", "", $pengiriman->no_part) }}{{ $qty }} </font>
             </td>
             <td colspan="1">
                 <font size="4" class="text-strong serif">{{ $pengiriman->bagian }}</font>
@@ -246,14 +248,14 @@
             <td>QC PASS</td>
         </tr>
         <tr>
-            <td class="align-middle text-center" rowspan="2">
-                <font size="4" class="text-strong serif">{{ $pengiriman->model }}</font>
+            <td class="align-middle text-center">
+                <font size="4" class="text-strong serif">{{ $pengiriman->model }}</font><br>
             </td>
-            <td class="align-middle text-center" rowspan="2">
-                <font size="4" class="text-strong serif">{{ $pengiriman->qty_kirim }}</font>
+            <td class="align-middle text-center">
+                <font size="4" class="text-strong serif">{{ $qty }}</font><br>
             </td>
-            <td class="align-middle text-center" rowspan="2">
-                <font size="4" class="text-strong serif">{{ \Carbon\Carbon::parse($pengiriman->tgl_kanban)->format('d/m/Y') }}</font>
+            <td class="align-middle text-center">
+                <font size="4" class="text-strong serif">{{ \Carbon\Carbon::parse($pengiriman->tgl_kanban)->format('d/m/Y') }}</font><br>
             </td>
             <td></td>
         </tr>
