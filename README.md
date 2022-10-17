@@ -13,6 +13,8 @@ Fitur :
 2. Data Produksi Racking
 3. Data Produksi Unracking
 4. Data Produksi Kensa
+5. Data Pengiriman Kensa
+6. Data Stock
 
 
 
