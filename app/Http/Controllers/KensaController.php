@@ -292,6 +292,8 @@ class KensaController extends Controller
             return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
         } else if ($masterdata->stok < $request->kirim_painting) {
             return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
+        } else if ($masterdata->stok < $request->kirim_ppic){
+            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
         } else {
             $pengiriman = Pengiriman::create([
                 'tgl_kanban' => $request->tgl_kanban,
@@ -304,10 +306,10 @@ class KensaController extends Controller
                 'next_process' => $request->next_process,
                 'kirim_painting' => $request->kirim_painting,
                 'kirim_assy' => $request->kirim_assy,
+                'kirim_ppic' => $request->kirim_ppic,
                 'std_qty' => $request->std_qty,
                 'created_by' => Auth::user()->name,
                 'created_at' => Carbon::now(),
-
             ]);
 
             $masterdata->stok -= $request->kirim_assy;
@@ -316,6 +318,7 @@ class KensaController extends Controller
             $masterdata->total_ok -= $request->kirim_painting;
             $masterdata->kirim_assy += $request->kirim_assy;
             $masterdata->kirim_painting += $request->kirim_painting;
+            $masterdata->kirim_ppic += $request->kirim_ppic;
             $masterdata->no_kartu = $request->no_kartu;
             $masterdata->save();
 
@@ -337,7 +340,7 @@ class KensaController extends Controller
          * PDF
          */
 
-        $jumlah = $pengiriman->kirim_assy + $pengiriman->kirim_painting;
+        $jumlah = $pengiriman->kirim_assy + $pengiriman->kirim_painting + $pengiriman->kirim_ppic ;
         $print = ceil($jumlah / $pengiriman->std_qty);
         $sisa = $jumlah;
         $jml_print = $pengiriman->no_kartu + $print - 1;

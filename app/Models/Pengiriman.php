@@ -21,6 +21,7 @@ class Pengiriman extends Model
         'next_process',
         'kirim_painting',
         'kirim_assy',
+        'kirim_ppic',
         'std_qty',
         'created_at',
         'updated_at',
@@ -31,7 +32,7 @@ class Pengiriman extends Model
 
     public function getTotal()
     {
-        return $this->kirim_painting + $this->kirim_assy;
+        return $this->kirim_painting + $this->kirim_assy + $this->kirim_ppic ;
     }
 
     public function pengirimans()

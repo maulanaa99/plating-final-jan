@@ -21,7 +21,7 @@ class Stok extends Model
     ];
 
     public function getTotal(){
-        return $this->kirim_painting + $this->kirim_assy;
+        return $this->kirim_painting + $this->kirim_assy + $this->kirim_ppic;
    }
 
 }

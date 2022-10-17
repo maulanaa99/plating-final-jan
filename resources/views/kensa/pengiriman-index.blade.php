@@ -46,6 +46,7 @@
                     <th>Next Process</th>
                     <th>Kirim Painting</th>
                     <th>Kirim Assembly</th>
+                    <th>Kirim PPIC</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -61,6 +62,7 @@
                         <td >{{ $row->next_process }}</td>
                         <td>{{ $row->kirim_painting }}</td>
                         <td>{{ $row->kirim_assy }}</td>
+                        <td>{{ $row->kirim_ppic }}</td>
                         <td>
                             <a href="{{ route('kensa.cetak_kanban', $row->id) }}"
                                 class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a>

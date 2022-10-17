@@ -139,7 +139,8 @@
     function sum() {
           var kirim_assy = document.getElementById('kirim_assy').value;
           var kirim_painting = document.getElementById('kirim_painting').value;
-          var result = parseInt(kirim_assy) + parseInt(kirim_painting);
+          var kirim_ppic = document.getElementById('kirim_ppic').value;
+          var result = parseInt(kirim_assy) + parseInt(kirim_painting) + parseInt(kirim_ppic) ;
           if (!isNaN(result)) {
              document.getElementById('qty_kirim').value = result;
           }
