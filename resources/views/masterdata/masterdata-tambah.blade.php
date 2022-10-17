@@ -20,7 +20,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="">No. Part</label>
+                                                    <label for="">Part Number</label>
                                                     <input type="text" id="no_part" name="no_part"
                                                         placeholder="Masukan No Part .."
                                                         class="@error('no_part') is-invalid @enderror form-control">
@@ -46,9 +46,9 @@
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Katalis</label>
-                                                    <select name="Katalis"
-                                                        class="@error('Katalis') is-invalid @enderror form-control">
-                                                        @error('Katalis')
+                                                    <select name="katalis"
+                                                        class="@error('katalis') is-invalid @enderror form-control">
+                                                        @error('katalis')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                         <option value="">----Pilih Katalis----</option>
@@ -70,15 +70,21 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-sm-6">
+                                                <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade Color</label>
-                                                    <input type="text" id="grade_color" name="grade_color"
-                                                        placeholder="Masukan Grade Color .."
+                                                    <label>Chrome</label>
+                                                    <select name="grade_color"
                                                         class="@error('grade_color') is-invalid @enderror form-control">
-                                                    @error('grade_color')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
+                                                        @error('grade_color')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                        <option value="">----Pilih Chrome----</option>
+                                                        <option>Cr 6+</option>
+                                                        <option>Dark 3+</option>
+                                                        <option>Black 3+</option>
+                                                        <option>Satin</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -110,9 +116,9 @@
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Bagian</label>
-                                                    <select name="Bagian"
-                                                        class="@error('Bagian') is-invalid @enderror form-control">
-                                                        @error('Bagian')
+                                                    <select name="bagian"
+                                                        class="@error('bagian') is-invalid @enderror form-control">
+                                                        @error('bagian')
                                                             <div class="text-danger">{{ $message }}</div>
                                                         @enderror
                                                         <option value="">----Pilih Bagian----</option>

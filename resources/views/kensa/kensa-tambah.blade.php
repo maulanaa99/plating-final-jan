@@ -55,44 +55,6 @@
 
                                         <div id="detail_part"></div>
 
-                                        {{-- <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label> Part Name</label>
-                                                    <input type="text" id="part_name" name="part_name"
-                                                        value="{{ old('part_name') }}" class="typeahead form-control"
-                                                        placeholder="Masukkan Nama Part">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>No. Bar</label>
-                                                    <input type="text" name="no_bar" value="{{ old('no_bar') }}"
-                                                        class="form-control" placeholder="Masukkan No. Bar">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>No. Part</label>
-                                                    <input type="text" id="no_part" name="no_part"
-                                                        value="{{ old('no_part') }}" class="form-control typeahead">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                                <Label> Qty Bar</Label>
-                                                <div class="input-group">
-                                                    <input type="text" id="qty_bar" name="qty_bar"
-                                                        value="{{ old('qty_bar') }}" onkeyup="sum();" class="form-control">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Pcs </span>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
-
-
-
                                         <div class="col-md-6">
                                             <div class="row">
                                                 <p class="font-italic"> <b> NG Plating </b> </p>
@@ -179,6 +141,34 @@
                                                             class="form-control">
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <Label>Shiromoya</Label>
+                                                        <input type="number" id="shiromoya" name="shiromoya"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <Label>Shimi</Label>
+                                                        <input type="number" id="shimi" name="shimi"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <Label>Pitto</Label>
+                                                        <input type="number" id="pitto" name="pitto"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Other</Label>

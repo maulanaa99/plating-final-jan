@@ -253,6 +253,51 @@
 
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
+                    <div class="small-box bg-dark">
+                        <div class="inner">
+                            <h3>{{ number_format($shiromoya, 2) }}%</h3>
+                            <p>
+                                <font size="5"> SHIROMOYA </font>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-star-of-life"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>{{ number_format($shimi, 2) }}%</h3>
+                            <p>
+                                <font size="5"> SHIMI </font>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-star-of-life"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                            <h3>{{ number_format($pitto, 2) }}%</h3>
+                            <p>
+                                <font size="5"> PITTO </font>
+                            </p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-star-of-life"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
                     <div class="small-box bg-white">
                         <div class="inner">
                             <h3>{{ number_format($other, 2) }}%</h3>

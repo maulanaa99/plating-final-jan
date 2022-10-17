@@ -27,11 +27,11 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th class="align-middle text-center">No. Part</th>
+                    <th class="align-middle text-center">Part Number</th>
                     <th class="align-middle text-center">Part Name</th>
                     <th class="align-middle text-center">Katalis</th>
                     <th class="align-middle text-center">Channel</th>
-                    <th class="align-middle text-center">Grade Color</th>
+                    <th class="align-middle text-center">Chrome</th>
                     <th class="align-middle text-center">Qty Bar</th>
                     <th class="align-middle text-center">Action</th>
                 </tr>
@@ -54,7 +54,7 @@
                                     class="far fa-edit"></i></a>
                             <a href="#" data-id="{{ $data->id }}"
                                 class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="fas fa-times"></i>
-                                
+
                                 <form action="{{ route('master.delete', $data->id) }}" id="delete{{ $data->id }}"
                                     method="POST">
                                     @csrf

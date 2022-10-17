@@ -123,6 +123,9 @@ class KensaController extends Controller
             'hanazaki' => $request->hanazaki,
             'kizu' => $request->kizu,
             'kaburi' => $request->kaburi,
+            'shiromoya' => $request->shiromoya,
+            'shimi' => $request->shimi,
+            'pitto' => $request->pitto,
             'other' => $request->other,
             'gores' => $request->gores,
             'regas' => $request->regas,
@@ -415,6 +418,12 @@ class KensaController extends Controller
         $kizu = $sum_kizu != 0 && $sum_qty_bar != 0 ? (($sum_kizu / $sum_qty_bar) * 100) : 0;
         $sum_kaburi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kaburi');
         $kaburi = $sum_kaburi != 0 && $sum_qty_bar != 0 ? (($sum_kaburi / $sum_qty_bar) * 100) : 0;
+        $sum_shiromoya = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shiromoya');
+        $shiromoya = $sum_shiromoya != 0 && $sum_qty_bar != 0 ? (($sum_shiromoya / $sum_qty_bar) * 100) : 0;
+        $sum_shimi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shimi');
+        $shimi = $sum_shimi != 0 && $sum_qty_bar != 0 ? (($sum_shimi / $sum_qty_bar) * 100) : 0;
+        $sum_pitto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('pitto');
+        $pitto = $sum_pitto != 0 && $sum_qty_bar != 0 ? (($sum_pitto / $sum_qty_bar) * 100) : 0;
         $sum_other = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('other');
         $other = $sum_other != 0 && $sum_qty_bar != 0 ? (($sum_other / $sum_qty_bar) * 100) : 0;
         $sum_gores = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('gores');
@@ -457,6 +466,12 @@ class KensaController extends Controller
             'sum_kizu',
             'kaburi',
             'sum_kaburi',
+            'shiromoya',
+            'sum_shiromoya',
+            'shimi',
+            'sum_shimi',
+            'pitto',
+            'sum_pitto',
             'other',
             'sum_other',
             'gores',

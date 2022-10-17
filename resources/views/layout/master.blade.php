@@ -176,7 +176,7 @@
                                 class="nav-link @if (request()->routeIs('dashboard*')) active @else '' @endif">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Dashboard
+                                    Menu Utama
                                 </p>
                             </a>
                         </li>
@@ -258,7 +258,7 @@
                                     <a href="{{ route('kensa.tambah') }}"
                                         class="nav-link @if (request()->routeIs('kensa.tambah')) active @else '' @endif">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Input Stock</p>
+                                        <p>Input Inspeksi</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

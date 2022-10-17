@@ -100,16 +100,18 @@ class MasterDataController extends Controller
 
     //update data
     public function update(Request $request){
-        // update data pegawai
 		DB::table('masterdata')->where('id',$request->id)->update([
 			'no_part' => $request->no_part,
             'part_name' => $request->part_name,
             'katalis' => $request->katalis,
             'channel' => $request->channel,
             'grade_color' => $request->grade_color,
-            'qty_bar' => $request->qty_bar
+            'qty_bar' => $request->qty_bar,
+            'qty_trolly' => $request->qty_trolly,
+            'bagian' => $request->bagian,
+            'next_process' => $request->next_process,
+            'model' => $request->model,
 		]);
-		// alihkan halaman ke halaman pegawai
 		return redirect('masterdata')->with('success', 'Data Berhasil Diperbarui!');
     }
 

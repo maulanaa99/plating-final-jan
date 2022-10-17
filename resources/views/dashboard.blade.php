@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('title')
-    Dashboard
+    MENU UTAMA
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > Dashboard</li>
+    <li class="active"> > MENU UTAMA</li>
 @endsection
 
 

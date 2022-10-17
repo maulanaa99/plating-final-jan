@@ -67,10 +67,10 @@
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
                                                     <option value="">----Pilih Cycle----</option>
-                                                    <option>Cycle 1</option>
-                                                    <option>Cycle 2</option>
-                                                    <option>Cooper Storage</option>
-                                                    <option>Final Storage</option>
+                                                    <option>C1</option>
+                                                    <option>C2</option>
+                                                    <option>CS</option>
+                                                    <option>FS</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -98,7 +98,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>No. Part</label>
+                                                <label>Part Number</label>
                                                 <input type="text" id="no_part" name="no_part" readonly
                                                     value="{{ old('no_part') }}"
                                                     class="@error('no_part') is-invalid @enderror form-control">
@@ -134,7 +134,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label> Grade Color</label>
+                                                <label>Chrome </label>
                                                 <input type="text" id="grade_color" name="grade_color" readonly
                                                     value="{{ old('grade_color') }}"
                                                     class="@error('grade_color') is-invalid @enderror form-control">

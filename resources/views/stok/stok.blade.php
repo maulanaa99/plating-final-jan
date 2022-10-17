@@ -36,6 +36,7 @@
                     <th>#</th>
                     <th>No Part</th>
                     <th>Part Name</th>
+                    <th>Stok BC</th>
                     <th>Total OK</th>
                     <th>Total NG</th>
                     <th>Stok</th>
@@ -43,6 +44,7 @@
                     <th>No Kartu</th>
                     <th>Kirim Painting</th>
                     <th>Kirim Assy</th>
+                    <th>Kirim PPIC</th>
                 </tr>
             </thead>
 
@@ -53,6 +55,7 @@
                         <td> <center> {{ $no++ }} </center></td>
                         <td>{{ $row->no_part }}</td>
                         <td>{{ $row->part_name }}</td>
+                        <td></td>
                         <td>{{ $row->total_ok }} </td>
                         <td>{{ $row->total_ng }} </td>
                         <td>{{ $row->stok }} </td>
@@ -60,6 +63,7 @@
                         <td>{{ $row->no_kartu??0 }} </td>
                         <td>{{ $row->kirim_painting??0 }} </td>
                         <td>{{ $row->kirim_assy??0  }} </td>
+                        <td></td>
                     </tr>
                 @endforeach
             </tbody>
