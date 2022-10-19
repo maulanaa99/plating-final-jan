@@ -41,32 +41,22 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($plating as $no => $racking)
+                    @foreach ($racking as $no => $rack)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($racking->tanggal_r)->format('d-m-Y') }} {{ $racking->waktu_in_r }}</td>
-                            <td>{{ $racking->no_bar }}</td>
-                            <td>{{ $racking->part_name }}</td>
-                            <td>{{ $racking->no_part }}</td>
-                            <td>{{ $racking->katalis }}</td>
-                            <td>{{ $racking->channel }}</td>
-                            <td>{{ $racking->grade_color }}</td>
-                            <td>{{ $racking->qty_bar }}</td>
-                            <td>{{ \Carbon\Carbon::parse($racking->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
-                            <td>{{ $racking->cycle }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
+                            <td>{{ $rack->no_bar }}</td>
+                            <td>{{ $rack->part_name }}</td>
+                            <td>{{ $rack->no_part }}</td>
+                            <td>{{ $rack->katalis }}</td>
+                            <td>{{ $rack->channel }}</td>
+                            <td>{{ $rack->grade_color }}</td>
+                            <td>{{ $rack->qty_bar }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
+                            <td>{{ $rack->cycle }}</td>
                             <td>
-                                <a href="{{ route('racking_t.edit', $racking->plating_id) }}"
+                                <a href="{{ route('racking_t.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
-
-                                {{-- <a href="#" data-id="{{ $racking->plating_id }}"
-                            class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="fas fa-times"></i>
-                            Delete
-                            <form action="{{ route('racking_t.delete', $racking->plating_id) }}"
-                                id="delete{{ $racking->plating_id }}" method="POST">
-                                @csrf
-                                @method('delete')
-                            </form>
-                        </a> --}}
                             </td>
                         </tr>
                     @endforeach
@@ -75,7 +65,6 @@
         </div>
     </div>
     <br>
-    {{-- {!! $plating->links() !!} --}}
     </div>
 @endsection
 
@@ -96,31 +85,6 @@
                     [10, 25, 50, 75, "All"]
                 ],
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-
-    
-
-    <script>
-        $(".swal-confirm").click(function(e) {
-            id = e.target.dataset.id;
-            swal({
-                    title: 'Hapus data? ',
-                    text: 'Setelah dihapus data tidak dapat dikembalikan',
-                    icon: 'warning',
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        // swal('Poof! Your imaginary file has been deleted!', {
-                        // icon: 'success',
-                        // });
-                        $(`#delete${id}`).submit();
-                    } else {
-                        // swal('Your imaginary file is safe!');
-                    }
-                });
         });
     </script>
 @endpush

@@ -5,19 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\Pengiriman;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Mike42\Escpos\CapabilityProfile;
 use Mike42\Escpos\EscposImage;
-use Mike42\Escpos\ImagickEscposImage;
-use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class KensaController extends Controller
 {
@@ -141,6 +136,8 @@ class KensaController extends Controller
             'created_at' => Carbon::now(),
         ]);
         $masterdata = MasterData::find($request->id_masterdata);
+        $masterdata->stok_bc -= $request->total_ok;
+        $masterdata->stok_bc -= $request->total_ng;
         $masterdata->stok += $request->total_ok;
         $masterdata->total_ng += $request->total_ng;
         $masterdata->total_ok += $request->total_ok;
@@ -152,7 +149,6 @@ class KensaController extends Controller
     //edit data
     public function edit($id)
     {
-        // return view('racking.racking-edit',compact('racking'));
         $kensa = DB::table('kensa')->where('kensa_id', $id)->first();
         return view('kensa.kensa-edit', ['kensa' => $kensa]);
     }
@@ -163,16 +159,12 @@ class KensaController extends Controller
         $kensa = kensa::find($id);
         $kensa->delete();
         return redirect('kensa')->with('toast_success', 'Data berhasil dihapus');
-        // DB::table('kensa')
-        //     ->select('kensa.kensa_id')->where('kensa_id', $id)->delete();
-        // return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
 
     //update data
     public function update(Request $request, $id)
     {
         $kensa = kensa::find($id);
-
         $kensa->tanggal_k = $request->tanggal_k;
         $kensa->waktu_k = $request->waktu_k;
         $kensa->no_part = $request->no_part;
@@ -202,43 +194,8 @@ class KensaController extends Controller
         $kensa->total_ng = $request->total_ng;
         $kensa->p_total_ok = $request->p_total_ok;
         $kensa->p_total_ng = $request->p_total_ng;
-
         $kensa->save();
-        // alert()->success('SuccessAlert', 'Lorem ipsum dolor sit amet.');
         return redirect()->route('kensa.tambah')->with('message', 'Data berhasil di update');
-    }
-
-    public function autocomplete($id)
-    {
-        if (empty($id)) {
-            return [];
-        }
-        $datas = DB::table('masterdata')
-            ->join('kensa', 'kensa.no_part', '=', 'masterdata.no_part')
-            ->where('masterdata.part_name', 'LIKE', "$id%")
-            ->limit(25)
-            ->get();
-
-        return $datas;
-    }
-
-    public function search(Request $request)
-    {
-        $keyword = $request->search;
-        $kensa = kensa::where('part_name', 'like', "%" . $keyword . "%")->paginate(124);
-        return view('kensa.kensa-index', compact('kensa'))->with('i', (request()->input('page', 1) - 1) * 5);
-    }
-
-    public function searchDater(Request $request)
-    {
-        if (request()->start_date || request()->end_date) {
-            $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
-            $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
-            $kensa = kensa::whereBetween('tanggal_k', [$start_date, $end_date])->paginate(75);
-        } else {
-            $kensa = kensa::latest()->paginate(75);
-        }
-        return view('kensa.kensa-index', compact('kensa'));
     }
 
     public function printKanban()
@@ -266,26 +223,14 @@ class KensaController extends Controller
         $ajax_barang = MasterData::where('id', $id_masterdata)->get();
 
         $date = Carbon::parse($request->tgl_kanban)->format('Y-m-d');
-
-        // $q = DB::table('pengiriman')->select(DB::raw('MAX(RIGHT(no_kartu,4)) as kode'))->where('tgl_kanban', '=', $date)->where('id_masterdata', '=', $id_masterdata);
         $q = $ajax_barang->first()->pengirimans()->where('tgl_kanban', '=', $date)->orderBy('id', 'desc')->first();
         $kode = $q ? $q->no_kartu + 1 : '0001';
-        // $kode = "";
-        // if ($q->count() > 0) {
-        //     foreach ($q->get() as $k) {
-        //         $tmp = ((int)$k->kode) + 1;
-        //         $kode = sprintf("%04s", $tmp);
-        //     }
-        // } else {
-        //     $kode = "0001";
-        // }
 
         return view('kensa.print-kanban-ajax', compact('ajax_barang', 'kode'));
     }
 
     public function kanbansimpan(Request $request)
     {
-
         $masterdata = MasterData::find($request->id_masterdata);
 
         if ($masterdata->stok < $request->kirim_assy) {
@@ -311,7 +256,6 @@ class KensaController extends Controller
                 'created_by' => Auth::user()->name,
                 'created_at' => Carbon::now(),
             ]);
-
             $masterdata->stok -= $request->kirim_assy;
             $masterdata->total_ok -= $request->kirim_assy;
             $masterdata->stok -= $request->kirim_painting;
@@ -323,17 +267,12 @@ class KensaController extends Controller
             $masterdata->save();
 
             return redirect()->route('kensa.cetak_kanban',  ['id' => $pengiriman->id]);
-
-            // return redirect()->route('kensa.printKanban')->with('toast_success', 'Data berhasil disimpan');
         }
     }
 
     public function cetak_kanban(Request $request, $id)
     {
         $pengiriman = $data['pengiriman'] = Pengiriman::findOrFail($id);
-
-        // $masterdata = MasterData::all();
-        // return view('kensa.cetak-kanban', compact('pengiriman', 'masterdata'));
         $filepath = storage_path('app/' . md5($id));
 
         /**
@@ -396,7 +335,6 @@ class KensaController extends Controller
     public function utama(Request $request)
     {
         $date = Carbon::parse($request->date)->format('Y-m-d');
-
         $sum_qty_bar = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('qty_bar');
         $sum_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ng');
         $sum_nikel = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('nikel');

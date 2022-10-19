@@ -52,10 +52,10 @@
                 @php $no = 1; @endphp
                 @foreach ($stok as $row)
                     <tr>
-                        <td> <center> {{ $no++ }} </center></td>
+                        <td> <center> {{ $loop->iteration }} </center></td>
                         <td>{{ $row->no_part }}</td>
                         <td>{{ $row->part_name }}</td>
-                        <td></td>
+                        <td>{{ $row->stok_bc }}</td>
                         <td>{{ $row->total_ok }} </td>
                         <td>{{ $row->total_ng }} </td>
                         <td>{{ $row->stok }} </td>
@@ -66,13 +66,14 @@
                         <td>{{ $row->kirim_ppic??0  }}</td>
                     </tr>
                 @endforeach
+                
             </tbody>
             <tfoot>
                 <tr>
                     <td colspan="3">
                         <center> <b> Total </b> </center>
                     </td>
-                    <td></td>
+                    <td> <b> {{ $sum_stok_bc }}</b></td>
                     <td> <b> {{ $sum_total_ok }}</b></td>
                     <td> <b> {{ $sum_total_ng }}</b></td>
                     <td> <b> {{ $sum_stok }}</b></td>

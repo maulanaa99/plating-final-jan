@@ -27,7 +27,9 @@
                                             <div class="form-group">
                                                 <label>Tanggal</label>
                                                 <input type="date" name="tanggal_r" value="<?= date('Y-m-d') ?>"
-                                                class="@error('tanggal_r') is-invalid @enderror form-control">
+                                                    class="@error('tanggal_r')
+is-invalid
+@enderror form-control">
                                                 @error('tanggal_r')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
@@ -90,76 +92,26 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Part Name</label>
-                                                <input type="text" id="part_name" name="part_name"
-                                                    value="{{ old('part_name') }}" class="typeahead form-control"
-                                                    placeholder="Masukkan Nama Part">
+                                                <select class="form-control masterdata-js" name="id_masterdata"
+                                                    id="id_masterdata">
+                                                    <option value="" hidden>--Pilih Barang--</option>
+                                                    @foreach ($masterdata as $d)
+                                                        <option value="{{ $d->id }}">{{ $d->part_name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Part Number</label>
-                                                <input type="text" id="no_part" name="no_part" readonly
-                                                    value="{{ old('no_part') }}"
-                                                    class="@error('no_part') is-invalid @enderror form-control">
-                                                @error('no_part')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
+                                        <div id="detail_part"></div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Katalis </label>
-                                                <input type="text" id="katalis" name="katalis" readonly
-                                                    value="{{ old('katalis') }}"
-                                                    class="@error('katalis') is-invalid @enderror form-control">
-                                                @error('katalis')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Channel </label>
-                                                <input type="text" id="channel" name="channel" readonly
-                                                    value="{{ old('channel') }}"
-                                                    class="@error('channel') is-invalid @enderror form-control">
-                                                @error('channel')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Chrome </label>
-                                                <input type="text" id="grade_color" name="grade_color" readonly
-                                                    value="{{ old('grade_color') }}"
-                                                    class="@error('grade_color') is-invalid @enderror form-control">
-                                                @error('grade_color')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <Label> Qty Bar</Label>
-                                                <input type="text" id="qty_bar" name="qty_bar"
-                                                    value="{{ old('qty_bar') }}"
-                                                    class="@error('qty_bar') is-invalid @enderror form-control">
-                                                @error('qty_bar')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
 
                                         <div class="container">
                                             <div class="card-footer text-center">
-                                                <button class="btn btn-primary mr-1" type="submit"> <i class="fas fa-save"></i> Submit</button>
-                                                <button class="btn btn-danger" type="reset"> <i class="fas fa-trash-restore"></i> Reset</button>
+                                                <button class="btn btn-primary mr-1" type="submit"> <i
+                                                        class="fas fa-save"></i> Submit</button>
+                                                <button class="btn btn-danger" type="reset"> <i
+                                                        class="fas fa-trash-restore"></i> Reset</button>
                                                 <a href="{{ route('racking_t') }}"
                                                     class="btn btn-icon icon-left btn-warning"><i
                                                         class="fas fa-arrow-left"></i> Kembali</a>
@@ -188,6 +140,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
 
 
@@ -197,51 +151,23 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            var basePath = $("#base_path").val();
-            //Array of Values
-            $("#part_name").autocomplete({
-                source: function(request, cb) {
-                    $.ajax({
-                        url: basePath + '/masterdata/' + request.term,
-                        method: 'GET',
-                        dataType: 'json',
-                        success: function(res) {
-                            var result;
-                            result = [{
-                                label: 'There is no matching record found for ' +
-                                    request.term,
-                                value: ''
-                            }];
+            $('.masterdata-js').select2();
+        });
+    </script>
 
-                            console.log(res);
-
-
-                            if (res.length) {
-                                result = $.map(res, function(obj) {
-                                    return {
-                                        label: obj.part_name,
-                                        value: obj.part_name,
-                                        data: obj
-                                    };
-                                });
-                            }
-                            cb(result);
-                        }
-                    });
-                },
-                select: function(e, selectedData) {
-                    console.log(selectedData);
-
-                    if (selectedData && selectedData.item && selectedData.item.data) {
-                        var data = selectedData.item.data;
-
-                        $('#no_part').val(data.no_part);
-                        $('#katalis').val(data.katalis);
-                        $('#channel').val(data.channel);
-                        $('#grade_color').val(data.grade_color);
-                        $('#qty_bar').val(data.qty_bar);
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_masterdata').change(function() {
+                var id_masterdata = $('#id_masterdata').val();
+                $.ajax({
+                    type: "GET",
+                    url: "/racking_t/ajax",
+                    data: "id_masterdata=" + id_masterdata,
+                    cache: false,
+                    success: function(data) {
+                        $('#detail_part').html(data);
                     }
-                }
+                });
             });
         });
     </script>

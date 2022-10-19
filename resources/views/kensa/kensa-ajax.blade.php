@@ -1,31 +1,17 @@
 @foreach ($ajax_barang as $d)
     <div class="row">
-
-        {{-- <div class="col-md-2">
-            <div class="form-group"> --}}
-                {{-- <label>No. Part</label> --}}
-                <input type="hidden" id="no_part" name="no_part" value="{{ $d->no_part }}"
-                    class="form-control typeahead" readonly>
-            {{-- </div>
-        </div> --}}
-
-        {{-- <div class="col-md-4">
-            <div class="form-group"> --}}
-                {{-- <label> Part Name</label> --}}
-                <input type="hidden" id="part_name" name="part_name" value="{{ $d->part_name }}"
-                    class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
-            {{-- </div>
-        </div> --}}
+        <input type="hidden" id="no_part" name="no_part" value="{{ $d->no_part }}" class="form-control typeahead"
+            readonly>
+        <input type="hidden" id="part_name" name="part_name" value="{{ $d->part_name }}" class="typeahead form-control"
+            placeholder="Masukkan Nama Part" readonly>
 
         <div class="col-md-4">
             <div class="form-group">
                 <label>No. Bar</label>
-                <input type="text" name="no_bar" value="{{ old('no_bar') }}"
-                    class="form-control" placeholder="Masukkan No. Bar">
+                <input type="text" name="no_bar" value="{{ old('no_bar') }}" class="form-control"
+                    placeholder="Masukkan No. Bar">
             </div>
         </div>
-
-        
 
         <div class="col-md-4">
             <Label> Qty Bar</Label>
@@ -52,6 +38,4 @@
             </div>
         </div>
     </div>
-
-    
 @endforeach

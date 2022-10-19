@@ -66,23 +66,15 @@ Route::controller(RackingController_T::class)->middleware(['auth'])->group(funct
     Route::delete('racking_t/delete/{id}', 'delete')->name('racking_t.delete');
     Route::get('racking_t/{id}/edit', 'edit')->name('racking_t.edit');
     Route::patch('racking_t/{id}', 'update')->name('racking_t.update');
-    Route::get('racking_t/export_excel', 'exportexcel')->name('racking_t.export');
-    Route::get('racking_t/autocomplete/{id}', 'autocomplete')->name('autocomplete_t');
-    Route::get('racking_t/search', 'search')->name('racking_t.search');
-    Route::get('racking_t/searchdate', 'searchDate')->name('racking_t.searchdate');
+    Route::get('racking_t/ajax', 'ajaxRacking')->name('racking_t.ajax');
 });
 
 Route::controller(UnrackingController_T::class)->middleware(['auth'])->group(function () {
     Route::get('unracking_t', 'index')->name('unracking_t');
-    Route::get('unracking_t/tambah', 'tambah')->name('unracking_t.tambah');
     Route::post('unracking_t', 'simpan')->name('unracking_t.simpan');
     Route::delete('unracking_t/delete/{id}', 'delete')->name('unracking_t.delete');
     Route::get('unracking_t/{id}/edit', 'edit')->name('unracking_t.edit');
     Route::patch('unracking_t/{id}', 'update')->name('unracking_t.update');
-    Route::get('unracking_t/export_excel', 'exportexcel')->name('unracking_t.export');
-    Route::get('unracking_t/autocomplete1', 'autocomplete1')->name('autocomplete1_t');
-    Route::get('unracking_t/search', 'search')->name('unracking_t.search');
-    Route::get('unracking_t/searchdater', 'searchDater')->name('unracking_t.searchdater');
     Route::get('unracking_t/print/{id}', 'unrackingPrint')->name('unracking_t.print');
 });
 

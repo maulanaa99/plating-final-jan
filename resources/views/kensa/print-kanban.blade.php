@@ -33,7 +33,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Part Name</label>
-                                                <select class="form-control masterdata-js" name="id_masterdata"
+                                                <select class="form-control select2-container" name="id_masterdata"
                                                     id="id_masterdata">
                                                     <option value="" hidden>--Pilih Barang--</option>
                                                     @foreach ($masterdata as $d)
@@ -92,7 +92,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.masterdata-js').select2();
+            $('.select2-container').select2();
         });
     </script>
 
@@ -140,7 +140,7 @@
           var kirim_assy = document.getElementById('kirim_assy').value;
           var kirim_painting = document.getElementById('kirim_painting').value;
           var kirim_ppic = document.getElementById('kirim_ppic').value;
-          var result = parseInt(kirim_assy) + parseInt(kirim_painting) + parseInt(kirim_ppic) ;
+          var result = parseInt(kirim_assy) + parseInt(kirim_painting) + parseInt(kirim_ppic);
           if (!isNaN(result)) {
              document.getElementById('qty_kirim').value = result;
           }

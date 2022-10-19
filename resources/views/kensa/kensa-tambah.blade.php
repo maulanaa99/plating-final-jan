@@ -26,16 +26,16 @@
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
                                                 <label>Tanggal</label>
-                                                <input type="date" name="tanggal_k"
-                                                    value="<?= date('Y-m-d') ?>" class="form-control">
+                                                <input type="date" name="tanggal_k" value="<?= date('Y-m-d') ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
 
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Jam</label>
-                                                <input type="time" name="waktu_k"
-                                                    value="<?= date('H:i:s') ?>" class="form-control">
+                                                <input type="time" name="waktu_k" value="<?= date('H:i:s') ?>"
+                                                    class="form-control">
                                             </div>
                                         </div>
 
@@ -61,60 +61,68 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Nikel</Label>
-                                                        <input type="number" id="nikel" name="nikel" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="nikel" name="nikel"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Butsu</Label>
-                                                        <input type="number" id="butsu" name="butsu" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="butsu" name="butsu"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Hadare</Label>
-                                                        <input type="number" id="hadare" name="hadare" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="hadare" name="hadare"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Hage</Label>
-                                                        <input type="number" id="hage" name="hage" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="hage" name="hage"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Moyo</Label>
-                                                        <input type="number" id="moyo" name="moyo" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="moyo" name="moyo"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Fukure</Label>
-                                                        <input type="number" id="fukure" name="fukure" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="fukure" name="fukure"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Crack</Label>
-                                                        <input type="number" id="crack" name="crack" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="crack" name="crack"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Henkei</Label>
-                                                        <input type="number" id="henkei" name="henkei" onchange="sum();"
-                                                            value="{{ 0 }}" class="form-control">
+                                                        <input type="number" id="henkei" name="henkei"
+                                                            onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
@@ -150,7 +158,7 @@
                                                             class="form-control">
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <Label>Shimi</Label>
@@ -285,25 +293,26 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
 
-                                    </div>
-                                    <div class="container mt-3 text-center">
-                                        <button class="btn btn-primary mr-1" type="submit"><i class="fa fa-save"></i>
-                                            Submit</button>
-                                        <button class="btn btn-danger mr-1" type="reset"> <i
-                                                class="fa fa-trash-restore"></i> Reset</button>
-                                        <a href="{{ route('kensa') }}" class="btn btn-icon icon-left btn-warning">
-                                            <i class="fas fa-arrow-left"></i> Kembali</a>
-                                    </div>
+                                </div>
+                                <div class="container mt-3 text-center">
+                                    <button class="btn btn-primary mr-1" type="submit"><i class="fa fa-save"></i>
+                                        Submit</button>
+                                    <button class="btn btn-danger mr-1" type="reset"> <i
+                                            class="fa fa-trash-restore"></i> Reset</button>
+                                    <a href="{{ route('kensa') }}" class="btn btn-icon icon-left btn-warning">
+                                        <i class="fas fa-arrow-left"></i> Kembali</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
-                <!-- /.card -->
+                </form>
             </div>
+            <!-- /.card -->
         </div>
-        <!-- /.row -->
+    </div>
+    <!-- /.row -->
     </div>
 @endsection
 
@@ -315,11 +324,10 @@
 @endpush
 
 @push('after-script')
-@include('sweetalert::alert')
+    @include('sweetalert::alert')
     <script type="text/javascript">
         $(document).ready(function() {
             $('.masterdata-js').select2();
-
         });
     </script>
 
@@ -344,55 +352,6 @@
                         $('#detail_part').html(data);
                     }
                 });
-            });
-        });
-    </script>
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var basePath = $("#base_path").val();
-            //Array of Values
-            $("#part_name").autocomplete({
-                source: function(request, cb) {
-                    $.ajax({
-                        url: basePath + '/masterdata/' + request.term,
-                        method: 'GET',
-                        dataType: 'json',
-                        success: function(res) {
-                            var result;
-                            result = [{
-                                label: 'There is no matching record found for ' +
-                                    request.term,
-                                value: ''
-                            }];
-
-                            console.log(res);
-
-
-                            if (res.length) {
-                                result = $.map(res, function(obj) {
-                                    return {
-                                        label: obj.part_name,
-                                        value: obj.part_name,
-                                        data: obj
-                                    };
-                                });
-                            }
-                            cb(result);
-                        }
-                    });
-                },
-                select: function(e, selectedData) {
-                    console.log(selectedData);
-
-                    if (selectedData && selectedData.item && selectedData.item.data) {
-                        var data = selectedData.item.data;
-                        $('#no_part').val(data.no_part);
-                        $('#qty_bar').val(data.qty_bar);
-                    }
-                }
             });
         });
     </script>

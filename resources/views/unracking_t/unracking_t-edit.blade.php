@@ -15,7 +15,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="{{ route('unracking_t.update', $plating->plating_id) }}" method="POST"
+                    <form id="quickForm" action="{{ route('unracking_t.update', $plating->id) }}" method="POST"
                         class="form-master">
                         @csrf
                         @method('patch')
@@ -138,21 +138,21 @@
                                         <div class="col-sm-6">
                                             <!-- select -->
                                             <div class="form-group">
-                                                <label>Select</label>
-                                                <select name="cycle" class="form-control">
+                                                <label>Cycle</label>
+                                                <select name="cycle" class="form-control" readonly>
                                                     <option value="">----Pilih Cycle----</option>
-                                                    <option value="Cycle 1"
-                                                        {{ old('cycle', $plating->cycle) == 'Cycle 1' ? 'selected' : '' }}>
-                                                        Cycle 1</option>
-                                                    <option value="Cycle 2"
-                                                        {{ old('cycle', $plating->cycle) == 'Cycle 2' ? 'selected' : '' }}>
-                                                        Cycle 2</option>
-                                                    <option value="Cooper Storage"
-                                                        {{ old('cycle', $plating->cycle) == 'Cooper Storage' ? 'selected' : '' }}>
-                                                        Cooper Storage</option>
-                                                    <option value="Final Storage"
-                                                        {{ old('cycle', $plating->cycle) == 'Final Storage' ? 'selected' : '' }}>
-                                                        Final Storage</option>
+                                                    <option value="C1"
+                                                        {{ old('cycle', $plating->cycle) == 'C1' ? 'selected' : '' }}>
+                                                        C1</option>
+                                                    <option value="C2"
+                                                        {{ old('cycle', $plating->cycle) == 'C2' ? 'selected' : '' }}>
+                                                        C2</option>
+                                                    <option value="CS"
+                                                        {{ old('cycle', $plating->cycle) == 'CS' ? 'selected' : '' }}>
+                                                        CS</option>
+                                                    <option value="FS"
+                                                        {{ old('cycle', $plating->cycle) == 'FS' ? 'selected' : '' }}>
+                                                        FS</option>
                                                 </select>
 
                                             </div>

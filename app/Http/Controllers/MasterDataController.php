@@ -67,16 +67,6 @@ class MasterDataController extends Controller
             'next_process' => $request->next_process,
             'model' => $request->model,
         ]);
-        
-        // DB::table('masterdata')->insert([
-        //     'no_part' => $request->no_part,
-        //     'part_name' => $request->part_name,
-        //     'katalis' => $request->katalis,
-        //     'channel' => $request->channel,
-        //     'grade_color' => $request->grade_color,
-        //     'qty_bar' => $request->qty_bar,
-        //     'stok' => $request->stok
-        // ]);
         return redirect()->route('master')->with('success','Data Berhasil Disimpan!');
     }
 

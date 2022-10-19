@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UnrackingExport;
-use App\Models\racking_t;
+use App\Models\MasterData;
 use App\Models\unracking_t;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UnrackingController_T extends Controller
@@ -16,84 +14,37 @@ class UnrackingController_T extends Controller
     //tampil data
     public function index()
     {
-        $plating = DB::table('plating')
-            ->join('masterdata', 'masterdata.no_part', '=', 'plating.no_part')
+        $plating = unracking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
+            ->select('plating.*', 'masterdata.stok_bc')
             ->orderBy('tanggal_r', 'desc')->orderBy('waktu_in_r', 'desc')
-            ->paginate(75);
-        return view('unracking_t.unracking_t', ['plating' => $plating]);
-    }
-
-    //tambah data
-    public function tambah()
-    {
-        return view('unracking_t.unracking_t-tambah');
-    }
-
-    //simpan data
-    public function simpan(Request $request)
-    {
-        DB::table('plating')->insert([
-            'tanggal_u' => $request->tanggal_u,
-            'waktu_in_u' => $request->waktu_in_u,
-            'qty_aktual' => $request->qty_aktual
-        ]);
-        return redirect()->route('unracking_t')->with('toast_success', 'Data Berhasil Disimpan!');
+            ->get();
+        $masterdata = MasterData::all();
+        return view('unracking_t.unracking_t', compact('plating', 'masterdata'));
     }
 
     //edit data
     public function edit($id)
     {
-
-        // return view('racking.racking-edit',compact('racking'));
-        $plating = DB::table('plating')->where('plating_id', $id)->first();
-        return view('unracking_t.unracking_t-edit', ['plating' => $plating]);
-    }
-
-    //hapus data
-    public function delete($id)
-    {
-        DB::table('plating')
-            ->select('plating.plating_id')->where('plating_id', $id)->delete();
-        return redirect()->back()->with('message', 'Data berhasil dihapus');
+        $plating = unracking_t::find($id);
+        return view('unracking_t.unracking_t-edit', compact('plating'));
     }
 
     //update data
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'qty_aktual' => 'required'
-          ], [
-            'qty_aktual.required' => 'Qty Aktual Harus Diisi!',
-        ]);
-
-        DB::table('plating')->where('plating_id', $request->id)->update([
-            'tanggal_u' => $request->tanggal_u,
-            'waktu_in_u' => $request->waktu_in_u,
-            'qty_aktual' => $request->qty_aktual,
-            'updated_by' => Auth::user()->name,
-            'updated_at' => Carbon::now(),
-        ]);
-        return redirect()->route('unracking_t')->with('toast_success', 'Data Berhasil Diupdate!');
+        $unracking = unracking_t::find($id);
+        $unracking->tanggal_u = $request->tanggal_u;
+        $unracking->waktu_in_u = $request->waktu_in_u;
+        $unracking->qty_aktual = $request->qty_aktual;
+        $unracking->save();
+        return redirect()->route('unracking_t')->with('success', 'Data Berhasil Ditambahkan');
     }
 
-    public function autocomplete($id)
-    {
-        if (empty($id)) {
-            return [];
-        }
-        $datas = DB::table('masterdata')
-            ->join('plating', 'plating.no_part', '=', 'masterdata.no_part')
-            ->where('masterdata.part_name', 'LIKE', "$id%")
-            ->limit(25)
-            ->get();
-
-        return $datas;
-    }
 
     public function search(Request $request)
     {
         $keyword = $request->search;
-        $plating = racking_t::where('part_name', 'like', "%" . $keyword . "%")->paginate(124);
+        $plating = unracking_t::where('part_name', 'like', "%" . $keyword . "%")->paginate(124);
         return view('unracking_t.unracking_t', compact('plating'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -109,13 +60,14 @@ class UnrackingController_T extends Controller
         return view('unracking_t.unracking_t', compact('plating'));
     }
 
-    public function exportexcel(){
+    public function exportexcel()
+    {
         return Excel::download(new UnrackingExport, 'Unracking.xlsx');
     }
 
     public function unrackingPrint(Request $request, $id)
     {
-        $unracking = unracking_t::where('plating_id',$id)->first();
-        return view('unracking_t.unracking_t-print',compact('unracking'));
+        $unracking = unracking_t::where('id', $id)->first();
+        return view('unracking_t.unracking_t-print', compact('unracking'));
     }
 }

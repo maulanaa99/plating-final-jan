@@ -49,13 +49,35 @@
                 <!-- select -->
                 <div class="form-group">
                     <label>Next Process</label>
-                    <select name="next_process" class="form-control">
+                    <select name="next_process" id="next_process" class="form-control">
                         <option value="">----Pilih Next Process----</option>
                         <option>ASSEMBLY</option>
                         <option>PAINTING</option>
                     </select>
                 </div>
             </div>
+            <div class="col-md-3">
+                <label>Kirim Assy</label>
+                <div class="input-group">
+                    <input type="text" id="kirim_assy" name="kirim_assy" class="form-control"
+                        value="{{ 0 }}" onkeyup="sum();">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>Kirim Painting</label>
+                <div class="input-group">
+                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control"
+                        value="{{ 0 }}" onkeyup="sum();">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();"
+                value="{{ 0 }}">
         @else
             <div class="col-md-3">
                 <label>Next Process</label>
@@ -86,8 +108,10 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();" value="{{ 0 }}">
-            <input type="hidden" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();" value="{{ 0 }}">
+            <input type="hidden" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();"
+                value="{{ 0 }}">
+            <input type="hidden" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();"
+                value="{{ 0 }}">
         @elseif ($d->next_process == 'PAINTING')
             <div class="col-md-3">
                 <label>Qty Troly</label>
@@ -99,20 +123,23 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();" value="{{ 0 }}">
-            <input type="hidden" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();" value="{{ 0 }}">
+            <input type="hidden" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();"
+                value="{{ 0 }}">
+            <input type="hidden" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();"
+                value="{{ 0 }}">
         @elseif ($d->next_process == 'PPIC')
             <div class="col-md-3">
                 <label>Qty Troly</label>
                 <div class="input-group">
-                    <input type="text" id="kirim_ppic" name="kirim_ppic" class="form-control"
-                        onkeyup="sum();">
+                    <input type="text" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
                     </div>
                 </div>
             </div>
-            <input type="hidden" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();" value="{{ 0 }}">
-            <input type="hidden" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();" value="{{ 0 }}">
+            <input type="hidden" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();"
+                value="{{ 0 }}">
+            <input type="hidden" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();"
+                value="{{ 0 }}">
         @endif
 @endforeach

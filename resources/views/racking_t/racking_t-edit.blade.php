@@ -15,7 +15,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="{{ route('racking_t.update', $plating->plating_id) }}" method="POST" class="form-master">
+                    <form id="quickForm" action="{{ route('racking_t.update', $plating->id) }}" method="POST" class="form-master">
                         @csrf
                         @method('patch')
                         <div class="row">

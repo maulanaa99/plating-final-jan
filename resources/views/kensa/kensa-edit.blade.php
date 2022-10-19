@@ -86,18 +86,18 @@
                                                     <label>Select</label>
                                                     <select name="cycle" class="form-control">
                                                         <option value="">----Pilih Cycle----</option>
-                                                        <option value="Cycle 1"
-                                                            {{ old('cycle', $kensa->cycle) == 'Cycle 1' ? 'selected' : '' }}>
-                                                            Cycle 1</option>
-                                                        <option value="Cycle 2"
-                                                            {{ old('cycle', $kensa->cycle) == 'Cycle 2' ? 'selected' : '' }}>
-                                                            Cycle 2</option>
-                                                        <option value="Cooper Storage"
-                                                            {{ old('cycle', $kensa->cycle) == 'Cooper Storage' ? 'selected' : '' }}>
-                                                            Cooper Storage</option>
-                                                        <option value="Final Storage"
-                                                            {{ old('cycle', $kensa->cycle) == 'Final Storage' ? 'selected' : '' }}>
-                                                            Final Storage</option>
+                                                        <option value="C1"
+                                                            {{ old('cycle', $kensa->cycle) == 'C1' ? 'selected' : '' }}>
+                                                            C1</option>
+                                                        <option value="C2"
+                                                            {{ old('cycle', $kensa->cycle) == 'C2' ? 'selected' : '' }}>
+                                                            C2</option>
+                                                        <option value="CS"
+                                                            {{ old('cycle', $kensa->cycle) == 'CS' ? 'selected' : '' }}>
+                                                            CS</option>
+                                                        <option value="FS"
+                                                            {{ old('cycle', $kensa->cycle) == 'FS' ? 'selected' : '' }}>
+                                                            FS</option>
                                                     </select>
                                                 </div>
                                             </div>

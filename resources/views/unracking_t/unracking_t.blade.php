@@ -11,9 +11,7 @@
     <div class="card-header">
         <div class="row  float-right">
             <div class="col-12 col-md-12 col-lg-12">
-                {{-- <a href="{{ route('unracking_t.tambah') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i> Tambah Data</a> --}}
-                {{-- <a href="{{ route('unracking_t.export') }}" class="btn btn-icon icon-left btn-success"><i
-                        class="fas fa-download"></i>Export Data</a> --}}
+                
             </div>
         </div>
     </div>
@@ -35,25 +33,22 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($plating as $no => $unracking)
+                @foreach ($plating as $no => $unrack)
                     <tr>
                         <td>{{ $no + 1 }}</td>
-                        <td>{{ \Carbon\Carbon::parse($unracking->tanggal_r)->format('d-m-Y') }} {{ $unracking->waktu_in_r }}</td>
-                        <td>{{ \Carbon\Carbon::parse($unracking->tanggal_u)->format('d-m-Y') }} {{ $unracking->waktu_in_u }}</td>
-                        <td>{{ $unracking->no_bar }}</td>
-                        <td>{{ $unracking->part_name }}</td>
-                        <td>{{ $unracking->no_part }}</td>
-                        {{-- <td>{{ $unracking->katalis }}</td> --}}
-                        <td>{{ $unracking->channel }}</td>
-                        {{-- <td>{{ $unracking->grade_color }}</td> --}}
-                        <td>{{ $unracking->qty_bar }}</td>
-                        <td>{{ $unracking->qty_aktual }}</td>
-                        {{-- <td>{{ \Carbon\Carbon::parse($unracking->tgl_lot_prod_mldg)->format('d-m-Y') }}</td> --}}
-                        <td>{{ $unracking->cycle }}</td>
+                        <td>{{ \Carbon\Carbon::parse($unrack->tanggal_r)->format('d-m-Y') }} {{ $unrack->waktu_in_r }}</td>
+                        <td>{{ \Carbon\Carbon::parse($unrack->tanggal_u)->format('d-m-Y') }} {{ $unrack->waktu_in_u }}</td>
+                        <td>{{ $unrack->no_bar }}</td>
+                        <td>{{ $unrack->part_name }}</td>
+                        <td>{{ $unrack->no_part }}</td>
+                        <td>{{ $unrack->channel }}</td>
+                        <td>{{ $unrack->qty_bar }}</td>
+                        <td>{{ $unrack->qty_aktual }}</td>
+                        <td>{{ $unrack->cycle }}</td>
                         <td>
-                            <a href="{{ route('unracking_t.edit', $unracking->plating_id) }}" 
+                            <a href="{{ route('unracking_t.edit', $unrack->id) }}" 
                             class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
-                            <a href="{{ route('unracking_t.print', $unracking->plating_id) }}" 
+                            <a href="{{ route('unracking_t.print', $unrack->id) }}" 
                             class="btn btn-icon btn-sm btn-primary" target="_blank" ><i class="fas fa-print"></i> Print </a>
                         </td>
                     </tr>
@@ -80,29 +75,6 @@
                 "lengthMenu": [ [10, 25, 50, 75, -1], [10, 25, 50, 75, "All"] ],
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-
-    <script>
-        $(".swal-confirm").click(function(e) {
-            id = e.target.dataset.id;
-            swal({
-                    title: 'Hapus data? ',
-                    text: 'Setelah dihapus data tidak dapat dikembalikan',
-                    icon: 'warning',
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        // swal('Poof! Your imaginary file has been deleted!', {
-                        // icon: 'success',
-                        // });
-                        $(`#delete${id}`).submit();
-                    } else {
-                        // swal('Your imaginary file is safe!');
-                    }
-                });
         });
     </script>
 @endpush
