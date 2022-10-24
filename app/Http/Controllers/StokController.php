@@ -17,7 +17,7 @@ class StokController extends Controller
         $stok = Pengiriman::rightJoin('masterdata', function ($rightJoin) use ($date) {
             $rightJoin->on('masterdata.id', '=', 'pengiriman.id_masterdata')->where('tgl_kanban', '=', $date);
         })
-            ->select('pengiriman.kirim_assy', 'pengiriman.kirim_painting', 'pengiriman.kirim_ppic', 'masterdata.part_name', 'masterdata.no_part', 'masterdata.total_ok', 'masterdata.total_ng', 'masterdata.stok', 'masterdata.stok_bc' , DB::raw('MAX(pengiriman.no_kartu) as no_kartu'))
+            ->select('pengiriman.kirim_assy', 'pengiriman.kirim_painting', 'pengiriman.kirim_ppic', 'masterdata.part_name', 'masterdata.no_part', 'masterdata.total_ok', 'masterdata.total_ng', 'masterdata.stok', 'masterdata.stok_bc', DB::raw('MAX(pengiriman.no_kartu) as no_kartu'))
             ->groupBy('masterdata.id')
             ->get();
 
@@ -30,6 +30,18 @@ class StokController extends Controller
         $sum_kirim_ppic = DB::table('pengiriman')->where('tgl_kanban', '=', $date)->get()->sum('kirim_ppic');
         $sum_total_kirim = $sum_kirim_painting + $sum_kirim_assy + $sum_kirim_ppic;
 
-        return view('stok.stok', compact('stok', 'sum_total_ok', 'sum_total_ng', 'sum_stok','sum_stok_bc', 'sum_kirim_painting', 'sum_kirim_assy', 'sum_kirim_ppic', 'sum_total_kirim', 'date'));
+        return view('stok.stok', compact('stok', 'sum_total_ok', 'sum_total_ng', 'sum_stok', 'sum_stok_bc', 'sum_kirim_painting', 'sum_kirim_assy', 'sum_kirim_ppic', 'sum_total_kirim', 'date'));
+    }
+
+    public function lihatPart(){
+        $part = MasterData::all();
+        return view('latihanajax',compact('part'));
+    }
+
+
+    public function cariPart(Request $request)
+    {
+        $z = Masterdata::select('no_part', 'katalis', 'channel', 'grade_color', 'qty_bar')->where('id', $request->id)->first();
+        return response()->json($z);
     }
 }

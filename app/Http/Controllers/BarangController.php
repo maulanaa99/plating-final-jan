@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use Yajra\DataTables\Facades\DataTables;
+use App\Models\Barang;
 
 class BarangController extends Controller
 {
@@ -16,15 +14,12 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $barangs = Barang::all()
-            ->sortBy('kode_barang');
-
-        return view('barang', compact('barangs'));
+        $barangs = Barang::all();
+        return view ('barang', compact('barangs'));
     }
 
     public function data()
     {
-        //
     }
 
     /**
@@ -45,21 +40,13 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        $cek_barang = Barang::where('kode_barang', $request->kode_barang)
-            ->count();
-        if ($cek_barang == 0) {
-            $barang = new Barang;
-            $barang->kode_barang = $request->kode_barang;
-            $barang->nama = $request->nama;
-            $barang->qty = $request->qty;
-            $barang->harga = $request->harga;
-            $barang->save();
-
-            Session::flash('create_success', 'Barang baru berhasil ditambahkan');
-
-            return redirect('/barang');
-        }
+        $barang = Barang::create([
+            'nama_barang' => $request->nama_barang,
+            'jumlah_barang' => $request->jumlah_barang,
+        ]);
+        return redirect()->route('barang',compact('barang'));
     }
+
 
     /**
      * Display the specified resource.
@@ -80,9 +67,6 @@ class BarangController extends Controller
      */
     public function edit($id)
     {
-        $barang = Barang::find($id);
-
-        return response()->json(['barang' => $barang]);
     }
 
     /**

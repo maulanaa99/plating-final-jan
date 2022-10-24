@@ -1,18 +1,18 @@
 @extends('layout.master')
 @section('title')
-    Data Barang
+    Data Transaksi
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > Barang > Barang</li>
+    <li class="active"> > Transaksi > Transaksi</li>
 @endsection
 @section('content_header')
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Data Barang</h1>
+                    <h1>Data Transaksi</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -28,7 +28,7 @@
     <div class="card-header">
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{ route('barang.tambah') }}" class="btn btn-icon icon-left btn-primary">
+                <a href="{{ route('transaksi.create') }}" class="btn btn-icon icon-left btn-primary">
                     <i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
@@ -40,18 +40,27 @@
                     <tr>
                         <th>#</th>
                         <th>Nama Barang</th>
+                        <th>Jenis Transaksi</th>
                         <th>Jumlah Barang</th>
                         <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach ($barangs as $no => $barang)
+                    @foreach ($transaksis as $no => $transaksi)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ $barang->nama_barang }}</td>
-                            <td>{{ $barang->jumlah_barang }}</td>
-                            <td></td>
+                            <td>{{ $transaksi->getNamaBarang->nama_barang }}</td>
+                            <td>{{ $transaksi->jenis_transaksi }}</td>
+                            <td>{{ $transaksi->jumlah_barang }}</td>
+                            <td>
+                                <a href="{{ route('transaksi.edit', $transaksi->id) }}"
+                                    class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i></a>
+                                {{-- <a href="{{ route('transaksi.destroy', $transaksi->id) }}"
+                                    class="btn btn-icon btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a> --}}
+                                <a href="{{ url('transaksi/destroy/' . $transaksi->id) }}"
+                                    class="btn btn-icon btn-sm btn-danger"> <i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

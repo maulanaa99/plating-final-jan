@@ -3,6 +3,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 @endpush
+@section('title')
+
+@endsection
+
+@section('breadcrumb')
+    @parent
+    <li class="active"> > Kensa > Input Data Inspeksi</li>
+@endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">

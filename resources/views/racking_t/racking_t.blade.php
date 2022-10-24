@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    Input Data Racking
+    Data Racking
 @endsection
 
 @section('breadcrumb')

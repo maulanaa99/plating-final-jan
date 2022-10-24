@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('title')
-    Input Data Pengiriman
+    Data Pengiriman
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > Kanban Pengiriman</li>
+    <li class="active"> > Kensa > Data Pengiriman</li>
 @endsection
 @section('content_header')
     <section class="content-header">
@@ -34,7 +34,7 @@
         </div>
     </div> --}}
 
-    <div class="card-body mt-3">
+    <div class="card-body">
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
             <thead>
                 <tr>

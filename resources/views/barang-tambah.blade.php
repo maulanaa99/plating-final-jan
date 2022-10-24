@@ -1,128 +1,113 @@
 @extends('layout.master')
+@push('page-styles')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
+@endpush
 @section('content')
-<div class="row page-title-header">
-    <div class="col-12">
-      <div class="page-header d-flex justify-content-start align-items-center">
-        <div class="quick-link-wrapper d-md-flex flex-md-wrap">
-          <ul class="quick-links">
-            <li><a href="{{ url('barang') }}">Daftar Barang</a></li>
-            <li><a href="{{ url('barang/create') }}">Barang Baru</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row modal-group">
-    <div class="modal fade" id="scanModal" tabindex="-1" role="dialog" aria-labelledby="scanModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="scanModalLabel">Scan Barcode</h5>
-              <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-12 text-center" id="area-scan">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- jquery validation -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Tambah Data Barang</small></h3>
                     </div>
-                    <div class="col-12 barcode-result" hidden="">
-                        <h5 class="font-weight-bold">Hasil</h5>
-                        <div class="form-border">
-                            <p class="barcode-result-text"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer" id="btn-scan-action" hidden="">
-              <button type="button" class="btn btn-primary btn-sm font-weight-bold rounded-0 btn-continue">Lanjutkan</button>
-              <button type="button" class="btn btn-outline-secondary btn-sm font-weight-bold rounded-0 btn-repeat">Ulangi</button>
-            </div>
-        </div>
-      </div>
-    </div>
-    <div class="modal fade" id="formatModal" tabindex="-1" role="dialog" aria-labelledby="formatModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="formatModalLabel">Format Upload</h5>
-              <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-          </div>
-          <div class="modal-body">
-              <div class="row">
-                  <div class="col-12 img-import-area">
-                  </div>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-      <div class="col-lg-8 col-md-12 col-sm-12 mb-4">
-          <div class="card card-noborder b-radius">
-              <div class="card-body">
-                  <form action="{{ route('barang.store') }}" method="post" name="create_form">
-                      @csrf
-                      <div class="form-group row">
-                            <label class="col-12 font-weight-bold col-form-label">Kode Barang <span class="text-danger">*</span></label>
-                            <div class="col-12">
-                                <div class="input-group">
-                                    <input type="text" class="form-control number-input" name="kode_barang" placeholder="Masukkan Kode Barang">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-inverse-primary btn-sm btn-scan shadow-sm ml-2" type="button" data-toggle="modal" data-target="#scanModal"><i class="mdi mdi-crop-free"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                          <div class="col-12 error-notice" id="kode_barang_error"></div>
-                      </div>
-                      <div class="form-group row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 space-bottom">
-                                <div class="row">
-                                    <label class="col-12 font-weight-bold col-form-label">Nama Barang <span class="text-danger">*</span></label>
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Barang">
-                                    </div>
-                                  <div class="col-12 error-notice" id="nama_error"></div>
-                                </div>
-                            </div> 
-                            <div class="col-lg-6 col-md-6 col-sm-12 space-bottom">
-                                <div class="row">
-                                    <label class="col-12 font-weight-bold col-form-label">Stok Barang <span class="text-danger">*</span></label>
-                                    <div class="col-12">
-                                        <input type="text" class="form-control number-input" name="qty" placeholder="Masukkan Stok Barang">
-                                    </div>
-                                  <div class="col-12 error-notice" id="qty_error"></div>
-                                </div>
-                            </div>
-                      </div>
-                      
-                      <div class="form-group row">
-                            <div class="col-lg-6 col-md-6 col-sm-12">
-                                <div class="row">
-                                    <label class="col-12 font-weight-bold col-form-label">Harga Barang <span class="text-danger">*</span></label>
-                                    <div class="col-12">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Rp. </span>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form id="quickForm" action="{{ route('barang.simpan') }}" method="POST" class="form-master">
+                        {{ csrf_field() }}
+                        <div class="row">
+                            <div class="col-12 col-md-12 col-lg-12">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Nama Barang</label>
+                                                <input type="text" name="nama_barang" value="{{ old('nama_barang') }}"
+                                                    placeholder="Masukkan Nama Barang"
+                                                    class="@error('nama_barang') is-invalid @enderror form-control">
+                                                @error('nama_barang')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
-                                            <input type="text" class="form-control number-input" name="harga" placeholder="Masukkan Harga Barang">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Jumlah Barang</label>
+                                                <input type="text" name="jumlah_barang" value="{{ old('jumlah_barang') }}"
+                                                    placeholder="Masukkan Jumlah Barang"
+                                                    class="@error('jumlah_barang') is-invalid @enderror form-control">
+                                                @error('jumlah_barang')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="container">
+                                            <div class="card-footer text-center">
+                                                <button class="btn btn-primary mr-1" type="submit"> <i
+                                                        class="fas fa-save"></i> Submit</button>
+                                                <button class="btn btn-danger" type="reset"> <i
+                                                        class="fas fa-trash-restore"></i> Reset</button>
+                                                <a href="{{ route('barang') }}"
+                                                    class="btn btn-icon icon-left btn-warning"><i
+                                                        class="fas fa-arrow-left"></i> Kembali</a>
+                                            </div>
                                         </div>
                                     </div>
-                                  <div class="col-12 error-notice" id="harga_error"></div>
                                 </div>
                             </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-12 mt-2 d-flex justify-content-end">
-                                <button class="btn btn-simpan btn-sm" type="submit"><i class="mdi mdi-content-save"></i> Simpan</button>
-                            </div>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div>
 @endsection
+
+@push('page-script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+@endpush
+
+@push('after-script')
+    @include('sweetalert::alert')
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.masterdata-js').select2();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#id_masterdata').change(function() {
+                var id_masterdata = $('#id_masterdata').val();
+                $.ajax({
+                    type: "GET",
+                    url: "/racking_t/ajax",
+                    data: "id_masterdata=" + id_masterdata,
+                    cache: false,
+                    success: function(data) {
+                        $('#detail_part').html(data);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

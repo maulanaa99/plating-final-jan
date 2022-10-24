@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KensaController;
 use App\Http\Controllers\MasterDataController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\MasterKensaController;
 use App\Http\Controllers\RackingController_T;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UnrackingController_T;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +69,7 @@ Route::controller(RackingController_T::class)->middleware(['auth'])->group(funct
     Route::get('racking_t/{id}/edit', 'edit')->name('racking_t.edit');
     Route::patch('racking_t/{id}', 'update')->name('racking_t.update');
     Route::get('racking_t/ajax', 'ajaxRacking')->name('racking_t.ajax');
+    Route::get('racking_t/findMasterdata', 'findMasterdata')->name('findMasterdata');
 });
 
 Route::controller(UnrackingController_T::class)->middleware(['auth'])->group(function () {
@@ -106,6 +109,20 @@ Route::get('masterdata/downloadPDF/{id}', [MasterDataController::class, 'downloa
 Route::get('students', [StudentController::class, 'index']);
 Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
 
+Route::get('lihatPart', [StokController::class, 'lihatPart'])->name('lihatPart');
+Route::get('cariPart', [StokController::class, 'cariPart'])->name('cariPart');
 
+Route::get('barang', [BarangController::class, 'index'])->name('barang');
+Route::get('barang/create', [BarangController::class, 'create'])->name('barang.tambah');
+Route::post('barang/simpan', [BarangController::class, 'store'])->name('barang.simpan');
+
+Route::resource('transaksi', TransaksiController::class);
+Route::get('/transaksi/destroy/{id}', [TransaksiController::class, 'destroy']);
+
+// Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
+// Route::get('transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.tambah');
+// Route::post('transaksi/simpan', [TransaksiController::class, 'store'])->name('transaksi.simpan');
+// Route::get('transaksi/edit/{id}', [TransaksiController::class, 'edit'])->name('transaksi.edit');
+// Route::get('transaksi/hapus/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.hapus');
 
 require __DIR__ . '/auth.php';

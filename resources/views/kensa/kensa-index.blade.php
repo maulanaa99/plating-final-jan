@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('title')
-    Input Data Kensa
+    Data Kensa
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > Kensa</li>
+    <li class="active"> > Kensa > Kensa</li>
 @endsection
 @section('content_header')
     <section class="content-header">

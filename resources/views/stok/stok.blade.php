@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    Input Data Stok
+    Data Stok
 @endsection
 
 @section('breadcrumb')
