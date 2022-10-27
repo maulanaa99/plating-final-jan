@@ -25,9 +25,7 @@
     </section>
 @endsection
 @section('content')
-    <div class="card-header" style="
-    padding-left: 10px;
-">
+    <div class="card-header" style="padding-left: 10px;">
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
                 <a href="{{ route('kensa.tambah') }}" class="btn btn-icon icon-left btn-info"><i class="fas fa-plus"></i>
@@ -37,9 +35,11 @@
         <form action="{{ route('kensa') }}" method="GET">
             <div class="row">
                 <div class="col-md-4">
+                    <label for="">Tanggal</label>
                     <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
                 </div>
                 <div class="col-md-4">
+                    <label for="" class="text-white">Filter</label> <br>
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                         <td>{{ $kensha->p_total_ok }} %</td>
                         <td>{{ $kensha->p_total_ng }} %</td>
                         <td>
-                            <a href="{{ route('kensa.edit', $kensha->kensa_id) }}"
+                            <a href="{{ route('kensa.edit', $kensha->id) }}"
                                 class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
                         </td>
                     </tr>

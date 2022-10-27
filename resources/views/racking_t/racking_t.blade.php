@@ -9,7 +9,6 @@
 @endsection
 
 @section('content')
-    {{-- <marquee direction="left" scrollamount="8" align="center">SELAMAT DATANG DI APLIKASI RACKING <br> UTAMAKAN KESELAMATAN KERJA</marquee> --}}
     <div class="card-header">
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
@@ -17,6 +16,18 @@
                     <i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
+        <form action="{{ route('racking_t') }}" method="GET">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Tanggal</label>
+                    <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="" class="text-white">Filter</label> <br>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
     </div>
 
     <div class="card-body">
@@ -57,6 +68,15 @@
                             <td>
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
+                                <a href="#" data-id="{{ $rack->id }}"
+                                    class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
+                                        Delete</i>
+
+                                    <form action="{{ route('racking_t.delete', $rack->id) }}"
+                                        id="delete{{ $rack->id }}" method="POST">
+                                        @csrf
+                                    </form>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
@@ -73,6 +93,8 @@
 @endpush
 
 @push('after-script')
+    @include('sweetalert::alert')
+
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
@@ -84,7 +106,25 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+    <script>
+        $(".swal-confirm").click(function(e) {
+            id = e.target.dataset.id;
+            swal({
+                    title: 'Hapus data? ',
+                    text: 'Setelah dihapus, data tidak dapat dikembalikan',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $(`#delete${id}`).submit();
+                    } else {}
+                });
         });
     </script>
 @endpush

@@ -27,9 +27,7 @@
                                             <div class="form-group">
                                                 <label>Tanggal</label>
                                                 <input type="date" name="tanggal_r" value="<?= date('Y-m-d') ?>"
-                                                    class="@error('tanggal_r')
-is-invalid
-@enderror form-control">
+                                                    class="@error('tanggal_r') is-invalid @enderror form-control">
                                                 @error('tanggal_r')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
@@ -62,7 +60,7 @@ is-invalid
                                         <div class="col-sm-6">
                                             <!-- select -->
                                             <div class="form-group">
-                                                <label>Produksi</label>
+                                                <label>Cycle</label>
                                                 <select name="cycle"
                                                     class="@error('cycle') is-invalid @enderror form-control">
                                                     @error('cycle')
@@ -74,18 +72,6 @@ is-invalid
                                                     <option>CS</option>
                                                     <option>FS</option>
                                                 </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>No. Bar</label>
-                                                <input type="text" name="no_bar" value="{{ old('no_bar') }}"
-                                                    placeholder="Masukkan No. Bar"
-                                                    class="@error('no_bar') is-invalid @enderror form-control">
-                                                @error('no_bar')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
                                             </div>
                                         </div>
 
@@ -103,8 +89,19 @@ is-invalid
                                             </div>
                                         </div>
 
-                                        <div id="detail_part"></div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>No. Bar</label>
+                                                <input type="number" name="no_bar" value="{{ old('no_bar') }}"
+                                                    placeholder="Masukkan No. Bar"
+                                                    class="@error('no_bar') is-invalid @enderror form-control">
+                                                @error('no_bar')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
 
+                                        <div id="detail_part"></div>
 
                                         <div class="container">
                                             <div class="card-footer text-center">

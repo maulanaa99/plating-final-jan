@@ -12,14 +12,16 @@ use Maatwebsite\Excel\Facades\Excel;
 class UnrackingController_T extends Controller
 {
     //tampil data
-    public function index()
+    public function index(Request $request)
     {
+        $date = Carbon::parse($request->date)->format('Y-m-d');
         $plating = unracking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
             ->select('plating.*', 'masterdata.stok_bc')
             ->orderBy('tanggal_r', 'desc')->orderBy('waktu_in_r', 'desc')
+            ->where('tanggal_r', '=', $date)
             ->get();
         $masterdata = MasterData::all();
-        return view('unracking_t.unracking_t', compact('plating', 'masterdata'));
+        return view('unracking_t.unracking_t', compact('plating', 'masterdata','date'));
     }
 
     //edit data

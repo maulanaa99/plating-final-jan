@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    Tambah Data Pengiriman 
+    Tambah Data Pengiriman
 @endsection
 
 @section('breadcrumb')
@@ -76,6 +76,7 @@
                                             class="btn btn-icon icon-left btn-warning">
                                             <i class="fas fa-arrow-left"></i> Kembali</a>
                                     </div>
+
 
                                 </div>
                             </div>

@@ -88,12 +88,75 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Stock</label>
-                                                    <input type="text" id="stok" name="stok"
-                                                        @if (old('stok')) value="{{ old('stok') }}"
+                                                    <label>Qty Trolly / Qty Box</label>
+                                                    <input type="text" id="qty_trolly" name="qty_trolly"
+                                                        @if (old('qty_trolly')) value="{{ old('qty_trolly') }}"
                                                     @else
-                                                        value="{{ $masterdata->stok }}" @endif
-                                                        class="form-control">
+                                                        value="{{ $masterdata->qty_trolly }}" @endif
+                                                        class="@error('qty_trolly') is-invalid @enderror form-control">
+                                                    @error('qty_trolly')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Bagian</label>
+                                                    <select name="bagian"
+                                                        class="@error('bagian') is-invalid @enderror form-control">
+                                                        @error('bagian')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                        <option value="">----Pilih Bagian----</option>
+                                                        <option value="-"
+                                                            {{ old('bagian', $masterdata->bagian) == '-' ? 'selected' : '' }}>
+                                                            -</option>
+                                                        <option value="LH"
+                                                            {{ old('bagian', $masterdata->bagian) == 'LH' ? 'selected' : '' }}>
+                                                            LH</option>
+                                                        <option value="RH"
+                                                            {{ old('bagian', $masterdata->bagian) == 'RH' ? 'selected' : '' }}>
+                                                            RH</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Next Process</label>
+                                                    <select name="next_process"
+                                                        class="@error('next_process') is-invalid @enderror form-control">
+                                                        @error('next_process')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                        <option value="">----Pilih Next Process----</option>
+                                                        <option value="ASSEMBLY"
+                                                            {{ old('next_process', $masterdata->next_process) == 'ASSEMBLY' ? 'selected' : '' }}>
+                                                            ASSEMBLY</option>
+                                                        <option value="PAINTING"
+                                                            {{ old('next_process', $masterdata->next_process) == 'PAINTING' ? 'selected' : '' }}>
+                                                            PAINTING</option>
+                                                        <option value="PPIC"
+                                                            {{ old('next_process', $masterdata->next_process) == 'PPIC' ? 'selected' : '' }}>
+                                                            PPIC</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Model</label>
+                                                    <input type="text" id="model" name="model"
+                                                        @if (old('model')) value="{{ old('model') }}"
+                                                    @else
+                                                        value="{{ $masterdata->model }}" @endif
+                                                        class="@error('model') is-invalid @enderror form-control">
+                                                    @error('model')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
 

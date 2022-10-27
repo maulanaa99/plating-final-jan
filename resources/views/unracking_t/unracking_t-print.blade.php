@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    
+
 
     <body style="background-color: white;" onload="window.print()">
         <style>
@@ -35,7 +35,7 @@
                             <thead>
                                 <tr>
                                     <th colspan="4">PART NAME</th>
-                                    
+
                                 </tr>
                                 <tr>
                                     <th colspan="4">{{ $unracking->part_name }}</th>

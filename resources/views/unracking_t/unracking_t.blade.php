@@ -11,9 +11,21 @@
     <div class="card-header">
         <div class="row  float-right">
             <div class="col-12 col-md-12 col-lg-12">
-                
+
             </div>
         </div>
+        <form action="{{ route('unracking_t') }}" method="GET">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Tanggal</label>
+                    <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="" class="text-white">Filter</label> <br>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="card-body">
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
@@ -46,10 +58,10 @@
                         <td>{{ $unrack->qty_aktual }}</td>
                         <td>{{ $unrack->cycle }}</td>
                         <td>
-                            <a href="{{ route('unracking_t.edit', $unrack->id) }}" 
-                            class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
-                            <a href="{{ route('unracking_t.print', $unrack->id) }}" 
-                            class="btn btn-icon btn-sm btn-primary" target="_blank" ><i class="fas fa-print"></i> Print </a>
+                            <a href="{{ route('unracking_t.edit', $unrack->id) }}"
+                                class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
+                            <a href="{{ route('unracking_t.print', $unrack->id) }}" class="btn btn-icon btn-sm btn-primary"
+                                target="_blank"><i class="fas fa-print"></i> Print </a>
                         </td>
                     </tr>
                 @endforeach
@@ -72,7 +84,10 @@
                 "lengthChange": true,
                 "autoWidth": false,
                 "pageLength": 75,
-                "lengthMenu": [ [10, 25, 50, 75, -1], [10, 25, 50, 75, "All"] ],
+                "lengthMenu": [
+                    [10, 25, 50, 75, -1],
+                    [10, 25, 50, 75, "All"]
+                ],
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });

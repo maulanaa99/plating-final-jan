@@ -12,20 +12,22 @@ use Illuminate\Support\Facades\DB;
 class RackingController_T extends Controller
 {
     //tampil data
-    public function index()
+    public function index(Request $request)
     {
-        $racking = DB::table("plating")
-            ->leftJoin("masterdata", function ($join) {
-                $join->on("masterdata.id", "=", "plating.id_masterdata");
+        $date = Carbon::parse($request->date)->format('Y-m-d');
+        $racking = DB::table('plating')
+            ->leftJoin('masterdata', function ($join) {
+                $join->on('masterdata.id', '=', 'plating.id_masterdata');
             })
-            ->select("plating.id", "plating.id_masterdata", "plating.tanggal_r", "plating.waktu_in_r", "plating.no_bar", "plating.no_part", "plating.part_name", "plating.katalis", "plating.channel", "plating.grade_color", "plating.qty_bar", "plating.cycle", "plating.tgl_lot_prod_mldg")
-            ->orderBy("tanggal_r", "desc")
+            ->select('plating.id', 'plating.id_masterdata', 'plating.tanggal_r', 'plating.waktu_in_r', 'plating.no_bar', 'plating.no_part', 'plating.part_name', 'plating.katalis', 'plating.channel', 'plating.grade_color', 'plating.qty_bar', 'plating.cycle', 'plating.tgl_lot_prod_mldg')
+            ->orderBy('tanggal_r', 'desc')
             ->orderBy('waktu_in_r', 'desc')
+            ->where('tanggal_r', '=', $date)
             ->get();
 
         $masterdata = MasterData::all();
 
-        return view('racking_t.racking_t', compact('racking', 'masterdata'));
+        return view('racking_t.racking_t', compact('racking', 'masterdata', 'date'));
     }
 
     //tambah data
@@ -128,4 +130,13 @@ class RackingController_T extends Controller
 
         return view('racking_t.racking_t-ajax', compact('ajax_racking'));
     }
+
+    public function delete($id)
+    {
+        $plating = racking_t::find($id);
+        $plating->delete();
+        return redirect()->route('racking_t')->with('success', 'Data Berhasil Dihapus!');
+    }
+
+
 }

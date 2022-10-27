@@ -65,7 +65,7 @@ Route::controller(RackingController_T::class)->middleware(['auth'])->group(funct
     Route::get('racking_t', 'index')->name('racking_t');
     Route::get('racking_t/tambah', 'tambah')->name('racking_t.tambah');
     Route::post('racking_t', 'simpan')->name('racking_t.simpan');
-    Route::delete('racking_t/delete/{id}', 'delete')->name('racking_t.delete');
+    Route::post('racking_t/delete/{id}', 'delete')->name('racking_t.delete');
     Route::get('racking_t/{id}/edit', 'edit')->name('racking_t.edit');
     Route::patch('racking_t/{id}', 'update')->name('racking_t.update');
     Route::get('racking_t/ajax', 'ajaxRacking')->name('racking_t.ajax');

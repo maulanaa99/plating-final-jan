@@ -8,8 +8,11 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label>No. Bar</label>
-                <input type="text" name="no_bar" value="{{ old('no_bar') }}" class="form-control"
-                    placeholder="Masukkan No. Bar">
+                <input type="text" name="no_bar" value="{{ old('no_bar') }}" placeholder="Masukkan No. Bar"
+                    class="@error('no_bar') is-invalid @enderror form-control">
+                @error('no_bar')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 

@@ -98,6 +98,10 @@ class KensaController extends Controller
     //simpan data
     public function simpan(Request $request)
     {
+        $masterdata = MasterData::find($request->id_masterdata);
+        if ($masterdata->stok_bc < $request->qty_bar) {
+            return redirect()->route('kensa.tambah')->with('errors', 'Gagal!, Stok Kurang');
+        }
         kensa::create([
             'tanggal_k' => $request->tanggal_k,
             'waktu_k' => $request->waktu_k,
@@ -135,7 +139,6 @@ class KensaController extends Controller
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
         ]);
-        $masterdata = MasterData::find($request->id_masterdata);
         $masterdata->stok_bc -= $request->total_ok;
         $masterdata->stok_bc -= $request->total_ng;
         $masterdata->stok += $request->total_ok;
@@ -143,7 +146,7 @@ class KensaController extends Controller
         $masterdata->total_ok += $request->total_ok;
         $masterdata->save();
 
-        return redirect()->route('kensa.tambah')->with('toast_success', 'Data berhasil disimpan');
+        return redirect()->route('kensa.tambah')->with('success', 'Data berhasil disimpan');
     }
 
     //edit data
@@ -234,11 +237,11 @@ class KensaController extends Controller
         $masterdata = MasterData::find($request->id_masterdata);
 
         if ($masterdata->stok < $request->kirim_assy) {
-            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
+            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
         } else if ($masterdata->stok < $request->kirim_painting) {
-            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
-        } else if ($masterdata->stok < $request->kirim_ppic){
-            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
+            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
+        } else if ($masterdata->stok < $request->kirim_ppic) {
+            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
         } else {
             $pengiriman = Pengiriman::create([
                 'tgl_kanban' => $request->tgl_kanban,
@@ -279,7 +282,7 @@ class KensaController extends Controller
          * PDF
          */
 
-        $jumlah = $pengiriman->kirim_assy + $pengiriman->kirim_painting + $pengiriman->kirim_ppic ;
+        $jumlah = $pengiriman->kirim_assy + $pengiriman->kirim_painting + $pengiriman->kirim_ppic;
         $print = ceil($jumlah / $pengiriman->std_qty);
         $sisa = $jumlah;
         $jml_print = $pengiriman->no_kartu + $print - 1;

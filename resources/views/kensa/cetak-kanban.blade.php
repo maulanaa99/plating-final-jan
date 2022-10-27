@@ -195,6 +195,14 @@
             height: 30px;
             margin-bottom: 5px
         }
+
+        .text-white {
+            color: #fff !important;
+        }
+
+        .bg-dark {
+            background-color: #000000 !important;
+        }
     </style>
 </head>
 
@@ -215,19 +223,36 @@
         </tr>
         <tr>
             @php
-                $no_parts = preg_replace("/[^A-Za-z0-9 ]/", "", $pengiriman->no_part);
+                $no_parts = preg_replace('/[^A-Za-z0-9 ]/', '', $pengiriman->no_part);
             @endphp
+
             <td colspan="3">
                 <font size="2" class="text-left"> PART NO. </font>
-                <div class="centring"> <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($no_parts, 'C39') }}" 
-                    alt="{{ $pengiriman->no_part }}"
-                    width="180"
-                    height="30"> </div>
-                <font size="2"> {{ preg_replace("/[^A-Za-z0-9 ]/", "", $pengiriman->no_part) }}{{ $qty }} </font>
+                <div class="centring"> <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($no_parts, 'C39') }}"
+                        alt="{{ $pengiriman->no_part }}" width="180" height="30"> </div>
+                <font size="2"> {{ $no_parts }}{{ $qty }}
+                </font>
             </td>
-            <td colspan="1">
-                <font size="4" class="text-strong serif">{{ $pengiriman->bagian }}</font>
-            </td>
+
+            @if ($pengiriman->bagian == 'LH')
+                <td colspan="1" class="bg-dark">
+                    <font size="5" class="text-strong serif">
+                        <p class="text-white ">LH</p>
+                    </font>
+                </td>
+            @elseif($pengiriman->bagian == 'RH')
+                <td colspan="1">
+                    <font size="5" class="text-strong serif">
+                        RH
+                    </font>
+                </td>
+            @elseif($pengiriman->bagian == '-')
+                <td colspan="1">
+                    <font size="5" class="text-strong serif">
+                        -
+                    </font>
+                </td>
+            @endif
         </tr>
         <tr>
             <td colspan="4">
@@ -255,7 +280,8 @@
                 <font size="4" class="text-strong serif">{{ $qty }}</font><br>
             </td>
             <td class="align-middle text-center">
-                <font size="4" class="text-strong serif">{{ \Carbon\Carbon::parse($pengiriman->tgl_kanban)->format('d/m/Y') }}</font><br>
+                <font size="4" class="text-strong serif">
+                    {{ \Carbon\Carbon::parse($pengiriman->tgl_kanban)->format('d/m/Y') }}</font><br>
             </td>
             <td></td>
         </tr>

@@ -15,7 +15,8 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="{{ route('racking_t.update', $plating->id) }}" method="POST" class="form-master">
+                    <form id="quickForm" action="{{ route('racking_t.update', $plating->id) }}" method="POST"
+                        class="form-master">
                         @csrf
                         @method('patch')
                         <div class="row">
@@ -27,12 +28,10 @@
                                                 <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                                 <div class="form-group">
                                                     <label>Tanggal</label>
-                                                    <input type="date" name="tanggal_r" 
-                                                        @if (old('tanggal')) 
-                                                            value="{{ old('tanggal_r') }}"
+                                                    <input type="date" name="tanggal_r"
+                                                        @if (old('tanggal')) value="{{ old('tanggal_r') }}"
                                                         @else
-                                                            value="{{ $plating->tanggal_r }}" 
-                                                        @endif
+                                                            value="{{ $plating->tanggal_r }}" @endif
                                                         class="form-control">
                                                 </div>
                                             </div>
@@ -40,53 +39,11 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Waktu in</label>
-                                                    <input type="text" name="waktu_in_r" 
-                                                        @if (old('waktu_in')) 
-                                                            value="{{ old('waktu_in_r') }}"
+                                                    <input type="text" name="waktu_in_r"
+                                                        @if (old('waktu_in')) value="{{ old('waktu_in_r') }}"
                                                         @else
-                                                            value="{{ $plating->waktu_in_r }}" 
-                                                        @endif
+                                                            value="{{ $plating->waktu_in_r }}" @endif
                                                         class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label> Part Name</label>
-                                                    <input type="text" id="part_name" name="part_name"
-                                                        @if (old('part_name')) 
-                                                            value="{{ old('part_name') }}"
-                                                        @else
-                                                            value="{{ $plating->part_name }}" 
-                                                        @endif
-                                                        class="typeahead form-control"
-                                                        placeholder="Masukkan Nama Part">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>No. Bar</label>
-                                                    <input type="text" name="no_bar" 
-                                                        @if (old('no_bar')) 
-                                                            value="{{ old('no_bar') }}"
-                                                        @else
-                                                            value="{{ $plating->no_bar }}" 
-                                                        @endif
-                                                        class="form-control" placeholder="Masukkan No. Bar">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>No. Part</label>
-                                                    <input type="text" id="no_part" name="no_part"
-                                                        @if (old('no_part')) 
-                                                            value="{{ old('no_part') }}"
-                                                        @else
-                                                            value="{{ $plating->no_part }}" 
-                                                        @endif
-                                                    class="form-control typeahead">
                                                 </div>
                                             </div>
 
@@ -94,38 +51,89 @@
                                                 <div class="form-group">
                                                     <label>Tanggal Lot Produksi Molding</label>
                                                     <input type="date" name="tgl_lot_prod_mldg"
-                                                        @if (old('tgl_lot_prod_mldg')) 
-                                                            value="{{ old('tgl_lot_prod_mldg') }}"
+                                                        @if (old('tgl_lot_prod_mldg')) value="{{ old('tgl_lot_prod_mldg') }}"
                                                         @else
-                                                            value="{{ $plating->tgl_lot_prod_mldg }}" 
-                                                        @endif
+                                                            value="{{ $plating->tgl_lot_prod_mldg }}" @endif
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Cycle</label>
+                                                    <select name="cycle" class="form-control">
+                                                        <option value="">----Pilih Cycle----</option>
+                                                        <option value="C1"
+                                                            {{ old('cycle', $plating->cycle) == 'C1' ? 'selected' : '' }}>
+                                                            C1</option>
+                                                        <option value="C2"
+                                                            {{ old('cycle', $plating->cycle) == 'C2' ? 'selected' : '' }}>
+                                                            C2</option>
+                                                        <option value="CS"
+                                                            {{ old('cycle', $plating->cycle) == 'CS' ? 'selected' : '' }}>
+                                                            CS</option>
+                                                        <option value="FS"
+                                                            {{ old('cycle', $plating->cycle) == 'FS' ? 'selected' : '' }}>
+                                                            FS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label> Part Name</label>
+                                                    <input type="text" id="part_name" name="part_name"
+                                                        @if (old('part_name')) value="{{ old('part_name') }}"
+                                                        @else
+                                                            value="{{ $plating->part_name }}" @endif
+                                                        class="typeahead form-control" placeholder="Masukkan Nama Part">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>No. Bar</label>
+                                                    <input type="text" name="no_bar"
+                                                        @if (old('no_bar')) value="{{ old('no_bar') }}"
+                                                        @else
+                                                            value="{{ $plating->no_bar }}" @endif
+                                                        class="form-control" placeholder="Masukkan No. Bar">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>No. Part</label>
+                                                    <input type="text" id="no_part" name="no_part" readonly
+                                                        @if (old('no_part')) value="{{ old('no_part') }}"
+                                                        @else
+                                                            value="{{ $plating->no_part }}" @endif
+                                                        class="form-control typeahead">
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label> Katalis </label>
+                                                    <input type="text" id="katalis" name="katalis" readonly
+                                                        @if (old('katalis')) value="{{ old('katalis') }}"
+                                                        @else
+                                                            value="{{ $plating->katalis }}" @endif
                                                         class="form-control">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label> Katalis </label>
-                                                    <input type="text" id="katalis" name="katalis" readonly
-                                                        @if (old('katalis')) 
-                                                            value="{{ old('katalis') }}"
-                                                        @else
-                                                            value="{{ $plating->katalis }}" 
-                                                        @endif
-                                                    class="form-control" >
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label> Channel </label> 
+                                                    <label> Channel </label>
                                                     <input type="text" id="channel" name="channel" readonly
-                                                        @if (old('channel')) 
-                                                            value="{{ old('channel') }}"
+                                                        @if (old('channel')) value="{{ old('channel') }}"
                                                         @else
-                                                            value="{{ $plating->channel }}" 
-                                                        @endif
-                                                        class="form-control" >
+                                                            value="{{ $plating->channel }}" @endif
+                                                        class="form-control">
                                                 </div>
                                             </div>
 
@@ -133,12 +141,10 @@
                                                 <div class="form-group">
                                                     <label> Grade Color</label>
                                                     <input type="text" id="grade_color" name="grade_color" readonly
-                                                    @if (old('grade_color')) 
-                                                            value="{{ old('grade_color') }}"
+                                                        @if (old('grade_color')) value="{{ old('grade_color') }}"
                                                         @else
-                                                            value="{{ $plating->grade_color }}" 
-                                                        @endif
-                                                        class="form-control" >
+                                                            value="{{ $plating->grade_color }}" @endif
+                                                        class="form-control">
                                                 </div>
                                             </div>
 
@@ -146,41 +152,21 @@
                                                 <div class="form-group">
                                                     <Label> Qty Bar</Label>
                                                     <input type="text" id="qty_bar" name="qty_bar"
-                                                        @if (old('qty_bar')) 
-                                                            value="{{ old('qty_bar') }}"
+                                                        @if (old('qty_bar')) value="{{ old('qty_bar') }}"
                                                         @else
-                                                            value="{{ $plating->qty_bar }}" 
-                                                        @endif
-                                                        class="form-control" >
+                                                            value="{{ $plating->qty_bar }}" @endif
+                                                        class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6">
-                                                <!-- select -->
-                                                <div class="form-group">
-                                                    <label>Select</label>
-                                                    <select name="cycle" class="form-control">
-                                                        <option value="">----Pilih Cycle----</option>
-                                                        <option value="Cycle 1"
-                                                            {{ old('cycle', $plating->cycle) == 'Cycle 1' ? 'selected' : '' }}>
-                                                            Cycle 1</option>
-                                                        <option value="Cycle 2"
-                                                            {{ old('cycle', $plating->cycle) == 'Cycle 2' ? 'selected' : '' }}>
-                                                            Cycle 2</option>
-                                                        <option value="Cooper Storage"
-                                                            {{ old('cycle', $plating->cycle) == 'Cooper Storage' ? 'selected' : '' }}>
-                                                            Cooper Storage</option>
-                                                        <option value="Final Storage"
-                                                            {{ old('cycle', $plating->cycle) == 'Final Storage' ? 'selected' : '' }}>
-                                                            Final Storage</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+
 
                                             <div class="container">
                                                 <div class="card-footer text-center">
-                                                    <button class="btn btn-primary mr-1" type="submit"> <i class="fas fa-save"></i> Submit</button>
-                                                    <button class="btn btn-danger" type="reset"> <i class="fas fa-trash-restore"></i> Reset</button>
+                                                    <button class="btn btn-primary mr-1" type="submit"> <i
+                                                            class="fas fa-save"></i> Submit</button>
+                                                    <button class="btn btn-danger" type="reset"> <i
+                                                            class="fas fa-trash-restore"></i> Reset</button>
                                                     <a href="{{ route('racking_t') }}"
                                                         class="btn btn-icon icon-left btn-warning"><i
                                                             class="fas fa-arrow-left"></i> Kembali</a>

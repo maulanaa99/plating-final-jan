@@ -25,7 +25,7 @@
     {{ csrf_field() }}
     <div class="form-group col-xs-12 col-lg-12">
         <label class="control-label">Nama Barang</label>
-        {{ Form::select('id_barang', $id_barang, isset($transaksis->id_barang) ? $transaksis->id_barang : null, ['class' => 'form-control', 'placeholder' => 'Pilih']) }}
+        {{ Form::select('id_barang', $id_barang, isset($transaksis->id_barang) ? $transaksis->id_barang : null, ['class' => 'form-control barang-js', 'placeholder' => 'Pilih']) }}
     </div>
     <div class="form-group col-xs-12 col-lg-12">
         <label class="control-label">Jenis Transaksi</label>
@@ -42,3 +42,13 @@
     </div>
     {!! Form::close() !!}
 @endsection
+@push('page-script')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+@endpush
+@push('after-script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.barang-js').select2();
+        });
+    </script>
+@endpush
