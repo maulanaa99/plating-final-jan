@@ -85,7 +85,7 @@ Route::controller(KensaController::class)->middleware(['auth'])->group(function 
     Route::get('kensa', 'index')->name('kensa');
     Route::get('kensa/tambah', 'tambah')->name('kensa.tambah');
     Route::post('kensa', 'simpan')->name('kensa.simpan');
-    Route::delete('kensa/delete/{id}', 'delete')->name('kensa.delete');
+    Route::post('kensa/delete/{id}', 'delete')->name('kensa.delete');
     Route::get('kensa/{id}/edit', 'edit')->name('kensa.edit');
     Route::patch('kensa/{id}', 'update')->name('kensa.update');
     Route::get('kensa/export_excel', 'exportexcel')->name('kensa.export');
@@ -105,9 +105,6 @@ Route::controller(KensaController::class)->middleware(['auth'])->group(function 
 Route::get('stok', [StokController::class, 'index'])->name('stok');
 Route::get('masterkensa', [MasterKensaController::class, 'index'])->name('msterkensa');
 Route::get('masterdata/downloadPDF/{id}', [MasterDataController::class, 'downloadPDF'])->name('masterdata.downloadPDF');
-
-Route::get('students', [StudentController::class, 'index']);
-Route::get('students/list', [StudentController::class, 'getStudents'])->name('students.list');
 
 Route::get('lihatPart', [StokController::class, 'lihatPart'])->name('lihatPart');
 Route::get('cariPart', [StokController::class, 'cariPart'])->name('cariPart');

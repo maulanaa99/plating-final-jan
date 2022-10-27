@@ -1,11 +1,14 @@
-<label> Part Name</label>
-<select class="form-control" name="id_masterdata" id="id_masterdata">
-    <option value="" hidden>--Pilih Barang--</option>
-    @foreach ($part as $d)
-        <option value="{{ $d->id }}">{{ $d->part_name }}
-        </option>
-    @endforeach
-</select>
+<div>
+    <label> Part Name</label>
+    <select class="form-control" name="id_masterdata" id="id_masterdata">
+        <option value="" hidden>--Pilih Barang--</option>
+        @foreach ($part as $d)
+            <option value="{{ $d->id }}">{{ $d->part_name }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
 
 <label for="">No Part</label>
 <input type="text" id="no_part" class="no_part">
@@ -27,9 +30,10 @@
                     'id': id_masterdata
                 },
                 success: function(data) {
-                    a.find('#no_part').val(data.no_part);
-                    a.find('#katalis').val(data.katalis);
-                    a.find('#channel').val(data.channel);
+                    console.log(id_masterdata);
+                    $('#no_part').val(data.no_part);
+                    $('#katalis').val(data.katalis);
+                    $('#channel').val(data.channel);
                 },
                 error: function() {
 

@@ -27,7 +27,9 @@
                                             <div class="form-group">
                                                 <label>Tanggal</label>
                                                 <input type="date" name="tanggal_r" value="<?= date('Y-m-d') ?>"
-                                                    class="@error('tanggal_r') is-invalid @enderror form-control">
+                                                    class="@error('tanggal_r')
+is-invalid
+@enderror form-control">
                                                 @error('tanggal_r')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
@@ -101,23 +103,61 @@
                                             </div>
                                         </div>
 
-                                        <div id="detail_part"></div>
+                                        {{-- <div id="detail_part"></div> --}}
 
-                                        <div class="container">
-                                            <div class="card-footer text-center">
-                                                <button class="btn btn-primary mr-1" type="submit"> <i
-                                                        class="fas fa-save"></i> Submit</button>
-                                                <button class="btn btn-danger" type="reset"> <i
-                                                        class="fas fa-trash-restore"></i> Reset</button>
-                                                <a href="{{ route('racking_t') }}"
-                                                    class="btn btn-icon icon-left btn-warning"><i
-                                                        class="fas fa-arrow-left"></i> Kembali</a>
+                                        <div class="row">
+                                            <input type="hidden" id="no_part" name="no_part" value=""
+                                                class="form-control typeahead" readonly>
+                                            <input type="hidden" id="part_name" name="part_name" value=""
+                                                class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label> Katalis </label>
+                                                    <input type="text" id="katalis" name="katalis" readonly
+                                                        value="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label> Channel </label>
+                                                    <input type="text" id="channel" name="channel" readonly
+                                                        value="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Chrome </label>
+                                                    <input type="text" id="grade_color" name="grade_color" readonly
+                                                        value="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <Label> Qty Bar</Label>
+                                                    <input type="text" id="qty_bar" name="qty_bar" value=""
+                                                        class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="container">
+                                                <div class="card-footer text-center">
+                                                    <button class="btn btn-primary mr-1" type="submit"> <i
+                                                            class="fas fa-save"></i> Submit</button>
+                                                    <button class="btn btn-danger" type="reset"> <i
+                                                            class="fas fa-trash-restore"></i> Reset</button>
+                                                    <a href="{{ route('racking_t') }}"
+                                                        class="btn btn-icon icon-left btn-warning"><i
+                                                            class="fas fa-arrow-left"></i> Kembali</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </form>
                 </div>
                 <!-- /.card -->
@@ -154,6 +194,35 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $(document).on('change', '#id_masterdata', function() {
+                var id_masterdata = $(this).val();
+                var a = $(this).parent();
+                $.ajax({
+                    type: 'get',
+                    url: '{{ route('cariPart') }}',
+                    data: {
+                        'id': id_masterdata
+                    },
+                    success: function(data) {
+                        console.log(id_masterdata);
+                        $('#no_part').val(data.no_part);
+                        $('#part_name').val(data.part_name);
+                        $('#katalis').val(data.katalis);
+                        $('#grade_color').val(data.grade_color);
+                        $('#channel').val(data.channel);
+                        $('#qty_bar').val(data.qty_bar);
+                        $('#stok_bc').val(data.stok_bc);
+                    },
+                    error: function() {
+
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- <script type="text/javascript">
+        $(document).ready(function() {
             $('#id_masterdata').change(function() {
                 var id_masterdata = $('#id_masterdata').val();
                 $.ajax({
@@ -167,5 +236,5 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 @endpush

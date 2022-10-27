@@ -15,7 +15,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="{{ route('kensa.update', $kensa->kensa_id) }}" method="POST"
+                    <form id="quickForm" action="{{ route('kensa.update', $kensa->id) }}" method="POST"
                         class="form-master">
                         @csrf
                         @method('patch')
@@ -28,7 +28,7 @@
                                                 <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                                 <div class="form-group">
                                                     <label>Tanggal Jam</label>
-                                                    <input type="datetime-local" name="tanggal_k"
+                                                    <input type="date" name="tanggal_k"
                                                         @if (old('tanggal_k')) value="{{ old('tanggal_k') }}"
                                                         @else
                                                             value="{{ $kensa->tanggal_k }}" @endif
@@ -83,7 +83,7 @@
                                             <div class="col-sm-6">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Select</label>
+                                                    <label>Cycle</label>
                                                     <select name="cycle" class="form-control">
                                                         <option value="">----Pilih Cycle----</option>
                                                         <option value="C1"
@@ -108,7 +108,8 @@
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <Label>Nikel</Label>
-                                                            <input type="number" id="nikel" name="nikel" onkeyup="sum()"
+                                                            <input type="number" id="nikel" name="nikel"
+                                                                onkeyup="sum()"
                                                                 @if (old('nikel')) value="{{ old('nikel') }}"
                                                             @else
                                                                 value="{{ $kensa->nikel }}" @endif
@@ -118,7 +119,8 @@
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <Label>Butsu</Label>
-                                                            <input type="number" id="butsu" name="butsu" onkeyup="sum();"
+                                                            <input type="number" id="butsu" name="butsu"
+                                                                onkeyup="sum();"
                                                                 @if (old('butsu')) value="{{ old('butsu') }}"
                                                             @else
                                                                 value="{{ $kensa->butsu }}" @endif
@@ -218,6 +220,34 @@
                                                                 onkeyup="sum();" class="form-control">
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <Label>Shiromoya</Label>
+                                                            <input type="number" id="shiromoya" name="shiromoya"
+                                                                onchange="sum();" value="{{ 0 }}"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <Label>Shimi</Label>
+                                                            <input type="number" id="shimi" name="shimi"
+                                                                onchange="sum();" value="{{ 0 }}"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-2">
+                                                        <div class="form-group">
+                                                            <Label>Pitto</Label>
+                                                            <input type="number" id="pitto" name="pitto"
+                                                                onchange="sum();" value="{{ 0 }}"
+                                                                class="form-control">
+                                                        </div>
+                                                    </div>
+
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <Label>Other</Label>
@@ -352,8 +382,10 @@
                                         </div>
                                         <div class="container">
                                             <div class="card-footer text-center">
-                                                <button class="btn btn-primary mr-1" type="submit"> <i class="fa fa-save"></i> Submit</button>
-                                                <button class="btn btn-danger mr-1" type="reset"> <i class="fa fa-trash-restore"></i> Reset</button>
+                                                <button class="btn btn-primary mr-1" type="submit"> <i
+                                                        class="fa fa-save"></i> Submit</button>
+                                                <button class="btn btn-danger mr-1" type="reset"> <i
+                                                        class="fa fa-trash-restore"></i> Reset</button>
                                                 <a href="#" class="btn btn-icon icon-left btn-warning">
                                                     <i class="fas fa-arrow-left"></i> Kembali</a>
                                             </div>

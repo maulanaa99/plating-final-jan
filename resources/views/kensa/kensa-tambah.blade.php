@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 @endpush
 @section('title')
-
 @endsection
 
 @section('breadcrumb')
@@ -61,7 +60,64 @@
                                             </div>
                                         </div>
 
-                                        <div id="detail_part"></div>
+                                        {{-- <div id="detail_part"></div> --}}
+
+                                        <div class="row">
+                                            <input type="hidden" id="no_part" name="no_part" value=""
+                                                class="form-control typeahead" readonly>
+                                            <input type="hidden" id="part_name" name="part_name" value=""
+                                                class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
+
+                                            <div class="col-md-1">
+                                                <div class="form-group">
+                                                    <label>Stok BC</label>
+                                                    <input type="text" name="stok_bc" id="stok_bc" value=""
+                                                        placeholder="Masukkan No. Bar" readonly
+                                                        class="@error('stok_bc') is-invalid @enderror form-control">
+                                                    @error('stok_bc')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>No. Bar</label>
+                                                    <input type="text" name="no_bar" value="{{ old('no_bar') }}"
+                                                        placeholder="Masukkan No. Bar"
+                                                        class="@error('no_bar') is-invalid @enderror form-control">
+                                                    @error('no_bar')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <Label> Qty Bar</Label>
+                                                <div class="input-group">
+                                                    <input type="text" id="qty_bar" name="qty_bar" value=""
+                                                        onkeyup="sum();" class="form-control">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">Pcs </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Cycle</label>
+                                                    <select name="cycle" class="form-control">
+                                                        <option value="">----Pilih Cycle----</option>
+                                                        <option>C1</option>
+                                                        <option>C2</option>
+                                                        <option>CS</option>
+                                                        <option>FS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                         <div class="col-md-6">
                                             <div class="row">
@@ -347,7 +403,7 @@
         });
     </script>
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             $('#id_masterdata').change(function() {
                 var id_masterdata = $('#id_masterdata').val();
@@ -358,6 +414,36 @@
                     cache: false,
                     success: function(data) {
                         $('#detail_part').html(data);
+                    }
+                });
+            });
+        });
+    </script> --}}
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('change', '#id_masterdata', function() {
+                var id_masterdata = $(this).val();
+                var a = $(this).parent();
+                $.ajax({
+                    type: 'get',
+                    url: '{{ route('cariPart') }}',
+                    data: {
+                        'id': id_masterdata
+                    },
+                    success: function(data) {
+                        console.log(id_masterdata);
+                        $('#no_part').val(data.no_part);
+                        $('#part_name').val(data.part_name);
+                        $('#katalis').val(data.katalis);
+                        $('#grade_color').val(data.grade_color);
+                        $('#channel').val(data.channel);
+                        $('#qty_bar').val(data.qty_bar);
+                        $('#stok_bc').val(data.stok_bc);
+
+                    },
+                    error: function() {
+
                     }
                 });
             });

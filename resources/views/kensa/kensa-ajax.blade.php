@@ -5,7 +5,18 @@
         <input type="hidden" id="part_name" name="part_name" value="{{ $d->part_name }}" class="typeahead form-control"
             placeholder="Masukkan Nama Part" readonly>
 
-        <div class="col-md-4">
+        <div class="col-md-1">
+            <div class="form-group">
+                <label>Stok BC</label>
+                <input type="text" name="stok_bc" value="{{ $d->stok_bc }}" placeholder="Masukkan No. Bar" readonly
+                    class="@error('stok_bc') is-invalid @enderror form-control">
+                @error('stok_bc')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="col-md-3">
             <div class="form-group">
                 <label>No. Bar</label>
                 <input type="text" name="no_bar" value="{{ old('no_bar') }}" placeholder="Masukkan No. Bar"

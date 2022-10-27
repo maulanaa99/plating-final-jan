@@ -152,7 +152,7 @@ class KensaController extends Controller
     //edit data
     public function edit($id)
     {
-        $kensa = DB::table('kensa')->where('kensa_id', $id)->first();
+        $kensa = DB::table('kensa')->where('id', $id)->first();
         return view('kensa.kensa-edit', ['kensa' => $kensa]);
     }
 
@@ -160,7 +160,9 @@ class KensaController extends Controller
     public function delete($id)
     {
         $kensa = kensa::find($id);
-        $kensa->delete();
+        kensa::destroy($id);
+
+        // $kensa->delete();
         return redirect('kensa')->with('toast_success', 'Data berhasil dihapus');
     }
 

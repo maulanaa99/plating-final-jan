@@ -131,8 +131,16 @@
                         <td>{{ $kensha->p_total_ok }} %</td>
                         <td>{{ $kensha->p_total_ng }} %</td>
                         <td>
-                            <a href="{{ route('kensa.edit', $kensha->id) }}"
-                                class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
+                            <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
+                                    class="far fa-edit"></i></a>
+                            <a href="#" data-id="{{ $kensha->id }}"
+                                class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
+                                    </i>
+                                <form action="{{ route('kensa.delete', $kensha->id) }}" id="delete{{ $kensha->id }}"
+                                    method="POST">
+                                    @csrf
+                                </form>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -199,20 +207,15 @@
             id = e.target.dataset.id;
             swal({
                     title: 'Hapus data? ',
-                    text: 'Setelah dihapus data tidak dapat dikembalikan',
+                    text: 'Setelah dihapus, data tidak dapat dikembalikan',
                     icon: 'warning',
                     buttons: true,
                     dangerMode: true,
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        // swal('Poof! Your imaginary file has been deleted!', {
-                        // icon: 'success',
-                        // });
                         $(`#delete${id}`).submit();
-                    } else {
-                        // swal('Your imaginary file is safe!');
-                    }
+                    } else {}
                 });
         });
     </script>

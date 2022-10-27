@@ -67,10 +67,10 @@
                             <td>{{ $rack->cycle }}</td>
                             <td>
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
-                                    class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> Edit </a>
+                                    class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i>  </a>
                                 <a href="#" data-id="{{ $rack->id }}"
                                     class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
-                                        Delete</i>
+                                        </i>
 
                                     <form action="{{ route('racking_t.delete', $rack->id) }}"
                                         id="delete{{ $rack->id }}" method="POST">

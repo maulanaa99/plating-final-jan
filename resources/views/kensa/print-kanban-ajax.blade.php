@@ -22,16 +22,29 @@
                 class="form-control">
         </div>
 
+        @if($d->stok <= 10)
         <div class="col-md-3">
-            <label>Stok</label>
+            <label>Stok <i class="fas fa-exclamation-triangle"></i></label>
             <div class="input-group">
-                <input type="text" id="stok" name="stok" value="{{ $d->stok }}" class="form-control"
+                <input type="text" id="stok" name="stok" value="{{ $d->stok }}" class="form-control bg-danger"
                     readonly>
                 <div class="input-group-prepend">
                     <span class="input-group-text">Pcs </span>
                 </div>
             </div>
         </div>
+        @elseif($d->stok > 10)
+        <div class="col-md-3">
+            <label>Stok</label>
+            <div class="input-group">
+                <input type="text" id="stok" name="stok" value="{{ $d->stok }}" class="form-control bg-success"
+                    readonly>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Pcs </span>
+                </div>
+            </div>
+        </div>
+        @endif
 
         <div class="col-md-3">
             <label>Std Qty</label>

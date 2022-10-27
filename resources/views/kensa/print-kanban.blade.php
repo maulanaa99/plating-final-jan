@@ -32,7 +32,7 @@
                                         <div class="col-md-6">
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
-                                                <label>Tanggal Jam</label>
+                                                <label>Tanggal Kanban</label>
                                                 <input type="date" name="tgl_kanban" id="tgl_kanban"
                                                     value="<?= date('Y-m-d') ?>" class="form-control">
                                             </div>
