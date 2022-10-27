@@ -42,14 +42,23 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-sm-6">
+                                                <!-- select -->
                                                 <div class="form-group">
                                                     <label>Katalis</label>
-                                                    <input type="text" id="katalis" name="katalis"
-                                                        @if (old('katalis')) value="{{ old('katalis') }}"
-                                                    @else
-                                                        value="{{ $masterdata->katalis }}" @endif
-                                                        placeholder="ex: K1" class="form-control">
+                                                    <select name="katalis"
+                                                        class="@error('katalis') is-invalid @enderror form-control">
+                                                        @error('katalis')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                        <option value="">----Pilih Katalis----</option>
+                                                        <option value="K1"
+                                                            {{ old('katalis', $masterdata->katalis) == 'K1' ? 'selected' : '' }}>
+                                                            K1</option>
+                                                        <option value="K2"
+                                                            {{ old('katalis', $masterdata->katalis) == 'K2' ? 'selected' : '' }}>
+                                                            K2</option>
+                                                    </select>
                                                 </div>
                                             </div>
 
@@ -64,14 +73,29 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-sm-6">
+                                                <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Grade Color</label>
-                                                    <input type="text" id="grade_color" name="grade_color"
-                                                        @if (old('grade_color')) value="{{ old('grade_color') }}"
-                                                    @else
-                                                        value="{{ $masterdata->grade_color }}" @endif
-                                                        placeholder="ex: Cr 6+" class="form-control">
+                                                    <label>Chrome</label>
+                                                    <select name="grade_color"
+                                                        class="@error('grade_color') is-invalid @enderror form-control">
+                                                        @error('grade_color')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                        <option value="">----Pilih Chrome----</option>
+                                                        <option value="Cr 6+"
+                                                            {{ old('grade_color', $masterdata->grade_color) == 'Cr 6+' ? 'selected' : '' }}>
+                                                            Cr 6+</option>
+                                                        <option value="Dark 3+"
+                                                            {{ old('grade_color', $masterdata->grade_color) == 'Dark 3+' ? 'selected' : '' }}>
+                                                            Dark 3+</option>
+                                                        <option value="Black 3+"
+                                                            {{ old('grade_color', $masterdata->grade_color) == 'Black 3+' ? 'selected' : '' }}>
+                                                            Black 3+</option>
+                                                        <option value="Satin"
+                                                            {{ old('grade_color', $masterdata->grade_color) == 'Satin' ? 'selected' : '' }}>
+                                                            Satin</option>
+                                                    </select>
                                                 </div>
                                             </div>
 

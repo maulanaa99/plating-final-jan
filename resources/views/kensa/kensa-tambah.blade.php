@@ -72,7 +72,7 @@
                                                 <div class="form-group">
                                                     <label>Stok BC</label>
                                                     <input type="text" name="stok_bc" id="stok_bc" value=""
-                                                        placeholder="Masukkan No. Bar" readonly
+                                                        readonly
                                                         class="@error('stok_bc') is-invalid @enderror form-control">
                                                     @error('stok_bc')
                                                         <div class="text-danger">{{ $message }}</div>

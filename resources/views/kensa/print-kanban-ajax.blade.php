@@ -22,28 +22,28 @@
                 class="form-control">
         </div>
 
-        @if($d->stok <= 10)
-        <div class="col-md-3">
-            <label>Stok <i class="fas fa-exclamation-triangle"></i></label>
-            <div class="input-group">
-                <input type="text" id="stok" name="stok" value="{{ $d->stok }}" class="form-control bg-danger"
-                    readonly>
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Pcs </span>
+        @if ($d->stok <= 10)
+            <div class="col-md-3">
+                <label>Stok <i class="fas fa-exclamation-triangle" aria-hidden="true"style="color:red"></i></label>
+                <div class="input-group">
+                    <input type="text" id="stok" name="stok" value="{{ $d->stok }}"
+                        class="form-control bg-red" readonly>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
                 </div>
             </div>
-        </div>
         @elseif($d->stok > 10)
-        <div class="col-md-3">
-            <label>Stok</label>
-            <div class="input-group">
-                <input type="text" id="stok" name="stok" value="{{ $d->stok }}" class="form-control bg-success"
-                    readonly>
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Pcs </span>
+            <div class="col-md-3">
+                <label>Stok <i class="fas fa-check-square" aria-hidden="true"style="color:green" ></i> </label>
+                <div class="input-group">
+                    <input type="text" id="stok" name="stok" value="{{ $d->stok }}"
+                        class="form-control bg-success" readonly>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Pcs </span>
+                    </div>
                 </div>
             </div>
-        </div>
         @endif
 
         <div class="col-md-3">
@@ -57,6 +57,17 @@
             </div>
         </div>
 
+        <div class="col-md-3">
+            <label>Model</label>
+            <input type="text" id="model" name="model" value="{{ $d->model }}" class="form-control"
+                readonly>
+        </div>
+
+        <div class="col-md-3">
+            <label>Bagian</label>
+            <input type="text" id="bagian" name="bagian" value="{{ $d->bagian }}" class="form-control"
+                readonly>
+        </div>
         @if ($d->next_process == '')
             <div class="col-sm-3">
                 <!-- select -->
@@ -99,21 +110,9 @@
             </div>
         @endif
 
-        <div class="col-md-3">
-            <label>Model</label>
-            <input type="text" id="model" name="model" value="{{ $d->model }}" class="form-control"
-                readonly>
-        </div>
-
-        <div class="col-md-3">
-            <label>Bagian</label>
-            <input type="text" id="bagian" name="bagian" value="{{ $d->bagian }}" class="form-control"
-                readonly>
-        </div>
-
         @if ($d->next_process == 'ASSEMBLY')
             <div class="col-md-3">
-                <label>Qty Troly</label>
+                <label>Qty Troly <i class="fas fa-boxes"></i></label>
                 <div class="input-group">
                     <input type="number" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();">
                     <div class="input-group-prepend">
@@ -127,7 +126,7 @@
                 value="{{ 0 }}">
         @elseif ($d->next_process == 'PAINTING')
             <div class="col-md-3">
-                <label>Qty Troly</label>
+                <label>Qty Troly <i class="fas fa-spray-can"></i></label>
                 <div class="input-group">
                     <input type="text" id="kirim_painting" name="kirim_painting" class="form-control"
                         onkeyup="sum();">
@@ -142,7 +141,7 @@
                 value="{{ 0 }}">
         @elseif ($d->next_process == 'PPIC')
             <div class="col-md-3">
-                <label>Qty Troly</label>
+                <label>Qty Troly <i class="fas fa-search-plus"></i></label>
                 <div class="input-group">
                     <input type="text" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();">
                     <div class="input-group-prepend">

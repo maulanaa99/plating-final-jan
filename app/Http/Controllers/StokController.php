@@ -25,9 +25,9 @@ class StokController extends Controller
         $sum_total_ng = MasterData::sum('total_ng');
         $sum_stok_bc =  MasterData::sum('stok_bc');
         $sum_stok = MasterData::sum('stok');
-        $sum_kirim_painting = Pengiriman::where('tgl_kanban', '=', $date)->get()->sum('kirim_painting');
-        $sum_kirim_assy = Pengiriman::where('tgl_kanban', '=', $date)->get()->sum('kirim_assy');
-        $sum_kirim_ppic = Pengiriman::where('tgl_kanban', '=', $date)->get()->sum('kirim_ppic');
+        $sum_kirim_painting = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_painting');
+        $sum_kirim_assy = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_assy');
+        $sum_kirim_ppic = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_ppic');
         $sum_total_kirim = $sum_kirim_painting + $sum_kirim_assy + $sum_kirim_ppic;
 
         return view('stok.stok', compact('stok', 'sum_total_ok', 'sum_total_ng', 'sum_stok', 'sum_stok_bc', 'sum_kirim_painting', 'sum_kirim_assy', 'sum_kirim_ppic', 'sum_total_kirim', 'date'));

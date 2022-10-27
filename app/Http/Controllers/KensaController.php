@@ -265,6 +265,8 @@ class KensaController extends Controller
             $masterdata->total_ok -= $request->kirim_assy;
             $masterdata->stok -= $request->kirim_painting;
             $masterdata->total_ok -= $request->kirim_painting;
+            $masterdata->stok -= $request->kirim_ppic;
+            $masterdata->total_ok -= $request->kirim_ppic;
             $masterdata->kirim_assy += $request->kirim_assy;
             $masterdata->kirim_painting += $request->kirim_painting;
             $masterdata->kirim_ppic += $request->kirim_ppic;

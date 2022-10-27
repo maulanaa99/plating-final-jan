@@ -52,7 +52,7 @@
                                     class="far fa-eye"></i></a>
                             <a href="{{ route('master.edit', $data->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                     class="far fa-edit"></i></a>
-                            <a href="#" data-id="{{ $data->id }}"
+                            <a href="javascript:void(0)" data-id="{{ $data->id }}"
                                 class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="fas fa-times"></i>
 
                                 <form action="{{ route('master.delete', $data->id) }}" id="delete{{ $data->id }}"

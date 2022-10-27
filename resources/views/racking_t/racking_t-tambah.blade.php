@@ -39,8 +39,8 @@ is-invalid
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Waktu in</label>
-                                                <input type="text" name="waktu_in_r" value="<?php date_default_timezone_set('Asia/Jakarta');
-                                                echo date('H:i:s'); ?>"
+                                                <input type="time" name="waktu_in_r" value="<?php date_default_timezone_set('Asia/Jakarta');
+                                                echo date('H:i'); ?>"
                                                     class="@error('waktu_in_r') is-invalid @enderror form-control">
                                                 @error('waktu_in_r')
                                                     <div class="text-danger">{{ $message }}</div>
