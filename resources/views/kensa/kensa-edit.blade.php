@@ -24,10 +24,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                                 <div class="form-group">
-                                                    <label>Tanggal Jam</label>
+                                                    <label>Tanggal</label>
                                                     <input type="date" name="tanggal_k"
                                                         @if (old('tanggal_k')) value="{{ old('tanggal_k') }}"
                                                         @else
@@ -36,75 +36,100 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label> Part Name</label>
-                                                    <input type="text" id="part_name" name="part_name"
-                                                        @if (old('part_name')) value="{{ old('part_name') }}"
+                                                    <label>Jam</label>
+                                                    <input type="time" name="waktu_k"
+                                                        @if (old('waktu_k')) value="{{ old('waktu_k') }}"
                                                         @else
-                                                            value="{{ $kensa->part_name }}" @endif
-                                                        class="typeahead form-control" placeholder="Masukkan Nama Part">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>No. Bar</label>
-                                                    <input type="text" name="no_bar"
-                                                        @if (old('no_bar')) value="{{ old('no_bar') }}"
-                                                    @else
-                                                        value="{{ $kensa->no_bar }}" @endif
-                                                        class="form-control" placeholder="Masukkan No. Bar">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>No. Part</label>
-                                                    <input type="text" id="no_part" name="no_part"
-                                                        @if (old('no_part')) value="{{ old('no_part') }}"
-                                                    @else
-                                                        value="{{ $kensa->no_part }}" @endif
-                                                        class="form-control typeahead">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <Label> Qty Bar</Label>
-                                                    <input type="text" id="qty_bar" name="qty_bar" onkeyup="sum();"
-                                                        @if (old('qty_bar')) value="{{ old('qty_bar') }}"
-                                                    @else
-                                                        value="{{ $kensa->qty_bar }}" @endif
+                                                            value="{{ $kensa->waktu_k }}" @endif
                                                         class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6">
-                                                <!-- select -->
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Cycle</label>
-                                                    <select name="cycle" class="form-control">
-                                                        <option value="">----Pilih Cycle----</option>
-                                                        <option value="C1"
-                                                            {{ old('cycle', $kensa->cycle) == 'C1' ? 'selected' : '' }}>
-                                                            C1</option>
-                                                        <option value="C2"
-                                                            {{ old('cycle', $kensa->cycle) == 'C2' ? 'selected' : '' }}>
-                                                            C2</option>
-                                                        <option value="CS"
-                                                            {{ old('cycle', $kensa->cycle) == 'CS' ? 'selected' : '' }}>
-                                                            CS</option>
-                                                        <option value="FS"
-                                                            {{ old('cycle', $kensa->cycle) == 'FS' ? 'selected' : '' }}>
-                                                            FS</option>
+                                                    <label>Part Name</label>
+                                                    <select class="form-control masterdata-js" name="id_masterdata"
+                                                        id="id_masterdata">
+                                                        <option value="" hidden>--Pilih Part--</option>
+                                                        @foreach ($masterdata as $d)
+                                                            <option
+                                                                {{ old('id_masterdata', $kensa->id_masterdata) == $d->id ? 'selected' : '' }}
+                                                                value="{{ $d->id }}">{{ $d->part_name }}
+                                                            </option>
+                                                        @endforeach
                                                     </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <input type="hidden" id="no_part" name="no_part" value=""
+                                                    class="form-control typeahead" readonly>
+                                                <input type="hidden" id="part_name" name="part_name" value=""
+                                                    class="typeahead form-control" placeholder="Masukkan Nama Part"
+                                                    readonly>
+
+
+                                                <div class="col-md-1">
+                                                    <div class="form-group">
+                                                        <label>Stok BC</label>
+                                                        <input type="text" name="stok_bc" id="stok_bc" readonly
+                                                            @if (old('stok_bc')) value="{{ old('stok_bc') }}"
+                                                    @else
+                                                        value="" @endif
+                                                            class="form-control" placeholder="Masukkan No. Bar">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>No. Bar</label>
+                                                        <input type="text" name="no_bar"
+                                                            @if (old('no_bar')) value="{{ old('no_bar') }}"
+                                                    @else
+                                                        value="{{ $kensa->no_bar }}" @endif
+                                                            class="form-control" placeholder="Masukkan No. Bar">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <Label> Qty Bar</Label>
+                                                        <input type="text" id="qty_bar" name="qty_bar" onkeyup="sum();"
+                                                            @if (old('qty_bar')) value="{{ old('qty_bar') }}"
+                                                    @else
+                                                        value="{{ $kensa->qty_bar }}" @endif
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <!-- select -->
+                                                    <div class="form-group">
+                                                        <label>Cycle</label>
+                                                        <select name="cycle" class="form-control">
+                                                            <option value="">----Pilih Cycle----</option>
+                                                            <option value="C1"
+                                                                {{ old('cycle', $kensa->cycle) == 'C1' ? 'selected' : '' }}>
+                                                                C1</option>
+                                                            <option value="C2"
+                                                                {{ old('cycle', $kensa->cycle) == 'C2' ? 'selected' : '' }}>
+                                                                C2</option>
+                                                            <option value="CS"
+                                                                {{ old('cycle', $kensa->cycle) == 'CS' ? 'selected' : '' }}>
+                                                                CS</option>
+                                                            <option value="FS"
+                                                                {{ old('cycle', $kensa->cycle) == 'FS' ? 'selected' : '' }}>
+                                                                FS</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p>NG Plating</p>
+                                                    <p class="font-italic"> <b> NG Plating </b> </p>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <Label>Nikel</Label>
@@ -263,7 +288,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="row">
-                                                    <p> NG Molding</p>
+                                                    <p class="font-italic"> <b> NG Molding </b> </p>
                                                     <div class="col-md-2">
                                                         <div class="form-group">
                                                             <Label>Gores</Label>
@@ -402,51 +427,38 @@
 @push('page-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
 
 @push('after-script')
     <script type="text/javascript">
         $(document).ready(function() {
-            var basePath = $("#base_path").val();
-            //Array of Values
-            $("#part_name").autocomplete({
-                source: function(request, cb) {
-                    $.ajax({
-                        url: basePath + '/get-employess/' + request.term,
-                        method: 'GET',
-                        dataType: 'json',
-                        success: function(res) {
-                            var result;
-                            result = [{
-                                label: 'There is no matching record found for ' +
-                                    request.term,
-                                value: ''
-                            }];
+            $('.masterdata-js').select2();
 
-                            console.log(res);
+            $('#id_masterdata').trigger('change');
+        });
 
-
-                            if (res.length) {
-                                result = $.map(res, function(obj) {
-                                    return {
-                                        label: obj.part_name,
-                                        value: obj.part_name,
-                                        data: obj
-                                    };
-                                });
-                            }
-                            cb(result);
-                        }
-                    });
+        $(document).on('change', '#id_masterdata', function() {
+            var id_masterdata = $(this).val();
+            var a = $(this).parent();
+            $.ajax({
+                type: 'get',
+                url: '{{ route('cariPart') }}',
+                data: {
+                    'id': id_masterdata
                 },
-                select: function(e, selectedData) {
-                    console.log(selectedData);
+                success: function(data) {
+                    console.log(id_masterdata);
+                    $('#no_part').val(data.no_part);
+                    $('#part_name').val(data.part_name);
+                    $('#katalis').val(data.katalis);
+                    $('#grade_color').val(data.grade_color);
+                    $('#channel').val(data.channel);
+                    $('#qty_bar').val(data.qty_bar);
+                    $('#stok_bc').val(data.stok_bc);
+                },
+                error: function() {
 
-                    if (selectedData && selectedData.item && selectedData.item.data) {
-                        var data = selectedData.item.data;
-                        $('#no_part').val(data.no_part);
-                        $('#qty_bar').val(data.qty_bar);
-                    }
                 }
             });
         });
@@ -476,9 +488,12 @@
             var qtybar = document.getElementById('qty_bar').value;
             var persenok = document.getElementById('persenok').value;
             var persenng = document.getElementById('persenng').value;
-            var result = parseInt(nikel) + parseInt(butsu) + parseInt(hadare) + parseInt(hage) + parseInt(moyo) + parseInt(
-                    fukure) + parseInt(crack) + parseInt(henkei) + parseInt(hanazaki) + parseInt(kizu) + parseInt(kaburi) +
-                parseInt(other) + parseInt(gores) + parseInt(regas) + parseInt(silver) + parseInt(hike) + parseInt(burry) +
+            var result = parseInt(nikel) + parseInt(butsu) + parseInt(hadare) + parseInt(hage) + parseInt(moyo) +
+                parseInt(
+                    fukure) + parseInt(crack) + parseInt(henkei) + parseInt(hanazaki) + parseInt(kizu) + parseInt(
+                    kaburi) +
+                parseInt(other) + parseInt(gores) + parseInt(regas) + parseInt(silver) + parseInt(hike) + parseInt(
+                    burry) +
                 parseInt(others);
             var hasil = parseInt(qtybar) - parseInt(result)
             var persenoks = (parseInt(hasil) / parseInt(qtybar)) * 100

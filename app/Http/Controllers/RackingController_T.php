@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\racking_t;
 use Carbon\Carbon;
@@ -89,9 +90,9 @@ class RackingController_T extends Controller
             'created_by' => Auth::user()->name,
             'created_at' => Carbon::now(),
         ]);
-        $masterdata = MasterData::find($request->id_masterdata);
-        $masterdata->stok_bc += $request->qty_bar;
-        $masterdata->save();
+        // $masterdata = MasterData::find($request->id_masterdata);
+        // $masterdata->stok_bc += $request->qty_bar;
+        // $masterdata->save();
         return redirect()->route('racking_t.tambah', compact('racking'))->with('toast_success', 'Data Berhasil Disimpan!');
     }
 
@@ -99,7 +100,8 @@ class RackingController_T extends Controller
     public function edit($id)
     {
         $plating = racking_t::findOrFail($id);
-        return view('racking_t.racking_t-edit', compact('plating'));
+        $masterdata = MasterData::all();
+        return view('racking_t.racking_t-edit', compact('plating','masterdata'));
     }
 
     //update data
@@ -133,9 +135,19 @@ class RackingController_T extends Controller
 
     public function delete($id)
     {
+
         $plating = racking_t::find($id);
-        $plating->delete();
-        return redirect()->route('racking_t')->with('success', 'Data Berhasil Dihapus!');
+        $unracking = racking_t::where('id_masterdata','=',$plating->id_masterdata)->first();
+        if(!$unracking)
+        {
+            $masterdata = MasterData::find($plating->id_masterdata);
+            $masterdata->stok_bc = $masterdata->stok_bc - $plating->qty_aktual;
+            $masterdata->save();
+
+            $plating->delete();
+            return redirect()->route('racking_t')->with('success', 'Data Berhasil Dihapus!');
+        } else
+        return redirect()->route('racking_t')->with('errors', 'Data Gagal Dihapus!');
     }
 
 

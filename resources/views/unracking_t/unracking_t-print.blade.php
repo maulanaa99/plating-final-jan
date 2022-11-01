@@ -38,21 +38,26 @@
 
                                 </tr>
                                 <tr>
-                                    <th colspan="4">{{ $unracking->part_name }}</th>
+                                    <th colspan="4">PART NAME</th>
+                                    {{-- <th colspan="4">{{ $unracking->part_name }}</th> --}}
                                 </tr>
                                 <tr>
-                                    <th colspan="3">GAMBAR</th>
+                                    <th colspan="3"></th>
                                     <th rowspan="3"> QTY <br>
-                                        <font size="5"> {{ $unracking->qty_aktual }} </font>
+                                        <font size="5"> QTY AKTUAL </font>
+                                        {{-- <font size="5"> {{ $unracking->qty_aktual }} </font> --}}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td width="0" colspan="" >CHANNEL</td>
-                                    <td colspan="1">{{ $unracking->channel }}</td>
+                                    <td colspan="1">CHANNEL</td>
+                                    {{-- <td colspan="1">{{ $unracking->channel }}</td> --}}
                                     <td rowspan="4">Produksi <br> <center> Cycle </center></td>
-                                    <td rowspan="4"> <b> {{ $unracking->cycle }} </b></td>
+                                    <td rowspan="4"> <b> CYCLE</b></td>
+                                    <td rowspan="4"> <b> CYCLE</b></td>
+                                    {{-- <td rowspan="4"> <b> {{ $unracking->cycle }} </b></td> --}}
                                 </tr>
                                 <tr>
                                     <td width="0" >PINBOSH</td>
@@ -60,11 +65,13 @@
                                 </tr>
                                 <tr>
                                     <td width="0" >TANGGAL</td>
-                                    <td colspan="1">{{ $unracking->tanggal_u }} {{ $unracking->waktu_in_u }}</td>
+                                    <td colspan="1">TANGGAL</td>
+                                    {{-- <td colspan="1">{{ $unracking->tanggal_u }} {{ $unracking->waktu_in_u }}</td> --}}
                                 </tr>
                                 <tr>
                                     <td width="0" >NO BAR</td>
-                                    <td colspan="1">{{ $unracking->no_bar }}</td>
+                                    <td colspan="1">NO BAR</td>
+                                    {{-- <td colspan="1">{{ $unracking->no_bar }}</td> --}}
                                 </tr>
                             </tbody>
                         </table>

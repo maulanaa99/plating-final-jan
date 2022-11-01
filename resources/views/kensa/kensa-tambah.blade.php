@@ -72,11 +72,7 @@
                                                 <div class="form-group">
                                                     <label>Stok BC</label>
                                                     <input type="text" name="stok_bc" id="stok_bc" value=""
-                                                        readonly
-                                                        class="@error('stok_bc') is-invalid @enderror form-control">
-                                                    @error('stok_bc')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
+                                                        readonly class="form-control">
                                                 </div>
                                             </div>
 
@@ -84,11 +80,7 @@
                                                 <div class="form-group">
                                                     <label>No. Bar</label>
                                                     <input type="text" name="no_bar" value="{{ old('no_bar') }}"
-                                                        placeholder="Masukkan No. Bar"
-                                                        class="@error('no_bar') is-invalid @enderror form-control">
-                                                    @error('no_bar')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
+                                                        placeholder="Masukkan No. Bar" class="form-control">
                                                 </div>
                                             </div>
 
@@ -107,7 +99,8 @@
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Cycle</label>
-                                                    <select name="cycle" class="form-control">
+                                                    <select name="cycle"
+                                                        class="form-control">
                                                         <option value="">----Pilih Cycle----</option>
                                                         <option>C1</option>
                                                         <option>C2</option>
@@ -384,14 +377,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+
 @endpush
 
 @push('after-script')
     @include('sweetalert::alert')
+
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.masterdata-js').select2();
+            $('#id_masterdata').select2();
         });
     </script>
 

@@ -35,7 +35,7 @@
             </div>
         @elseif($d->stok > 10)
             <div class="col-md-3">
-                <label>Stok <i class="fas fa-check-square" aria-hidden="true"style="color:green" ></i> </label>
+                <label>Stok <i class="fas fa-check-square" aria-hidden="true"style="color:green"></i> </label>
                 <div class="input-group">
                     <input type="text" id="stok" name="stok" value="{{ $d->stok }}"
                         class="form-control bg-success" readonly>
@@ -75,12 +75,12 @@
                     <label>Next Process</label>
                     <select name="next_process" id="next_process" class="form-control">
                         <option value="">----Pilih Next Process----</option>
-                        <option>ASSEMBLY</option>
-                        <option>PAINTING</option>
+                        <option value="assembly">ASSEMBLY</option>
+                        <option value="painting">PAINTING</option>
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div id="assy-panel" class="col-md-3" style="display:none">
                 <label>Kirim Assy</label>
                 <div class="input-group">
                     <input type="text" id="kirim_assy" name="kirim_assy" class="form-control"
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div id="painting-panel" class="col-md-3" style="display:none">
                 <label>Kirim Painting</label>
                 <div class="input-group">
                     <input type="text" id="kirim_painting" name="kirim_painting" class="form-control"
@@ -155,3 +155,16 @@
                 value="{{ 0 }}">
         @endif
 @endforeach
+
+<script>
+    $(document).on('click', '#next_process', function() {
+        if ($(this).find(":selected").val() == 'ASSEMBLY') {
+            $('#assy-panel').show();
+            $('#painting-panel').hide();
+        } else
+        if ($(this).find(":selected").val() == 'PAINTING') {
+            $('#assy-panel').hide();
+            $('#painting-panel').show();
+        }
+    })
+</script>

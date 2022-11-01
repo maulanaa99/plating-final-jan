@@ -224,13 +224,15 @@
         <tr>
             @php
                 $no_parts = preg_replace('/[^A-Za-z0-9 ]/', '', $pengiriman->no_part);
+                $gabungan = $no_parts . $qty;
+                $gabungans = preg_replace('/[^A-Za-z0-9 ]/', '', $gabungan);
             @endphp
 
             <td colspan="3">
                 <font size="2" class="text-left"> PART NO. </font>
-                <div class="centring"> <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($no_parts, 'C39') }}"
+                <div class="centring"> <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($gabungans, 'C39') }}"
                         alt="{{ $pengiriman->no_part }}" width="180" height="30"> </div>
-                <font size="2"> {{ $no_parts }}{{ $qty }}
+                <font size="2"> {{ $gabungans }}
                 </font>
             </td>
 

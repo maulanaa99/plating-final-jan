@@ -41,9 +41,6 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.addons.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/shared/style.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/demo_1/style.css') }}"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/main/style.css') }}?"> --}}
     <link rel="shortcut icon" href="{{ asset('icons/favicon.png') }}" />
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
@@ -70,35 +67,13 @@
                         ?>
                         Tanggal : <b> {{ $today }} </b>
                     </span><br>
-                    <span class="text-light"> Jam :<b> <span id="jam"></span></b></pre> </span>
-
+                    <span class="text-light text-sm"> Jam :<b> <span id="jam"></span></b></pre> </span>
                 </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                                    aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </li>
 
                 @php
                     $id = Auth::user()->id;
@@ -133,11 +108,6 @@
                                 out</a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
                 </li>
             </ul>
         </nav>

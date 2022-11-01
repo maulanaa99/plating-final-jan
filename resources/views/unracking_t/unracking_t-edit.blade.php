@@ -139,7 +139,7 @@
                                             <!-- select -->
                                             <div class="form-group">
                                                 <label>Cycle</label>
-                                                <select name="cycle" class="form-control" readonly>
+                                                <select name="cycle" class="form-control">
                                                     <option value="">----Pilih Cycle----</option>
                                                     <option value="C1"
                                                         {{ old('cycle', $plating->cycle) == 'C1' ? 'selected' : '' }}>
@@ -196,7 +196,7 @@
                                                     class="btn btn-icon icon-left btn-warning"><i
                                                         class="fas fa-arrow-left"></i> Kembali</a>
                                             </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>

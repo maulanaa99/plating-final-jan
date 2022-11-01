@@ -75,7 +75,7 @@ Route::controller(RackingController_T::class)->middleware(['auth'])->group(funct
 Route::controller(UnrackingController_T::class)->middleware(['auth'])->group(function () {
     Route::get('unracking_t', 'index')->name('unracking_t');
     Route::post('unracking_t', 'simpan')->name('unracking_t.simpan');
-    Route::delete('unracking_t/delete/{id}', 'delete')->name('unracking_t.delete');
+    // Route::delete('unracking_t/delete/{id}', 'delete')->name('unracking_t.delete');
     Route::get('unracking_t/{id}/edit', 'edit')->name('unracking_t.edit');
     Route::patch('unracking_t/{id}', 'update')->name('unracking_t.update');
     Route::get('unracking_t/print/{id}', 'unrackingPrint')->name('unracking_t.print');

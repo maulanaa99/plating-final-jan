@@ -71,8 +71,8 @@ is-invalid
                                                     <option value="">----Pilih Cycle----</option>
                                                     <option>C1</option>
                                                     <option>C2</option>
-                                                    <option>CS</option>
-                                                    <option>FS</option>
+                                                    <option>C3</option>
+                                                    <option>C4</option>
                                                 </select>
                                             </div>
                                         </div>

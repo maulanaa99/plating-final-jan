@@ -133,14 +133,14 @@
                         <td>
                             <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                     class="far fa-edit"></i></a>
-                            <a href="#" data-id="{{ $kensha->id }}"
+                            {{-- <a href="#" data-id="{{ $kensha->id }}"
                                 class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
                                     </i>
                                 <form action="{{ route('kensa.delete', $kensha->id) }}" id="delete{{ $kensha->id }}"
                                     method="POST">
                                     @csrf
                                 </form>
-                            </a>
+                            </a> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -189,7 +189,7 @@
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
-                "responsive": false,
+                "responsive": true,
                 "lengthChange": true,
                 "autoWidth": false,
                 "pageLength": 75,

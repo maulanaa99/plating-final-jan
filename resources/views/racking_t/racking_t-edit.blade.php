@@ -83,13 +83,21 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label> Part Name</label>
-                                                    <input type="text" id="part_name" name="part_name"
-                                                        @if (old('part_name')) value="{{ old('part_name') }}"
-                                                        @else
-                                                            value="{{ $plating->part_name }}" @endif
-                                                        class="typeahead form-control" placeholder="Masukkan Nama Part">
+                                                    <select class="form-control masterdata-js" name="id_masterdata"
+                                                        id="id_masterdata">
+                                                        <option value="" hidden>--Pilih Part--</option>
+                                                        @foreach ($masterdata as $d)
+                                                            <option
+                                                                {{ old('id_masterdata', $plating->id_masterdata) == $d->id ? 'selected' : '' }}
+                                                                value="{{ $d->id }}">{{ $d->part_name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+
+                                            <input type="hidden" id="part_name" name="part_name" value=""
+                                                class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -190,6 +198,7 @@
 @push('page-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
 
 @push('after-script')
@@ -259,50 +268,32 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            var basePath = $("#base_path").val();
-            //Array of Values
-            $("#part_name").autocomplete({
-                source: function(request, cb) {
-                    $.ajax({
-                        url: basePath + '/get-employess/' + request.term,
-                        method: 'GET',
-                        dataType: 'json',
-                        success: function(res) {
-                            var result;
-                            result = [{
-                                label: 'There is no matching record found for ' +
-                                    request.term,
-                                value: ''
-                            }];
+            $('.masterdata-js').select2();
 
-                            console.log(res);
+            $('#id_masterdata').trigger('change');
+        });
 
-
-                            if (res.length) {
-                                result = $.map(res, function(obj) {
-                                    return {
-                                        label: obj.part_name,
-                                        value: obj.part_name,
-                                        data: obj
-                                    };
-                                });
-                            }
-                            cb(result);
-                        }
-                    });
+        $(document).on('change', '#id_masterdata', function() {
+            var id_masterdata = $(this).val();
+            var a = $(this).parent();
+            $.ajax({
+                type: 'get',
+                url: '{{ route('cariPart') }}',
+                data: {
+                    'id': id_masterdata
                 },
-                select: function(e, selectedData) {
-                    console.log(selectedData);
+                success: function(data) {
+                    console.log(id_masterdata);
+                    $('#no_part').val(data.no_part);
+                    $('#part_name').val(data.part_name);
+                    $('#katalis').val(data.katalis);
+                    $('#grade_color').val(data.grade_color);
+                    $('#channel').val(data.channel);
+                    $('#qty_bar').val(data.qty_bar);
+                    $('#stok_bc').val(data.stok_bc);
+                },
+                error: function() {
 
-                    if (selectedData && selectedData.item && selectedData.item.data) {
-                        var data = selectedData.item.data;
-
-                        $('#no_part').val(data.no_part);
-                        $('#katalis').val(data.katalis);
-                        $('#channel').val(data.channel);
-                        $('#grade_color').val(data.grade_color);
-                        $('#qty_bar').val(data.qty_bar);
-                    }
                 }
             });
         });

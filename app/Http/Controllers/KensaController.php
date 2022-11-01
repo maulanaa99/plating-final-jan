@@ -22,7 +22,7 @@ class KensaController extends Controller
 
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
-            ->select('kensa.*', 'masterdata.part_name', 'masterdata.qty_bar')
+            ->select('kensa.*', 'masterdata.part_name')
             ->orderBy('tanggal_k', 'desc')->orderBy('waktu_k', 'desc')
             ->where('tanggal_k', '=', $date)
             ->get();
@@ -153,16 +153,24 @@ class KensaController extends Controller
     public function edit($id)
     {
         $kensa = DB::table('kensa')->where('id', $id)->first();
-        return view('kensa.kensa-edit', ['kensa' => $kensa]);
+        $masterdata = MasterData::all();
+        return view('kensa.kensa-edit', compact('kensa', 'masterdata'));
     }
 
     //hapus data
     public function delete($id)
     {
         $kensa = kensa::find($id);
-        kensa::destroy($id);
+        $kensa = kensa::where('id_masterdata', '=', $kensa->id_masterdata)->first();
+        if(!$kensa){
+            $masterdata = MasterData::find($kensa->id_masterdata);
+            $masterdata->stok = $masterdata->stok - $kensa->total_ok;
+            dd($kensa->total_ok);
+            $masterdata->save();
 
-        // $kensa->delete();
+            $kensa->delete();
+            return redirect('kensa')->with('toast_error', 'Data gagal dihapus');
+        }
         return redirect('kensa')->with('toast_success', 'Data berhasil dihapus');
     }
 
@@ -170,6 +178,8 @@ class KensaController extends Controller
     public function update(Request $request, $id)
     {
         $kensa = kensa::find($id);
+        $total_ok_prev = $kensa->total_ok;
+
         $kensa->tanggal_k = $request->tanggal_k;
         $kensa->waktu_k = $request->waktu_k;
         $kensa->no_part = $request->no_part;
@@ -200,6 +210,11 @@ class KensaController extends Controller
         $kensa->p_total_ok = $request->p_total_ok;
         $kensa->p_total_ng = $request->p_total_ng;
         $kensa->save();
+
+        $masterdata = MasterData::find($kensa->id_masterdata);
+        $masterdata->stok = ($masterdata->stok - $total_ok_prev) + (int)$request->total_ok;
+        $masterdata->save();
+
         return redirect()->route('kensa.tambah')->with('message', 'Data berhasil di update');
     }
 
