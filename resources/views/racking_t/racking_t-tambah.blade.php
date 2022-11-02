@@ -71,8 +71,8 @@ is-invalid
                                                     <option value="">----Pilih Cycle----</option>
                                                     <option>C1</option>
                                                     <option>C2</option>
-                                                    <option>C3</option>
-                                                    <option>C4</option>
+                                                    <option>CS</option>
+                                                    <option>FS</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -80,8 +80,7 @@ is-invalid
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Part Name</label>
-                                                <select class="form-control masterdata-js" name="id_masterdata"
-                                                    id="id_masterdata">
+                                                <select class="form-control" name="id_masterdata" id="id_masterdata">
                                                     <option value="" hidden>--Pilih Barang--</option>
                                                     @foreach ($masterdata as $d)
                                                         <option value="{{ $d->id }}">{{ $d->part_name }}
@@ -188,7 +187,7 @@ is-invalid
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.masterdata-js').select2();
+            $('#id_masterdata').select2();
         });
     </script>
 
@@ -196,7 +195,6 @@ is-invalid
         $(document).ready(function() {
             $(document).on('change', '#id_masterdata', function() {
                 var id_masterdata = $(this).val();
-                var a = $(this).parent();
                 $.ajax({
                     type: 'get',
                     url: '{{ route('cariPart') }}',

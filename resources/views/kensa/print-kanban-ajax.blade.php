@@ -74,9 +74,9 @@
                 <div class="form-group">
                     <label>Next Process</label>
                     <select name="next_process" id="next_process" class="form-control">
-                        <option value="">----Pilih Next Process----</option>
-                        <option value="assembly">ASSEMBLY</option>
-                        <option value="painting">PAINTING</option>
+                        <option value="">--Pilih Next Process--</option>
+                        <option value="ASSEMBLY">ASSEMBLY</option>
+                        <option value="PAINTING">PAINTING</option>
                     </select>
                 </div>
             </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PLATING | | @yield('title')</title>
+    <title>PLATING | @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -117,9 +117,9 @@
         <aside class="main-sidebar sidebar-dark-info elevation-4">
             <!-- Brand Logo -->
             <a href="/dashboard" class="brand-link">
-                <img src="{{ asset('assets/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+                <img src="{{ asset('assets/dist/img/sri2.jpg') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">ADMIN LTE 3</span>
+                <span class="brand-text font-weight-light">PT SAKAE RIKEN IDN</span>
             </a>
 
             <!-- Sidebar -->
@@ -131,7 +131,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                            with font-awesome or any other icon font library -->
 
-                        <li class="nav-header">-</li>
+                        <li class="nav-header"></li>
 
                         <li class="nav-item">
                             <a href="{{ route('dashboard') }}"

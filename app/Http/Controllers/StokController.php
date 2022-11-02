@@ -21,52 +21,54 @@ class StokController extends Controller
         //     ->groupBy('masterdata.id')
         //     ->get();
 
-        // $sum_total_ok = MasterData::sum('total_ok');
-        // $sum_total_ng = MasterData::sum('total_ng');
-        // $sum_stok_bc =  MasterData::sum('stok_bc');
-        // $sum_stok = MasterData::sum('stok');
-        // $sum_kirim_painting = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_painting');
-        // $sum_kirim_assy = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_assy');
-        // $sum_kirim_ppic = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_ppic');
-        // $sum_total_kirim = $sum_kirim_painting + $sum_kirim_assy + $sum_kirim_ppic;
+        $sum_total_ok = kensa::where('tanggal_k', '=', $date)->sum('total_ok');
+        $sum_total_ng = kensa::where('tanggal_k', '=', $date)->sum('total_ng');
+        $sum_stok_bc =  MasterData::sum('stok_bc');
+        $sum_stok = MasterData::sum('stok');
+        $sum_kirim_painting = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_painting');
+        $sum_kirim_assy = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_assy');
+        $sum_kirim_ppic = Pengiriman::where('tgl_kanban', '=', $date)->sum('kirim_ppic');
+        $sum_total_kirim = $sum_kirim_painting + $sum_kirim_assy + $sum_kirim_ppic;
+
         $kensa = DB::table('kensa AS k')->select('id_masterdata')
-        ->selectRaw('ifnull(sum(k.total_ok),0) as total_ok')
-        ->selectRaw('ifnull(sum(k.total_ng),0) as total_ng')
-        ->where('k.tanggal_k','=',"$date")
-        ->groupBy('k.id_masterdata');
+            ->selectRaw('ifnull(sum(k.total_ok),0) as total_ok')
+            ->selectRaw('ifnull(sum(k.total_ng),0) as total_ng')
+            ->where('k.tanggal_k', '=', "$date")
+            ->groupBy('k.id_masterdata');
 
         $kirim = DB::table('pengiriman AS pg')->select('id_masterdata')
-        ->selectRaw('ifnull(sum(pg.kirim_painting),0)  as kirim_painting')
-        ->selectRaw('ifnull(sum(pg.kirim_assy),0)  as kirim_assy')
-        ->selectRaw('ifnull(sum(pg.kirim_ppic),0)  as kirim_ppic')
-        ->selectRaw('max(pg.no_kartu)  as no_kartu')
-        ->where('pg.tgl_kanban','=',"$date")
-        ->groupBy('pg.id_masterdata');
+            ->selectRaw('ifnull(sum(pg.kirim_painting),0)  as kirim_painting')
+            ->selectRaw('ifnull(sum(pg.kirim_assy),0)  as kirim_assy')
+            ->selectRaw('ifnull(sum(pg.kirim_ppic),0)  as kirim_ppic')
+            ->selectRaw('max(pg.no_kartu)  as no_kartu')
+            ->where('pg.tgl_kanban', '=', "$date")
+            ->groupBy('pg.id_masterdata');
 
-        $stok = MasterData::select('masterdata.id','masterdata.part_name','masterdata.no_part','pg.kirim_painting','pg.kirim_assy','pg.kirim_ppic')
-        ->selectRaw('masterdata.stok_bc')
-        ->selectRaw('ifnull(k.total_ok,0) total_ok')
-        ->selectRaw('ifnull(k.total_ng,0) total_ng')
-        ->selectRaw('masterdata.stok')
-        ->selectRaw('ifnull(pg.kirim_painting + pg.kirim_assy + pg.kirim_ppic,0) as total_kirim')
-        ->selectRaw('pg.no_kartu')
-        ->joinSub($kensa,'k','k.id_masterdata','=','masterdata.id','left')
-        ->joinSub($kirim,'pg','pg.id_masterdata','=','masterdata.id','left')
-        ->groupBy('masterdata.id','masterdata.part_name','masterdata.no_part')->get();
+        $stok = MasterData::select('masterdata.id', 'masterdata.part_name', 'masterdata.no_part', 'pg.kirim_painting', 'pg.kirim_assy', 'pg.kirim_ppic')
+            ->selectRaw('masterdata.stok_bc')
+            ->selectRaw('ifnull(k.total_ok,0) total_ok')
+            ->selectRaw('ifnull(k.total_ng,0) total_ng')
+            ->selectRaw('masterdata.stok')
+            ->selectRaw('ifnull(pg.kirim_painting + pg.kirim_assy + pg.kirim_ppic,0) as total_kirim')
+            ->selectRaw('pg.no_kartu')
+            ->joinSub($kensa, 'k', 'k.id_masterdata', '=', 'masterdata.id', 'left')
+            ->joinSub($kirim, 'pg', 'pg.id_masterdata', '=', 'masterdata.id', 'left')
+            ->groupBy('masterdata.id', 'masterdata.part_name', 'masterdata.no_part')->get();
 
 
-        return view('stok.stok', compact('stok', 'date'));
+        return view('stok.stok', compact('stok', 'sum_total_ok', 'sum_total_ng', 'sum_stok_bc', 'sum_stok', 'sum_kirim_painting', 'sum_kirim_assy', 'sum_kirim_ppic', 'sum_total_kirim', 'date'));
     }
 
-    public function lihatPart(){
+    public function lihatPart()
+    {
         $part = MasterData::all();
-        return view('latihanajax',compact('part'));
+        return view('latihanajax', compact('part'));
     }
 
 
     public function cariPart(Request $request)
     {
-        $z = Masterdata::select('no_part', 'part_name' , 'katalis', 'channel', 'grade_color', 'qty_bar', 'stok_bc')->where('id', $request->id)->first();
+        $z = Masterdata::select('no_part', 'part_name', 'katalis', 'channel', 'grade_color', 'qty_bar', 'stok_bc')->where('id', $request->id)->first();
         return response()->json($z);
     }
 }

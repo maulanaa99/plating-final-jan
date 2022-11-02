@@ -74,7 +74,7 @@
                     <td colspan="3">
                         <center> <b> Total </b> </center>
                     </td>
-                    {{-- <td> <b> {{ $sum_stok_bc }}</b></td>
+                    <td> <b> {{ $sum_stok_bc }}</b></td>
                     <td> <b> {{ $sum_total_ok }}</b></td>
                     <td> <b> {{ $sum_total_ng }}</b></td>
                     <td> <b> {{ $sum_stok }}</b></td>
@@ -82,7 +82,7 @@
                     <td></td>
                     <td> <b> {{ $sum_kirim_painting }}</b></td>
                     <td> <b> {{ $sum_kirim_assy }}</b></td>
-                    <td> <b> {{ $sum_kirim_ppic }}</b></td> --}}
+                    <td> <b> {{ $sum_kirim_ppic }}</b></td>
                 </tr>
             </tfoot>
         </table>

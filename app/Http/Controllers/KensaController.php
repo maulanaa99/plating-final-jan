@@ -292,7 +292,7 @@ class KensaController extends Controller
         }
     }
 
-    public function cetak_kanban(Request $request, $id)
+    public function cetak_kanban($id)
     {
         $pengiriman = $data['pengiriman'] = Pengiriman::findOrFail($id);
         $filepath = storage_path('app/' . md5($id));

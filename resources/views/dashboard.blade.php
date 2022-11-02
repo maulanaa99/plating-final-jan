@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    MENU UTAMA
+    Menu Utama
 @endsection
 
 @section('breadcrumb')
@@ -77,6 +77,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
+
             </div>
         </div>
     </section>

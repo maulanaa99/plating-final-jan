@@ -61,7 +61,7 @@
                             <a href="{{ route('unracking_t.edit', $unrack->id) }}"
                                 class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i>  </a>
                             <a href="{{ route('unracking_t.print', $unrack->id) }}" class="btn btn-icon btn-sm btn-primary"
-                                target="_blank"><i class="fas fa-print"></i> Print </a>
+                                target="_blank"><i class="fas fa-print"></i></a>
                         </td>
                     </tr>
                 @endforeach
