@@ -53,7 +53,7 @@ Route::controller(MasterDataController::class)->middleware(['auth'])->group(func
     Route::get('masterdata', 'index')->name('master');
     Route::get('masterdata/tambah', 'tambah')->name('master.tambah');
     Route::post('masterdata', 'simpan')->name('master.simpan');
-    Route::post('masterdata/{id}', 'delete')->name('master.delete');
+    Route::post('masterdata/destroy/{id}', 'destroy')->name('master.destroy');
     Route::get('masterdata/{id}/edit', 'edit')->name('master.edit');
     Route::get('masterdata/{id}/show', 'show')->name('master.show');
     Route::patch('masterdata/{id}', 'update')->name('master.update');
@@ -123,6 +123,8 @@ Route::get('cariPart', [StokController::class, 'cariPart'])->name('cariPart');
 Route::get('barang', [BarangController::class, 'index'])->name('barang');
 Route::get('barang/create', [BarangController::class, 'create'])->name('barang.tambah');
 Route::post('barang/simpan', [BarangController::class, 'store'])->name('barang.simpan');
+Route::get('barang/export_excel',[BarangController::class, 'export_excel'])->name('barang.export');
+Route::post('barang/import_excel',[BarangController::class, 'import_excel'])->name('barang.import');
 
 Route::resource('transaksi', TransaksiController::class);
 Route::get('/transaksi/destroy/{id}', [TransaksiController::class, 'destroy']);

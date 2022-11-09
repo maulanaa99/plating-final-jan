@@ -172,11 +172,13 @@
                                                 </div>
                                             </div>
 
+                                            
+
                                             <div class="col-md-6">
                                                 <label></label>
                                                 <div class="col-sm-6">
                                                     <img id="showImage" class="rounded avatar-xla"
-                                                    src="{{ asset('upload/no_image.jpg') }}">
+                                                        src="{{ asset('upload/no_image.jpg') }}">
                                                 </div>
                                             </div>
 
@@ -210,6 +212,11 @@
 @endpush
 
 @push('after-script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#image').change(function(e) {

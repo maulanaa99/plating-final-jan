@@ -68,7 +68,7 @@
                                             <input type="hidden" id="part_name" name="part_name" value=""
                                                 class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
 
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 mt-2">
                                                 <div class="form-group">
                                                     <label>Stok BC</label>
                                                     <input type="text" name="stok_bc" id="stok_bc" value=""
@@ -76,7 +76,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 mt-2">
                                                 <div class="form-group">
                                                     <label>No. Bar</label>
                                                     <input type="text" name="no_bar" value="{{ old('no_bar') }}"
@@ -84,7 +84,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 mt-2">
                                                 <Label> Qty Bar</Label>
                                                 <div class="input-group">
                                                     <input type="text" id="qty_bar" name="qty_bar" value=""
@@ -95,7 +95,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 mt-2">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Cycle</label>
@@ -112,7 +112,7 @@
                                         </div>
 
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 mt-2">
                                             <div class="row">
                                                 <p class="font-italic"> <b> NG Plating </b> </p>
                                                 <div class="col-md-2">
@@ -245,7 +245,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 mt-2">
                                             <div class="row">
                                                 <p class="font-italic"> <b> NG Molding </b> </p>
                                                 <div class="col-md-2">

@@ -10,12 +10,30 @@
 
 @section('content')
     <div class="card-header">
+        {{-- notifikasi form validasi --}}
+        @if ($errors->has('file'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('file') }}</strong>
+            </span>
+        @endif
+
+        {{-- notifikasi sukses --}}
+        @if ($sukses = Session::get('sukses'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $sukses }}</strong>
+            </div>
+        @endif
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{ route('master.tambah') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i>
+                <a href="{{ route('master.tambah') }}" class="btn btn-icon icon-left btn-primary"><i
+                        class="fas fa-plus"></i>
                     Tambah Data</a>
-                <a href="#" class="btn btn-success" data-toggle="modal" data-target="#importExcel"><i
-                        class="fas fa-upload"></i>Import Data</a>
+                {{-- <a href="{{ route('master.export') }}" class="btn btn-success my-3" target="_blank">EXPORT EXCEL</a> --}}
+
+                <a class="btn btn-info my-3" data-toggle="modal" data-target="#importExcel">
+                    <i class="fas fa-upload"></i> Import Excel
+                </a>
             </div>
         </div>
     </div>
@@ -62,7 +80,7 @@
                             <a href="javascript:void(0)" data-id="{{ $data->id }}"
                                 class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="fas fa-times"></i>
 
-                                <form action="{{ route('master.delete', $data->id) }}" id="delete{{ $data->id }}"
+                                <form action="{{ route('master.destroy', $data->id) }}" id="destroy{{ $data->id }}"
                                     method="POST">
                                     @csrf
                                 </form>
@@ -81,7 +99,7 @@
     <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form method="POST" action="/masterdata/import_excel" enctype="multipart/form-data">
+            <form method="POST" action="masterdata/import_excel" enctype="multipart/form-data">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Import Data</h5>
@@ -95,6 +113,21 @@
                         <div class="form-group">
                             <input type="file" name="file" required="required">
                         </div>
+                        <img src="{{ asset('upload/Import Excel.png') }}" alt="" srcset="" style="max-width:450px;
+                        max-height:450px;" class="mt-2">
+                        <span>Untuk <b> mengimport file </b>, pastikan kolom dan format file (xlsx) dan kolom dengan gambar. </span><br>
+                        <span> <i> Keterangan: </i></span><br>
+                        <span>0. No</span><br>
+                        <span>1. Part Number</span><br>
+                        <span>2. Part Name</span><br>
+                        <span>3. Katalis</span><br>
+                        <span>4. Channel</span><br>
+                        <span>5. Chrome</span><br>
+                        <span>6. Qty Bar</span><br>
+                        <span>7. Std Qty</span><br>
+                        <span>8. Bagian</span><br>
+                        <span>9. Next Process</span><br>
+                        <span>10. Model</span><br>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Selesai</button>
@@ -145,7 +178,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        $(`#delete${id}`).submit();
+                        $(`#destroy${id}`).submit();
                     } else {}
                 });
         });

@@ -21,6 +21,7 @@ class DashboardController extends Controller
         $racking = racking_t::count();
         $racking_today = racking_t::where('tanggal_r', '=', $date)->count();
         $avail_stock = MasterData::where('stok', '>=', 0)->orderByDesc('stok')->paginate(5);
-        return view('dashboard', compact('stok','kensa','unracking', 'racking','racking_today','avail_stock'));
+        $bc_stock = MasterData::where('stok_bc', '>=', 0)->orderByDesc('stok_bc')->paginate(5);
+        return view('dashboard', compact('stok','kensa','unracking', 'racking','racking_today','avail_stock','bc_stock'));
     }
 }

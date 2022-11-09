@@ -52,19 +52,19 @@
                 @php $no = 1; @endphp
                 @foreach ($stok as $row)
                     <tr>
-                        <td> <center> {{ $loop->iteration }} </center></td>
-                        <td>{{ $row->no_part }}</td>
-                        <td>{{ $row->part_name }}</td>
-                        <td>{{ $row->stok_bc }}</td>
-                        <td>{{ $row->total_ok }} </td>
-                        <td>{{ $row->total_ng }} </td>
-                        <td>{{ $row->stok }} </td>
-                        <td>{{ $row->total_kirim }}</td>
+                        <td style="width:1px; white-space:nowrap;"> <center> {{ $loop->iteration }} </center></td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->no_part }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->part_name }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->stok_bc }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->total_ok }} </td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->total_ng }} </td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->stok }} </td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->total_kirim }}</td>
                         {{-- <td>{{ $row->getTotal() }} </td> --}}
-                        <td>{{ $row->no_kartu??0 }} </td>
-                        <td>{{ $row->kirim_painting??0 }} </td>
-                        <td>{{ $row->kirim_assy??0  }} </td>
-                        <td>{{ $row->kirim_ppic??0  }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->no_kartu??0 }} </td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->kirim_painting??0 }} </td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->kirim_assy??0  }} </td>
+                        <td style="width:1px; white-space:nowrap;">{{ $row->kirim_ppic??0  }}</td>
                     </tr>
                 @endforeach
 

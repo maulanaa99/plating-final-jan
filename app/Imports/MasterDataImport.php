@@ -21,11 +21,10 @@ class MasterDataImport implements ToModel
             'channel' => $row[4],
             'grade_color' => $row[5],
             'qty_bar' => $row[6],
-            'stok' => $row[7],
-            'qty_trolly' => $row[8],
-            'bagian' => $row[9],
-            'next_process' => $row[10],
-            'model' => $row[11]
+            'qty_trolly' => $row[7],
+            'bagian' => $row[8],
+            'next_process' => $row[9],
+            'model' => $row[10]
         ]);
     }
 }

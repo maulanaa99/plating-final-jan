@@ -80,7 +80,7 @@ is-invalid
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Part Name</label>
-                                                <select class="form-control" name="id_masterdata" id="id_masterdata">
+                                                <select class="form-control" style="width: 100%;" name="id_masterdata" id="id_masterdata" >
                                                     <option value="" hidden>--Pilih Barang--</option>
                                                     @foreach ($masterdata as $d)
                                                         <option value="{{ $d->id }}">{{ $d->part_name }}
@@ -177,8 +177,6 @@ is-invalid
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
-
-
 
 @push('after-script')
     @include('sweetalert::alert')

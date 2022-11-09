@@ -86,10 +86,12 @@ class MasterDataController extends Controller
     }
 
     //hapus data
-    public function delete($id)
+    public function destroy($id)
     {
-        $masterdata = MasterData::find($id);
-        $masterdata->delete();
+        MasterData::find($id);
+        MasterData::destroy($id);
+
+        // $masterdata->delete();
         return redirect('masterdata')->with('success', 'Data Berhasil Dihapus!');
     }
 

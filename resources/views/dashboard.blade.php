@@ -78,27 +78,49 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-sm table-hover table-bordered table-striped">
-                                <thead>
+                    <h2>Data Stok Tersedia</h2>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Part Name</th>
+                                    <th>Stok</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($avail_stock as $row)
                                     <tr>
-                                        <th>No</th>
-                                        <th>Part Name</th>
-                                        <th>Stok</th>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->part_name }}</td>
+                                        <td>{{ $row->stok }}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($avail_stock as $row)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $row->part_name }}</td>
-                                            <td>{{ $row->stok }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>Data Before Check</h2>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Part Name</th>
+                                    <th>Stok BC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($bc_stock as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->part_name }}</td>
+                                        <td>{{ $row->stok_bc }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

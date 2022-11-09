@@ -14,11 +14,11 @@ class MasterDataExport implements FromCollection, WithHeadings, ShouldAutoSize
     */
     public function collection()
     {
-        return MasterData::all();
+        return MasterData::select('no_part', 'part_name', 'katalis', 'channel', 'grade_color', 'qty_bar', 'qty_trolly', 'bagian', 'next_process', 'model')->get();
     }
 
     public function headings(): array
     {
-        return ["id","No Part", "Part Name", "Katalis", "Channel", "Grade Color", "Qty Bar"];
+        return ['no part', 'part name', 'katalis', 'channel', 'grade color', 'qty bar', 'qty trolly', 'bagian', 'next process', 'model'];
     }
 }

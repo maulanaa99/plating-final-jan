@@ -101,36 +101,36 @@
             <tbody>
                 @foreach ($kensa as $no => $kensha)
                     <tr>
-                        <td>{{ $no + 1 }}</td>
-                        <td>{{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
+                        <td style="width:1px; white-space:nowrap;">{{ $no + 1 }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
                             {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
-                        <td>{{ $kensha->part_name }}</td>
-                        <td>{{ $kensha->no_bar }}</td>
-                        <td>{{ $kensha->qty_bar }}</td>
-                        <td>{{ $kensha->cycle }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->no_bar }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->qty_bar }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->cycle }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->nikel }}</td>
-                        <td>{{ $kensha->butsu }}</td>
-                        <td>{{ $kensha->hadare }}</td>
-                        <td>{{ $kensha->hage }}</td>
-                        <td>{{ $kensha->moyo }}</td>
-                        <td>{{ $kensha->fukure }}</td>
-                        <td>{{ $kensha->crack }}</td>
-                        <td>{{ $kensha->henkei }}</td>
-                        <td>{{ $kensha->hanazaki }}</td>
-                        <td>{{ $kensha->kizu }}</td>
-                        <td>{{ $kensha->kaburi }}</td>
-                        <td>{{ $kensha->other }}</td>
-                        <td>{{ $kensha->gores }}</td>
-                        <td>{{ $kensha->regas }}</td>
-                        <td>{{ $kensha->silver }}</td>
-                        <td>{{ $kensha->hike }}</td>
-                        <td>{{ $kensha->burry }}</td>
-                        <td>{{ $kensha->others }}</td>
-                        <td>{{ $kensha->total_ok }}</td>
-                        <td>{{ $kensha->total_ng }}</td>
-                        <td>{{ $kensha->p_total_ok }} %</td>
-                        <td>{{ $kensha->p_total_ng }} %</td>
-                        <td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->butsu }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hadare }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hage }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->moyo }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->fukure }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->crack }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->henkei }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hanazaki }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->kizu }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->kaburi }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->other }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->gores }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->regas }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->silver }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hike }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->burry }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->others }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ng }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
+                        <td style="width:1px; white-space:nowrap;">
                             <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                     class="far fa-edit"></i></a>
                             {{-- <a href="#" data-id="{{ $kensha->id }}"
