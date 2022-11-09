@@ -353,7 +353,7 @@
                                     </div>
 
                                 </div>
-                                <div class="container mt-3 text-center">
+                                <div class="container mt-3 mb-3 text-center">
                                     <button class="btn btn-primary mr-1" type="submit"><i class="fa fa-save"></i>
                                         Submit</button>
                                     <button class="btn btn-danger mr-1" type="reset"> <i

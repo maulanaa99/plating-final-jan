@@ -33,18 +33,18 @@
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>No Part</th>
-                    <th>Part Name</th>
-                    <th>Stok BC</th>
-                    <th>Total OK</th>
-                    <th>Total NG</th>
-                    <th>Stok</th>
-                    <th>Total Kirim</th>
-                    <th>No Kartu</th>
-                    <th>Kirim Painting</th>
-                    <th>Kirim Assy</th>
-                    <th>Kirim PPIC</th>
+                    <th class="align-middle text-center">#</th>
+                    <th class="align-middle text-center">No Part</th>
+                    <th class="align-middle text-center">Part Name</th>
+                    <th class="align-middle text-center">Stok BC</th>
+                    <th class="align-middle text-center">Total OK</th>
+                    <th class="align-middle text-center">Total NG</th>
+                    <th class="align-middle text-center">Stok</th>
+                    <th class="align-middle text-center">Total Kirim</th>
+                    <th class="align-middle text-center">No Kartu</th>
+                    <th class="align-middle text-center">Kirim Painting</th>
+                    <th class="align-middle text-center">Kirim Assy</th>
+                    <th class="align-middle text-center">Kirim PPIC</th>
                 </tr>
             </thead>
 
@@ -122,14 +122,14 @@
         $(document).ready(function() {
             $("#add-row").DataTable({
                 "responsive": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "autoWidth": false,
                 "pageLength": 75,
                 "lengthMenu": [
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["excel", "pdf", "print"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

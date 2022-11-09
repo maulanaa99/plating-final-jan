@@ -4,8 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KensaController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\MasterKensaController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RackingController_T;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\StudentController;
@@ -70,6 +72,10 @@ Route::controller(RackingController_T::class)->middleware(['auth'])->group(funct
     Route::patch('racking_t/{id}', 'update')->name('racking_t.update');
     Route::get('racking_t/ajax', 'ajaxRacking')->name('racking_t.ajax');
     Route::get('racking_t/findMasterdata', 'findMasterdata')->name('findMasterdata');
+    Route::get('racking_t/utama', 'utama')->name('racking_t.utama');
+    Route::get('racking_t/ngracking', 'ngracking')->name('ngracking');
+    Route::get('racking_t/ngracking/tambah', 'tambahngracking')->name('ngracking.tambah');
+    Route::post('racking_t/ngracking/simpan', 'simpanngracking')->name('ngracking.simpan');
 });
 
 Route::controller(UnrackingController_T::class)->middleware(['auth'])->group(function () {
@@ -102,6 +108,11 @@ Route::controller(KensaController::class)->middleware(['auth'])->group(function 
     Route::get('kensa/utama', 'utama')->name('kensa.utama');
 });
 
+Route::controller(LaporanController::class)->middleware(['auth'])->group(function () {
+    Route::get('laporan', 'index')->name('laporan');
+    Route::get('laporan/getData', 'getData')->name('laporan.getdata');
+});
+
 Route::get('stok', [StokController::class, 'index'])->name('stok');
 Route::get('masterkensa', [MasterKensaController::class, 'index'])->name('msterkensa');
 Route::get('masterdata/downloadPDF/{id}', [MasterDataController::class, 'downloadPDF'])->name('masterdata.downloadPDF');
@@ -115,6 +126,12 @@ Route::post('barang/simpan', [BarangController::class, 'store'])->name('barang.s
 
 Route::resource('transaksi', TransaksiController::class);
 Route::get('/transaksi/destroy/{id}', [TransaksiController::class, 'destroy']);
+
+Route::get('product', [ProductController::class,'index'])->name('product');
+Route::get('product/getDataProduct', [ProductController::class,'getDataProduct'])->name('product.getdata');
+
+
+
 
 // Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
 // Route::get('transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.tambah');

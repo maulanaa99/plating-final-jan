@@ -96,7 +96,11 @@
                                 alt="Header Avatar">
                             <p>
                                 {{ Auth::user()->name }}
-                                <small>Plating</small>
+                                @if (Auth::user()->name == 'Admin')
+                                   <small>Admin Plating</small>
+                                @else
+                                <small>Operator Plating</small>
+                                @endif
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -114,7 +118,7 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-info elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/dashboard" class="brand-link">
                 <img src="{{ asset('assets/dist/img/sri2.jpg') }}" alt="AdminLTE Logo"
@@ -237,182 +241,44 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>
-                </nav>
-
-                {{-- <nav>
-                    <ul style="
-                    padding-left: 15px;
-                ">
-                        <li class="nav nav-pills nav-sidebar flex-column mt-3" data-widget="treeview" role="menu"
-                            data-accordion="false">
-                            <span class="text-light text-sm ">
-                                <?php
-                                $today = Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y');
-                                ?>
-                                Tanggal : <b> {{ $today }} </b>
-                            </span>
-                            <center><span class="text-light"> Jam :<b> <span id="jam"></span></b></pre> </span>
-                        </li>
-                    </ul>
-                </nav>
-
-                <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-                        <li class="nav-item">
-                            <a href="{{ route('dashboard') }}"
-                                class="nav-link @if (request()->routeIs('dashboard*')) active @else '' @endif">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <li class="nav-item {{ Route::is('laporan*') ? 'active menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ Route::is('laporan*') ? 'active menu-open' : '' }}">
+                                <i class="nav-icon fas fa-file-excel"></i>
                                 <p>
-                                    Menu Utama
+                                    Laporan
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan') }}"
+                                        class="nav-link @if (request()->routeIs('laporan')) active @else '' @endif">
+                                        <i class="nav-icon far fa-circle nav-icon"></i>
+                                        <p>Racking - Unracking</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('master') }}"
-                                class="nav-link @if (request()->routeIs('master*')) active @else '' @endif">
-                                <i class="nav-icon fas fa-dolly-flatbed"></i>
-                                <p>
-                                    Master Data Part
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('msterkensa') }}"
-                                class="nav-link @if (request()->routeIs('msterkensa*')) active @else '' @endif">
-                                <i class="nav-icon fas fa-clipboard-check"></i>
-                                <p>
-                                    Master Data Kensa
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('stok') }}"
-                                class="nav-link @if (request()->routeIs('stok*')) active @else '' @endif">
-                                <i class="nav-icon fas fa-warehouse"></i>
-                                <p>
-                                    Stock
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('racking_t') }}"
-                                class="nav-link @if (request()->routeIs('racking_t*')) active @else '' @endif">
-                                <i class="nav-icon fas fa-wrench"></i>
-                                <p>
-                                    Racking
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{ route('unracking_t') }}"
-                                class="nav-link @if (request()->routeIs('unracking_t*')) active @else '' @endif">
+                            <a href="{{ route('racking_t.utama') }}"
+                                class="nav-link">
                                 <i class="nav-icon fas fa-people-carry"></i>
                                 <p>
-                                    Unracking
+                                    Latihan Menu Utama Racking
                                 </p>
                             </a>
                         </li>
-
-                        <li class="nav-item dropdown {{ Route::is('kensa*') ? 'active menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Route::is('kensa*') ? 'active menu-open' : '' }}">
-                                <i class="nav-icon fas fa-search-plus"></i>
+                        <li class="nav-item">
+                            <a href="{{ route('ngracking') }}"
+                                class="nav-link">
+                                <i class="nav-icon fas fa-people-carry"></i>
                                 <p>
-                                    Kensa
-                                    <i class="right fas fa-angle-left"></i>
+                                    Latihan NG Racking
                                 </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-
-                                <li class="nav-item">
-                                    <a href="{{ route('kensa.utama') }}"
-                                        class="nav-link @if (request()->routeIs('kensa.utama')) active @else '' @endif">
-                                        <i class="nav-icon far fa-circle nav-icon"></i>
-                                        <p>Menu Utama</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('kensa') }}"
-                                        class="nav-link @if (request()->routeIs('kensa')) active @else '' @endif">
-                                        <i class="nav-icon far fa-circle nav-icon"></i>
-                                        <p>Kensa</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('kensa.tambah') }}"
-                                        class="nav-link @if (request()->routeIs('kensa.tambah')) active @else '' @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Input Inspeksi</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('kensa.printKanban') }}"
-                                        class="nav-link @if (request()->routeIs('kensa.printKanban')) active @else '' @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Print Kanban</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('kensa.pengiriman') }}"
-                                        class="nav-link @if (request()->routeIs('kensa.pengiriman')) active @else '' @endif">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pengiriman</p>
-                                    </a>
-                                </li>
-                            </ul>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Rekapitulasi Laporan
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Racking</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Unracking</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kensa</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-header">CONTOH</li>
-                        <li class="nav-item">
-                            <a href="{{ route('barang') }}"
-                                class="nav-link @if (request()->routeIs('barang*')) active @else '' @endif"">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Barang</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('transaksi.index') }}"
-                                class="nav-link @if (request()->routeIs('transaksi*')) active @else '' @endif" ">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Transaksi</p>
                             </a>
                         </li>
                     </ul>
-                </nav> --}}
+                </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->

@@ -11,7 +11,8 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="{{ route('master.update', $masterdata->id) }}" method="POST">
+                    <form id="quickForm" action="{{ route('master.update', $masterdata->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         @method('patch')
                         <div class="row">
@@ -184,6 +185,27 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Gambar</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input name="image" type="file" class="custom-file-input"
+                                                                id="image">
+                                                            <label class="custom-file-label">Choose File</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label></label>
+                                                <div class="form-group">
+                                                    <img id="showImage" class="rounded avatar-xla"
+                                                        src="{{ !empty($masterdata->image) ? url('upload/part_images/' . $masterdata->image) : url('upload/no_image.jpg') }}">
+                                                </div>
+                                            </div>
+
                                             <div class="container">
                                                 <div class="card-footer text-center">
                                                     <button class="btn btn-primary mr-1" type="submit"> Submit</button>
@@ -216,66 +238,15 @@
 
 @push('after-script')
     @include('sweetalert::alert')
-    {{-- <script>
-        $(function() {
-            $.validator.setDefaults({
-                submitHandler: function() {
-                    alert("Form successful submitted!");
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
                 }
-            });
-            $('#quickForm').validate({
-                rules: {
-                    no_part: {
-                        required: true
-                    },
-                    part_name: {
-                        required: true
-                    },
-                    katalis: {
-                        required: true
-                    },
-                    channel: {
-                        required: true
-                    },
-                    grade_color: {
-                        required: true
-                    },
-                    qty_bar: {
-                        required: true
-                    },
-                },
-                messages: {
-                    no_part: {
-                        required: "No Part tidak boleh kosong"
-                    },
-                    part_name: {
-                        required: "Nama part tidak boleh kosong"
-                    },
-                    katalis: {
-                        required: "Katalis tidak boleh kosong"
-                    },
-                    channel: {
-                        required: "Channel tidak boleh kosong"
-                    },
-                    grade_color: {
-                        required: "Grade color tidak boleh kosong"
-                    },
-                    qty_bar: {
-                        required: "Quantity per bar tidak boleh kosong"
-                    },
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
+                reader.readAsDataURL(e.target.files['0']);
             });
         });
-    </script> --}}
+    </script>
 @endpush

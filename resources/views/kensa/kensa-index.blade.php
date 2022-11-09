@@ -197,7 +197,7 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["excel", "pdf", "print"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

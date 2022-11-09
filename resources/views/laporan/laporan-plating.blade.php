@@ -3,27 +3,39 @@
     Data Racking
 @endsection
 
+@push('page-styles')
+    <style>
+        .centering {
+            margin: auto;
+            width: 50%;
+            border: 3px solid;
+            border-color:#F4F6F9;
+            padding: 10px;
+        }
+    </style>
+@endpush
+
 @section('breadcrumb')
     @parent
     <li class="active"> > Racking</li>
 @endsection
 
 @section('content')
-    <div class="card-header">
-        <div class="row float-right">
-            <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{ route('racking_t.tambah') }}" class="btn btn-icon icon-left btn-primary">
-                    <i class="fas fa-plus"></i> Tambah Data</a>
-            </div>
-        </div>
-        <form action="{{ route('racking_t') }}" method="GET">
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="">Tanggal</label>
-                    <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
+    <div class="card-header centering">
+        <form action="{{ route('laporan') }}" method="GET">
+            <div class="row input-daterange">
+                <div class="col-md-5">
+                    <input type="date" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
                 </div>
-                <div class="col-md-4">
-                    <label for="" class="text-white">Filter</label> <br>
+                <div class="col-md-1">
+                    <center>
+                        <font size="5"><b> - </b> </font>
+                    </center>
+                </div>
+                <div class="col-md-5">
+                    <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
+                </div>
+                <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
             </div>
@@ -31,13 +43,13 @@
     </div>
 
     <div class="card-body">
-
         <div class="table-responsive">
             <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Tgl Racking</th>
+                        <th>Tgl Unracking</th>
                         <th>No Bar</th>
                         <th>Part Name</th>
                         <th>No Part</th>
@@ -45,17 +57,18 @@
                         <th>Channel</th>
                         <th>Grade Color</th>
                         <th>Qty Bar</th>
+                        <th>Qty Aktual</th>
                         <th>Tgl Lot Prod Mldg</th>
                         <th>Cycle</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach ($racking as $no => $rack)
+                    @foreach ($plating as $no => $rack)
                         <tr>
                             <td>{{ $no + 1 }}</td>
                             <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_u)->format('d-m-Y') }} {{ $rack->waktu_in_u }}</td>
                             <td>{{ $rack->no_bar }}</td>
                             <td>{{ $rack->part_name }}</td>
                             <td>{{ $rack->no_part }}</td>
@@ -63,21 +76,9 @@
                             <td>{{ $rack->channel }}</td>
                             <td>{{ $rack->grade_color }}</td>
                             <td>{{ $rack->qty_bar }}</td>
+                            <td>{{ $rack->qty_aktual }}</td>
                             <td>{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
                             <td>{{ $rack->cycle }}</td>
-                            <td>
-                                <a href="{{ route('racking_t.edit', $rack->id) }}"
-                                    class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i>  </a>
-                                <a href="#" data-id="{{ $rack->id }}"
-                                    class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
-                                        </i>
-
-                                    <form action="{{ route('racking_t.delete', $rack->id) }}"
-                                        id="delete{{ $rack->id }}" method="POST">
-                                        @csrf
-                                    </form>
-                                </a>
-                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -106,7 +107,7 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["excel", "pdf", "print"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

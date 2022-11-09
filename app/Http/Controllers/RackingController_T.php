@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\kensa;
 use App\Models\MasterData;
+use App\Models\Ng_Racking;
 use App\Models\racking_t;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,6 +27,10 @@ class RackingController_T extends Controller
             ->get();
 
         $masterdata = MasterData::all();
+
+        $start_produksi = racking_t::where('tanggal_r', '=', $date)->min('waktu_in_r');
+        $cycle_stop = racking_t::where('tanggal_r', '=', $date)->max('waktu_in_r');
+        // dd($cycle_stop);
 
         return view('racking_t.racking_t', compact('racking', 'masterdata', 'date'));
     }
@@ -101,7 +105,7 @@ class RackingController_T extends Controller
     {
         $plating = racking_t::findOrFail($id);
         $masterdata = MasterData::all();
-        return view('racking_t.racking_t-edit', compact('plating','masterdata'));
+        return view('racking_t.racking_t-edit', compact('plating', 'masterdata'));
     }
 
     //update data
@@ -137,9 +141,8 @@ class RackingController_T extends Controller
     {
 
         $plating = racking_t::find($id);
-        $unracking = racking_t::where('id_masterdata','=',$plating->id_masterdata)->first();
-        if(!$unracking)
-        {
+        $unracking = racking_t::where('id_masterdata', '=', $plating->id_masterdata)->first();
+        if (!$unracking) {
             $masterdata = MasterData::find($plating->id_masterdata);
             $masterdata->stok_bc = $masterdata->stok_bc - $plating->qty_aktual;
             $masterdata->save();
@@ -147,8 +150,61 @@ class RackingController_T extends Controller
             $plating->delete();
             return redirect()->route('racking_t')->with('success', 'Data Berhasil Dihapus!');
         } else
-        return redirect()->route('racking_t')->with('errors', 'Data Gagal Dihapus!');
+            return redirect()->route('racking_t')->with('errors', 'Data Gagal Dihapus!');
     }
 
+    public function utama(Request $request)
+    {
+        $date = Carbon::parse($request->date)->format('Y-m-d');
+        $start_produksi = $start_produksi = racking_t::where('tanggal_r', '=', $date)->min('waktu_in_r');
+        $cycle_stop = racking_t::where('tanggal_r', '=', $date)->max('waktu_in_r');
+        $jml_bar = racking_t::where('tanggal_r', '=', $date)->count();
+        $ngracking_today = Ng_Racking::where('tanggal', '=', $date)->sum('quantity');
 
+        return view('racking_t.racking_t-menu_utama', compact('date', 'start_produksi', 'cycle_stop', 'jml_bar', 'ngracking_today'));
+    }
+
+    public function ngracking()
+    {
+        $ngracking = Ng_Racking::all();
+        return view('racking_t.ngracking', compact('ngracking'));
+    }
+
+    public function tambahngracking()
+    {
+        $ngracking = Ng_Racking::join('masterdata', 'masterdata.id', '=', 'ng_racking.id_masterdata')
+            ->select('ng_racking.*', 'masterdata.part_name')
+            ->get();
+
+        $masterdata = MasterData::all();
+
+        return view('racking_t.ngracking-tambah', compact('masterdata', 'ngracking'));
+    }
+
+    public function simpanngracking(Request $request)
+    {
+        $validatedData = $request->validate([
+            'tanggal' => 'required',
+            'id_masterdata' => 'required',
+            'part_name' => 'required',
+            'jenis_ng' => 'required',
+            'quantity' => 'required',
+        ], [
+            'tanggal.required' => 'Tanggal Harus Diisi!',
+            'id_masterdata.required' => 'Id Masterdata Harus Diisi!',
+            'part_name.required' => 'Part Name Harus Diisi!',
+            'jenis_ng.required' => 'Jenis NG Harus Diisi!',
+            'quantity.required' => 'Quantity Harus Diisi!',
+
+        ]);
+        $ngracking = Ng_Racking::create([
+            'tanggal' => $request->tanggal,
+            'id_masterdata' => $request->id_masterdata,
+            'part_name' => $request->part_name,
+            'jenis_ng' => $request->jenis_ng,
+            'quantity' => $request->quantity,
+
+        ]);
+        return redirect()->route('ngracking', compact('ngracking'))->with('success', 'Data Berhasil Disimpan!');
+    }
 }

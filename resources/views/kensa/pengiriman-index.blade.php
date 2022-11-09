@@ -25,14 +25,6 @@
     </section>
 @endsection
 @section('content')
-    {{-- <div class="card-header">
-        <div class="row float-right">
-            <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{ route('kensa.tambah') }}" class="btn btn-icon icon-left btn-primary"><i class="fas fa-plus"></i>
-                    Tambah Data</a>
-            </div>
-        </div>
-    </div> --}}
 
     <div class="card-body">
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
@@ -66,8 +58,6 @@
                         <td>
                             <a href="{{ route('kensa.cetak_kanban', $row->id) }}"
                                 class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a>
-                                {{-- <a href="{{ route('kensa.cetak_kanbane')}}"
-                                    class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a> --}}
                         </td>
                     </tr>
                 @endforeach
@@ -112,12 +102,8 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        // swal('Poof! Your imaginary file has been deleted!', {
-                        // icon: 'success',
-                        // });
                         $(`#delete${id}`).submit();
                     } else {
-                        // swal('Your imaginary file is safe!');
                     }
                 });
         });

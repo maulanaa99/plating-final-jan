@@ -40,7 +40,7 @@ is-invalid
                                             <div class="form-group">
                                                 <label>Waktu in</label>
                                                 <input type="time" name="waktu_in_r" value="<?php date_default_timezone_set('Asia/Jakarta');
-                                                echo date('H:i'); ?>"
+                                                echo date('H:i:s'); ?>"
                                                     class="@error('waktu_in_r') is-invalid @enderror form-control">
                                                 @error('waktu_in_r')
                                                     <div class="text-danger">{{ $message }}</div>
@@ -104,54 +104,52 @@ is-invalid
 
                                         {{-- <div id="detail_part"></div> --}}
 
-                                        <div class="row">
-                                            <input type="hidden" id="no_part" name="no_part" value=""
-                                                class="form-control typeahead" readonly>
-                                            <input type="hidden" id="part_name" name="part_name" value=""
-                                                class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
+                                        <input type="hidden" id="no_part" name="no_part" value=""
+                                            class="form-control typeahead" readonly>
+                                        <input type="hidden" id="part_name" name="part_name" value=""
+                                            class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label> Katalis </label>
-                                                    <input type="text" id="katalis" name="katalis" readonly
-                                                        value="" class="form-control">
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label> Katalis </label>
+                                                <input type="text" id="katalis" name="katalis" readonly value=""
+                                                    class="form-control">
                                             </div>
+                                        </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label> Channel </label>
-                                                    <input type="text" id="channel" name="channel" readonly
-                                                        value="" class="form-control">
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label> Channel </label>
+                                                <input type="text" id="channel" name="channel" readonly value=""
+                                                    class="form-control">
                                             </div>
+                                        </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Chrome </label>
-                                                    <input type="text" id="grade_color" name="grade_color" readonly
-                                                        value="" class="form-control">
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Chrome </label>
+                                                <input type="text" id="grade_color" name="grade_color" readonly
+                                                    value="" class="form-control">
                                             </div>
+                                        </div>
 
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <Label> Qty Bar</Label>
-                                                    <input type="text" id="qty_bar" name="qty_bar" value=""
-                                                        class="form-control">
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <Label> Qty Bar</Label>
+                                                <input type="text" id="qty_bar" name="qty_bar" value=""
+                                                    class="form-control">
                                             </div>
+                                        </div>
 
-                                            <div class="container">
-                                                <div class="card-footer text-center">
-                                                    <button class="btn btn-primary mr-1" type="submit"> <i
-                                                            class="fas fa-save"></i> Submit</button>
-                                                    <button class="btn btn-danger" type="reset"> <i
-                                                            class="fas fa-trash-restore"></i> Reset</button>
-                                                    <a href="{{ route('racking_t') }}"
-                                                        class="btn btn-icon icon-left btn-warning"><i
-                                                            class="fas fa-arrow-left"></i> Kembali</a>
-                                                </div>
+                                        <div class="container">
+                                            <div class="card-footer mt-3 text-center">
+                                                <button class="btn btn-primary mr-1" type="submit"> <i
+                                                        class="fas fa-save"></i> Submit</button>
+                                                <button class="btn btn-danger" type="reset"> <i
+                                                        class="fas fa-trash-restore"></i> Reset</button>
+                                                <a href="{{ route('racking_t') }}"
+                                                    class="btn btn-icon icon-left btn-warning"><i
+                                                        class="fas fa-arrow-left"></i> Kembali</a>
                                             </div>
                                         </div>
                                     </div>

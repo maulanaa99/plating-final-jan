@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\kensa;
+use App\Models\MasterData;
+use App\Models\Plating;
 use App\Models\racking_t;
 use App\Models\Stok;
 use App\Models\unracking_t;
@@ -18,6 +20,7 @@ class DashboardController extends Controller
         $unracking = unracking_t::count();
         $racking = racking_t::count();
         $racking_today = racking_t::where('tanggal_r', '=', $date)->count();
-        return view('dashboard', compact('stok','kensa','unracking', 'racking','racking_today'));
-    } 
+        $avail_stock = MasterData::where('stok', '>=', 0)->orderByDesc('stok')->paginate(5);
+        return view('dashboard', compact('stok','kensa','unracking', 'racking','racking_today','avail_stock'));
+    }
 }

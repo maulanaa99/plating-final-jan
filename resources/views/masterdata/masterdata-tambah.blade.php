@@ -158,22 +158,27 @@
                                                 </div>
                                             </div>
 
-                                            {{-- <div class="col-md-6">
 
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Minimal</label>
-                                                    <select class="form-control select2" style="width: 100%;">
-                                                        <option selected="selected">Alabama</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
+                                                    <label>Gambar</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input name="image" type="file" class="custom-file-input"
+                                                                id="image">
+                                                            <label class="custom-file-label">Choose File</label>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div> --}}
+                                            </div>
 
+                                            <div class="col-md-6">
+                                                <label></label>
+                                                <div class="col-sm-6">
+                                                    <img id="showImage" class="rounded avatar-xla"
+                                                    src="{{ asset('upload/no_image.jpg') }}">
+                                                </div>
+                                            </div>
 
                                             <div class="container">
                                                 <div class="card-footer text-center">
@@ -192,7 +197,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -205,3 +209,16 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
 @endpush
 
+@push('after-script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#image').change(function(e) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#showImage').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(e.target.files['0']);
+            });
+        });
+    </script>
+@endpush

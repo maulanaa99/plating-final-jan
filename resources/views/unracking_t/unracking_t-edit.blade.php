@@ -189,7 +189,7 @@
                                             </div>
                                         </div>
 
-                                            <div class="text-center">
+                                            <div class="text-center mt-3">
                                                 <button class="btn btn-primary mr-1" type="submit"> <i class="fas fa-save"></i> Submit</button>
                                                 <button class="btn btn-danger" type="reset"> <i class="fas fa-trash-restore"></i> Reset</button>
                                                 <a href="{{ route('unracking_t') }}"

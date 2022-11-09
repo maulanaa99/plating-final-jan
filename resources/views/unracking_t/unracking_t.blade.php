@@ -34,9 +34,9 @@
                     <th>#</th>
                     <th>Tgl Racking</th>
                     <th>Tgl Unracking</th>
-                    <th>No.Bar</th>
+                    <th>No Bar</th>
                     <th>Part Name</th>
-                    <th>No.Part</th>
+                    <th>No Part</th>
                     <th>Channel</th>
                     <th>Qty Bar</th>
                     <th>Qty Aktual</th>
@@ -59,7 +59,7 @@
                         <td>{{ $unrack->cycle }}</td>
                         <td>
                             <a href="{{ route('unracking_t.edit', $unrack->id) }}"
-                                class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i>  </a>
+                                class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>
                             <a href="{{ route('unracking_t.print', $unrack->id) }}" class="btn btn-icon btn-sm btn-primary"
                                 target="_blank"><i class="fas fa-print"></i></a>
                         </td>
@@ -88,8 +88,12 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
+
+        setTimeout(function() {
+            location.reload();
+        }, 600000);
     </script>
 @endpush

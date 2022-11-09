@@ -36,18 +36,18 @@
             <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Tgl Racking</th>
-                        <th>No Bar</th>
-                        <th>Part Name</th>
-                        <th>No Part</th>
-                        <th>Katalis</th>
-                        <th>Channel</th>
-                        <th>Grade Color</th>
-                        <th>Qty Bar</th>
-                        <th>Tgl Lot Prod Mldg</th>
-                        <th>Cycle</th>
-                        <th>Action</th>
+                        <th class="align-middle text-center">#</th>
+                        <th class="align-middle text-center">Tgl Racking</th>
+                        <th class="align-middle text-center">No Bar</th>
+                        <th class="align-middle text-center">Part Name</th>
+                        <th class="align-middle text-center">No Part</th>
+                        <th class="align-middle text-center">Katalis</th>
+                        <th class="align-middle text-center">Channel</th>
+                        <th class="align-middle text-center">Grade Color</th>
+                        <th class="align-middle text-center">Qty Bar</th>
+                        <th class="align-middle text-center">Tgl Lot Prod Mldg</th>
+                        <th class="align-middle text-center">Cycle</th>
+                        <th class="align-middle text-center">Action</th>
                     </tr>
                 </thead>
 
@@ -106,7 +106,7 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

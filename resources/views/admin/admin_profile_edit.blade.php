@@ -6,10 +6,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
+                        <div class="card-header bg-primary">
+                            <h4 class="card-title"> <span> Edit Profile Page </span> </h4>
+                        </div>
                         <div class="card-body">
-                            <h4 class="card-title"> <b> Edit Profile Page </b> </h4>
-                            <br>
-                            <br>
                             <form method="POST" action="{{ route('store.profile') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row mb-3">
@@ -50,7 +50,7 @@
                                     <div class="row mb-3">
                                         <label for="" class="col-sm-2 col-form-label"></label>
                                         <div class="col-sm-10">
-                                            <img id="showImage" class="roundede"
+                                            <img id="showImage" class="rounded avatar-xl"
                                                 src="{{ !empty($editData->profile_images) ? url('upload/admin_images/' . $editData->profile_images) : url('upload/no_image.jpg') }}">
                                         </div>
                                     </div>

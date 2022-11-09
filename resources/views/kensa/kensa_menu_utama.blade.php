@@ -71,7 +71,7 @@
                         <div class="inner">
                             <h3>{{ $kensa_today }} Bar</h3>
                             <p>
-                                <font size="5"> Jml Pengecekan Hari ini </font>
+                                <font size="5"> Pengecekan Hari ini </font>
                             </p>
                         </div>
                         <div class="icon">

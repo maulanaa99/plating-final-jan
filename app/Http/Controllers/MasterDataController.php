@@ -94,7 +94,7 @@ class MasterDataController extends Controller
     }
 
     //update data
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'no_part' => 'required',
@@ -105,7 +105,6 @@ class MasterDataController extends Controller
             'qty_bar' => 'required',
             'qty_trolly' => 'required',
             'bagian' => 'required',
-            'next_process' => 'required',
             'model' => 'required',
 
         ], [
@@ -118,23 +117,30 @@ class MasterDataController extends Controller
             'qty_bar.required' => 'Qty Bar Harus Diisi!',
             'qty_trolly.required' => 'Qty Trolly Harus Diisi!',
             'bagian.required' => 'Bagian Harus Diisi!',
-            'next_process.required' => 'Next Process Harus Diisi!',
             'model.required' => 'Model Harus Diisi!',
 
         ]);
 
-        DB::table('masterdata')->where('id', $request->id)->update([
-            'no_part' => $request->no_part,
-            'part_name' => $request->part_name,
-            'katalis' => $request->katalis,
-            'channel' => $request->channel,
-            'grade_color' => $request->grade_color,
-            'qty_bar' => $request->qty_bar,
-            'qty_trolly' => $request->qty_trolly,
-            'bagian' => $request->bagian,
-            'next_process' => $request->next_process,
-            'model' => $request->model,
-        ]);
+        $data = MasterData::find($id);
+        $data->no_part = $request->no_part;
+        $data->part_name = $request->part_name;
+        $data->katalis = $request->katalis;
+        $data->channel = $request->channel;
+        $data->grade_color = $request->grade_color;
+        $data->qty_bar = $request->qty_bar;
+        $data->qty_trolly = $request->qty_trolly;
+        $data->bagian = $request->bagian;
+        $data->next_process = $request->next_process;
+        $data->model = $request->model;
+        if ($request->file('image')) {
+            $file = $request->file('image');
+
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('upload/part_images'),$filename);
+            $data['image'] = $filename;
+         }
+         $data->save();
+
         return redirect('masterdata')->with('success', 'Data Berhasil Diperbarui!');
     }
 
@@ -190,9 +196,4 @@ class MasterDataController extends Controller
         return $datas;
     }
 
-    public function downloadPDF(Request $request, $id)
-    {
-        $data['masterdata'] = MasterData::find($id);
-        dd($data);
-    }
 }

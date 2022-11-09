@@ -6,27 +6,29 @@
                 <div class="col-lg-6">
                     <div class="card"><br>
                         <center>
-                            <img class="rounded"
+                            <img class="rounded-circle avatar-xl"
                                 src="{{ !empty($adminData->profile_images) ? url('upload/admin_images/' . $adminData->profile_images) : url('upload/no_image.jpg') }}"
                                 alt="Card image cap">
                         </center>
                         <div class="card-body">
-                            <div class="form-group row">
-                                <label class="col-sm-2">Name :</label>
-                                <div class="col-sm-4">
-                                    {{ ucfirst($adminData->name) }}
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-3">Name</label>
+                                    <div class="col-sm-9">
+                                        {{ ucfirst($adminData->name) }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2">Email :</label>
-                                <div class="col-sm-4">
-                                    {{ $adminData->email }}
+                                <div class="form-group row">
+                                    <label class="col-sm-3">Email</label>
+                                    <div class="col-sm-9">
+                                        {{ $adminData->email }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2">Username :</label>
-                                <div class="col-sm-4">
-                                    {{ $adminData->username }}
+                                <div class="form-group row">
+                                    <label class="col-sm-3">Username</label>
+                                    <div class="col-sm-9">
+                                        {{ $adminData->username }}
+                                    </div>
                                 </div>
                             </div>
                             <a href="{{ route('edit.profile') }}" class="btn btn-rounded btn-warning float-right"> <i

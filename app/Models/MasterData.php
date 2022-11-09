@@ -10,7 +10,7 @@ class MasterData extends Model
     use HasFactory;
 
     protected $table = 'masterdata';
-    protected $fillable = ['no_part', 'part_name', 'katalis', 'channel', 'grade_color', 'qty_bar', 'qty_trolly', 'bagian', 'next_process', 'model'];
+    protected $fillable = ['no_part', 'part_name', 'katalis', 'channel', 'grade_color', 'qty_bar', 'qty_trolly', 'bagian', 'next_process', 'model','image'];
 
     public function pengirimans()
     {

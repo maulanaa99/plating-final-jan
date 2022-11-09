@@ -33,6 +33,7 @@
                     <th class="align-middle text-center">Channel</th>
                     <th class="align-middle text-center">Chrome</th>
                     <th class="align-middle text-center">Qty Bar</th>
+                    <th class="align-middle text-center">Image</th>
                     <th class="align-middle text-center">Action</th>
                 </tr>
             </thead>
@@ -47,6 +48,12 @@
                         <td>{{ $data->channel }}</td>
                         <td>{{ $data->grade_color }}</td>
                         <td>{{ $data->qty_bar }}</td>
+                        <td>
+                            <img style="max-width:100px;
+                            max-height:100px;"
+                                src="{{ !empty($data->image) ? url('upload/part_images/' . $data->image) : url('upload/no_images2.png') }}"
+                                alt="">
+                        </td>
                         <td class="align-middle text-center">
                             <a href="{{ route('master.show', $data->id) }}" class="btn btn-icon btn-sm btn-primary"><i
                                     class="far fa-eye"></i></a>
@@ -111,15 +118,15 @@
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
-                responsive: true,
-                lengthChange: false,
-                autoWidth: false,
-                pageLength: 75,
-                lengthMenu: [
+                "responsive": true,
+                "lengthChange": true,
+                "autoWidth": false,
+                "pageLength": 75,
+                "lengthMenu": [
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>
