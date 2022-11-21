@@ -22,7 +22,7 @@
                                                 <div class="form-group">
                                                     <label for="">Part Number</label>
                                                     <input type="text" id="no_part" name="no_part"
-                                                        placeholder="Masukan No Part .."
+                                                        placeholder="Masukan Part Number .."
                                                         class="@error('no_part') is-invalid @enderror form-control">
                                                     @error('no_part')
                                                         <div class="text-danger">{{ $message }}</div>
@@ -172,7 +172,7 @@
                                                 </div>
                                             </div>
 
-                                            
+
 
                                             <div class="col-md-6">
                                                 <label></label>

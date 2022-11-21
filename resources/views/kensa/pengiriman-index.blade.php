@@ -32,7 +32,7 @@
                 <tr>
                     <th>#</th>
                     <th>Tanggal Kanban</th>
-                    <th class="align-middle text-center">No Part</th>
+                    <th class="align-middle text-center">Part Number</th>
                     <th class="align-middle text-center">Part Name</th>
                     <th>No Kartu</th>
                     <th>Next Process</th>

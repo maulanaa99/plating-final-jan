@@ -232,7 +232,7 @@
                 },
                 messages: {
                     no_part: {
-                        required: "No Part tidak boleh kosong"
+                        required: "Part Number tidak boleh kosong"
                     },
                     part_name: {
                         required: "Nama part tidak boleh kosong"

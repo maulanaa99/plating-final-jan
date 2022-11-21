@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\MasterData;
 use App\Models\Ng_Racking;
+use App\Models\Pinbosh_Tertinggal;
 use App\Models\racking_t;
+use App\Models\Rencana_Produksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +14,9 @@ use Illuminate\Support\Facades\DB;
 
 class RackingController_T extends Controller
 {
+
+    // =================================================== RACKING =========================================================================
+
     //tampil data
     public function index(Request $request)
     {
@@ -20,7 +25,7 @@ class RackingController_T extends Controller
             ->leftJoin('masterdata', function ($join) {
                 $join->on('masterdata.id', '=', 'plating.id_masterdata');
             })
-            ->select('plating.id', 'plating.id_masterdata', 'plating.tanggal_r', 'plating.waktu_in_r', 'plating.no_bar', 'plating.no_part', 'plating.part_name', 'plating.katalis', 'plating.channel', 'plating.grade_color', 'plating.qty_bar', 'plating.cycle', 'plating.tgl_lot_prod_mldg')
+            ->select('plating.id', 'plating.id_masterdata', 'plating.tanggal_r', 'plating.waktu_in_r', 'plating.no_bar', 'plating.no_part', 'plating.part_name', 'plating.katalis', 'plating.channel', 'plating.grade_color', 'plating.qty_bar', 'plating.cycle', 'plating.tgl_lot_prod_mldg', 'plating.created_by')
             ->orderBy('tanggal_r', 'desc')
             ->orderBy('waktu_in_r', 'desc')
             ->where('tanggal_r', '=', $date)
@@ -36,15 +41,38 @@ class RackingController_T extends Controller
     }
 
     //tambah data
-    public function tambah()
+    public function tambah(Request $request)
     {
+        $date = Carbon::parse($request->date)->format('Y-m-d');
         $racking = racking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
             ->select('plating.*', 'masterdata.part_name', 'masterdata.qty_bar')
             ->orderBy('tanggal_r', 'desc')
             ->get();
 
+        $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
+        $cycle = 75;
+        $capacity_cooper = 34;
+        $capacity_final = 38;
+        $total_capacity = $capacity_cooper + $capacity_final;
+        $count_rencana_produksi = Rencana_Produksi::where('tanggal', '=', $date)->count();
+        $end_cycle = $count_rencana_produksi - $total_capacity;
+        $fs_val = $end_cycle + $capacity_final;
+        $cs_val = $fs_val + $capacity_cooper;
+
         $masterdata = MasterData::all();
-        return view('racking_t.racking_t-tambah', compact('racking', 'masterdata'));
+        return view('racking_t.racking_t-tambah', compact(
+            'racking',
+            'masterdata',
+            'hit_data_racking',
+            'cycle',
+            'capacity_cooper',
+            'capacity_final',
+            'total_capacity',
+            'count_rencana_produksi',
+            'end_cycle',
+            'fs_val',
+            'cs_val'
+        ));
     }
 
     //simpan data
@@ -66,7 +94,7 @@ class RackingController_T extends Controller
             'tanggal_r.required' => 'Tgl Racking Harus Diisi!',
             'no_bar.required' => 'No Bar Harus Diisi!',
             'part_name.required' => 'Part Name Harus Diisi!',
-            'no_part.required' => 'No Part Harus Diisi!',
+            'no_part.required' => 'Part Number Harus Diisi!',
             'katalis.required' => 'katalis Harus Diisi!',
             'channel.required' => 'channel Harus Diisi!',
             'grade_color.required' => 'Grade Color Harus Diisi!',
@@ -93,7 +121,10 @@ class RackingController_T extends Controller
             'cycle' => $request->cycle,
             'created_by' => Auth::user()->name,
             'created_at' => Carbon::now(),
+            'status' => '0'
         ]);
+
+
         // $masterdata = MasterData::find($request->id_masterdata);
         // $masterdata->stok_bc += $request->qty_bar;
         // $masterdata->save();
@@ -139,14 +170,13 @@ class RackingController_T extends Controller
 
     public function delete($id)
     {
-
         $plating = racking_t::find($id);
         $unracking = racking_t::where('id_masterdata', '=', $plating->id_masterdata)->first();
-        if (!$unracking) {
+
+        if ($unracking->qty_aktual == '') {
             $masterdata = MasterData::find($plating->id_masterdata);
             $masterdata->stok_bc = $masterdata->stok_bc - $plating->qty_aktual;
             $masterdata->save();
-
             $plating->delete();
             return redirect()->route('racking_t')->with('success', 'Data Berhasil Dihapus!');
         } else
@@ -160,9 +190,13 @@ class RackingController_T extends Controller
         $cycle_stop = racking_t::where('tanggal_r', '=', $date)->max('waktu_in_r');
         $jml_bar = racking_t::where('tanggal_r', '=', $date)->count();
         $ngracking_today = Ng_Racking::where('tanggal', '=', $date)->sum('quantity');
+        $sum_pinbosh_tertinggal = Pinbosh_Tertinggal::where('tanggal', '=', $date)->sum('jumlah');
+        $count_rencana_produksi = Rencana_Produksi::where('tanggal', '=', $date)->count();
 
-        return view('racking_t.racking_t-menu_utama', compact('date', 'start_produksi', 'cycle_stop', 'jml_bar', 'ngracking_today'));
+        return view('racking_t.racking_t-menu_utama', compact('date', 'start_produksi', 'cycle_stop', 'jml_bar', 'ngracking_today', 'count_rencana_produksi', 'sum_pinbosh_tertinggal'));
     }
+
+    // ===================================================NG RACKING =========================================================================
 
     public function ngracking()
     {
@@ -206,5 +240,66 @@ class RackingController_T extends Controller
 
         ]);
         return redirect()->route('ngracking', compact('ngracking'))->with('success', 'Data Berhasil Disimpan!');
+    }
+
+    public function editngracking($id)
+    {
+        $ngracking = Ng_Racking::findOrFail($id);
+        $masterdata = MasterData::all();
+        return view('racking_t.ngracking-edit', compact('masterdata', 'ngracking'));
+    }
+
+    public function updatengracking(Request $request)
+    {
+        Ng_Racking::where('id', $request->id)->update([
+            'tanggal' => $request->tanggal,
+            'id_masterdata' => $request->id_masterdata,
+            'part_name' => $request->part_name,
+            'jenis_ng' => $request->jenis_ng,
+            'quantity' => $request->quantity,
+        ]);
+
+        return redirect()->route('ngracking')->with('message', 'Data berhasil di update');
+    }
+
+    public function deletengracking($id)
+    {
+        Ng_Racking::findOrFail($id);
+        Ng_Racking::destroy($id);
+        return redirect()->route('ngracking')->with('success', 'Data Berhasil Dihapus');
+    }
+
+
+    // ===================================================PINBOSH TERTINGGAL =========================================================================
+
+    public function pinbosh()
+    {
+        $pinbosh = Pinbosh_Tertinggal::all();
+
+        return view('racking_t.pinbosh', compact('pinbosh'));
+    }
+    public function pinboshTambah()
+    {
+        $masterdata = MasterData::all();
+        return view('racking_t.pinbosh-tambah', compact('masterdata'));
+    }
+
+    public function pinboshSimpan(Request $request)
+    {
+        $pinbosh = Pinbosh_Tertinggal::create([
+            'tanggal' => $request->tanggal,
+            'waktu' => $request->waktu,
+            'id_masterdata' => $request->id_masterdata,
+            'part_name' => $request->part_name,
+            'jumlah' => $request->jumlah,
+        ]);
+        return redirect()->route('pinbosh', compact('pinbosh'))->with('success', 'Data Berhasil Disimpan!');
+    }
+
+    public function pinboshEdit($id)
+    {
+        $pinbosh = Pinbosh_Tertinggal::findOrFail($id);
+        $masterdata = MasterData::all();
+        return view('pinbosh.edit', compact('masterdata', 'pinbosh'));
     }
 }

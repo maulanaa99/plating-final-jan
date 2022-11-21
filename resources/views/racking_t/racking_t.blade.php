@@ -40,13 +40,14 @@
                         <th class="align-middle text-center">Tgl Racking</th>
                         <th class="align-middle text-center">No Bar</th>
                         <th class="align-middle text-center">Part Name</th>
-                        <th class="align-middle text-center">No Part</th>
+                        <th class="align-middle text-center">Part Number</th>
                         <th class="align-middle text-center">Katalis</th>
                         <th class="align-middle text-center">Channel</th>
                         <th class="align-middle text-center">Grade Color</th>
                         <th class="align-middle text-center">Qty Bar</th>
                         <th class="align-middle text-center">Tgl Lot Prod Mldg</th>
                         <th class="align-middle text-center">Cycle</th>
+                        <th class="align-middle text-center">PIC</th>
                         <th class="align-middle text-center">Action</th>
                     </tr>
                 </thead>
@@ -65,6 +66,7 @@
                             <td>{{ $rack->qty_bar }}</td>
                             <td>{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
                             <td>{{ $rack->cycle }}</td>
+                            <td>{{ $rack->created_by }}</td>
                             <td>
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i>  </a>

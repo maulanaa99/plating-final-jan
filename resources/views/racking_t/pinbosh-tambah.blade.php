@@ -12,11 +12,11 @@
                 <!-- jquery validation -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Data Produksi Racking</small></h3>
+                        <h3 class="card-title">Tambah Data Pinbosh Tertinggal</small></h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="{{ route('racking_t.simpan') }}" method="POST" class="form-master">
+                    <form id="quickForm" action="{{ route('pinbosh.simpan') }}" method="POST" class="form-master">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
@@ -26,11 +26,11 @@
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
                                                 <label>Tanggal</label>
-                                                <input type="date" name="tanggal_r" value="<?= date('Y-m-d') ?>"
-                                                    class="@error('tanggal_r')
+                                                <input type="date" name="tanggal" value="<?= date('Y-m-d') ?>"
+                                                    class="@error('tanggal')
 is-invalid
 @enderror form-control">
-                                                @error('tanggal_r')
+                                                @error('tanggal')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
@@ -38,113 +38,55 @@ is-invalid
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Waktu in</label>
-                                                <input type="time" name="waktu_in_r" value="<?php date_default_timezone_set('Asia/Jakarta');
+                                                <label>Waktu</label>
+                                                <input type="time" name="waktu" value="<?php date_default_timezone_set('Asia/Jakarta');
                                                 echo date('H:i:s'); ?>"
-                                                    class="@error('waktu_in_r') is-invalid @enderror form-control">
-                                                @error('waktu_in_r')
+                                                    class="@error('waktu') is-invalid @enderror form-control">
+                                                @error('waktu')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tanggal Lot Produksi Molding</label>
-                                                <input type="date" name="tgl_lot_prod_mldg" value="<?= date('Y-m-d') ?>"
-                                                    class="@error('tgl_lot_prod_mldg')
-is-invalid
-@enderror form-control">
-                                                @error('tgl_lot_prod_mldg')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <!-- select -->
-                                            <div class="form-group">
-                                                <label>Cycle (Jml Bar = {{ $hit_data_racking }}) </label>
-                                                <select name="cycle"
-                                                    class="@error('cycle') is-invalid @enderror form-control">
-                                                    @error('cycle')
-                                                        <div class="text-danger">{{ $message }}</div>
-                                                    @enderror
-                                                    <option>C1</option>
-                                                    <option>C2</option>
-                                                    <option>CS</option>
-                                                    <option>FS</option>
-                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Part Name</label>
-                                                <select class="form-control" style="width: 100%;" name="id_masterdata"
-                                                    id="id_masterdata">
-                                                    <option value="" hidden>--Pilih Barang--</option>
+                                                <select name="id_masterdata" id="id_masterdata"
+                                                    class="@error('id_masterdata') is-invalid @enderror form-control">
+                                                    <option value="" hidden>--Pilih Part--</option>
                                                     @foreach ($masterdata as $d)
                                                         <option value="{{ $d->id }}">{{ $d->part_name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                            @error('id_masterdata')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>No. Bar</label>
-                                                <input type="number" name="no_bar" value="{{ old('no_bar') }}"
-                                                    placeholder="Masukkan No. Bar"
-                                                    class="@error('no_bar') is-invalid @enderror form-control">
-                                                @error('no_bar')
+                                                <Label> Quantity</Label>
+                                                <div class="input-group">
+                                                    <input type="text" id="jumlah" name="jumlah"
+                                                        class="@error('jumlah') is-invalid @enderror
+                                                    form-control">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text">Pcs</span>
+                                                    </div>
+                                                </div>
+                                                @error('jumlah')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
                                             </div>
                                         </div>
 
-                                        {{-- <div id="detail_part"></div> --}}
-
-                                        <input type="hidden" id="no_part" name="no_part" value=""
-                                            class="form-control typeahead" readonly>
                                         <input type="hidden" id="part_name" name="part_name" value=""
                                             class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Katalis </label>
-                                                <input type="text" id="katalis" name="katalis" readonly value=""
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label> Channel </label>
-                                                <input type="text" id="channel" name="channel" value=""
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Chrome </label>
-                                                <input type="text" id="grade_color" name="grade_color" readonly
-                                                    value="" class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <Label> Qty Bar</Label>
-                                                <input type="text" id="qty_bar" name="qty_bar" value=""
-                                                    class="form-control">
-                                            </div>
-                                        </div>
-
-                                        <div class="container">
-                                            <div class="card-footer mt-3 text-center">
+                                        <div class="container mt-2">
+                                            <div class="card-footer text-center">
                                                 <button class="btn btn-primary mr-1" type="submit"> <i
                                                         class="fas fa-save"></i> Submit</button>
                                                 <button class="btn btn-danger" type="reset"> <i
@@ -157,15 +99,13 @@ is-invalid
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </form>
                 </div>
                 <!-- /.card -->
             </div>
             <!--/.col (left) -->
             <!-- right column -->
-            <div class="col-md-6">
-
-            </div>
             <!--/.col (right) -->
         </div>
         <!-- /.row -->
@@ -179,6 +119,8 @@ is-invalid
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 @endpush
+
+
 
 @push('after-script')
     @include('sweetalert::alert')
@@ -201,13 +143,7 @@ is-invalid
                     },
                     success: function(data) {
                         console.log(id_masterdata);
-                        $('#no_part').val(data.no_part);
                         $('#part_name').val(data.part_name);
-                        $('#katalis').val(data.katalis);
-                        $('#grade_color').val(data.grade_color);
-                        $('#channel').val(data.channel);
-                        $('#qty_bar').val(data.qty_bar);
-                        $('#stok_bc').val(data.stok_bc);
                     },
                     error: function() {
 

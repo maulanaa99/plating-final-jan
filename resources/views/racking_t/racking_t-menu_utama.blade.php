@@ -8,7 +8,6 @@
     <li class="active"> > Racking > Menu Utama</li>
 @endsection
 
-
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -75,9 +74,9 @@
                     <a href="{{ route('racking_t') }}">
                         <div class="small-box bg-primary">
                             <div class="inner">
-                                <h3>{{ $jml_bar }}</h3>
+                                <h3>{{ $jml_bar }} Bar</h3>
                                 <p>
-                                    <font size="5"> Bar Diproses </font>
+                                    <font size="5"> Aktual Produksi </font>
                                 </p>
                             </div>
                             <div class="icon">
@@ -86,6 +85,24 @@
                         </div>
                     </a>
                 </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="{{ route('ngracking') }}">
+                        <div class="small-box bg-purple">
+                            <div class="inner">
+                                <h3>{{ $count_rencana_produksi }} Bar</h3>
+                                <p>
+                                    <font size="5"> Rencana Produksi </font>
+                                </p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <a href="{{ route('ngracking') }}">
@@ -94,6 +111,23 @@
                                 <h3>{{ $ngracking_today }} Pcs</h3>
                                 <p>
                                     <font size="5"> NG Molding </font>
+                                </p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <a href="{{ route('pinbosh') }}">
+                        <div class="small-box bg-secondary">
+                            <div class="inner">
+                                <h3>{{ $sum_pinbosh_tertinggal }} Pcs</h3>
+                                <p>
+                                    <font size="5"> Pinbosh Tertinggal </font>
                                 </p>
                             </div>
                             <div class="icon">

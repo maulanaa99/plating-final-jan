@@ -36,7 +36,7 @@
                     <th>Tgl Unracking</th>
                     <th>No Bar</th>
                     <th>Part Name</th>
-                    <th>No Part</th>
+                    <th>Part Number</th>
                     <th>Channel</th>
                     <th>Qty Bar</th>
                     <th>Qty Aktual</th>

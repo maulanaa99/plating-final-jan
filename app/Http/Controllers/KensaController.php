@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\Pengiriman;
+use App\Models\Plating;
+use App\Models\unracking_t;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -53,6 +55,10 @@ class KensaController extends Controller
 
         $masterdata = MasterData::all();
 
+        $coba = Plating::where('status', '=', '0')->get();
+
+        // dd($coba2);
+
         return view('kensa.kensa-index', compact(
             'kensa',
             'masterdata',
@@ -79,7 +85,8 @@ class KensaController extends Controller
             'sum_total_ng',
             'avg_p_total_ok',
             'avg_p_total_ng',
-            'date'
+            'date',
+            'coba'
         ));
     }
 

@@ -258,8 +258,18 @@
                                     </a>
                                 </li>
                             </ul>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan.kensa') }}"
+                                        class="nav-link @if (request()->routeIs('laporan.kensa')) active @else '' @endif">
+                                        <i class="nav-icon far fa-circle nav-icon"></i>
+                                        <p>Kensa</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="{{ route('racking_t.utama') }}"
                                 class="nav-link">
                                 <i class="nav-icon fas fa-people-carry"></i>
@@ -267,13 +277,43 @@
                                     Latihan Menu Utama Racking
                                 </p>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('ngracking') }}"
                                 class="nav-link">
                                 <i class="nav-icon fas fa-people-carry"></i>
                                 <p>
-                                    Latihan NG Racking
+                                    NG Molding Racking
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route('pinbosh') }}"
+                                class="nav-link">
+                                <i class="nav-icon fas fa-people-carry"></i>
+                                <p>
+                                    Pinbosh Tertinggal
+                                </p>
+                            </a>
+                        </li>
+
+                        {{-- <li class="nav-item">
+                            <a href="{{ route('rencana_produksi') }}"
+                                class="nav-link">
+                                <i class="nav-icon fas fa-people-carry"></i>
+                                <p>
+                                    Latihan Rencana Produksi
+                                </p>
+                            </a>
+                        </li> --}}
+
+                        <li class="nav-item">
+                            <a href="{{ route('stok_bc') }}"
+                                class="nav-link">
+                                <i class="nav-icon fas fa-people-carry"></i>
+                                <p>
+                                    Stok di Lane
                                 </p>
                             </a>
                         </li>
@@ -319,9 +359,9 @@
 
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 1.04.10.22
+                <b>Version</b> 1.11.11.22
             </div>
-            <strong>Copyright &copy; 2022 <a href="https://adminlte.io">Maulana Malik Ibrahim</a>.</strong> All rights
+            <strong>Copyright &copy; 2022 <a href="#">Maulana</a></strong> All rights
             reserved.
         </footer>
 

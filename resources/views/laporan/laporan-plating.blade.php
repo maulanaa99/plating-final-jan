@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    Data Racking
+    Laporan Racking - Unracking
 @endsection
 
 @push('page-styles')
@@ -17,7 +17,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > Racking</li>
+    <li class="active"> > Laporan Racking - Unracking</li>
 @endsection
 
 @section('content')
@@ -52,7 +52,7 @@
                         <th>Tgl Unracking</th>
                         <th>No Bar</th>
                         <th>Part Name</th>
-                        <th>No Part</th>
+                        <th>Part Number</th>
                         <th>Katalis</th>
                         <th>Channel</th>
                         <th>Grade Color</th>

@@ -76,7 +76,7 @@
                 </div>
                 <!-- ./col -->
             </div>
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-md-6">
                     <h2>Data Stok Tersedia</h2>
                     <div class="table-responsive">
@@ -123,7 +123,38 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> --}}
+
+
+            {{-- <div class="row">
+                <div class="col-md-6">
+                    <h2>Data Stok di Lane</h2>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Part Name</th>
+                                    <th>No Bar</th>
+                                    <th>Cycle</th>
+                                    <th>Qty Bar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($stok_in_lane as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->part_name }}</td>
+                                        <td>{{ $row->no_bar }}</td>
+                                        <td>{{ $row->cycle }}</td>
+                                        <td>{{ $row->qty_bar }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </section>
 @endsection

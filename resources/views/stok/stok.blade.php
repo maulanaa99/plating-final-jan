@@ -34,7 +34,7 @@
             <thead>
                 <tr>
                     <th class="align-middle text-center">#</th>
-                    <th class="align-middle text-center">No Part</th>
+                    <th class="align-middle text-center">Part Number</th>
                     <th class="align-middle text-center">Part Name</th>
                     <th class="align-middle text-center">Stok BC</th>
                     <th class="align-middle text-center">Total OK</th>

@@ -1,11 +1,11 @@
 @extends('layout.master')
 @section('title')
-    Data NG Molding Racking
+    Data Stok di Lane
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > NG Molding Racking</li>
+    <li class="active"> Stok > Stok di Lane</li>
 @endsection
 
 @section('content')
@@ -19,41 +19,43 @@
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Tanggal</th>
-                        <th>Part Name</th>
-                        <th>Jenis NG</th>
-                        <th>Quantity</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach ($ngracking as $no => $row)
+        <div class="col-md-12">
+            <h2>Data Stok CS - FS</h2>
+            <span> Jumlah Produksi = {{ $count_stok_bc }} Bar</span><br>
+            <span> Total Produksi = {{ $sum_qty_bar }} Pcs</span>
+            <div class="table-responsive">
+                <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
+                    <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $row->tanggal }}</td>
-                            <td>{{ $row->part_name }}</td>
-                            <td>{{ $row->jenis_ng }}</td>
-                            <td>{{ $row->quantity }} Pcs</td>
-                            <td>
-                                <a href="{{ route('ngracking.edit', $row->id) }}" class="btn btn-icon btn-sm btn-warning"><i
-                                        class="far fa-edit"></i> Edit </a>
-
-                                <form action="{{ route('ngracking.delete', $row->id) }}" method="post">
-                                    @csrf
-                                    {{-- <a href="" class="btn btn-sm btn-danger"><i class="fa fa-times">Hapus</i></a> --}}
-                                      <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-times"></i> Hapus</button>
-                                </form>
-                            </td>
+                            <th>#</th>
+                            <th>Tanggal</th>
+                            <th>Part Name</th>
+                            <th>No Bar</th>
+                            <th>Cycle</th>
+                            <th>Qty Bar</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        @foreach ($stok_bc as $no => $row)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $row->tanggal_r }} {{ $row->waktu_in_r }} </td>
+                                <td>{{ $row->part_name }}</td>
+                                <td>{{ $row->no_bar }}</td>
+                                <td>{{ $row->cycle }}</td>
+                                <td>{{ $row->qty_bar }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" align="center"> <b> Total </b></td>
+                            <td> <b> {{ $sum_qty_bar }} Pcs </b></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
     <br>
@@ -78,7 +80,7 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

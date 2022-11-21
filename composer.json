@@ -18,8 +18,8 @@
         "mike42/escpos-php": "^4.0",
         "milon/barcode": "^9.0",
         "realrashid/sweet-alert": "^5.1",
-        "yajra/laravel-datatables": "^1.5",
-        "spatie/pdf-to-image": "^2.2"
+        "spatie/pdf-to-image": "^2.2",
+        "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

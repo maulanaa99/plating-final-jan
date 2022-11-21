@@ -7,8 +7,10 @@ use App\Http\Controllers\KensaController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\MasterKensaController;
+use App\Http\Controllers\PinboshTertinggalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RackingController_T;
+use App\Http\Controllers\RencanaProduksiController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TransaksiController;
@@ -26,17 +28,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', 'login');
 
 Route::get('/dashboard', [DashboardController::class, 'home'])->middleware(['auth'])->name('dashboard');
 
@@ -73,9 +69,21 @@ Route::controller(RackingController_T::class)->middleware(['auth'])->group(funct
     Route::get('racking_t/ajax', 'ajaxRacking')->name('racking_t.ajax');
     Route::get('racking_t/findMasterdata', 'findMasterdata')->name('findMasterdata');
     Route::get('racking_t/utama', 'utama')->name('racking_t.utama');
+
+
     Route::get('racking_t/ngracking', 'ngracking')->name('ngracking');
     Route::get('racking_t/ngracking/tambah', 'tambahngracking')->name('ngracking.tambah');
     Route::post('racking_t/ngracking/simpan', 'simpanngracking')->name('ngracking.simpan');
+    Route::get('racking_t/ngracking/edit/{id}', 'editngracking')->name('ngracking.edit');
+    Route::patch('racking_t/ngracking/{id}', 'updatengracking')->name('ngracking.update');
+    Route::post('racking_t/ngracking/delete/{id}', 'deletengracking')->name('ngracking.delete');
+
+
+    Route::get('racking_t/pinbosh_tertinggal', 'pinbosh')->name('pinbosh');
+    Route::get('racking_t/pinbosh_tertinggal/tambah', 'pinboshTambah')->name('pinbosh.tambah');
+    Route::post('racking_t/pinbosh_tertinggal/simpan', 'pinboshSimpan')->name('pinbosh.simpan');
+    Route::get('racking_t/pinbosh_tertinggal/edit/{id}', 'pinboshEdit')->name('pinbosh.edit');
+    Route::patch('racking_t/pinbosh_tertinggal/{id}', 'pinboshUpdate')->name('pinbosh.update');
 });
 
 Route::controller(UnrackingController_T::class)->middleware(['auth'])->group(function () {
@@ -111,14 +119,24 @@ Route::controller(KensaController::class)->middleware(['auth'])->group(function 
 Route::controller(LaporanController::class)->middleware(['auth'])->group(function () {
     Route::get('laporan', 'index')->name('laporan');
     Route::get('laporan/getData', 'getData')->name('laporan.getdata');
+    Route::get('laporan/kensa', 'kensa')->name('laporan.kensa');
 });
 
 Route::get('stok', [StokController::class, 'index'])->name('stok');
+Route::get('stok_bc', [StokController::class, 'index2'])->name('stok_bc');
 Route::get('masterkensa', [MasterKensaController::class, 'index'])->name('msterkensa');
 Route::get('masterdata/downloadPDF/{id}', [MasterDataController::class, 'downloadPDF'])->name('masterdata.downloadPDF');
 
 Route::get('lihatPart', [StokController::class, 'lihatPart'])->name('lihatPart');
 Route::get('cariPart', [StokController::class, 'cariPart'])->name('cariPart');
+
+Route::get('rencana_produksi', [RencanaProduksiController::class, 'index'])->name('rencana_produksi');
+Route::post('rencana_produksi/import_excel', [RencanaProduksiController::class, 'import_excel'])->name('rencana_produksi.import_excel');
+
+
+
+
+
 
 Route::get('barang', [BarangController::class, 'index'])->name('barang');
 Route::get('barang/create', [BarangController::class, 'create'])->name('barang.tambah');

@@ -1,18 +1,18 @@
 @extends('layout.master')
 @section('title')
-    Data NG Molding Racking
+    Data Pinbosh Tertinggal
 @endsection
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > NG Molding Racking</li>
+    <li class="active"> > Pinbosh Tertinggal</li>
 @endsection
 
 @section('content')
     <div class="card-header">
         <div class="row float-right">
             <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{ route('ngracking.tambah') }}" class="btn btn-icon icon-left btn-primary">
+                <a href="{{ route('pinbosh.tambah') }}" class="btn btn-icon icon-left btn-primary">
                     <i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
@@ -26,29 +26,21 @@
                         <th>#</th>
                         <th>Tanggal</th>
                         <th>Part Name</th>
-                        <th>Jenis NG</th>
                         <th>Quantity</th>
                         <th>Action</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach ($ngracking as $no => $row)
+                    @foreach ($pinbosh as $no => $row)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $row->tanggal }}</td>
+                            <td>{{ $row->tanggal }} {{ $row->waktu }}</td>
                             <td>{{ $row->part_name }}</td>
-                            <td>{{ $row->jenis_ng }}</td>
-                            <td>{{ $row->quantity }} Pcs</td>
+                            <td>{{ $row->jumlah }} Pcs</td>
                             <td>
-                                <a href="{{ route('ngracking.edit', $row->id) }}" class="btn btn-icon btn-sm btn-warning"><i
-                                        class="far fa-edit"></i> Edit </a>
-
-                                <form action="{{ route('ngracking.delete', $row->id) }}" method="post">
-                                    @csrf
-                                    {{-- <a href="" class="btn btn-sm btn-danger"><i class="fa fa-times">Hapus</i></a> --}}
-                                      <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-times"></i> Hapus</button>
-                                </form>
+                                <a href="" class="btn btn-sm btn-warning"> <i class="fas fa-edit"></i> Edit</a>
+                                <a href="" class="btn btn-sm btn-danger"> <i class="fas fa-times"></i> Hapus</a>
                             </td>
                         </tr>
                     @endforeach
@@ -78,7 +70,7 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                "buttons": ["csv", "excel", "pdf", "print"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

@@ -10,6 +10,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
@@ -46,14 +47,14 @@ class UnrackingController_T extends Controller
         $unracking->tanggal_u = $request->tanggal_u;
         $unracking->waktu_in_u = $request->waktu_in_u;
         $unracking->qty_aktual = $request->qty_aktual;
+        $unracking->updated_by = Auth::user()->name;
+        $unracking->status = '1';
         $unracking->save();
 
         $masterdata = MasterData::find($unracking->id_masterdata);
         $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
 
         $masterdata->save();
-
-
 
         return redirect()->route('unracking_t')->with('success', 'Data Berhasil Ditambahkan');
     }

@@ -130,8 +130,8 @@
                         <span>10. Model</span><br>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Selesai</button>
-                        <button type="submit" class="btn btn-primary">Import</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times" > </i> Cancel</button>
+                        <button type="submit" class="btn btn-success"> <i class="fa fa-upload"> </i> Import</button>
                     </div>
                 </div>
             </form>

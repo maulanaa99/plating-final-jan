@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\Pengiriman;
+use App\Models\Plating;
+use App\Models\Rencana_Produksi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,5 +72,13 @@ class StokController extends Controller
     {
         $z = Masterdata::select('no_part', 'part_name', 'katalis', 'channel', 'grade_color', 'qty_bar', 'stok_bc')->where('id', $request->id)->first();
         return response()->json($z);
+    }
+
+    public function index2()
+    {
+        $stok_bc = Plating::whereNull('tanggal_u')->where('cycle','=', 'CS')->orWhere('cycle','=','FS')->get();
+        $sum_qty_bar = Plating::whereNull('tanggal_u')->where('cycle','=', 'CS')->orWhere('cycle','=','FS')->sum('qty_bar');
+        $count_stok_bc = Plating::whereNull('tanggal_u')->where('cycle','=', 'CS')->orWhere('cycle','=','FS')->count();
+        return view('stok.stok_bc',compact('stok_bc','sum_qty_bar','count_stok_bc'));
     }
 }
