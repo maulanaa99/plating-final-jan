@@ -76,9 +76,9 @@ class StokController extends Controller
 
     public function index2()
     {
-        $stok_bc = Plating::whereNull('tanggal_u')->where('cycle','=', 'CS')->orWhere('cycle','=','FS')->get();
-        $sum_qty_bar = Plating::whereNull('tanggal_u')->where('cycle','=', 'CS')->orWhere('cycle','=','FS')->sum('qty_bar');
-        $count_stok_bc = Plating::whereNull('tanggal_u')->where('cycle','=', 'CS')->orWhere('cycle','=','FS')->count();
+        $stok_bc = Plating::where('status','=', 2)->get();
+        $sum_qty_bar = Plating::where('status', '=', '2')->sum('qty_bar');
+        $count_stok_bc = Plating::where('status', '=', '2')->count();
         return view('stok.stok_bc',compact('stok_bc','sum_qty_bar','count_stok_bc'));
     }
 }

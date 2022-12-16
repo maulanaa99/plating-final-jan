@@ -100,4 +100,25 @@ class LaporanController extends Controller
         }
         return view('laporan.laporan-kensa', compact('kensa', 'start_date', 'end_date'));
     }
+    public function all(Request $request)
+    {
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+        if ($request->start_date || $request->end_date) {
+            $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+            $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+            $alls = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
+                ->join('plating', 'plating.id', '=', 'kensa.id_plating')
+                ->select('plating.*', 'kensa.*')
+                ->whereBetween('tanggal_k', [$start_date, $end_date])
+                ->orderBy('tanggal_k', 'desc')
+                ->get();
+        } else {
+            $alls = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
+                ->join('plating', 'plating.id', '=', 'kensa.id_plating')
+                ->select('plating.*', 'kensa.*')
+                ->whereBetween('tanggal_k', [$start_date, $end_date]);
+        }
+        return view('laporan.laporan-all', compact('alls', 'start_date', 'end_date'));
+    }
 }

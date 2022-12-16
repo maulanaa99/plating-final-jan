@@ -55,7 +55,7 @@
                 <tbody>
                     @foreach ($racking as $no => $rack)
                         <tr>
-                            <td>{{ $no + 1 }}</td>
+                            <td>{{ $racking->count() - $no }}</td>
                             <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
                             <td>{{ $rack->no_bar }}</td>
                             <td>{{ $rack->part_name }}</td>
@@ -69,10 +69,10 @@
                             <td>{{ $rack->created_by }}</td>
                             <td>
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
-                                    class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i>  </a>
+                                    class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>
                                 <a href="#" data-id="{{ $rack->id }}"
                                     class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
-                                        </i>
+                                    </i>
 
                                     <form action="{{ route('racking_t.delete', $rack->id) }}"
                                         id="delete{{ $rack->id }}" method="POST">
@@ -100,7 +100,7 @@
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
-                "responsive": true,
+                "responsive": false,
                 "lengthChange": true,
                 "autoWidth": false,
                 "pageLength": 75,
@@ -108,8 +108,14 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
+                scrollY: "700px",
+                scrollX: true,
+                scrollCollapse: true,
+                paging: true,
+                fixedColumns: {
+                    left: 2,
+                }
+            });
         });
     </script>
     <script>

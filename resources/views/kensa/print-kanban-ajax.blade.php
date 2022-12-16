@@ -22,7 +22,7 @@
                 class="form-control">
         </div>
 
-        @if ($d->stok <= 10)
+        @if ($d->stok < $d->qty_trolly)
             <div class="col-md-3">
                 <label>Stok <i class="fas fa-exclamation-triangle" aria-hidden="true"style="color:red"></i></label>
                 <div class="input-group">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-        @elseif($d->stok > 10)
+        @elseif($d->stok >= $d->qty_trolly)
             <div class="col-md-3">
                 <label>Stok <i class="fas fa-check-square" aria-hidden="true"style="color:green"></i> </label>
                 <div class="input-group">

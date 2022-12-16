@@ -43,12 +43,13 @@
                             <td>
                                 <a href="{{ route('ngracking.edit', $row->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                         class="far fa-edit"></i> Edit </a>
-
-                                <form action="{{ route('ngracking.delete', $row->id) }}" method="post">
-                                    @csrf
-                                    {{-- <a href="" class="btn btn-sm btn-danger"><i class="fa fa-times">Hapus</i></a> --}}
-                                      <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-times"></i> Hapus</button>
-                                </form>
+                                <a href="#" data-id="{{ $row->id }}"
+                                    class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt"> Hapus
+                                    </i>
+                                    <form action="{{ route('ngracking.delete', $row->id) }}" method="POST" id="delete{{ $row->id }}">
+                                        @csrf
+                                    </form>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

@@ -21,8 +21,8 @@
     <div class="card-body">
         <div class="col-md-12">
             <h2>Data Stok CS - FS</h2>
-            <span> Jumlah Produksi = {{ $count_stok_bc }} Bar</span><br>
-            <span> Total Produksi = {{ $sum_qty_bar }} Pcs</span>
+            <span> Jumlah Produksi di Lane = {{ $count_stok_bc }} Bar</span><br>
+            <span> Total Produksi di Lane = {{ $sum_qty_bar }} Pcs</span>
             <div class="table-responsive">
                 <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
                     <thead>

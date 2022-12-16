@@ -30,7 +30,7 @@
     </div>
 
     <div class="card-body">
-        <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
+        <table id="add-row" class="table table-sm table-hover table-bordered table-striped compact">
             <thead>
                 <tr>
                     <th class="align-middle text-center">#</th>
@@ -121,7 +121,7 @@
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
-                "responsive": true,
+                "responsive": false,
                 "lengthChange": true,
                 "autoWidth": false,
                 "pageLength": 75,
@@ -129,7 +129,14 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["excel", "pdf", "print"]
+                "buttons": ["excel", "pdf", "print"],
+                scrollY: "700px",
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                fixedColumns: {
+                    left: 2,
+                }
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

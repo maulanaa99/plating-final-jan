@@ -85,7 +85,7 @@ is-invalid
                                                     id="id_masterdata">
                                                     <option value="" hidden>--Pilih Barang--</option>
                                                     @foreach ($masterdata as $d)
-                                                        <option value="{{ $d->id }}">{{ $d->part_name }}
+                                                        <option value="{{ $d->id }}">{{ $d->part_name }} || Ch.{{ $d->channel }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -143,8 +143,8 @@ is-invalid
                                             </div>
                                         </div>
 
-                                        <div class="container">
-                                            <div class="card-footer mt-3 text-center">
+                                        {{-- <div class="container"> --}}
+                                            <div class="text-center mt-3">
                                                 <button class="btn btn-primary mr-1" type="submit"> <i
                                                         class="fas fa-save"></i> Submit</button>
                                                 <button class="btn btn-danger" type="reset"> <i
@@ -152,7 +152,7 @@ is-invalid
                                                 <a href="{{ route('racking_t') }}"
                                                     class="btn btn-icon icon-left btn-warning"><i
                                                         class="fas fa-arrow-left"></i> Kembali</a>
-                                            </div>
+                                            {{-- </div> --}}
                                         </div>
                                     </div>
                                 </div>

@@ -64,7 +64,7 @@ Route::controller(RackingController_T::class)->middleware(['auth'])->group(funct
     Route::get('racking_t/tambah', 'tambah')->name('racking_t.tambah');
     Route::post('racking_t', 'simpan')->name('racking_t.simpan');
     Route::post('racking_t/delete/{id}', 'delete')->name('racking_t.delete');
-    Route::get('racking_t/{id}/edit', 'edit')->name('racking_t.edit');
+    Route::get('racking_t/edit/{id}/', 'edit')->name('racking_t.edit');
     Route::patch('racking_t/{id}', 'update')->name('racking_t.update');
     Route::get('racking_t/ajax', 'ajaxRacking')->name('racking_t.ajax');
     Route::get('racking_t/findMasterdata', 'findMasterdata')->name('findMasterdata');
@@ -90,7 +90,7 @@ Route::controller(UnrackingController_T::class)->middleware(['auth'])->group(fun
     Route::get('unracking_t', 'index')->name('unracking_t');
     Route::post('unracking_t', 'simpan')->name('unracking_t.simpan');
     // Route::delete('unracking_t/delete/{id}', 'delete')->name('unracking_t.delete');
-    Route::get('unracking_t/{id}/edit', 'edit')->name('unracking_t.edit');
+    Route::get('unracking_t/edit/{id}', 'edit')->name('unracking_t.edit');
     Route::patch('unracking_t/{id}', 'update')->name('unracking_t.update');
     Route::get('unracking_t/print/{id}', 'unrackingPrint')->name('unracking_t.print');
 });
@@ -120,6 +120,7 @@ Route::controller(LaporanController::class)->middleware(['auth'])->group(functio
     Route::get('laporan', 'index')->name('laporan');
     Route::get('laporan/getData', 'getData')->name('laporan.getdata');
     Route::get('laporan/kensa', 'kensa')->name('laporan.kensa');
+    Route::get('laporan/all', 'all')->name('laporan.all');
 });
 
 Route::get('stok', [StokController::class, 'index'])->name('stok');
@@ -133,11 +134,6 @@ Route::get('cariPart', [StokController::class, 'cariPart'])->name('cariPart');
 Route::get('rencana_produksi', [RencanaProduksiController::class, 'index'])->name('rencana_produksi');
 Route::post('rencana_produksi/import_excel', [RencanaProduksiController::class, 'import_excel'])->name('rencana_produksi.import_excel');
 
-
-
-
-
-
 Route::get('barang', [BarangController::class, 'index'])->name('barang');
 Route::get('barang/create', [BarangController::class, 'create'])->name('barang.tambah');
 Route::post('barang/simpan', [BarangController::class, 'store'])->name('barang.simpan');
@@ -149,14 +145,5 @@ Route::get('/transaksi/destroy/{id}', [TransaksiController::class, 'destroy']);
 
 Route::get('product', [ProductController::class,'index'])->name('product');
 Route::get('product/getDataProduct', [ProductController::class,'getDataProduct'])->name('product.getdata');
-
-
-
-
-// Route::get('transaksi', [TransaksiController::class, 'index'])->name('transaksi');
-// Route::get('transaksi/create', [TransaksiController::class, 'create'])->name('transaksi.tambah');
-// Route::post('transaksi/simpan', [TransaksiController::class, 'store'])->name('transaksi.simpan');
-// Route::get('transaksi/edit/{id}', [TransaksiController::class, 'edit'])->name('transaksi.edit');
-// Route::get('transaksi/hapus/{id}', [TransaksiController::class, 'destroy'])->name('transaksi.hapus');
 
 require __DIR__ . '/auth.php';

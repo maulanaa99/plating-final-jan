@@ -17,13 +17,15 @@
                     <!-- form start -->
                     <form id="quickForm" action="{{ route('unracking_t.update', $plating->id) }}" method="POST"
                         class="form-master">
+
+                        <input type="hidden" name="next">
                         @csrf
                         @method('patch')
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
                                                 <label>Tanggal Racking</label>
@@ -31,6 +33,17 @@
                                                     @if (old('tanggal')) value="{{ old('tanggal_r') }}"
                                                         @else
                                                             value="{{ $plating->tanggal_r }}" @endif
+                                                    class="form-control" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Waktu in Racking</label>
+                                                <input type="time" name="waktu_in_r"
+                                                    @if (old('waktu_in')) value="{{ old('waktu_in_r') }}"
+                                                        @else
+                                                            value="{{ $plating->waktu_in_r }}" @endif
                                                     class="form-control" readonly>
                                             </div>
                                         </div>
@@ -47,18 +60,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>No. Bar</label>
-                                                <input type="text" name="no_bar"
-                                                    @if (old('no_bar')) value="{{ old('no_bar') }}"
-                                                        @else
-                                                            value="{{ $plating->no_bar }}" @endif
-                                                    class="form-control" placeholder="Masukkan No. Bar" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>No. Part</label>
                                                 <input type="text" id="no_part" name="no_part"
@@ -69,7 +71,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label> Katalis </label>
                                                 <input type="text" id="katalis" name="katalis"
@@ -80,7 +82,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label> Channel </label>
                                                 <input type="text" id="channel" name="channel"
@@ -91,7 +93,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label> Grade Color</label>
                                                 <input type="text" id="grade_color" name="grade_color"
@@ -102,29 +104,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <Label> Qty Bar</Label>
-                                                <input type="text" id="qty_bar" name="qty_bar"
-                                                    @if (old('qty_bar')) value="{{ old('qty_bar') }}"
-                                                        @else
-                                                            value="{{ $plating->qty_bar }}" @endif
-                                                    class="form-control" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Waktu in Racking</label>
-                                                <input type="time" name="waktu_in_r"
-                                                    @if (old('waktu_in')) value="{{ old('waktu_in_r') }}"
-                                                        @else
-                                                            value="{{ $plating->waktu_in_r }}" @endif
-                                                    class="form-control" readonly>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Tanggal Lot Produksi Molding</label>
                                                 <input type="date" name="tgl_lot_prod_mldg"
@@ -132,6 +112,28 @@
                                                         @else
                                                             value="{{ $plating->tgl_lot_prod_mldg }}" @endif
                                                     class="form-control" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>No. Bar</label>
+                                                <input type="text" name="no_bar"
+                                                    @if (old('no_bar')) value="{{ old('no_bar') }}"
+                                                        @else
+                                                            value="{{ $plating->no_bar }}" @endif
+                                                    class="form-control bg-warning" placeholder="Masukkan No. Bar" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <Label> Qty Bar</Label>
+                                                <input type="text" id="qty_bar" name="qty_bar" readonly
+                                                    @if (old('qty_bar')) value="{{ old('qty_bar') }}"
+                                                        @else
+                                                           value="{{ $plating->qty_bar }}" @endif
+                                                    class="form-control bg-green">
                                             </div>
                                         </div>
 
@@ -158,7 +160,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Tanggal Unracking</label>
                                                 <input type="date" name="tanggal_u" class="form-control"
@@ -166,7 +168,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <label>Waktu In Unracking</label>
                                                 <input type="time" name="waktu_in_u" value="<?php date_default_timezone_set('Asia/Jakarta');
@@ -178,7 +180,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Qty Aktual</label>
-                                                <input type="text" name="qty_aktual"
+                                                <input type="text" name="qty_aktual" autofocus
                                                     @if (old('qty_aktual')) value="{{ old('qty_aktual') }}"
                                                                 @else
                                                                     value="{{ $plating->qty_aktual }}" @endif
@@ -189,13 +191,53 @@
                                             </div>
                                         </div>
 
-                                            <div class="text-center mt-3">
-                                                <button class="btn btn-primary mr-1" type="submit"> <i class="fas fa-save"></i> Submit</button>
-                                                <button class="btn btn-danger" type="reset"> <i class="fas fa-trash-restore"></i> Reset</button>
-                                                <a href="{{ route('unracking_t') }}"
-                                                    class="btn btn-icon icon-left btn-warning"><i
-                                                        class="fas fa-arrow-left"></i> Kembali</a>
+                                        <div class="col-md-6">
+                                            <br>
+                                            <div class="form-group row">
+                                                <label class="col-sm-2">Image</label>
+                                                <div class="col-sm-10">
+                                                    <img style="max-width:700px;
+                                                max-height:700px;"
+                                                        src="{{ !empty($masterdata->image) ? url('upload/part_images/' . $masterdata->image) : url('upload/no_images2.png') }}">
+                                                </div>
                                             </div>
+                                        </div>
+
+                                        {{-- <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            @if (isset($previous_record))
+                                                                <a href="{{ url($previous_record->url) }}">
+                                                                    <div> Previous</div>
+                                                                    <p>{{ $previous_record->title }}</p>
+                                                                </a>
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-6">
+                                                            @if (isset($next_record))
+                                                                <a href="{{ url($next_record->url) }}">
+                                                                    <div>Next</div>
+                                                                    <p>{{ $next_record->title }}</p>
+                                                                </a>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+
+
+                                        <div class="text-center mt-3">
+                                            <a href="{{ URL::to('unracking_t/edit/' . $previous) }}"
+                                                class="btn btn-outline-secondary"> <i class="fas fa-arrow-left"></i>
+                                                Previous</a>
+                                            <button class="btn btn-primary mr-1" type="submit"> <i
+                                                    class="fas fa-save"></i> Submit</button>
+                                            <button class="btn btn-danger" type="reset"> <i
+                                                    class="fas fa-trash-restore"></i> Reset</button>
+                                            <a href="{{ URL::to('unracking_t/edit/' . $next) }}"
+                                                class="btn btn-outline-success btn-next-submit" data-next="{{ $next }}"> Next <i
+                                                    class="fas fa-arrow-right"></i></a>
+
+                                        </div>
 
                                     </div>
                                 </div>
@@ -223,117 +265,10 @@
 
 @push('after-script')
     <script>
-        $(function() {
-            $.validator.setDefaults({
-                submitHandler: function() {
-                    alert("Data berhasil di input!");
-                }
-            });
-            $('#quickForm').validate({
-                rules: {
-                    no_part: {
-                        required: true
-                    },
-                    part_name: {
-                        required: true
-                    },
-                    katalis: {
-                        required: true
-                    },
-                    channel: {
-                        required: true
-                    },
-                    grade_color: {
-                        required: true
-                    },
-                    qty_bar: {
-                        required: true
-                    },
-                },
-                messages: {
-                    no_part: {
-                        required: "No Part tidak boleh kosong"
-                    },
-                    part_name: {
-                        required: "Nama part tidak boleh kosong"
-                    },
-                    katalis: {
-                        required: "Katalis tidak boleh kosong"
-                    },
-                    channel: {
-                        required: "Channel tidak boleh kosong"
-                    },
-                    grade_color: {
-                        required: "Grade color tidak boleh kosong"
-                    },
-                    qty_bar: {
-                        required: "Quantity per bar tidak boleh kosong"
-                    },
-                },
-                errorElement: 'span',
-                errorPlacement: function(error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                }
-
-            });
-        });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var basePath = $("#base_path").val();
-            //Array of Values
-            $("#part_name").autocomplete({
-                source: function(request, cb) {
-                    $.ajax({
-                        url: basePath + '/get-employess/' + request.term,
-                        method: 'GET',
-                        dataType: 'json',
-                        success: function(res) {
-                            var result;
-                            result = [{
-                                label: 'There is no matching record found for ' +
-                                    request.term,
-                                value: ''
-                            }];
-
-                            console.log(res);
-
-
-                            if (res.length) {
-                                result = $.map(res, function(obj) {
-                                    return {
-                                        label: obj.part_name,
-                                        value: obj.part_name,
-                                        data: obj
-                                    };
-                                });
-                            }
-                            cb(result);
-                        }
-                    });
-                },
-                select: function(e, selectedData) {
-                    console.log(selectedData);
-
-                    if (selectedData && selectedData.item && selectedData.item.data) {
-                        var data = selectedData.item.data;
-
-                        $('#no_part').val(data.no_part);
-                        $('#katalis').val(data.katalis);
-                        $('#channel').val(data.channel);
-                        $('#grade_color').val(data.grade_color);
-                        $('#qty_bar').val(data.qty_bar);
-                    }
-                }
-            });
-        });
+        $(document).on('click','.btn-next-submit',function(e){
+            e.preventDefault();
+            $('input[name="next"]').val($(this).data('next'));
+            $('form').submit();
+        })
     </script>
 @endpush

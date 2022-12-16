@@ -61,7 +61,7 @@
                                             <div class="col-sm-6">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Cycle</label>
+                                                    <label>Cycle (Jml Bar = {{ $hit_data_racking }})</label>
                                                     <select name="cycle" class="form-control">
                                                         <option value="">----Pilih Cycle----</option>
                                                         <option value="C1"
@@ -89,14 +89,24 @@
                                                         @foreach ($masterdata as $d)
                                                             <option
                                                                 {{ old('id_masterdata', $plating->id_masterdata) == $d->id ? 'selected' : '' }}
-                                                                value="{{ $d->id }}">{{ $d->part_name }}
+                                                                value="{{ $d->id }}">{{ $d->part_name }} ||
+                                                                Ch.{{ $d->channel }}
                                                             </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
 
-                                            <input type="hidden" id="part_name" name="part_name" value=""
+                                            <input type="hidden" id="part_name" name="part_name"
+                                                @if (old('part_name')) value="{{ old('part_name') }}"
+                                            @else
+                                                value="{{ $plating->part_name }}" @endif
+                                                class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
+
+                                            <input type="hidden" id="no_part" name="no_part"
+                                                @if (old('no_part')) value="{{ old('no_part') }}"
+                                            @else
+                                                value="{{ $plating->no_part }}" @endif
                                                 class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
 
                                             <div class="col-md-6">
@@ -112,19 +122,6 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>No. Part</label>
-                                                    <input type="text" id="no_part" name="no_part" readonly
-                                                        @if (old('no_part')) value="{{ old('no_part') }}"
-                                                        @else
-                                                            value="{{ $plating->no_part }}" @endif
-                                                        class="form-control typeahead">
-                                                </div>
-                                            </div>
-
-
-
-                                            <div class="col-md-6">
-                                                <div class="form-group">
                                                     <label> Katalis </label>
                                                     <input type="text" id="katalis" name="katalis" readonly
                                                         @if (old('katalis')) value="{{ old('katalis') }}"
@@ -137,7 +134,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label> Channel </label>
-                                                    <input type="text" id="channel" name="channel" readonly
+                                                    <input type="text" id="channel" name="channel"
                                                         @if (old('channel')) value="{{ old('channel') }}"
                                                         @else
                                                             value="{{ $plating->channel }}" @endif
@@ -166,11 +163,10 @@
                                                         class="form-control">
                                                 </div>
                                             </div>
-
-
-
-                                            <div class="container">
-                                                <div class="card-footer text-center">
+                                                <div class="text-center mt-3">
+                                                    <a href="{{ URL::to('racking_t/edit/' . $previous) }}"
+                                                        class="btn btn-outline-secondary"> <i class="fas fa-arrow-left"></i>
+                                                        Previous</a>
                                                     <button class="btn btn-primary mr-1" type="submit"> <i
                                                             class="fas fa-save"></i> Submit</button>
                                                     <button class="btn btn-danger" type="reset"> <i
@@ -178,8 +174,10 @@
                                                     <a href="{{ route('racking_t') }}"
                                                         class="btn btn-icon icon-left btn-warning"><i
                                                             class="fas fa-arrow-left"></i> Kembali</a>
+                                                    <a href="{{ URL::to('racking_t/edit/' . $next) }}"
+                                                        class="btn btn-outline-success"> Next <i
+                                                            class="fas fa-arrow-right"></i></a>
                                                 </div>
-                                            </div>
                     </form>
                 </div>
                 <!-- /.card -->

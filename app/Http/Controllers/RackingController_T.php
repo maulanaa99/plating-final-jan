@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 
 class RackingController_T extends Controller
 {
@@ -121,43 +122,54 @@ class RackingController_T extends Controller
             'cycle' => $request->cycle,
             'created_by' => Auth::user()->name,
             'created_at' => Carbon::now(),
-            'status' => '0'
+            'status' => '1'
         ]);
 
-
-        // $masterdata = MasterData::find($request->id_masterdata);
-        // $masterdata->stok_bc += $request->qty_bar;
-        // $masterdata->save();
         return redirect()->route('racking_t.tambah', compact('racking'))->with('toast_success', 'Data Berhasil Disimpan!');
     }
 
     //edit data
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        $date = Carbon::parse($request->date)->format('Y-m-d');
         $plating = racking_t::findOrFail($id);
+        $previous = racking_t::where('id', '<', $plating->id)->max('id');
+        $next = racking_t::where('id', '>', $plating->id)->min('id');
         $masterdata = MasterData::all();
-        return view('racking_t.racking_t-edit', compact('plating', 'masterdata'));
+        $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
+
+        return view('racking_t.racking_t-edit', compact('plating', 'masterdata', 'hit_data_racking','date'))->with('previous', $previous)->with('next', $next);
     }
 
     //update data
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        DB::table('plating')->where('id', $request->id)->update([
-            'tanggal_r' => $request->tanggal_r,
-            'no_bar' => $request->no_bar,
-            'part_name' => $request->part_name,
-            'no_part' => $request->no_part,
-            'katalis' => $request->katalis,
-            'channel' => $request->channel,
-            'grade_color' => $request->grade_color,
-            'qty_bar' => $request->qty_bar,
-            'waktu_in_r' => $request->waktu_in_r,
-            'tgl_lot_prod_mldg' => $request->tgl_lot_prod_mldg,
-            'cycle' => $request->cycle,
-            'updated_by' => Auth::user()->id,
-            'updated_at' => Carbon::now(),
-        ]);
-        return redirect()->route('racking_t')->with('message', 'Data berhasil di update');
+        $plating = racking_t::find($id);
+        $plating->id_masterdata = $request->id_masterdata;
+        $plating->tanggal_r = $request->tanggal_r;
+        $plating->no_bar = $request->no_bar;
+        $plating->part_name = $request->part_name;
+        $plating->no_part = $request->no_part;
+        $plating->katalis = $request->katalis;
+        $plating->channel = $request->channel;
+        $plating->grade_color = $request->grade_color;
+        $plating->qty_bar = $request->qty_bar;
+        $plating->waktu_in_r = $request->waktu_in_r;
+        $plating->tgl_lot_prod_mldg = $request->tgl_lot_prod_mldg;
+        $plating->cycle = $request->cycle;
+        $plating->updated_by = Auth::user()->id;
+        $plating->updated_at = Carbon::now();
+        $plating->save();
+
+        $masterdata = MasterData::all();
+
+        $previous = racking_t::where('id', '<', $plating->id)->max('id');
+        $next = racking_t::where('id', '>', $plating->id)->min('id');
+
+        $date = Carbon::parse($request->date)->format('Y-m-d');
+        $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
+
+        return View::make('racking_t.racking_t-edit',compact('plating','masterdata','date','hit_data_racking'))->with('previous', $previous)->with('next', $next)->with('message', 'Data berhasil di update');
     }
 
     public function ajaxRacking(Request $request)
@@ -171,7 +183,7 @@ class RackingController_T extends Controller
     public function delete($id)
     {
         $plating = racking_t::find($id);
-        $unracking = racking_t::where('id_masterdata', '=', $plating->id_masterdata)->first();
+        $unracking = racking_t::where('id_masterdata', '=', $plating->id_masterdata)->where('id', '=', $plating->id)->first();
 
         if ($unracking->qty_aktual == '') {
             $masterdata = MasterData::find($plating->id_masterdata);

@@ -8,20 +8,21 @@
     <li class="active"> > Unracking</li>
 @endsection
 @section('content')
-    <div class="card-header">
-        <div class="row  float-right">
-            <div class="col-12 col-md-12 col-lg-12">
-
-            </div>
-        </div>
+        <div class="card-header centering">
         <form action="{{ route('unracking_t') }}" method="GET">
-            <div class="row">
-                <div class="col-md-4">
-                    <label for="">Tanggal</label>
-                    <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
+            <div class="row input-daterange">
+                <div class="col-md-5">
+                    <input type="date" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
                 </div>
-                <div class="col-md-4">
-                    <label for="" class="text-white">Filter</label> <br>
+                <div class="col-md-1">
+                    <center>
+                        <font size="5"><b> - </b> </font>
+                    </center>
+                </div>
+                <div class="col-md-5">
+                    <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
+                </div>
+                <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
             </div>
@@ -60,8 +61,7 @@
                         <td>
                             <a href="{{ route('unracking_t.edit', $unrack->id) }}"
                                 class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>
-                            <a href="{{ route('unracking_t.print', $unrack->id) }}" class="btn btn-icon btn-sm btn-primary"
-                                target="_blank"><i class="fas fa-print"></i></a>
+
                         </td>
                     </tr>
                 @endforeach
@@ -88,6 +88,13 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
+		scrollY: "700px",
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
+                fixedColumns: {
+                    left: 2,
+                }
                 // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });

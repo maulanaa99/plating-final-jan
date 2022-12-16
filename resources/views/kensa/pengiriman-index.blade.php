@@ -25,7 +25,20 @@
     </section>
 @endsection
 @section('content')
-
+    <div class="card-header">
+        <form action="{{ route('kensa.pengiriman') }}" method="GET">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Tanggal</label>
+                    <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
+                </div>
+                <div class="col-md-4">
+                    <label for="" class="text-white">Filter</label> <br>
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+    </div>
     <div class="card-body">
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
             <thead>
@@ -43,21 +56,21 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $no=1 ?>
+                <?php $no = 1; ?>
                 @foreach ($pengiriman as $row)
                     <tr>
                         <td>{{ $no++ }}</td>
-                        <td >{{ \Carbon\Carbon::parse($row->tgl_kanban)->format('d-m-Y') }}</td>
-                        <td >{{ $row->no_part }}</td>
-                        <td >{{ $row->part_name }}</td>
+                        <td>{{ \Carbon\Carbon::parse($row->tgl_kanban)->format('d-m-Y') }}</td>
+                        <td>{{ $row->no_part }}</td>
+                        <td>{{ $row->part_name }}</td>
                         <td>{{ $row->no_kartu }}</td>
-                        <td >{{ $row->next_process }}</td>
+                        <td>{{ $row->next_process }}</td>
                         <td>{{ $row->kirim_painting }}</td>
                         <td>{{ $row->kirim_assy }}</td>
                         <td>{{ $row->kirim_ppic }}</td>
                         <td>
-                            <a href="{{ route('kensa.cetak_kanban', $row->id) }}"
-                                class="btn btn-icon btn-sm btn-primary" target="_blanke"><i class="fas fa-print"></i> Cetak </a>
+                            <a href="{{ route('kensa.cetak_kanban', $row->id) }}" class="btn btn-icon btn-sm btn-primary"
+                                target="_blanke"><i class="fas fa-print"></i> Cetak </a>
                         </td>
                     </tr>
                 @endforeach
@@ -103,8 +116,7 @@
                 .then((willDelete) => {
                     if (willDelete) {
                         $(`#delete${id}`).submit();
-                    } else {
-                    }
+                    } else {}
                 });
         });
     </script>

@@ -45,6 +45,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.1/css/fixedColumns.dataTables.min.css">
 
     @stack('page-styles')
 </head>
@@ -123,7 +124,7 @@
             <a href="/dashboard" class="brand-link">
                 <img src="{{ asset('assets/dist/img/sri2.jpg') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">PT SAKAE RIKEN IDN</span>
+                <span class="brand-text font-weight-light">Admin LTE 3</span>
             </a>
 
             <!-- Sidebar -->
@@ -268,6 +269,16 @@
                                     </a>
                                 </li>
                             </ul>
+
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('laporan.all') }}"
+                                        class="nav-link @if (request()->routeIs('laporan.all')) active @else '' @endif">
+                                        <i class="nav-icon far fa-circle nav-icon"></i>
+                                        <p>All</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         {{-- <li class="nav-item">
                             <a href="{{ route('racking_t.utama') }}"
@@ -380,6 +391,7 @@
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.2.1/js/dataTables.fixedColumns.min.js"></script>
     <script src="{{ asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>

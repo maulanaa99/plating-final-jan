@@ -4,59 +4,115 @@ namespace App\Http\Controllers;
 
 use App\Exports\UnrackingExport;
 use App\Models\MasterData;
-use App\Models\Unracking;
+use App\Models\Plating;
 use App\Models\unracking_t;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
+use Yajra\DataTables\Facades\DataTables;
+use Log;
 
 class UnrackingController_T extends Controller
 {
     //tampil data
     public function index(Request $request)
     {
-        $date = Carbon::parse($request->date)->format('Y-m-d');
-        $plating = unracking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
-            ->select('plating.*', 'masterdata.stok_bc')
-            ->orderBy('tanggal_r', 'desc')->orderBy('waktu_in_r', 'desc')
-            ->where('tanggal_r', '=', $date)
+        // $date = Carbon::parse($request->date)->format('Y-m-d');
+        // $plating = unracking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
+        //     ->select('plating.*', 'masterdata.stok_bc')
+        //     ->whereNull('tanggal_u')
+        //     // ->orderBy('tanggal_r', 'desc')->orderBy('waktu_in_r', 'desc')
+        //     ->get();
+
+        // $plating = unracking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
+        //     ->select('plating.*', 'masterdata.stok_bc')
+        //     ->where('status', '=', '0')
+        //     ->get();
+
+        // $masterdata = MasterData::all();
+        // return view('unracking_t.unracking_t', compact('plating', 'masterdata', 'date'));
+
+        // if ($request->ajax()) {
+        //     $data = unracking_t::select('*');
+        //     return DataTables::of($data)
+        //             ->addIndexColumn()
+        //             ->addColumn('action', function($row){
+
+        //                    $btn = '<a href="unracking_t/{id}/edit" class="edit btn btn-primary btn-sm">View</a>';
+
+        //                     return $btn;
+        //             })
+        //             ->rawColumns(['action'])
+        //             ->make(true);
+        // }
+
+        // return view('unracking_t.unracking_t');
+
+        // $startOfWeek = Carbon::parse($request->startofWeek)->format('Y-m-d');
+        // $endOfWeek = Carbon::parse($request->endOfWeek)->format('Y-m-d');
+        // $plating = unracking_t::whereBetween('tanggal_r', [$startOfWeek, $endOfWeek])
+        //     ->orderBy('tanggal_r', 'desc')->orderBy('waktu_in_r', 'asc')
+        //     ->get();
+        // return view('unracking_t.unracking_t', compact('plating','startOfWeek','endOfWeek'));
+
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+        $plating = Plating::whereBetween('tanggal_r', [$start_date, $end_date])
+            ->orderBy('tanggal_r', 'desc')
+            ->orderBy('waktu_in_r', 'desc')
             ->get();
-        $masterdata = MasterData::all();
-        return view('unracking_t.unracking_t', compact('plating', 'masterdata', 'date'));
+        return view('unracking_t.unracking_t', compact('plating', 'start_date', 'end_date'));
     }
 
     //edit data
     public function edit($id)
     {
         $plating = unracking_t::find($id);
-        return view('unracking_t.unracking_t-edit', compact('plating'));
+        $masterdata = MasterData::find($plating->id_masterdata);
+
+        $previous = unracking_t::where('id', '<', $plating->id)->max('id');
+        $next = unracking_t::where('id', '>', $plating->id)->min('id');
+
+        return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next);
     }
 
     //update data
     public function update(Request $request, $id)
     {
-        $unracking = unracking_t::find($id);
-        $qty_aktual_prev = $unracking->qty_aktual;
+        $plating = Plating::find($id);
+        $qty_aktual_prev = $plating->qty_aktual;
 
-        $unracking->tanggal_u = $request->tanggal_u;
-        $unracking->waktu_in_u = $request->waktu_in_u;
-        $unracking->qty_aktual = $request->qty_aktual;
-        $unracking->updated_by = Auth::user()->name;
-        $unracking->status = '1';
-        $unracking->save();
+        $plating->tanggal_u = $request->tanggal_u;
+        $plating->waktu_in_u = $request->waktu_in_u;
+        $plating->qty_aktual = $request->qty_aktual;
+        $plating->cycle = $request->cycle;
+        $plating->updated_by = Auth::user()->name;
+        $plating->status = '2';
+        $plating->save();
 
-        $masterdata = MasterData::find($unracking->id_masterdata);
+        $masterdata = MasterData::find($plating->id_masterdata);
         $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
 
         $masterdata->save();
 
-        return redirect()->route('unracking_t')->with('success', 'Data Berhasil Ditambahkan');
+        // Log::debug('next : '.$request->next);
+        if(isset($request->next)){
+           return redirect('/unracking_t/edit/'.$request->next);
+        }else{
+            $previous = unracking_t::where('id', '<', $plating->id)->max('id');
+            $next = unracking_t::where('id', '>', $plating->id)->min('id');
+
+            // return redirect()->route('unracking_t.edit',compact('unracking'))->with('previous', $previous)->with('next', $next);
+            return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next)->with('success', 'Data berhasil ditambahkan!');
+        }
     }
 
 

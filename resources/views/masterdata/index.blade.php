@@ -151,7 +151,7 @@
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
-                "responsive": true,
+                "responsive": false,
                 "lengthChange": true,
                 "autoWidth": false,
                 "pageLength": 75,
@@ -159,6 +159,10 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
+                scrollY: "700px",
+                scrollX: true,
+                scrollCollapse: true,
+                paging: false,
                 // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });

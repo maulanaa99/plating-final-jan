@@ -24,8 +24,12 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <input type="hidden" value="<?= url('/') ?>" id="base_path" />
+                                            <div class="col-md-1">
+                                                <label> No. </label>
+                                                <h1 class="form-control" readonly>{{ $jml_bar }}</h1>
+                                            </div>
+                                            <input type="hidden" value="<?= url('/') ?>" id="base_path" />
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Tanggal</label>
                                                     <input type="date" name="tanggal_k"
@@ -50,7 +54,12 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Part Name</label>
-                                                    <select class="form-control masterdata-js" name="id_masterdata"
+                                                    <input type="text" name="part_name" id="part_name"
+                                                        @if (old('part_name')) value="{{ old('part_name') }}"
+                                                    @else
+                                                        value="{{ $kensa->part_name }}" @endif
+                                                        class="form-control" readonly>
+                                                    {{-- <select class="form-control masterdata-js" name="id_masterdata" readonly
                                                         id="id_masterdata">
                                                         <option value="" hidden>--Pilih Part--</option>
                                                         @foreach ($masterdata as $d)
@@ -59,26 +68,37 @@
                                                                 value="{{ $d->id }}">{{ $d->part_name }}
                                                             </option>
                                                         @endforeach
-                                                    </select>
+                                                    </select> --}}
                                                 </div>
                                             </div>
 
                                             <div class="row">
-                                                <input type="hidden" id="no_part" name="no_part" value=""
-                                                    class="form-control typeahead" readonly>
-                                                <input type="hidden" id="part_name" name="part_name" value=""
-                                                    class="typeahead form-control" placeholder="Masukkan Nama Part"
-                                                    readonly>
+                                                <input type="hidden" id="no_part" name="no_part"
+                                                    @if (old('no_part')) value="{{ old('no_part') }}"
+                                                @else
+                                                    value="{{ $kensa->no_part }}" @endif
+                                                    class="form-control"readonly>
 
 
-                                                <div class="col-md-1">
+                                                {{-- <div class="col-md-1">
                                                     <div class="form-group">
                                                         <label>Stok BC</label>
                                                         <input type="text" name="stok_bc" id="stok_bc" readonly
                                                             @if (old('stok_bc')) value="{{ old('stok_bc') }}"
                                                     @else
-                                                        value="" @endif
+                                                        value="{{ $masterdata->stok_bc }}" @endif
                                                             class="form-control" placeholder="Masukkan No. Bar">
+                                                    </div>
+                                                </div> --}}
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <Label> Qty Bar</Label>
+                                                        <input type="text" id="qty_bar" name="qty_bar" onkeyup="sum();"
+                                                            @if (old('qty_bar')) value="{{ old('qty_bar') }}"
+                                                    @else
+                                                        value="{{ $kensa->qty_bar }}" @endif
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
@@ -93,16 +113,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <Label> Qty Bar</Label>
-                                                        <input type="text" id="qty_bar" name="qty_bar" onkeyup="sum();"
-                                                            @if (old('qty_bar')) value="{{ old('qty_bar') }}"
-                                                    @else
-                                                        value="{{ $kensa->qty_bar }}" @endif
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
+
 
                                                 <div class="col-md-4">
                                                     <!-- select -->
@@ -405,8 +416,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="container">
-                                            <div class="card-footer text-center">
+                                            <div class="text-center mt-3">
                                                 <button class="btn btn-primary mr-1" type="submit"> <i
                                                         class="fa fa-save"></i> Submit</button>
                                                 <button class="btn btn-danger mr-1" type="reset"> <i
@@ -414,7 +424,6 @@
                                                 <a href="#" class="btn btn-icon icon-left btn-warning">
                                                     <i class="fas fa-arrow-left"></i> Kembali</a>
                                             </div>
-                                        </div>
                     </form>
                 </div>
                 <!-- /.card -->
@@ -431,6 +440,8 @@
 @endpush
 
 @push('after-script')
+    @include('sweetalert::alert')
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('.masterdata-js').select2();

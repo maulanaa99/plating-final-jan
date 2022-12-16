@@ -26,10 +26,9 @@
                         @csrf
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
-
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
                                                 <label>Tanggal</label>
@@ -37,38 +36,54 @@
                                                     class="form-control">
                                             </div>
                                         </div>
-
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Jam</label>
                                                 <input type="time" name="waktu_k" value="<?= date('H:i:s') ?>"
                                                     class="form-control">
                                             </div>
                                         </div>
+                                        <div class="col-md-2">
+                                            <div class="row">
+                                                <label for="">Part Number</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" id="part_number"
+                                                        name="no_part">
+                                                    <div class="input-group-prepend">
+                                                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                                                            data-target="#modal-item"> <i
+                                                                class="fas fa-search"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Part Name</label>
-                                                <select class="form-control masterdata-js" name="id_masterdata"
+                                                <input type="text" name="part_name" id="part_name" class="form-control">
+                                                {{-- <select class="form-control masterdata-js" name="id_masterdata"
                                                     id="id_masterdata">
                                                     <option value="" hidden>--Pilih Barang--</option>
                                                     @foreach ($masterdata as $d)
                                                         <option value="{{ $d->id }}">{{ $d->part_name }}
                                                         </option>
                                                     @endforeach
-                                                </select>
+                                                </select> --}}
                                             </div>
                                         </div>
 
                                         {{-- <div id="detail_part"></div> --}}
 
                                         <div class="row">
-                                            <input type="hidden" id="no_part" name="no_part" value=""
-                                                class="form-control typeahead" readonly>
-                                            <input type="hidden" id="part_name" name="part_name" value=""
+                                            <input type="hidden" id="id_masterdata" name="id_masterdata" value=""
                                                 class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
 
-                                            <div class="col-md-1 mt-2">
+                                            <input type="hidden" name="id_plating" id="id_plating" value="" readonly
+                                                class="form-control">
+
+
+                                            <div class="col-md-1">
                                                 <div class="form-group">
                                                     <label>Stok BC</label>
                                                     <input type="text" name="stok_bc" id="stok_bc" value=""
@@ -76,15 +91,16 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-3 mt-2">
+                                            <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>No. Bar</label>
-                                                    <input type="text" name="no_bar" value="{{ old('no_bar') }}"
-                                                        placeholder="Masukkan No. Bar" class="form-control">
+                                                    <input type="text" name="no_bar" id="no_bar"
+                                                        value="{{ old('no_bar') }}" placeholder="Masukkan No. Bar"
+                                                        class="form-control">
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 mt-2">
+                                            <div class="col-md-4">
                                                 <Label> Qty Bar</Label>
                                                 <div class="input-group">
                                                     <input type="text" id="qty_bar" name="qty_bar" value=""
@@ -95,12 +111,11 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 mt-2">
+                                            <div class="col-md-4">
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Cycle</label>
-                                                    <select name="cycle"
-                                                        class="form-control">
+                                                    <select name="cycle" id="cycle" class="form-control">
                                                         <option value="">----Pilih Cycle----</option>
                                                         <option>C1</option>
                                                         <option>C2</option>
@@ -115,131 +130,227 @@
                                         <div class="col-md-6 mt-2">
                                             <div class="row">
                                                 <p class="font-italic"> <b> NG Plating </b> </p>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Nikel</Label>
+                                                        <Label> Nikel :</Label>
                                                         <input type="number" id="nikel" name="nikel"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Butsu</Label>
-                                                        <input type="number" id="butsu" name="butsu"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Hadare</Label>
-                                                        <input type="number" id="hadare" name="hadare"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Hage</Label>
-                                                        <input type="number" id="hage" name="hage"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Moyo</Label>
+                                                        <Label>Moyo :</Label>
                                                         <input type="number" id="moyo" name="moyo"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Fukure</Label>
-                                                        <input type="number" id="fukure" name="fukure"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Crack</Label>
-                                                        <input type="number" id="crack" name="crack"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Henkei</Label>
-                                                        <input type="number" id="henkei" name="henkei"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Hanazaki</Label>
+                                                        <Label>Hanazaki :</Label>
                                                         <input type="number" id="hanazaki" name="hanazaki"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Kizu</Label>
+                                                        <Label>Gores :</Label>
+                                                        <input type="number" id="gores" name="gores"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Butsu :</Label>
+                                                        <input type="number" id="butsu" name="butsu"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Fukure :</Label>
+                                                        <input type="number" id="fukure" name="fukure"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Kizu :</Label>
                                                         <input type="number" id="kizu" name="kizu"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Kaburi</Label>
+                                                        <Label>Regas :</Label>
+                                                        <input type="number" id="regas" name="regas"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Hadare :</Label>
+                                                        <input type="number" id="hadare" name="hadare"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Crack :</Label>
+                                                        <input type="number" id="crack" name="crack"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Kaburi :</Label>
                                                         <input type="number" id="kaburi" name="kaburi"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Shiromoya</Label>
+                                                        <Label>Silver :</Label>
+                                                        <input type="number" id="silver" name="silver"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Hage :</Label>
+                                                        <input type="number" id="hage" name="hage"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Henkei :</Label>
+                                                        <input type="number" id="henkei" name="henkei"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Shiromoya :</Label>
                                                         <input type="number" id="shiromoya" name="shiromoya"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Shimi</Label>
+                                                        <Label>Hike :</Label>
+                                                        <input type="number" id="hike" name="hike"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Shimi :</Label>
                                                         <input type="number" id="shimi" name="shimi"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Pitto</Label>
+                                                        <Label>Pitto :</Label>
                                                         <input type="number" id="pitto" name="pitto"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Other</Label>
+                                                        <Label>Misto :</Label>
+                                                        <input type="number" id="misto" name="misto"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Other :</Label>
                                                         <input type="number" id="other" name="other"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
                                             </div>
@@ -248,108 +359,112 @@
                                         <div class="col-md-6 mt-2">
                                             <div class="row">
                                                 <p class="font-italic"> <b> NG Molding </b> </p>
-                                                <div class="col-md-2">
+
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <Label>Gores</Label>
-                                                        <input type="number" id="gores" name="gores"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Regas</Label>
-                                                        <input type="number" id="regas" name="regas"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Silver</Label>
-                                                        <input type="number" id="silver" name="silver"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Hike</Label>
-                                                        <input type="number" id="hike" name="hike"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <div class="form-group">
-                                                        <Label>Burry</Label>
+                                                        <Label>Burry :</Label>
                                                         <input type="number" id="burry" name="burry"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-2">
+
+                                                <div class="col-md-7">
                                                     <div class="form-group">
-                                                        <Label>Others</Label>
+                                                        <Label class="text-white">.</Label>
+                                                        <input type="hidden" readonly class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <Label>Others :</Label>
                                                         <input type="number" id="others" name="others"
-                                                            onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                            style="width: 180px;
+                                                            height:80px; font-size:24pt;">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <Label class="text-white">.</Label>
+                                                        <input type="hidden" readonly class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 mt-5">
+                                                    <div class="row">
+                                                        <Label>Total OK</Label>
+                                                        <div class="input-group">
+                                                            <input type="number" id="total_ok" name="total_ok"
+                                                                onchange="sum();" class="form-control">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Pcs </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 mt-5">
+                                                    <div class="row">
+                                                        <Label>Total NG</Label>
+                                                        <div class="input-group">
+                                                            <input type="number" id="hasil" name="total_ng"
+                                                                class="form-control">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text">Pcs </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <div class="row">
+                                                        <Label>%Total OK</Label>
+                                                        <div class="input-group">
+                                                            <input type="text" id="persenok" name="p_total_ok"
+                                                                onchange="sum()" class="form-control">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> % </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <div class="row">
+                                                        <Label>%Total NG</Label>
+                                                        <div class="input-group">
+                                                            <input type="text" id="persenng" name="p_total_ng"
+                                                                onchange="sum()" class="form-control">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"> % </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 mt-2">
+                                                    <div class="row">
+                                                        <Label>Keterangan</Label>
+                                                        <div class="input-group">
+                                                            <textarea name="keterangan" id="keterangan" cols="30" rows="2" class="form-control">
+                                                            </textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <Label>Total OK</Label>
-                                                <div class="input-group">
-                                                    <input type="number" id="total_ok" name="total_ok"
-                                                        onchange="sum();" class="form-control">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Pcs </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <Label>Total NG</Label>
-                                                <div class="input-group">
-                                                    <input type="number" id="hasil" name="total_ng"
-                                                        class="form-control">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text">Pcs </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-6 mt-2">
-                                            <div class="row">
-                                                <Label>%Total OK</Label>
-                                                <div class="input-group">
-                                                    <input type="text" id="persenok" name="p_total_ok"
-                                                        onchange="sum()" class="form-control">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> % </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <br>
 
-                                        <div class="col-md-6 mt-2">
-                                            <div class="row">
-                                                <Label>%Total NG</Label>
-                                                <div class="input-group">
-                                                    <input type="text" id="persenng" name="p_total_ng"
-                                                        onchange="sum()" class="form-control">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"> % </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
 
                                 </div>
@@ -361,33 +476,120 @@
                                     <a href="{{ route('kensa') }}" class="btn btn-icon icon-left btn-warning">
                                         <i class="fas fa-arrow-left"></i> Kembali</a>
                                 </div>
+
+                                <div class="modal" id="modal-item" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog modal-xl" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Select Plating Item</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body table-responsive">
+                                                <table class="table table-sm" id="add-row">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>ID</td>
+                                                            <td>Tanggal</td>
+                                                            <td>No. Bar</td>
+                                                            <td>Part Name</td>
+                                                            <td>Cycle</td>
+                                                            <td>Qty Bar</td>
+                                                            <td>Stok BC</td>
+                                                            <td>Action</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($platings as $plating)
+                                                            <tr>
+                                                                <td>{{ $plating->id }}</td>
+                                                                <td>{{ $plating->tanggal_r }}</td>
+                                                                <td>{{ $plating->no_bar }}</td>
+                                                                <td>{{ $plating->part_name }}</td>
+                                                                <td>{{ $plating->cycle }}</td>
+                                                                <td>{{ $plating->qty_aktual }}</td>
+                                                                <td>{{ $plating->stok_bc }}</td>
+                                                                <td> <a class="btn btn-xs btn-primary" id="select"
+                                                                        data-id="{{ $plating->id }}"
+                                                                        data-id_masterdata="{{ $plating->id_masterdata }}"
+                                                                        data-part_number="{{ $plating->no_part }}"
+                                                                        data-tanggal="{{ $plating->tanggal_r }}"
+                                                                        data-no_bar="{{ $plating->no_bar }}"
+                                                                        data-part_name="{{ $plating->part_name }}"
+                                                                        data-cycle="{{ $plating->cycle }}"
+                                                                        data-stok_bc="{{ $plating->stok_bc }}"
+                                                                        data-qty_bar="{{ $plating->qty_aktual }}">
+                                                                        <i class="fa fa-check"></i> Select </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
+                    </form>
                 </div>
-                </form>
+                <!-- /.card -->
             </div>
-            <!-- /.card -->
         </div>
-    </div>
-    <!-- /.row -->
+        <!-- /.row -->
     </div>
 @endsection
 
 @push('page-script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
-    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
-
+    <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script> --}}
 @endpush
 
 @push('after-script')
     @include('sweetalert::alert')
 
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
-            $('#id_masterdata').select2();
+            $(document).on('click', '#select', function() {
+                var id = $(this).data('id');
+                var id_masterdata = $(this).data('id_masterdata');
+                var part_number = $(this).data('part_number');
+                var no_bar = $(this).data('no_bar');
+                var part_name = $(this).data('part_name');
+                var qty_bar = $(this).data('qty_bar');
+                var cycle = $(this).data('cycle');
+                var stok_bc = $(this).data('stok_bc');
+
+                $('#id_plating').val(id);
+                $('#id_masterdata').val(id_masterdata);
+                $('#part_number').val(part_number);
+                $('#no_bar').val(no_bar);
+                $('#part_name').val(part_name);
+                $('#qty_bar').val(qty_bar);
+                $('#cycle').val(cycle);
+                $('#stok_bc').val(stok_bc);
+                $('#modal-item').modal('hide');
+            });
+        });
+        $("#add-row").DataTable({
+            "responsive": true,
+            "lengthChange": true,
+            "autoWidth": false,
+            "pageLength": 10,
+            "lengthMenu": [
+                [10, 25, 50, 75, -1],
+                [10, 25, 50, 75, "All"]
+            ]
         });
     </script>
 
@@ -398,23 +600,6 @@
             }
         });
     </script>
-
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $('#id_masterdata').change(function() {
-                var id_masterdata = $('#id_masterdata').val();
-                $.ajax({
-                    type: "GET",
-                    url: "/kensa/ajax",
-                    data: "id_masterdata=" + id_masterdata,
-                    cache: false,
-                    success: function(data) {
-                        $('#detail_part').html(data);
-                    }
-                });
-            });
-        });
-    </script> --}}
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -428,7 +613,6 @@
                         'id': id_masterdata
                     },
                     success: function(data) {
-                        console.log(id_masterdata);
                         $('#no_part').val(data.no_part);
                         $('#part_name').val(data.part_name);
                         $('#katalis').val(data.katalis);
@@ -436,7 +620,6 @@
                         $('#channel').val(data.channel);
                         $('#qty_bar').val(data.qty_bar);
                         $('#stok_bc').val(data.stok_bc);
-
                     },
                     error: function() {
 

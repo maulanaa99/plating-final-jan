@@ -53,7 +53,7 @@
                         <th rowspan="2" class="align-middle text-center">No Bar</th>
                         <th rowspan="2" class="align-middle text-center">Qty Bar</th>
                         <th rowspan="2" class="align-middle text-center">Cycle</th>
-                        <th colspan="12" class="align-middle text-center">NG PLATING</th>
+                        <th colspan="15" class="align-middle text-center">NG PLATING</th>
                         <th colspan="6" class="align-middle text-center">NG MOLDING</th>
                         <th colspan="5" class="align-middle text-center">Total</th>
                     </tr>
@@ -69,6 +69,9 @@
                         <th>Hanazaki</th>
                         <th>Kizu</th>
                         <th>Kaburi</th>
+                        <th>Shiromoya</th>
+                        <th>Shimi</th>
+                        <th>Pitto</th>
                         <th>Other</th>
                         <th>Gores</th>
                         <th>Regas</th>
@@ -104,6 +107,9 @@
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->hanazaki }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->kizu }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->kaburi }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ $kensha->shiromoya }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ $kensha->shimi }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ $kensha->pitto }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->other }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->gores }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->regas }}</td>
@@ -147,7 +153,7 @@
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
-                "responsive": true,
+                "responsive": false,
                 "lengthChange": true,
                 "autoWidth": false,
                 "pageLength": 75,
