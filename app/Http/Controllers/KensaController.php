@@ -119,11 +119,11 @@ class KensaController extends Controller
     //simpan data
     public function simpan(Request $request)
     {
-        // $masterdata = MasterData::find($request->id_masterdata);
-        // if ($masterdata->stok_bc < $request->qty_bar) {
-        //     return redirect()->route('kensa.tambah')->with('errors', 'Gagal!, Stok Kurang');
-        // }
-        $kensa = kensa::create([
+        $masterdata = MasterData::find($request->id_masterdata);
+        if ($masterdata->stok_bc < $request->qty_bar) {
+            return redirect()->route('kensa.tambah')->with('errors', 'Gagal!, Stok Kurang');
+        }
+        kensa::create([
             'tanggal_k' => $request->tanggal_k,
             'waktu_k' => $request->waktu_k,
             'id_masterdata' => $request->id_masterdata,
@@ -163,9 +163,7 @@ class KensaController extends Controller
             'created_by' => Auth::user()->id,
             'created_at' => Carbon::now(),
         ]);
-        // dd($kensa);
 
-        $masterdata = MasterData::find($request->id_masterdata);
         $masterdata->stok_bc -= $request->total_ok;
         $masterdata->stok_bc -= $request->total_ng;
         $masterdata->stok += $request->total_ok;
@@ -280,65 +278,55 @@ class KensaController extends Controller
 
         $date = Carbon::parse($request->tgl_kanban)->format('Y-m-d');
 
-        // $q = DB::table('pengiriman')->select(DB::raw('MAX(RIGHT(no_kartu,4)) as kode'))->where('tgl_kanban', '=', $date)->where('id_masterdata', '=', $id_masterdata);
         $q = $ajax_barang->first()->pengirimans()->where('tgl_kanban', '=', $date)->orderBy('id', 'desc')->first();
         $kode = $q ? $q->no_kartu + 1 : '0001';
-        // $kode = "";
-        // if ($q->count() > 0) {
-        //     foreach ($q->get() as $k) {
-        //         $tmp = ((int)$k->kode) + 1;
-        //         $kode = sprintf("%04s", $tmp);
-        //     }
-        // } else {
-        //     $kode = "0001";
-        // }
 
         return view('kensa.print-kanban-ajax', compact('ajax_barang', 'kode'));
     }
 
     public function kanbansimpan(Request $request)
     {
-
         $masterdata = MasterData::find($request->id_masterdata);
-        $pengiriman = Pengiriman::create([
-            'tgl_kanban' => $request->tgl_kanban,
-            'id_masterdata' => $request->id_masterdata,
-            'no_part' => $request->no_part,
-            'part_name' => $request->part_name,
-            'model' => $request->model,
-            'bagian' => $request->bagian,
-            'no_kartu' => $request->no_kartu,
-            'next_process' => $request->next_process,
-            'kirim_painting' => $request->kirim_painting,
-            'kirim_assy' => $request->kirim_assy,
-            'kirim_ppic' => $request->kirim_ppic,
-            'std_qty' => $request->std_qty,
-            'created_at' => Carbon::now(),
-        ]);
+        if ($masterdata->stok < $request->kirim_assy) {
+            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
+        } else if ($masterdata->stok < $request->kirim_painting) {
+            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
+        } else if ($masterdata->stok < $request->kirim_ppic) {
+            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
+        } else {
+            $pengiriman = Pengiriman::create([
+                'tgl_kanban' => $request->tgl_kanban,
+                'id_masterdata' => $request->id_masterdata,
+                'no_part' => $request->no_part,
+                'part_name' => $request->part_name,
+                'model' => $request->model,
+                'bagian' => $request->bagian,
+                'no_kartu' => $request->no_kartu,
+                'next_process' => $request->next_process,
+                'kirim_painting' => $request->kirim_painting,
+                'kirim_assy' => $request->kirim_assy,
+                'kirim_ppic' => $request->kirim_ppic,
+                'std_qty' => $request->std_qty,
+                'created_at' => Carbon::now(),
+            ]);
 
-        $masterdata->stok -= $request->kirim_assy;
-        // $masterdata->total_ok -= $request->kirim_assy;
-        $masterdata->stok -= $request->kirim_painting;
-        // $masterdata->total_ok -= $request->kirim_painting;
-        $masterdata->stok -= $request->kirim_ppic;
-        // $masterdata->kirim_assy += $request->kirim_assy;
-        // $masterdata->kirim_painting += $request->kirim_painting;
-        // $masterdata->kirim_ppic += $request->kirim_ppic;
-        $masterdata->no_kartu = $request->no_kartu;
-        $masterdata->save();
+            $masterdata->stok -= $request->kirim_assy;
+            $masterdata->stok -= $request->kirim_painting;
+            $masterdata->stok -= $request->kirim_ppic;
+            $masterdata->no_kartu = $request->no_kartu;
+            $masterdata->save();
 
-        return redirect()->route('kensa.cetak_kanban',  ['id' => $pengiriman->id]);
+            return redirect()->route('kensa.cetak_kanban',  ['id' => $pengiriman->id]);
 
-        // return redirect()->route('kensa.printKanban')->with('toast_success', 'Data berhasil disimpan');
+            // return redirect()->route('kensa.printKanban')->with('toast_success', 'Data berhasil disimpan');
 
+        }
     }
 
     public function cetak_kanban(Request $request, $id)
     {
         $pengiriman = $data['pengiriman'] = Pengiriman::findOrFail($id);
 
-        // $masterdata = MasterData::all();
-        // return view('kensa.cetak-kanban', compact('pengiriman', 'masterdata'));
         $filepath = storage_path('app/' . md5($id));
 
         /**

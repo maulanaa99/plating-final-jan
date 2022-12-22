@@ -10,6 +10,38 @@
 @push('page-styles')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <style>
+        /* untuk menghilangkan spinner  */
+        .spinner {
+            display: none;
+        }
+        .perhatian {
+            font-size: 24pt;
+            align-content: center;
+            text-emphasis-color: red;
+        }
+        label{
+            font-size: 18pt;
+        }
+        input[type="date"]{
+            font-size: 24pt;
+        }
+        input[type="text"]{
+            font-size: 24pt;
+        }
+        input[type="number"]{
+            font-size: 24pt;
+        }
+        .select2-container{
+            font-size: 18pt;
+        }
+        .form-control{
+            height: 50pt;
+        }
+        .btn{
+            font-size: 18pt;
+        }
+    </style>
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -43,7 +75,7 @@
                                                 <label> Part Name</label>
                                                 <select class="form-control select2-container" name="id_masterdata"
                                                     id="id_masterdata">
-                                                    <option value="" hidden>--Pilih Barang--</option>
+                                                    <option value="" hidden>--Pilih Part--</option>
                                                     @foreach ($masterdata as $d)
                                                         <option value="{{ $d->id }}">{{ $d->part_name }}
                                                         </option>
@@ -66,10 +98,23 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12 mt-3 text-center">
+                                        <span class="perhatian text-danger" > <i class="fa fa-danger" >  "PASTIKAN BOX SESUAI DENGAN PARTNYA DAN BUKAN BOX KOSONG <br> DAN JUMLAHNYA HARUS FULL!!!" </i></span>
+                                       <p class=" text-center text-danger"> </p>
+                                    </div>
+
+
+
                                     <div class="container mt-3 text-center">
-                                        <button class="btn btn-primary mr-1" name="submit" type="submit"><i
+                                        <button class="btn btn-primary button-prevent" type="submit">
+                                            <!-- spinner-border adalah component bawaan bootstrap untuk menampilakn roda berputar  -->
+                                            <div class="spinner"><i role="status"
+                                                    class="spinner-border spinner-border-sm"></i> Simpan </div>
+                                            <div class="hide-text"> <i class="fa fa-save"></i> Simpan</div>
+                                        </button>
+                                        {{-- <button class="btn btn-primary mr-1" name="submit" type="submit"><i
                                                 class="fa fa-save"></i>
-                                            Submit</button>
+                                            Submit</button> --}}
                                         <button class="btn btn-danger mr-1" type="reset"> <i
                                                 class="fa fa-trash-restore"></i> Reset</button>
                                         <a href="{{ route('kensa.pengiriman') }}"
@@ -144,21 +189,31 @@
         });
     </script>
 
-<script>
-    function sum() {
-          var kirim_assy = document.getElementById('kirim_assy').value;
-          var kirim_painting = document.getElementById('kirim_painting').value;
-          var kirim_ppic = document.getElementById('kirim_ppic').value;
-          var result = parseInt(kirim_assy) + parseInt(kirim_painting) + parseInt(kirim_ppic);
-          if (!isNaN(result)) {
-             document.getElementById('qty_kirim').value = result;
-          }
-          var std_qty = document.getElementById('std_qty').value;
-          var total_kirim = parseInt(result) / parseInt(std_qty);
-          if (!isNaN(total_kirim)) {
-             document.getElementById('jml_kirim').value = Math.ceil(total_kirim);
-             console.log(total_kirim);
-          }
-    }
+    <script>
+        $(document).ready(function() {
+            $('#quickForm').on('submit', function() {
+                $('.button-prevent').attr('disabled', 'true');
+                $('.spinner').show();
+                $('.hide-text').hide();
+            })
+        });
+    </script>
+
+    <script>
+        function sum() {
+            var kirim_assy = document.getElementById('kirim_assy').value;
+            var kirim_painting = document.getElementById('kirim_painting').value;
+            var kirim_ppic = document.getElementById('kirim_ppic').value;
+            var result = parseInt(kirim_assy) + parseInt(kirim_painting) + parseInt(kirim_ppic);
+            if (!isNaN(result)) {
+                document.getElementById('qty_kirim').value = result;
+            }
+            var std_qty = document.getElementById('std_qty').value;
+            var total_kirim = parseInt(result) / parseInt(std_qty);
+            if (!isNaN(total_kirim)) {
+                document.getElementById('jml_kirim').value = Math.ceil(total_kirim);
+                console.log(total_kirim);
+            }
+        }
     </script>
 @endpush

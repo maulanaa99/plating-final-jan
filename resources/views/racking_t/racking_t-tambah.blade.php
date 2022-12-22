@@ -3,6 +3,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">
+    <style>
+        /* untuk menghilangkan spinner  */
+        .spinner {
+            display: none;
+        }
+    </style>
 @endpush
 @section('content')
     <div class="container-fluid">
@@ -85,7 +91,8 @@ is-invalid
                                                     id="id_masterdata">
                                                     <option value="" hidden>--Pilih Barang--</option>
                                                     @foreach ($masterdata as $d)
-                                                        <option value="{{ $d->id }}">{{ $d->part_name }} || Ch.{{ $d->channel }}
+                                                        <option value="{{ $d->id }}">{{ $d->part_name }} ||
+                                                            Ch.{{ $d->channel }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -143,15 +150,28 @@ is-invalid
                                             </div>
                                         </div>
 
+
+
                                         {{-- <div class="container"> --}}
-                                            <div class="text-center mt-3">
-                                                <button class="btn btn-primary mr-1" type="submit"> <i
+                                        <div class="text-center mt-3">
+                                            <button class="btn btn-primary button-prevent" type="submit">
+                                                <!-- spinner-border adalah component bawaan bootstrap untuk menampilakn roda berputar  -->
+                                                <div class="spinner"><i role="status"
+                                                        class="spinner-border spinner-border-sm"></i> Simpan </div>
+                                                <div class="hide-text"> <i class="fa fa-save"></i> Simpan</div>
+                                            </button>
+                                            <button class="btn btn-danger" type="reset"> <i
+                                                    class="fas fa-trash-restore"></i> Reset</button>
+                                            <a href="{{ route('racking_t') }}"
+                                                class="btn btn-icon icon-left btn-warning"><i
+                                                    class="fas fa-arrow-left"></i> Kembali</a>
+                                            {{-- <button class="btn btn-primary mr-1" type="submit"> <i
                                                         class="fas fa-save"></i> Submit</button>
                                                 <button class="btn btn-danger" type="reset"> <i
                                                         class="fas fa-trash-restore"></i> Reset</button>
                                                 <a href="{{ route('racking_t') }}"
                                                     class="btn btn-icon icon-left btn-warning"><i
-                                                        class="fas fa-arrow-left"></i> Kembali</a>
+                                                        class="fas fa-arrow-left"></i> Kembali</a> --}}
                                             {{-- </div> --}}
                                         </div>
                                     </div>
@@ -214,6 +234,16 @@ is-invalid
                     }
                 });
             });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#quickForm').on('submit', function() {
+                $('.button-prevent').attr('disabled', 'true');
+                $('.spinner').show();
+                $('.hide-text').hide();
+            })
         });
     </script>
 

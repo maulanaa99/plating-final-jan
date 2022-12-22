@@ -2,6 +2,28 @@
 @push('page-styles')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <style>
+        input[type="number"]{
+            width: 90%;
+            height: 70pt;
+            font-size: 30pt;
+        }
+        input[type="text"]{
+            font-size: 24pt;
+            height: 100%;
+        }
+        input[type="date"]{
+            font-size: 24pt;
+            height: 100%;
+        }
+        input[type="time"]{
+            font-size: 24pt;
+            height: 100%;
+        }
+        label{
+            font-size: 24px;
+        }
+    </style>
 @endpush
 @section('title')
 @endsection
@@ -61,7 +83,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label> Part Name</label>
-                                                <input type="text" name="part_name" id="part_name" class="form-control">
+                                                <input type="text" name="part_name" id="part_name" class="form-control" readonly>
                                                 {{-- <select class="form-control masterdata-js" name="id_masterdata"
                                                     id="id_masterdata">
                                                     <option value="" hidden>--Pilih Barang--</option>
@@ -94,7 +116,7 @@
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>No. Bar</label>
-                                                    <input type="text" name="no_bar" id="no_bar"
+                                                    <input type="text" name="no_bar" id="no_bar" readonly
                                                         value="{{ old('no_bar') }}" placeholder="Masukkan No. Bar"
                                                         class="form-control">
                                                 </div>
@@ -103,7 +125,7 @@
                                             <div class="col-md-4">
                                                 <Label> Qty Bar</Label>
                                                 <div class="input-group">
-                                                    <input type="text" id="qty_bar" name="qty_bar" value=""
+                                                    <input type="text" id="qty_bar" name="qty_bar" value="" readonly
                                                         onkeyup="sum();" class="form-control">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text">Pcs </span>
@@ -115,13 +137,7 @@
                                                 <!-- select -->
                                                 <div class="form-group">
                                                     <label>Cycle</label>
-                                                    <select name="cycle" id="cycle" class="form-control">
-                                                        <option value="">----Pilih Cycle----</option>
-                                                        <option>C1</option>
-                                                        <option>C2</option>
-                                                        <option>CS</option>
-                                                        <option>FS</option>
-                                                    </select>
+                                                    <input type="text" name="cycle" id="cycle" class="form-control" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,227 +146,175 @@
                                         <div class="col-md-6 mt-2">
                                             <div class="row">
                                                 <p class="font-italic"> <b> NG Plating </b> </p>
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label> Nikel :</Label>
                                                         <input type="number" id="nikel" name="nikel"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Moyo :</Label>
                                                         <input type="number" id="moyo" name="moyo"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Hanazaki :</Label>
                                                         <input type="number" id="hanazaki" name="hanazaki"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <Label>Gores :</Label>
-                                                        <input type="number" id="gores" name="gores"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-md-3">
+
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Butsu :</Label>
                                                         <input type="number" id="butsu" name="butsu"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Fukure :</Label>
                                                         <input type="number" id="fukure" name="fukure"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Kizu :</Label>
                                                         <input type="number" id="kizu" name="kizu"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <Label>Regas :</Label>
-                                                        <input type="number" id="regas" name="regas"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-md-3">
+
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Hadare :</Label>
                                                         <input type="number" id="hadare" name="hadare"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Crack :</Label>
                                                         <input type="number" id="crack" name="crack"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Kaburi :</Label>
                                                         <input type="number" id="kaburi" name="kaburi"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <Label>Silver :</Label>
-                                                        <input type="number" id="silver" name="silver"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
 
 
-                                                <div class="col-md-3">
+
+
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Hage :</Label>
                                                         <input type="number" id="hage" name="hage"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control"style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
 
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Henkei :</Label>
                                                         <input type="number" id="henkei" name="henkei"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Shiromoya :</Label>
                                                         <input type="number" id="shiromoya" name="shiromoya"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <Label>Hike :</Label>
-                                                        <input type="number" id="hike" name="hike"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
-                                                    </div>
-                                                </div>
 
-                                                <div class="col-md-3">
+
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Shimi :</Label>
                                                         <input type="number" id="shimi" name="shimi"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Pitto :</Label>
                                                         <input type="number" id="pitto" name="pitto"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Misto :</Label>
                                                         <input type="number" id="misto" name="misto"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Other :</Label>
                                                         <input type="number" id="other" name="other"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
                                             </div>
@@ -360,47 +324,100 @@
                                             <div class="row">
                                                 <p class="font-italic"> <b> NG Molding </b> </p>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <Label>Gores :</Label>
+                                                        <input type="number" id="gores" name="gores"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                           >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Burry :</Label>
                                                         <input type="number" id="burry" name="burry"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-7">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <Label class="text-white">.</Label>
-                                                        <input type="hidden" readonly class="form-control">
+                                                        <input type="hidden"
+                                                            class="form-control"
+                                                           >
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <Label>Regas :</Label>
+                                                        <input type="number" id="regas" name="regas"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Others :</Label>
                                                         <input type="number" id="others" name="others"
                                                             min="0" onchange="sum();" value="{{ 0 }}"
                                                             class="form-control"
-                                                            style="width: 180px;
-                                                            height:80px; font-size:24pt;">
+                                                           >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input type="hidden"
+                                                            class="form-control"
+                                                           >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <Label>Silver :</Label>
+                                                        <input type="number" id="silver" name="silver"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                           >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <input type="hidden"
+                                                            class="form-control"
+                                                           >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <Label>Hike :</Label>
+                                                        <input type="number" id="hike" name="hike"
+                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                            class="form-control"
+                                                           >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <input type="hidden"
+                                                            class="form-control"
+                                                           >
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <Label class="text-white">.</Label>
-                                                        <input type="hidden" readonly class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-6 mt-5">
                                                     <div class="row">
                                                         <Label>Total OK</Label>
                                                         <div class="input-group">
-                                                            <input type="number" id="total_ok" name="total_ok"
+                                                            <input type="text" id="total_ok" name="total_ok"
                                                                 onchange="sum();" class="form-control">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Pcs </span>
@@ -409,11 +426,11 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6 mt-5">
+                                                <div class="col-md-6 ">
                                                     <div class="row">
                                                         <Label>Total NG</Label>
                                                         <div class="input-group">
-                                                            <input type="number" id="hasil" name="total_ng"
+                                                            <input type="text" id="hasil" name="total_ng"
                                                                 class="form-control">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Pcs </span>
@@ -452,8 +469,7 @@
                                                     <div class="row">
                                                         <Label>Keterangan</Label>
                                                         <div class="input-group">
-                                                            <textarea name="keterangan" id="keterangan" cols="30" rows="2" class="form-control">
-                                                            </textarea>
+                                                            <input type="text" name="keterangan" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -642,6 +658,10 @@
             var hanazaki = document.getElementById('hanazaki').value;
             var kizu = document.getElementById('kizu').value;
             var kaburi = document.getElementById('kaburi').value;
+            var shiromoya = document.getElementById('shiromoya').value;
+            var shimi = document.getElementById('shimi').value;
+            var pitto = document.getElementById('pitto').value;
+            var misto = document.getElementById('misto').value;
             var other = document.getElementById('other').value;
             var gores = document.getElementById('gores').value;
             var regas = document.getElementById('regas').value;
@@ -654,7 +674,7 @@
             var persenok = document.getElementById('persenok').value;
             var persenng = document.getElementById('persenng').value;
             var result = parseInt(nikel) + parseInt(butsu) + parseInt(hadare) + parseInt(hage) + parseInt(moyo) + parseInt(
-                    fukure) + parseInt(crack) + parseInt(henkei) + parseInt(hanazaki) + parseInt(kizu) + parseInt(kaburi) +
+                    fukure) + parseInt(crack) + parseInt(henkei) + parseInt(hanazaki) + parseInt(kizu) + parseInt(kaburi) + parseInt(shiromoya)+ parseInt(shimi)+ parseInt(pitto)+ parseInt(misto) +
                 parseInt(other) + parseInt(gores) + parseInt(regas) + parseInt(silver) + parseInt(hike) + parseInt(burry) +
                 parseInt(others);
             var hasil = parseInt(qtybar) - parseInt(result)

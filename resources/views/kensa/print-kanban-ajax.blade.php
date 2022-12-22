@@ -154,7 +154,14 @@
             <input type="hidden" id="kirim_painting" name="kirim_painting" class="form-control" onkeyup="sum();"
                 value="{{ 0 }}">
         @endif
+        
+    </div>
 @endforeach
+
+
+
+
+
 
 <script>
     $(document).on('click', '#next_process', function() {

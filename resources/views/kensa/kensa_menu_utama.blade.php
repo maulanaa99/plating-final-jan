@@ -5,9 +5,19 @@
 
 @push('page-styles')
     <style>
-        h3 {
-            background-color: white;
+        h7 {
+            font-size: 48pt;
+        }
 
+        input[type="text"] {
+            font-size: 38px;
+        }
+
+        span {
+            font-size: 24px;
+        }
+        card{
+            height: 50pt;
         }
     </style>
 @endpush
@@ -20,162 +30,179 @@
 
 @section('content')
     <section class="content">
-        <div class="container-fluid">
-            <form action="{{ route('kensa.utama') }}" method="GET">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="">Tanggal</label>
-                        <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="" class="text-white">Filter</label> <br>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                    </div>
+        <form action="{{ route('kensa.utama') }}" method="GET">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="">Tanggal</label>
+                    <input type="date" class="form-control" name="date" id="date" value="{{ $date }}">
                 </div>
-            </form>
-            <!-- Small boxes (Stat box) -->
-            <h1 class="mt-4"><b>Summary</b></h1>
-            <hr>
-            <div class="col-md-12 mt-3">
-                <div class="row">
-                    <div class="col-lg-3 col-6 mt-auto">
-                        <!-- small box -->
-                        <div class="small-box bg-success" style="width: 100%; height: 200%;">
-                            <div class="inner">
-                                <h2>{{ number_format($total_ok, 2) }}%</h2>
-                                <p>
-                                    <font size="5"> Total OK </font>
-                                </p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-check"></i>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    {{-- <div class="container2">
-                        <div class="small-box bg-green">
-                            <h1 class="ml-2 mr-3 mt-5 mb-2">TOTAL OK : {{ number_format($total_ok, 2) }}%</h1>
-                            <label style="font-size: 25pt" class="ml-2 mt-4 mb-3 text-center">TOTAL OK : </label>
-                        <label class="ml-2 mr-2">
-                            <font>
-                                <h3>{{ number_format($total_ok, 2) }}%</h3>
-                            </font>
-                        </label>
-                        </div>
-                    </div> --}}
-                    <div class="container mr-2 ml-2 border border-dark">
-                        <div class="col-lg-12">
-                            <h1 class="text-center"> <b> NG PLATING</b></h1>
-                            <div class="row">
-
-                                <?php
-                                $data1 = collect([['type' => 'plating', 'name' => 'Nikel', 'val' => $nikel], ['type' => 'plating', 'name' => 'Butsu', 'val' => $butsu], ['type' => 'plating', 'name' => 'Hadare', 'val' => $hadare], ['type' => 'plating', 'name' => 'Hage', 'val' => $hage], ['type' => 'plating', 'name' => 'Moyo', 'val' => $moyo], ['type' => 'plating', 'name' => 'Fukure', 'val' => $fukure], ['type' => 'plating', 'name' => 'Crack', 'val' => $crack], ['type' => 'plating', 'name' => 'Henkei', 'val' => $henkei], ['type' => 'plating', 'name' => 'Hanazaki', 'val' => $hanazaki], ['type' => 'plating', 'name' => 'Kizu', 'val' => $kizu], ['type' => 'plating', 'name' => 'Kaburi', 'val' => $kaburi], ['type' => 'plating', 'name' => 'Other', 'val' => $other]]);
-
-                                $data2 = collect([['type' => 'molding', 'name' => 'Gores', 'val' => $gores], ['type' => 'molding', 'name' => 'Regas', 'val' => $regas], ['type' => 'molding', 'name' => 'Silver', 'val' => $silver], ['type' => 'molding', 'name' => 'Hike', 'val' => $hike], ['type' => 'molding', 'name' => 'Burry', 'val' => $burry], ['type' => 'molding', 'name' => 'Others', 'val' => $others]]);
-
-                                $dataMerge = $data1->merge($data2);
-
-                                $dataSort1 = $dataMerge->sortByDesc('val')->slice(0, 3);
-                                ?>
-
-                                @foreach ($data1 as $key1 => $d)
-                                    <?php
-                                    $p = $d['name'];
-                                    $t = $d['type'];
-                                    $filter = $dataSort1->filter(function ($i, $k) use ($p, $t) {
-                                        return $i['name'] === $p && $i['type'] === $t && $i['val'] > 0;
-                                    });
-                                    // print_r($filter->count());
-                                    ?>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <h2>{{ $d['name'] }}</h2>
-                                            <h1 class="{{ $filter->count() === 1 ? 'bg-danger' : 'bg-white' }} border">
-                                                {{ number_format($d['val'], 2) }}%</h1>
-                                        </div>
-                                    </div>
-                                @endforeach
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-4">
+                    <label for="" class="text-white">Filter</label> <br>
+                    <button type="submit" class="btn btn-primary">Filter</button>
                 </div>
-
-                <br>
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <!-- small box -->
-                        <div class="small-box bg-danger">
-                            <div class="inner">
-                                <h2>{{ number_format($total_ng, 2) }}%</h2>
-                                <p>
-                                    <font size="5"> Total NG </font>
-                                </p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-dumpster"></i>
-                            </div>
-                        </div>
+            </div>
+        </form>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-widget widget-user">
+                    <div class="widget-user-header bg-success">
+                        <i class="far fa-check-circle fa-7x"></i>
                     </div>
-                    <div class="container mr-2 ml-2 border border-dark">
-                        <div class="col-md-12">
-                            <h1 class="text-center"> <b> NG MOLDING </b> </h1>
-                            <div class="row">
-
-                                @foreach ($data2 as $key2 => $d2)
-                                    <?php
-                                    $p2 = $d2['name'];
-                                    $t2 = $d2['type'];
-                                    $filter = $dataSort1->filter(function ($i, $k) use ($p2, $t2) {
-                                        return $i['name'] === $p2 && $i['type'] === $t2;
-                                    });
-                                    ?>
-
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <h2>{{ $d2['name'] }}</h2>
-                                            <h1 class="{{ $filter->count() == 1 ? 'bg-danger' : 'bg-white' }} border">
-                                                {{ number_format($d2['val'], 2) }}%</h1>
-                                        </div>
-                                    </div>
-                                @endforeach
+                    <div class="card-footer"
+                        style="
+                    padding-top: 0px;
+                    padding-left: 0px;
+                    padding-bottom: 0px;
+                    padding-right: 0px;
+                ">
+                        <div class="row">
+                            <div class="col-sm-6 border-right">
+                                <div class="description-block">
+                                    <h7> <b> OK </b> </h7>
+                                </div>
                             </div>
-                            <div class="container mt-2 border border-dark">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <h3> <b> C1 | {{ number_format($c1_p) }}% </b></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <h3> <b> C2 | {{ number_format($c2_p) }}% </b></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <h3> <b> CS | {{ number_format($cooper_p) }}% </b></h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <h3> <b> FS | {{ number_format($final_p) }}% </b></h3>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-sm-6">
+                                <div class="description-block">
+                                    <h7> <b> {{ number_format($total_ok, 2) }}% </b> </h7>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <h1 class="text-center"> <b> NG PLATING </b></h1>
+                    <div class="row">
+                        <?php
+                        $data1 = collect([['type' => 'plating', 'name' => 'Nikel', 'val' => $nikel], ['type' => 'plating', 'name' => 'Butsu', 'val' => $butsu], ['type' => 'plating', 'name' => 'Hadare', 'val' => $hadare], ['type' => 'plating', 'name' => 'Hage', 'val' => $hage], ['type' => 'plating', 'name' => 'Moyo', 'val' => $moyo], ['type' => 'plating', 'name' => 'Fukure', 'val' => $fukure], ['type' => 'plating', 'name' => 'Crack', 'val' => $crack], ['type' => 'plating', 'name' => 'Henkei', 'val' => $henkei], ['type' => 'plating', 'name' => 'Hanazaki', 'val' => $hanazaki], ['type' => 'plating', 'name' => 'Kizu', 'val' => $kizu], ['type' => 'plating', 'name' => 'Kaburi', 'val' => $kaburi], ['type' => 'plating', 'name' => 'Other', 'val' => $other]]);
+
+                        $data2 = collect([['type' => 'molding', 'name' => 'Gores', 'val' => $gores], ['type' => 'molding', 'name' => 'Regas', 'val' => $regas], ['type' => 'molding', 'name' => 'Silver', 'val' => $silver], ['type' => 'molding', 'name' => 'Hike', 'val' => $hike], ['type' => 'molding', 'name' => 'Burry', 'val' => $burry], ['type' => 'molding', 'name' => 'Others', 'val' => $others]]);
+
+                        $dataMerge = $data1->merge($data2);
+
+                        $dataSort1 = $dataMerge->sortByDesc('val')->slice(0, 3);
+                        ?>
+
+                        @foreach ($data1 as $key1 => $d)
+                            <?php
+                            $p = $d['name'];
+                            $t = $d['type'];
+                            $filter = $dataSort1->filter(function ($i, $k) use ($p, $t) {
+                                return $i['name'] === $p && $i['type'] === $t && $i['val'] > 0;
+                            });
+                            ?>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="text-center ml-2"> {{ $d['name'] }} </span>
+                                    <input type="text"
+                                        class="form-control ml-2 {{ $filter->count() === 1 ? 'bg-danger' : 'bg-white' }} border"
+                                        value="{{ number_format($d['val'], 2) }}%" readonly>
+                                        <br>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-widget widget-user">
+                    <div class="widget-user-header bg-danger">
+                        <i class="far fa-times-circle fa-7x"></i>
+                    </div>
+                    <div class="card-footer"
+                        style="
+                    padding-top: 0px;
+                    padding-left: 0px;
+                    padding-bottom: 0px;
+                    padding-right: 0px;
+                ">
+                        <div class="row">
+                            <div class="col-sm-6 border-right">
+                                <div class="description-block">
+                                    <h7> <b> NG </b> </h7>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="description-block">
+                                    <h7> <b> {{ number_format($total_ng, 2) }}% </b> </h7>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <h1 class="text-center"> <b> NG MOLDING </b></h1>
+                    <div class="row">
+                        <?php
+                        $data1 = collect([['type' => 'plating', 'name' => 'Nikel', 'val' => $nikel], ['type' => 'plating', 'name' => 'Butsu', 'val' => $butsu], ['type' => 'plating', 'name' => 'Hadare', 'val' => $hadare], ['type' => 'plating', 'name' => 'Hage', 'val' => $hage], ['type' => 'plating', 'name' => 'Moyo', 'val' => $moyo], ['type' => 'plating', 'name' => 'Fukure', 'val' => $fukure], ['type' => 'plating', 'name' => 'Crack', 'val' => $crack], ['type' => 'plating', 'name' => 'Henkei', 'val' => $henkei], ['type' => 'plating', 'name' => 'Hanazaki', 'val' => $hanazaki], ['type' => 'plating', 'name' => 'Kizu', 'val' => $kizu], ['type' => 'plating', 'name' => 'Kaburi', 'val' => $kaburi], ['type' => 'plating', 'name' => 'Other', 'val' => $other]]);
+
+                        $data2 = collect([['type' => 'molding', 'name' => 'Gores', 'val' => $gores], ['type' => 'molding', 'name' => 'Regas', 'val' => $regas], ['type' => 'molding', 'name' => 'Silver', 'val' => $silver], ['type' => 'molding', 'name' => 'Hike', 'val' => $hike], ['type' => 'molding', 'name' => 'Burry', 'val' => $burry], ['type' => 'molding', 'name' => 'Others', 'val' => $others]]);
+
+                        $dataMerge = $data1->merge($data2);
+
+                        $dataSort1 = $dataMerge->sortByDesc('val')->slice(0, 3);
+                        ?>
+
+                        @foreach ($data2 as $key2 => $d2)
+                            <?php
+                            $p2 = $d2['name'];
+                            $t2 = $d2['type'];
+                            $filter = $dataSort1->filter(function ($i, $k) use ($p, $t) {
+                                return $i['name'] === $p && $i['type'] === $t && $i['val'] > 0;
+                            });
+                            ?>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <span class="text-center"> {{ $d2['name'] }} </span>
+                                    <input type="text"
+                                        class="form-control {{ $filter->count() === 1 ? 'bg-danger' : 'bg-white' }} border"
+                                        value="{{ number_format($d['val'], 2) }}%" readonly>
+                                        <br><br><br><br><br>
+                                </div>
+                            </div>
+                            <hr>
+                        @endforeach
+
+                    </div>
 
                 </div>
+                <div class="row">
+                    <div class="col-md-3 mt-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control border border-dark "
+                                value=" C1 | {{ number_format($c1_p) }}%">
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control border border-dark"
+                                value=" C2 | {{ number_format($c2_p) }}%">
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control border border-dark"
+                                value=" CS | {{ number_format($cooper_p) }}%">
+                        </div>
+                    </div>
+                    <div class="col-md-3 mt-2">
+                        <div class="form-group">
+                            <input type="text" class="form-control border border-dark"
+                                value=" FS | {{ number_format($final_p) }}%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-                {{-- <div class="row">
+        <div class="row mt-4">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
@@ -184,8 +211,8 @@
                     <div class="card-body">
                         <div class="chart-container">
                             <canvas id="doughnutChart"
-                                style="display: block; box-sizing: border-box; height: 310px; width: 310px;"
-                                width="310" height="310"></canvas>
+                                style="display: block; box-sizing: border-box; height: 310px; width: 310px;" width="310"
+                                height="310"></canvas>
                         </div>
                     </div>
                 </div>
@@ -202,10 +229,8 @@
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
 
-                <!-- ./col -->
-            </div>
         </div>
     </section>
 @endsection

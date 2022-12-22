@@ -8,7 +8,7 @@
     <li class="active"> > Unracking</li>
 @endsection
 @section('content')
-        <div class="card-header centering">
+    <div class="card-header centering">
         <form action="{{ route('unracking_t') }}" method="GET">
             <div class="row input-daterange">
                 <div class="col-md-5">
@@ -88,7 +88,7 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-		scrollY: "700px",
+                scrollY: "700px",
                 scrollX: true,
                 scrollCollapse: true,
                 paging: false,

@@ -22,8 +22,28 @@
                         @csrf
                         @method('patch')
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+<label for="">asdasdas</label>
+<input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card-body">
+                                    <div class="form-group row">
+                                        <label class="col-sm-1">Tgl Racking</label>
+                                        <div class="col-sm-4 bg-danger">
+                                            {{ $plating->tanggal_r }}
+                                        </div>
+                                        <label class="col-sm-2">Part Name</label>
+                                        <div class="col-sm-4">
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-md-3">
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
@@ -203,27 +223,6 @@
                                             </div>
                                         </div>
 
-                                        {{-- <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            @if (isset($previous_record))
-                                                                <a href="{{ url($previous_record->url) }}">
-                                                                    <div> Previous</div>
-                                                                    <p>{{ $previous_record->title }}</p>
-                                                                </a>
-                                                            @endif
-                                                        </div>
-                                                        <div class="col-6">
-                                                            @if (isset($next_record))
-                                                                <a href="{{ url($next_record->url) }}">
-                                                                    <div>Next</div>
-                                                                    <p>{{ $next_record->title }}</p>
-                                                                </a>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
-
 
                                         <div class="text-center mt-3">
                                             <a href="{{ URL::to('unracking_t/edit/' . $previous) }}"
@@ -242,7 +241,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
                 <!-- /.card -->
