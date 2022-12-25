@@ -23,44 +23,6 @@ class UnrackingController_T extends Controller
     //tampil data
     public function index(Request $request)
     {
-        // $date = Carbon::parse($request->date)->format('Y-m-d');
-        // $plating = unracking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
-        //     ->select('plating.*', 'masterdata.stok_bc')
-        //     ->whereNull('tanggal_u')
-        //     // ->orderBy('tanggal_r', 'desc')->orderBy('waktu_in_r', 'desc')
-        //     ->get();
-
-        // $plating = unracking_t::join('masterdata', 'masterdata.id', '=', 'plating.id_masterdata')
-        //     ->select('plating.*', 'masterdata.stok_bc')
-        //     ->where('status', '=', '0')
-        //     ->get();
-
-        // $masterdata = MasterData::all();
-        // return view('unracking_t.unracking_t', compact('plating', 'masterdata', 'date'));
-
-        // if ($request->ajax()) {
-        //     $data = unracking_t::select('*');
-        //     return DataTables::of($data)
-        //             ->addIndexColumn()
-        //             ->addColumn('action', function($row){
-
-        //                    $btn = '<a href="unracking_t/{id}/edit" class="edit btn btn-primary btn-sm">View</a>';
-
-        //                     return $btn;
-        //             })
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
-
-        // return view('unracking_t.unracking_t');
-
-        // $startOfWeek = Carbon::parse($request->startofWeek)->format('Y-m-d');
-        // $endOfWeek = Carbon::parse($request->endOfWeek)->format('Y-m-d');
-        // $plating = unracking_t::whereBetween('tanggal_r', [$startOfWeek, $endOfWeek])
-        //     ->orderBy('tanggal_r', 'desc')->orderBy('waktu_in_r', 'asc')
-        //     ->get();
-        // return view('unracking_t.unracking_t', compact('plating','startOfWeek','endOfWeek'));
-
         $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
         $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
         $start_date = Carbon::parse($request->start_date)->format('Y-m-d');

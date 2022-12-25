@@ -27,7 +27,9 @@
                                             <div class="form-group">
                                                 <label>Tanggal</label>
                                                 <input type="date" name="tanggal" value="<?= date('Y-m-d') ?>"
-                                                    class="@error('tanggal') is-invalid @enderror form-control">
+                                                    class="@error('tanggal')
+is-invalid
+@enderror form-control">
                                                 @error('tanggal')
                                                     <div class="text-danger">{{ $message }}</div>
                                                 @enderror
@@ -89,6 +91,65 @@
                                             @enderror
                                         </div>
 
+                                        <div class="col-md-6" data-select2-id="30">
+                                            <div class="form-group" data-select2-id="29">
+                                                <label>Minimal</label>
+                                                <select class="form-control select2 select2-hidden-accessible"
+                                                    style="width: 100%;" data-select2-id="1" tabindex="-1"
+                                                    aria-hidden="true">
+                                                    <option selected="selected" data-select2-id="3">Alabama</option>
+                                                    <option data-select2-id="33">Alaska</option>
+                                                    <option data-select2-id="34">California</option>
+                                                    <option data-select2-id="35">Delaware</option>
+                                                    <option data-select2-id="36">Tennessee</option>
+                                                    <option data-select2-id="37">Texas</option>
+                                                    <option data-select2-id="38">Washington</option>
+                                                </select><span
+                                                    class="select2 select2-container select2-container--default select2-container--below"
+                                                    dir="ltr" data-select2-id="2" style="width: 100%;"><span
+                                                        class="selection"><span
+                                                            class="select2-selection select2-selection--single"
+                                                            role="combobox" aria-haspopup="true" aria-expanded="false"
+                                                            tabindex="0" aria-disabled="false"
+                                                            aria-labelledby="select2-bvwz-container"><span
+                                                                class="select2-selection__rendered"
+                                                                id="select2-bvwz-container" role="textbox"
+                                                                aria-readonly="true" title="Alabama">Alabama</span><span
+                                                                class="select2-selection__arrow" role="presentation"><b
+                                                                    role="presentation"></b></span></span></span><span
+                                                        class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                            </div>
+                                            <!-- /.form-group -->
+                                            <div class="form-group">
+                                                <label>Disabled</label>
+                                                <select class="form-control select2 select2-hidden-accessible"
+                                                    disabled="" style="width: 100%;" data-select2-id="4"
+                                                    tabindex="-1" aria-hidden="true">
+                                                    <option selected="selected" data-select2-id="6">Alabama</option>
+                                                    <option>Alaska</option>
+                                                    <option>California</option>
+                                                    <option>Delaware</option>
+                                                    <option>Tennessee</option>
+                                                    <option>Texas</option>
+                                                    <option>Washington</option>
+                                                </select><span
+                                                    class="select2 select2-container select2-container--default select2-container--disabled"
+                                                    dir="ltr" data-select2-id="5" style="width: 100%;"><span
+                                                        class="selection"><span
+                                                            class="select2-selection select2-selection--single"
+                                                            role="combobox" aria-haspopup="true" aria-expanded="false"
+                                                            tabindex="-1" aria-disabled="true"
+                                                            aria-labelledby="select2-xng7-container"><span
+                                                                class="select2-selection__rendered"
+                                                                id="select2-xng7-container" role="textbox"
+                                                                aria-readonly="true" title="Alabama">Alabama</span><span
+                                                                class="select2-selection__arrow" role="presentation"><b
+                                                                    role="presentation"></b></span></span></span><span
+                                                        class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                            </div>
+                                            <!-- /.form-group -->
+                                        </div>
+
                                         <div class="container mt-2">
                                             <div class="card-footer text-center">
                                                 <button class="btn btn-primary mr-1" type="submit"> <i
@@ -131,7 +192,10 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#id_masterdata').select2();
+            $("#id_masterdata").select2({
+                allowClear: true,
+                width: "resolve"
+            });
         });
     </script>
 

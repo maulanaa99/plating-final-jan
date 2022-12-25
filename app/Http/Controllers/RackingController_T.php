@@ -138,7 +138,7 @@ class RackingController_T extends Controller
         $masterdata = MasterData::all();
         $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
 
-        return view('racking_t.racking_t-edit', compact('plating', 'masterdata', 'hit_data_racking','date'))->with('previous', $previous)->with('next', $next);
+        return view('racking_t.racking_t-edit', compact('plating', 'masterdata', 'hit_data_racking', 'date'))->with('previous', $previous)->with('next', $next);
     }
 
     //update data
@@ -169,7 +169,7 @@ class RackingController_T extends Controller
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
 
-        return View::make('racking_t.racking_t-edit',compact('plating','masterdata','date','hit_data_racking'))->with('previous', $previous)->with('next', $next)->with('message', 'Data berhasil di update');
+        return View::make('racking_t.racking_t-edit', compact('plating', 'masterdata', 'date', 'hit_data_racking'))->with('previous', $previous)->with('next', $next)->with('message', 'Data berhasil di update');
     }
 
     public function ajaxRacking(Request $request)
@@ -190,9 +190,15 @@ class RackingController_T extends Controller
             $masterdata->stok_bc = $masterdata->stok_bc - $plating->qty_aktual;
             $masterdata->save();
             $plating->delete();
-            return redirect()->route('racking_t')->with('success', 'Data Berhasil Dihapus!');
+            // return redirect()->route('racking_t')->with('success', 'Data Berhasil Dihapus!');
+            return response()->json([
+                'success' => true
+            ]);
         } else
-            return redirect()->route('racking_t')->with('errors', 'Data Gagal Dihapus!');
+            return response()->json([
+                'success' => false
+            ]);
+        // return redirect()->route('racking_t')->with('errors', 'Data Gagal Dihapus!');
     }
 
     public function utama(Request $request)

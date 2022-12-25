@@ -1,4 +1,7 @@
 @extends('layout.master')
+@section('title')
+    Tambah Masterdata Part
+@endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">

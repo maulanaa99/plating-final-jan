@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,12 +12,17 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
-    require('tailwindcss'),
-    require('autoprefixer'),
-]);
-mix.webpackConfig({
-    stats: {
-        children: true,
-    },
+// mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
+//     require('tailwindcss'),
+//     require('autoprefixer'),
+// ]);
+// mix.webpackConfig({
+//     stats: {
+//         children: true,
+//     },
+// });
+
+mix.browserSync({
+    proxy: 'http://localhost:8000',
+    files: ['resources/views/**/*.blade.php', 'public/css/**/*.css', 'public/js/**/*.js']
 });

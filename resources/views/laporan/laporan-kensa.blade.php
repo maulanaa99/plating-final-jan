@@ -47,17 +47,13 @@
             <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="align-middle text-center">#</th>
-                        <th rowspan="2" class="align-middle text-center">Tanggal</th>
-                        <th rowspan="2" class="align-middle text-center">Part Name</th>
-                        <th rowspan="2" class="align-middle text-center">No Bar</th>
-                        <th rowspan="2" class="align-middle text-center">Qty Bar</th>
-                        <th rowspan="2" class="align-middle text-center">Cycle</th>
-                        <th colspan="15" class="align-middle text-center">NG PLATING</th>
-                        <th colspan="6" class="align-middle text-center">NG MOLDING</th>
-                        <th colspan="5" class="align-middle text-center">Total</th>
-                    </tr>
-                    <tr>
+                        <th>#</th>
+                        <th>Tanggal</th>
+                        <th>Part Name</th>
+                        <th>No Bar</th>
+                        <th>Qty Bar</th>
+                        <th>Total OK</th>
+                        <th>Cycle</th>
                         <th>Nikel</th>
                         <th>Butsu</th>
                         <th>Hadare</th>
@@ -79,7 +75,6 @@
                         <th>Hike</th>
                         <th>Burry</th>
                         <th>Others</th>
-                        <th>Total OK</th>
                         <th>Total NG</th>
                         <th>% Total OK</th>
                         <th>% Total NG</th>
@@ -95,6 +90,7 @@
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->no_bar }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->qty_bar }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->cycle }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->nikel }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->butsu }}</td>
@@ -117,22 +113,9 @@
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->hike }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->burry }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->others }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ng }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
-                            {{-- <td style="width:1px; white-space:nowrap;"> --}}
-                                {{-- <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
-                                        class="far fa-edit"></i></a> --}}
-                                {{-- <a href="#" data-id="{{ $kensha->id }}"
-                                    class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
-                                        </i>
-                                    <form action="{{ route('kensa.delete', $kensha->id) }}" id="delete{{ $kensha->id }}"
-                                        method="POST">
-                                        @csrf
-                                    </form>
-                                </a> --}}
-                            {{-- </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
@@ -161,25 +144,8 @@
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["excel", "pdf", "print"]
+                "buttons": ["excel", "pdf", "print","copy"]
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
-        });
-    </script>
-    <script>
-        $(".swal-confirm").click(function(e) {
-            id = e.target.dataset.id;
-            swal({
-                    title: 'Hapus data? ',
-                    text: 'Setelah dihapus, data tidak dapat dikembalikan',
-                    icon: 'warning',
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $(`#delete${id}`).submit();
-                    } else {}
-                });
         });
     </script>
 @endpush

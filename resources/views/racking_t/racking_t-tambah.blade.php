@@ -10,6 +10,11 @@
         }
     </style>
 @endpush
+
+@section('title')
+    Tambah Data Racking
+@endsection
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -28,7 +33,14 @@
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-1">
+                                            <div class="form-group">
+                                                <label>No</label>
+                                                <input type="text" value="{{ $hit_data_racking + 1 }}" readonly
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
                                                 <label>Tanggal</label>
@@ -89,7 +101,7 @@ is-invalid
                                                 <label> Part Name</label>
                                                 <select class="form-control" style="width: 100%;" name="id_masterdata"
                                                     id="id_masterdata">
-                                                    <option value="" hidden>--Pilih Barang--</option>
+                                                    <option value="" hidden>--Pilih Part--</option>
                                                     @foreach ($masterdata as $d)
                                                         <option value="{{ $d->id }}">{{ $d->part_name }} ||
                                                             Ch.{{ $d->channel }}

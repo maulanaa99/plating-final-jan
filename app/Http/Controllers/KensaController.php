@@ -98,7 +98,7 @@ class KensaController extends Controller
     }
 
     //tambah data
-    public function tambah()
+    public function tambah(Request $request)
     {
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->join('plating', 'plating.id', '=', 'kensa.id_plating')
@@ -112,8 +112,12 @@ class KensaController extends Controller
             ->where('status', '=', '2')
             ->get();
 
+        $date = Carbon::parse($request->date)->format('Y-m-d');
+        $hit_data_kensa = kensa::where('tanggal_k', '=', $date)->count();
+
+
         $masterdata = MasterData::all();
-        return view('kensa.kensa-tambah', compact('kensa', 'masterdata', 'platings'));
+        return view('kensa.kensa-tambah', compact('kensa', 'masterdata', 'platings','hit_data_kensa','date'));
     }
 
     //simpan data
@@ -279,7 +283,7 @@ class KensaController extends Controller
         $date = Carbon::parse($request->tgl_kanban)->format('Y-m-d');
 
         $q = $ajax_barang->first()->pengirimans()->where('tgl_kanban', '=', $date)->orderBy('id', 'desc')->first();
-        $kode = $q ? $q->no_kartu + 1 : '0001';
+        $kode = $q ? $q->no_kartu + 1 : '01';
 
         return view('kensa.print-kanban-ajax', compact('ajax_barang', 'kode'));
     }
@@ -288,11 +292,11 @@ class KensaController extends Controller
     {
         $masterdata = MasterData::find($request->id_masterdata);
         if ($masterdata->stok < $request->kirim_assy) {
-            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
+            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
         } else if ($masterdata->stok < $request->kirim_painting) {
-            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
+            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
         } else if ($masterdata->stok < $request->kirim_ppic) {
-            return redirect()->route('kensa.printKanban')->with('errors', 'Gagal!, Stok Kurang');
+            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
         } else {
             $pengiriman = Pengiriman::create([
                 'tgl_kanban' => $request->tgl_kanban,

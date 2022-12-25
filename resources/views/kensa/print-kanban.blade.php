@@ -10,6 +10,8 @@
 @push('page-styles')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
     <style>
         /* untuk menghilangkan spinner  */
         .spinner {
@@ -41,6 +43,10 @@
         .btn{
             font-size: 18pt;
         }
+        .form-control{
+            font-size: 18pt;
+        }
+        
     </style>
 @endpush
 @section('content')
@@ -86,13 +92,13 @@
 
                                         <div id="detail_part"></div>
 
-                                        <div class="col-md-3 mt-2">
-                                            <label>Qty Kirim</label>
+                                        <div class="col-md-6 mt-2">
+                                            <label>Jumlah Kirim</label>
                                             <input type="text" id="qty_kirim" name="qty_kirim" readonly onkeyup="sum();"
                                                 class="form-control">
                                         </div>
 
-                                        <div class="col-md-3 mt-2">
+                                        <div class="col-md-6 mt-2">
                                             <label>Jumlah Print</label>
                                             <input type="text" id="jml_kirim" readonly class="form-control">
                                         </div>
@@ -102,8 +108,6 @@
                                         <span class="perhatian text-danger" > <i class="fa fa-danger" >  "PASTIKAN BOX SESUAI DENGAN PARTNYA DAN BUKAN BOX KOSONG <br> DAN JUMLAHNYA HARUS FULL!!!" </i></span>
                                        <p class=" text-center text-danger"> </p>
                                     </div>
-
-
 
                                     <div class="container mt-3 text-center">
                                         <button class="btn btn-primary button-prevent" type="submit">
@@ -121,8 +125,6 @@
                                             class="btn btn-icon icon-left btn-warning">
                                             <i class="fas fa-arrow-left"></i> Kembali</a>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -137,7 +139,8 @@
 @push('page-script')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endpush
 

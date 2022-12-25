@@ -31,7 +31,6 @@
     </div>
 
     <div class="card-body">
-
         <div class="table-responsive">
             <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
                 <thead>
@@ -43,7 +42,7 @@
                         <th class="align-middle text-center">Part Number</th>
                         <th class="align-middle text-center">Katalis</th>
                         <th class="align-middle text-center">Channel</th>
-                        <th class="align-middle text-center">Grade Color</th>
+                        <th class="align-middle text-center">Chrome</th>
                         <th class="align-middle text-center">Qty Bar</th>
                         <th class="align-middle text-center">Tgl Lot Prod Mldg</th>
                         <th class="align-middle text-center">Cycle</th>
@@ -55,7 +54,7 @@
                 <tbody>
                     @foreach ($racking as $no => $rack)
                         <tr>
-                            <td>{{ $racking->count() - $no }}</td>
+                            <td>{{ $no + 1 }}</td>
                             <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
                             <td>{{ $rack->no_bar }}</td>
                             <td>{{ $rack->part_name }}</td>
@@ -70,15 +69,9 @@
                             <td>
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>
-                                <a href="#" data-id="{{ $rack->id }}"
-                                    class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
-                                    </i>
-
-                                    <form action="{{ route('racking_t.delete', $rack->id) }}"
-                                        id="delete{{ $rack->id }}" method="POST">
-                                        @csrf
-                                    </form>
-                                </a>
+                                <button type="button" class="btn btn-danger btn-sm delete-button"
+                                    data-id="{{ $rack->id }}"> <i class="far fa-trash-alt">
+                                    </i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -91,12 +84,11 @@
 @endsection
 
 @push('page-script')
-    <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
 @endpush
 
 @push('after-script')
-    @include('sweetalert::alert')
-
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({
@@ -118,21 +110,58 @@
             });
         });
     </script>
+
     <script>
-        $(".swal-confirm").click(function(e) {
-            id = e.target.dataset.id;
-            swal({
-                    title: 'Hapus data? ',
-                    text: 'Setelah dihapus, data tidak dapat dikembalikan',
-                    icon: 'warning',
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $(`#delete${id}`).submit();
-                    } else {}
-                });
+        $(document).on('click', '.delete-button', function(e) {
+            e.preventDefault();
+
+            var id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus saja!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '/racking_t/delete/' + id,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(data) {
+                            if (data.success) {
+                                Swal.fire(
+                                    'Terhapus!',
+                                    'Data Anda telah dihapus.',
+                                    'success'
+                                ).then((result) => {
+                                    window.location.href = '/racking_t';
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Part sudah di Unracking.',
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function() {
+                            Swal.fire(
+                                'Gagal!',
+                                'Terjadi kesalahan saat menghapus data.',
+                                'error'
+                            ).then((result) => {
+                                window.location.href = '/racking_t';
+                            });
+                        }
+                    });
+                }
+            })
         });
     </script>
 @endpush
