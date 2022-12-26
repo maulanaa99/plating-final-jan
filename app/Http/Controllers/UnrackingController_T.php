@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Mike42\Escpos\EscposImage;
@@ -35,7 +36,7 @@ class UnrackingController_T extends Controller
     }
 
     //edit data
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $plating = unracking_t::find($id);
         $masterdata = MasterData::find($plating->id_masterdata);
@@ -43,7 +44,20 @@ class UnrackingController_T extends Controller
         $previous = unracking_t::where('id', '<', $plating->id)->max('id');
         $next = unracking_t::where('id', '>', $plating->id)->min('id');
 
-        return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next);
+        // $previous = unracking_t::where('id', '<', $plating->id)->orderBy('id', 'desc')->first();
+        // $next = unracking_t::where('id', '>', $plating->id)->orderBy('id', 'asc')->first();
+
+        // if ($id === null) {
+        //     $next = unracking_t::first();
+        //     dd($next);
+        // } else {
+        //     $user = unracking_t::find($id);
+        //     $next = unracking_t::where('id', '>', $user->id)->orderBy('id', 'asc')->first();
+        // }
+
+        return view('unracking_t.unracking_t-edit', compact('previous','next','plating','masterdata','id'));
+
+        // return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next);
     }
 
     //update data
@@ -65,14 +79,12 @@ class UnrackingController_T extends Controller
 
         $masterdata->save();
 
-        // Log::debug('next : '.$request->next);
-        if(isset($request->next)){
-           return redirect('/unracking_t/edit/'.$request->next);
-        }else{
+        if (isset($request->next)) {
+            return redirect('/unracking_t/edit/' . $request->next);
+        } else {
             $previous = unracking_t::where('id', '<', $plating->id)->max('id');
             $next = unracking_t::where('id', '>', $plating->id)->min('id');
 
-            // return redirect()->route('unracking_t.edit',compact('unracking'))->with('previous', $previous)->with('next', $next);
             return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next)->with('success', 'Data berhasil ditambahkan!');
         }
     }

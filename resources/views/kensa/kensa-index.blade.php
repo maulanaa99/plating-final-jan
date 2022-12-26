@@ -46,15 +46,6 @@
         </form>
     </div>
 
-    <div class="row"
-        style="
-    padding-bottom: 0px;
-    padding-left: 20px;
-    padding-right: 0px;
-    padding-top: 0px;
-">
-    </div>
-
 
     <div class="card-body mt-3" style="
     padding-top: 0px;
@@ -67,6 +58,7 @@
                     <th rowspan="2" class="align-middle text-center">Part Name</th>
                     <th rowspan="2" class="align-middle text-center">No Bar</th>
                     <th rowspan="2" class="align-middle text-center">Qty Bar</th>
+                    <th rowspan="2" class="align-middle text-center">Total OK</th>
                     <th rowspan="2" class="align-middle text-center">Cycle</th>
                     <th colspan="16" class="align-middle text-center">NG PLATING</th>
                     <th colspan="6" class="align-middle text-center">NG MOLDING</th>
@@ -95,7 +87,6 @@
                     <th>Hike</th>
                     <th>Burry</th>
                     <th>Others</th>
-                    <th>Total OK</th>
                     <th>Total NG</th>
                     <th>% Total OK</th>
                     <th>% Total NG</th>
@@ -113,6 +104,7 @@
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->no_bar }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->qty_bar }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->cycle }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->nikel }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->butsu }}</td>
@@ -136,7 +128,6 @@
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->hike }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->burry }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->others }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ng }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
@@ -156,11 +147,10 @@
                     </tr>
                 @endforeach
             </tbody>
-            {{-- <tfoot>
+            <tfoot>
                 <tr>
-                    <td colspan="4" class="bg-transparent">
+                    <td colspan="6" class="bg-transparent">
                     </td>
-                    <td colspan="2" class="bg-tranparent" ></td>
                     <td><b>{{ $sum_nikel }}</b></td>
                     <td><b>{{ $sum_butsu }}</b></td>
                     <td><b>{{ $sum_hadare }}</b></td>
@@ -175,6 +165,7 @@
                     <td><b>{{ $sum_shiromoya }}</b></td>
                     <td><b>{{ $sum_shimi }}</b></td>
                     <td><b>{{ $sum_pitto }}</b></td>
+                    <td><b>{{ $sum_misto }}</b></td>
                     <td><b>{{ $sum_other }}</b></td>
                     <td><b>{{ $sum_gores }}</b></td>
                     <td><b>{{ $sum_regas }}</b></td>
@@ -186,7 +177,7 @@
                     <td><b>{{ $sum_total_ng }}</b></td>
                     <td colspan="3"></td>
                 </tr>
-            </tfoot> --}}
+            </tfoot>
         </table>
     </div>
     <br>
@@ -219,7 +210,7 @@
                 scrollCollapse: true,
                 paging: false,
                 fixedColumns: {
-                    left: 6,
+                    left: 7,
                 }
             });
         });

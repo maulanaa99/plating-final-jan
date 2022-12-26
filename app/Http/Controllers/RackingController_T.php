@@ -145,22 +145,6 @@ class RackingController_T extends Controller
     public function update(Request $request, $id)
     {
         $plating = racking_t::find($id);
-        $plating->id_masterdata = $request->id_masterdata;
-        $plating->tanggal_r = $request->tanggal_r;
-        $plating->no_bar = $request->no_bar;
-        $plating->part_name = $request->part_name;
-        $plating->no_part = $request->no_part;
-        $plating->katalis = $request->katalis;
-        $plating->channel = $request->channel;
-        $plating->grade_color = $request->grade_color;
-        $plating->qty_bar = $request->qty_bar;
-        $plating->waktu_in_r = $request->waktu_in_r;
-        $plating->tgl_lot_prod_mldg = $request->tgl_lot_prod_mldg;
-        $plating->cycle = $request->cycle;
-        $plating->updated_by = Auth::user()->id;
-        $plating->updated_at = Carbon::now();
-        $plating->save();
-
         $masterdata = MasterData::all();
 
         $previous = racking_t::where('id', '<', $plating->id)->max('id');
@@ -168,6 +152,30 @@ class RackingController_T extends Controller
 
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
+        if ($plating->qty_aktual != '') {
+            // return redirect()->route('racking_t',compact('plating'))->with('toast_error', 'Data tidak dapat diedit!');
+            return redirect()->route('racking_t.edit', compact('plating','hit_data_racking','date','masterdata','previous','next','id'))->with('toast_error', 'Data sudah di unracking');
+
+            // return view('racking_t.racking_t-edit', compact('plating','hit_data_racking','date','masterdata','previous','next'))->with('toast_error', 'Data tidak dapat diedit!');
+        } else {
+            $plating->id_masterdata = $request->id_masterdata;
+            $plating->tanggal_r = $request->tanggal_r;
+            $plating->no_bar = $request->no_bar;
+            $plating->part_name = $request->part_name;
+            $plating->no_part = $request->no_part;
+            $plating->katalis = $request->katalis;
+            $plating->channel = $request->channel;
+            $plating->grade_color = $request->grade_color;
+            $plating->qty_bar = $request->qty_bar;
+            $plating->waktu_in_r = $request->waktu_in_r;
+            $plating->tgl_lot_prod_mldg = $request->tgl_lot_prod_mldg;
+            $plating->cycle = $request->cycle;
+            $plating->updated_by = Auth::user()->id;
+            $plating->updated_at = Carbon::now();
+            $plating->save();
+        }
+
+
 
         return View::make('racking_t.racking_t-edit', compact('plating', 'masterdata', 'date', 'hit_data_racking'))->with('previous', $previous)->with('next', $next)->with('message', 'Data berhasil di update');
     }

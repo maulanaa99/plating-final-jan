@@ -36,7 +36,6 @@
         label {
             font-size: 15pt;
         }
-        
     </style>
 @endpush
 @section('title')
@@ -155,7 +154,7 @@
                                 <div class="col-md-12 mt-1">
                                     <label>Image</label> <br>
                                     <img style="max-width:100%;
-                                    max-height:100%x;"
+                                    max-height:100%;"
                                         src="{{ !empty($masterdata->image) ? url('upload/part_images/' . $masterdata->image) : url('upload/no_images2.png') }}">
                                 </div>
 
@@ -230,9 +229,23 @@
                                     Submit</button>
                                 <button class="btn btn-danger" type="reset"> <i class="fas fa-trash-restore"></i>
                                     Reset</button>
-                                <a href="{{ URL::to('unracking_t/edit/' . $next) }}"
-                                    class="btn btn-outline-success btn-next-submit" data-next="{{ $next }}"> Next
+
+                                    <a href="{{ route('unracking_t.edit', ['id' => $next->id]) }}">Next</a>
+
+
+
+
+
+
+
+
+                                {{-- <a href="{{ URL::to('/unracking_t/edit/' . $id) }}" class="btn btn-primary" > NEXT </a> --}}
+                                <a href="{{ URL::to('unracking_t/edit/' . $next) }}" class="btn btn-outline-success">
+                                    Next
                                     <i class="fas fa-arrow-right"></i></a>
+                                {{-- <a href="{{ URL::to('unracking_t/edit/' . $next) }}"
+                                    class="btn btn-outline-success btn-next-submit" data-next="{{ $next }}"> Next
+                                    <i class="fas fa-arrow-right"></i></a> --}}
                             </div>
                         </div>
                     </form>
@@ -250,7 +263,7 @@
         <script>
             $(document).on('click', '.btn-next-submit', function(e) {
                 e.preventDefault();
-                $('input[name="number"]').val($(this).data('next'));
+                $('input[name="next"]').val($(this).data('next'));
                 $('form').submit();
             })
         </script>

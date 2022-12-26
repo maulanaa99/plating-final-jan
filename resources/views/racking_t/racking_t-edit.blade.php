@@ -163,21 +163,21 @@
                                                         class="form-control">
                                                 </div>
                                             </div>
-                                                <div class="text-center mt-3">
-                                                    <a href="{{ URL::to('racking_t/edit/' . $previous) }}"
-                                                        class="btn btn-outline-secondary"> <i class="fas fa-arrow-left"></i>
-                                                        Previous</a>
-                                                    <button class="btn btn-primary mr-1" type="submit"> <i
-                                                            class="fas fa-save"></i> Submit</button>
-                                                    <button class="btn btn-danger" type="reset"> <i
-                                                            class="fas fa-trash-restore"></i> Reset</button>
-                                                    <a href="{{ route('racking_t') }}"
-                                                        class="btn btn-icon icon-left btn-warning"><i
-                                                            class="fas fa-arrow-left"></i> Kembali</a>
-                                                    <a href="{{ URL::to('racking_t/edit/' . $next) }}"
-                                                        class="btn btn-outline-success"> Next <i
-                                                            class="fas fa-arrow-right"></i></a>
-                                                </div>
+                                            <div class="text-center mt-3">
+                                                <a href="{{ URL::to('racking_t/edit/' . $previous) }}"
+                                                    class="btn btn-outline-secondary"> <i class="fas fa-arrow-left"></i>
+                                                    Previous</a>
+                                                <button class="btn btn-primary mr-1" type="submit"> <i
+                                                        class="fas fa-save"></i> Submit</button>
+                                                <button class="btn btn-danger" type="reset"> <i
+                                                        class="fas fa-trash-restore"></i> Reset</button>
+                                                <a href="{{ route('racking_t') }}"
+                                                    class="btn btn-icon icon-left btn-warning"><i
+                                                        class="fas fa-arrow-left"></i> Kembali</a>
+                                                <a href="{{ URL::to('racking_t/edit/' . $next) }}"
+                                                    class="btn btn-outline-success"> Next <i
+                                                        class="fas fa-arrow-right"></i></a>
+                                            </div>
                     </form>
                 </div>
                 <!-- /.card -->
@@ -200,6 +200,7 @@
 @endpush
 
 @push('after-script')
+    @include('sweetalert::alert');
     <script>
         $(function() {
             $.validator.setDefaults({

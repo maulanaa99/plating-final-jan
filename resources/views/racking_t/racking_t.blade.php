@@ -89,6 +89,7 @@
 @endpush
 
 @push('after-script')
+@include('sweetalert::alert');
     <script>
         $(document).ready(function() {
             $("#add-row").DataTable({

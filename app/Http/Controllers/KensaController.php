@@ -42,7 +42,8 @@ class KensaController extends Controller
         $sum_kaburi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kaburi');
         $sum_shiromoya = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shiromoya');
         $sum_shimi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shimi');
-        $sum_pitto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('pti$sum_pitto');
+        $sum_pitto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('pitto');
+        $sum_misto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('misto');
         $sum_other = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('other');
         $sum_gores = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('gores');
         $sum_regas = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('regas');
@@ -56,12 +57,6 @@ class KensaController extends Controller
         $avg_p_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->average('p_total_ng');
 
         $masterdata = MasterData::all();
-
-        $coba = Plating::where('status', '=', '0')->get();
-
-        $values = compact('sum_butsu', 'sum_hadare', 'sum_moyo', 'sum_hanazaki', 'sum_gores');
-        $highest_value = max($values);
-        $key = array_search($highest_value, $values);
 
         return view('kensa.kensa-index', compact(
             'kensa',
@@ -81,6 +76,7 @@ class KensaController extends Controller
             'sum_shiromoya',
             'sum_shimi',
             'sum_pitto',
+            'sum_misto',
             'sum_other',
             'sum_gores',
             'sum_regas',
@@ -93,7 +89,6 @@ class KensaController extends Controller
             'avg_p_total_ok',
             'avg_p_total_ng',
             'date',
-            'coba'
         ));
     }
 
