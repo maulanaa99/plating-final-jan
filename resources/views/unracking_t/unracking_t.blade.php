@@ -60,7 +60,7 @@
                         <td>{{ $unrack->cycle }}</td>
                         <td>
                             <a href="{{ route('unracking_t.edit', $unrack->id) }}"
-                                class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>
+                                class="btn btn-icon btn-sm btn-warning" target="_blank"><i class="far fa-edit"></i> </a>
 
                         </td>
                     </tr>

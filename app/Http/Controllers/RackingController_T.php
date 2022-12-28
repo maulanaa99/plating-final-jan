@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RackingController_T extends Controller
 {
@@ -79,51 +80,73 @@ class RackingController_T extends Controller
     //simpan data
     public function simpan(Request $request)
     {
-        $validatedData = $request->validate([
-            'tanggal_r' => 'required',
-            'no_bar' => 'required',
-            'part_name' => 'required',
-            'no_part' => 'required',
-            'katalis' => 'required',
-            'channel' => 'required',
-            'grade_color' => 'required',
-            'qty_bar' => 'required',
-            'waktu_in_r' => 'required',
-            'tgl_lot_prod_mldg' => 'required',
-            'cycle' => 'required',
-        ], [
-            'tanggal_r.required' => 'Tgl Racking Harus Diisi!',
-            'no_bar.required' => 'No Bar Harus Diisi!',
-            'part_name.required' => 'Part Name Harus Diisi!',
-            'no_part.required' => 'Part Number Harus Diisi!',
-            'katalis.required' => 'katalis Harus Diisi!',
-            'channel.required' => 'channel Harus Diisi!',
-            'grade_color.required' => 'Grade Color Harus Diisi!',
-            'qty_bar.required' => 'Qty Bar Harus Diisi!',
-            'waktu_in_r.required' => 'waktu in racking Harus Diisi!',
-            'tgl_lot_prod_mldg.required' => 'Tgl Lot Prod Molding Harus Diisi!',
-            'cycle.required' => 'cycle Harus Diisi!',
+        // $validatedData = $request->validate([
+        //     'tanggal_r' => 'required',
+        //     'no_bar' => 'required',
+        //     'part_name' => 'required',
+        //     'no_part' => 'required',
+        //     'katalis' => 'required',
+        //     'channel' => 'required',
+        //     'grade_color' => 'required',
+        //     'qty_bar' => 'required',
+        //     'waktu_in_r' => 'required',
+        //     'tgl_lot_prod_mldg' => 'required',
+        //     'cycle' => 'required',
+        // ], [
+        //     'tanggal_r.required' => 'Tgl Racking Harus Diisi!',
+        //     'no_bar.required' => 'No Bar Harus Diisi!',
+        //     'part_name.required' => 'Part Name Harus Diisi!',
+        //     'no_part.required' => 'Part Number Harus Diisi!',
+        //     'katalis.required' => 'katalis Harus Diisi!',
+        //     'channel.required' => 'channel Harus Diisi!',
+        //     'grade_color.required' => 'Grade Color Harus Diisi!',
+        //     'qty_bar.required' => 'Qty Bar Harus Diisi!',
+        //     'waktu_in_r.required' => 'waktu in racking Harus Diisi!',
+        //     'tgl_lot_prod_mldg.required' => 'Tgl Lot Prod Molding Harus Diisi!',
+        //     'cycle.required' => 'cycle Harus Diisi!',
 
-        ]);
+        // ]);
 
-        $racking = racking_t::create([
-            'id_masterdata' => $request->id_masterdata,
-            'tanggal_r' => $request->tanggal_r,
-            'waktu_in_r' => $request->waktu_in_r,
-            'no_bar' => $request->no_bar,
-            'part_name' => $request->part_name,
-            'no_part' => $request->no_part,
-            'katalis' => $request->katalis,
-            'channel' => $request->channel,
-            'grade_color' => $request->grade_color,
-            'qty_bar' => $request->qty_bar,
-            'waktu_in_r' => $request->waktu_in_r,
-            'tgl_lot_prod_mldg' => $request->tgl_lot_prod_mldg,
-            'cycle' => $request->cycle,
-            'created_by' => Auth::user()->name,
-            'created_at' => Carbon::now(),
-            'status' => '1'
-        ]);
+        $racking = new racking_t();
+
+        $racking->id_masterdata = $request->id_masterdata;
+        $racking->tanggal_r = $request->tanggal_r;
+        $racking->waktu_in_r = $request->waktu_in_r;
+        $racking->no_bar = $request->no_bar;
+        $racking->part_name = $request->part_name;
+        $racking->no_part = $request->no_part;
+        $racking->katalis = $request->katalis;
+        $racking->channel = $request->channel;
+        $racking->grade_color = $request->grade_color;
+        $racking->qty_bar = $request->qty_bar;
+        $racking->tgl_lot_prod_mldg = $request->tgl_lot_prod_mldg;
+        $racking->cycle = $request->cycle;
+        $racking->created_by = Auth::user()->name;
+        $racking->created_at = Carbon::now();
+        $racking->status = Carbon::now();
+
+        $racking->save();
+
+
+
+        // $racking = racking_t::create([
+        //     'id_masterdata' => $request->id_masterdata,
+        //     'tanggal_r' => $request->tanggal_r,
+        //     'waktu_in_r' => Carbon::now(),
+        //     'no_bar' => $request->no_bar,
+        //     'part_name' => $request->part_name,
+        //     'no_part' => $request->no_part,
+        //     'katalis' => $request->katalis,
+        //     'channel' => $request->channel,
+        //     'grade_color' => $request->grade_color,
+        //     'qty_bar' => $request->qty_bar,
+        //     'tgl_lot_prod_mldg' => $request->tgl_lot_prod_mldg,
+        //     'cycle' => $request->cycle,
+        //     'created_by' => Auth::user()->name,
+        //     'created_at' => Carbon::now(),
+        //     'status' => '1'
+        // ]);
+        // dd($racking->waktu_in_r);
 
         return redirect()->route('racking_t.tambah', compact('racking'))->with('toast_success', 'Data Berhasil Disimpan!');
     }
@@ -152,11 +175,9 @@ class RackingController_T extends Controller
 
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
-        if ($plating->qty_aktual != '') {
-            // return redirect()->route('racking_t',compact('plating'))->with('toast_error', 'Data tidak dapat diedit!');
-            return redirect()->route('racking_t.edit', compact('plating','hit_data_racking','date','masterdata','previous','next','id'))->with('toast_error', 'Data sudah di unracking');
-
-            // return view('racking_t.racking_t-edit', compact('plating','hit_data_racking','date','masterdata','previous','next'))->with('toast_error', 'Data tidak dapat diedit!');
+        if ($plating->qty_aktual > 0) {
+            Alert::Warning('Gagal', 'Part Sudah Di Unracking!');
+            return redirect()->route('racking_t.edit', compact('plating', 'hit_data_racking', 'date', 'masterdata', 'previous', 'next', 'id'));
         } else {
             $plating->id_masterdata = $request->id_masterdata;
             $plating->tanggal_r = $request->tanggal_r;
@@ -174,8 +195,7 @@ class RackingController_T extends Controller
             $plating->updated_at = Carbon::now();
             $plating->save();
         }
-
-
+        Alert::Success('Berhasil', 'Data Berhasil Di Update!');
 
         return View::make('racking_t.racking_t-edit', compact('plating', 'masterdata', 'date', 'hit_data_racking'))->with('previous', $previous)->with('next', $next)->with('message', 'Data berhasil di update');
     }

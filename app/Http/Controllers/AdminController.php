@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Plating;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,10 @@ class AdminController extends Controller
     {
         $id = Auth::user()->id;
         $adminData = User::find($id);
-        return view('admin.admin_profile_view', compact('adminData'));
+        $jml_pasang = Plating::where('created_by', '=', Auth::user()->name)->count();
+        $jml_unracking = Plating::where('updated_by', '=', Auth::user()->name)->count();
+        $jml_kensa = Plating::where('created_by', '=', Auth::user()->name)->count();
+        return view('admin.admin_profile_view', compact('adminData','jml_pasang','jml_kensa','jml_unracking'));
     } // End Profile
 
     public function editprofile()

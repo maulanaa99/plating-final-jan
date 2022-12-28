@@ -10,14 +10,12 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Maatwebsite\Excel\Facades\Excel;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
-use Yajra\DataTables\Facades\DataTables;
-use Log;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UnrackingController_T extends Controller
 {
@@ -44,40 +42,35 @@ class UnrackingController_T extends Controller
         $previous = unracking_t::where('id', '<', $plating->id)->max('id');
         $next = unracking_t::where('id', '>', $plating->id)->min('id');
 
-        // $previous = unracking_t::where('id', '<', $plating->id)->orderBy('id', 'desc')->first();
-        // $next = unracking_t::where('id', '>', $plating->id)->orderBy('id', 'asc')->first();
-
-        // if ($id === null) {
-        //     $next = unracking_t::first();
-        //     dd($next);
-        // } else {
-        //     $user = unracking_t::find($id);
-        //     $next = unracking_t::where('id', '>', $user->id)->orderBy('id', 'asc')->first();
-        // }
-
-        return view('unracking_t.unracking_t-edit', compact('previous','next','plating','masterdata','id'));
-
-        // return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next);
+        return view('unracking_t.unracking_t-edit', compact('previous', 'next', 'plating', 'masterdata', 'id'));
     }
 
     //update data
     public function update(Request $request, $id)
     {
         $plating = Plating::find($id);
-        $qty_aktual_prev = $plating->qty_aktual;
-
-        $plating->tanggal_u = $request->tanggal_u;
-        $plating->waktu_in_u = $request->waktu_in_u;
-        $plating->qty_aktual = $request->qty_aktual;
-        $plating->cycle = $request->cycle;
-        $plating->updated_by = Auth::user()->name;
-        $plating->status = '2';
-        $plating->save();
-
         $masterdata = MasterData::find($plating->id_masterdata);
-        $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
 
-        $masterdata->save();
+        $qty_aktual_prev = $plating->qty_aktual;
+        $previous = unracking_t::where('id', '<', $plating->id)->max('id');
+        $next = unracking_t::where('id', '>', $plating->id)->min('id');
+
+        if ($request->qty_aktual > $plating->qty_bar) {
+            Alert::Warning('Gagal', 'Qty Aktual Salah!');
+            return redirect()->route('unracking_t.edit', compact('plating','masterdata','id'));
+        } else {
+            $plating->tanggal_u = $request->tanggal_u;
+            $plating->waktu_in_u = Carbon::now()->format('H:i:m');
+            $plating->qty_aktual = $request->qty_aktual;
+            $plating->cycle = $request->cycle;
+            $plating->updated_by = Auth::user()->name;
+            $plating->status = '2';
+            $plating->save();
+
+            $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
+            $masterdata->save();
+        }
+        // dd($request->waktu_in_u);
 
         if (isset($request->next)) {
             return redirect('/unracking_t/edit/' . $request->next);
@@ -85,7 +78,8 @@ class UnrackingController_T extends Controller
             $previous = unracking_t::where('id', '<', $plating->id)->max('id');
             $next = unracking_t::where('id', '>', $plating->id)->min('id');
 
-            return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next)->with('success', 'Data berhasil ditambahkan!');
+            Alert::success('Success', 'Data Berhasil Disimpan!');
+            return View::make('unracking_t.unracking_t-edit', compact('plating', 'masterdata'))->with('previous', $previous)->with('next', $next);
         }
     }
 

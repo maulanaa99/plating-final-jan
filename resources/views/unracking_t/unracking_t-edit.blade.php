@@ -177,7 +177,7 @@
                                             @if (old('no_bar')) value="{{ old('no_bar') }}"
                                                 @else
                                                     value="{{ $plating->no_bar }}" @endif
-                                            class="form-control" placeholder="Masukkan No. Bar" readonly>
+                                            class="form-control bg-yellow" placeholder="Masukkan No. Bar" readonly>
                                     </div>
                                 </div>
 
@@ -209,12 +209,12 @@
                                         @if (old('qty_bar')) value="{{ old('qty_bar') }}"
                                                     @else
                                                         value="{{ $plating->qty_bar }}" @endif
-                                        class="typeahead form-control" placeholder="Masukkan Nama Part" readonly>
+                                        class="form-control bg-green" placeholder="Masukkan Nama Part" readonly>
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="">Qty Aktual</label>
-                                    <input type="number" id="qty_aktual" name="qty_aktual" autofocus
+                                    <input type="number" id="qty_aktual" name="qty_aktual" autofocus required
                                         @if (old('qty_aktual')) value="{{ old('qty_aktual') }}"
                                                     @else
                                                         value="{{ $plating->qty_aktual }}" @endif
@@ -229,23 +229,9 @@
                                     Submit</button>
                                 <button class="btn btn-danger" type="reset"> <i class="fas fa-trash-restore"></i>
                                     Reset</button>
-
-                                    <a href="{{ route('unracking_t.edit', ['id' => $next->id]) }}">Next</a>
-
-
-
-
-
-
-
-
-                                {{-- <a href="{{ URL::to('/unracking_t/edit/' . $id) }}" class="btn btn-primary" > NEXT </a> --}}
                                 <a href="{{ URL::to('unracking_t/edit/' . $next) }}" class="btn btn-outline-success">
                                     Next
                                     <i class="fas fa-arrow-right"></i></a>
-                                {{-- <a href="{{ URL::to('unracking_t/edit/' . $next) }}"
-                                    class="btn btn-outline-success btn-next-submit" data-next="{{ $next }}"> Next
-                                    <i class="fas fa-arrow-right"></i></a> --}}
                             </div>
                         </div>
                     </form>
@@ -260,6 +246,7 @@
     @endpush
 
     @push('after-script')
+    @include('sweetalert::alert')
         <script>
             $(document).on('click', '.btn-next-submit', function(e) {
                 e.preventDefault();

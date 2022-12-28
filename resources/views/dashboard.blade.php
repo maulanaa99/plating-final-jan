@@ -8,6 +8,17 @@
     <li class="active"> > MENU UTAMA</li>
 @endsection
 
+@push('page-styles')
+    <style>
+        h3 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+        }
+    </style>
+@endpush
+
 
 @section('content')
     <section class="content">
@@ -19,8 +30,7 @@
                         <!-- small box -->
                         <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>RACKING</h3>
-                                <p class="text-info">-</p>
+                                <h3 class="text-center">RACKING</h3>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
@@ -35,8 +45,7 @@
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
-                                <h3>UNRACKING</h3>
-                                <p class="text-success">-</p>
+                                <h3 class="text-center">UNRACKING</h3>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-stats-bars"></i>
@@ -50,8 +59,7 @@
                     <a href="{{ route('kensa') }}">
                         <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>KENSA</h3>
-                                <p class="text-warning">-</p>
+                                <h3 class="text-center">KENSA</h3>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
@@ -65,8 +73,7 @@
                         <!-- small box -->
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>STOK</h3>
-                                <p class="text-danger">DATA PART</p>
+                                <h3 class="text-center">STOK</h3>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>

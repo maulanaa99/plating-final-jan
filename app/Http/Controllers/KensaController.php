@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KensaController extends Controller
 {
@@ -287,11 +288,14 @@ class KensaController extends Controller
     {
         $masterdata = MasterData::find($request->id_masterdata);
         if ($masterdata->stok < $request->kirim_assy) {
-            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
+            Alert::Warning('Gagal', 'Stok Kurang!');
+            return redirect()->route('kensa.printKanban');
         } else if ($masterdata->stok < $request->kirim_painting) {
-            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
+            Alert::Warning('Gagal', 'Stok Kurang!');
+            return redirect()->route('kensa.printKanban');
         } else if ($masterdata->stok < $request->kirim_ppic) {
-            return redirect()->route('kensa.printKanban')->with('toast_error', 'Gagal!, Stok Kurang');
+            Alert::Warning('Gagal', 'Stok Kurang!');
+            return redirect()->route('kensa.printKanban');
         } else {
             $pengiriman = Pengiriman::create([
                 'tgl_kanban' => $request->tgl_kanban,
@@ -358,7 +362,7 @@ class KensaController extends Controller
             /**
              * PRINTING
              */
-            $connector = new WindowsPrintConnector("TM-T82II-Dell");
+            $connector = new WindowsPrintConnector("TM-T82II");
             $printer = new Printer($connector);
 
             try {

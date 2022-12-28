@@ -30,6 +30,24 @@
                                         {{ $adminData->username }}
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3">Jumlah Racking</label>
+                                    <div class="col-sm-9">
+                                        {{ $jml_pasang }} Bar
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3">Jumlah Unracking</label>
+                                    <div class="col-sm-9">
+                                        {{ $jml_unracking }} Bar
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-3">Jumlah Kensa</label>
+                                    <div class="col-sm-9">
+                                        {{ $jml_kensa }} Bar
+                                    </div>
+                                </div>
                             </div>
                             <a href="{{ route('edit.profile') }}" class="btn btn-rounded btn-warning float-right"> <i
                                     class="fa fa-edit"></i> Edit Profile</a>

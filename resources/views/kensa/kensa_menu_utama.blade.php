@@ -16,7 +16,8 @@
         span {
             font-size: 24px;
         }
-        card{
+
+        card {
             height: 50pt;
         }
     </style>
@@ -100,7 +101,7 @@
                                     <input type="text"
                                         class="form-control ml-2 {{ $filter->count() === 1 ? 'bg-danger' : 'bg-white' }} border"
                                         value="{{ number_format($d['val'], 2) }}%" readonly>
-                                        <br>
+                                    <br>
                                 </div>
                             </div>
                         @endforeach
@@ -164,7 +165,7 @@
                                     <input type="text"
                                         class="form-control {{ $filter->count() === 1 ? 'bg-danger' : 'bg-white' }} border"
                                         value="{{ number_format($d['val'], 2) }}%" readonly>
-                                        <br><br><br><br><br>
+                                    <br><br><br><br><br>
                                 </div>
                             </div>
                             <hr>
@@ -275,7 +276,7 @@
                         'rgb(255, 255, 255)',
                         'rgb(0, 0, 0)'
                     ]
-                }]
+                }],
             },
         });
     </script>
@@ -323,13 +324,7 @@
                 ]
 
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+
         });
     </script>
 @endpush

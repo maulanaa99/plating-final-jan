@@ -23,6 +23,6 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 // });
 
 mix.browserSync({
-    proxy: 'http://localhost:8000',
+    proxy: '127.0.0.1:8000',
     files: ['resources/views/**/*.blade.php', 'public/css/**/*.css', 'public/js/**/*.js']
 });

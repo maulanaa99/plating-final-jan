@@ -406,7 +406,7 @@
                                                     <div class="row">
                                                         <Label>Total OK</Label>
                                                         <div class="input-group">
-                                                            <input type="text" id="total_ok" name="total_ok" required readonly
+                                                            <input type="text" id="total_ok" name="total_ok" required
                                                                 onchange="sum();" class="form-control">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Pcs </span>
@@ -444,7 +444,7 @@
                                                 <div class="col-md-6 mt-2">
                                                     <div class="row">
                                                         <Label>%Total NG</Label>
-                                                        <div class="input-group"> 
+                                                        <div class="input-group">
                                                             <input type="text" id="persenng" name="p_total_ng" readonly
                                                                 onchange="sum()" class="form-control">
                                                             <div class="input-group-prepend">
