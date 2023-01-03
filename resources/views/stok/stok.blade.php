@@ -133,10 +133,7 @@
                 scrollY: "700px",
                 scrollX: true,
                 scrollCollapse: true,
-                paging: false,
-                fixedColumns: {
-                    left: 2,
-                }
+                paging: false
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

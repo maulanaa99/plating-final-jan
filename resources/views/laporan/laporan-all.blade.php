@@ -89,53 +89,43 @@
                 <tbody>
                     @foreach ($alls as $no => $all)
                         <tr>
-                            <td style="width:1px; white-space:nowrap;">{{ $no + 1 }}</td>
-
-                            <td style="width:1px; white-space:nowrap;">
-                                {{ \Carbon\Carbon::parse($all->tanggal_r)->format('d-m-Y') }}
-                                {{ \Carbon\Carbon::parse($all->waktu_in_r)->format('H:i:s') }}</td>
-
-                            <td style="width:1px; white-space:nowrap;">
-                                {{ \Carbon\Carbon::parse($all->tanggal_u)->format('d-m-Y') }}
-                                {{ \Carbon\Carbon::parse($all->waktu_in_u)->format('H:i:s') }}</td>
-
-                            <td style="width:1px; white-space:nowrap;">
-                                {{ \Carbon\Carbon::parse($all->tanggal_k)->format('d-m-Y') }}
-                                {{ \Carbon\Carbon::parse($all->waktu_k)->format('H:i:s') }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->part_name }}</td>
-
-                            <td style="width:1px; white-space:nowrap;">{{ $all->no_bar }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->channel }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->grade_color }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->katalis }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->qty_bar }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->qty_aktual }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->cycle }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->nikel }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->butsu }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->hadare }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->hage }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->moyo }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->fukure }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->crack }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->henkei }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->hanazaki }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->kizu }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->kaburi }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->shiromoya }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->shimi }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->pitto }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->other }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->gores }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->regas }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->silver }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->hike }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->burry }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->others }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->total_ok }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->total_ng }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->p_total_ok }}%</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $all->p_total_ng }}%</td>
+                            <td>{{ $no + 1 }}</td>
+                            <td>{{ \Carbon\Carbon::parse($all->tanggal_r)->format('d-m-Y') }} {{ $all->waktu_in_r }}</td>
+                            <td>{{ \Carbon\Carbon::parse($all->tanggal_u)->format('d-m-Y') }} {{ $all->waktu_in_u }}</td>
+                            <td>{{ \Carbon\Carbon::parse($all->tanggal_k)->format('d-m-Y') }} {{ $all->waktu_k }}</td>
+                            <td>{{ $all->part_name }}</td>
+                            <td>{{ $all->no_bar }}</td>
+                            <td>{{ $all->channel }}</td>
+                            <td>{{ $all->grade_color }}</td>
+                            <td>{{ $all->katalis }}</td>
+                            <td>{{ $all->qty_bar }}</td>
+                            <td>{{ $all->qty_aktual }}</td>
+                            <td>{{ $all->cycle }}</td>
+                            <td>{{ $all->nikel }}</td>
+                            <td>{{ $all->butsu }}</td>
+                            <td>{{ $all->hadare }}</td>
+                            <td>{{ $all->hage }}</td>
+                            <td>{{ $all->moyo }}</td>
+                            <td>{{ $all->fukure }}</td>
+                            <td>{{ $all->crack }}</td>
+                            <td>{{ $all->henkei }}</td>
+                            <td>{{ $all->hanazaki }}</td>
+                            <td>{{ $all->kizu }}</td>
+                            <td>{{ $all->kaburi }}</td>
+                            <td>{{ $all->shiromoya }}</td>
+                            <td>{{ $all->shimi }}</td>
+                            <td>{{ $all->pitto }}</td>
+                            <td>{{ $all->other }}</td>
+                            <td>{{ $all->gores }}</td>
+                            <td>{{ $all->regas }}</td>
+                            <td>{{ $all->silver }}</td>
+                            <td>{{ $all->hike }}</td>
+                            <td>{{ $all->burry }}</td>
+                            <td>{{ $all->others }}</td>
+                            <td>{{ $all->total_ok }}</td>
+                            <td>{{ $all->total_ng }}</td>
+                            <td>{{ $all->p_total_ok }}%</td>
+                            <td>{{ $all->p_total_ng }}%</td>
                             {{-- <td style="width:1px; white-space:nowrap;"> --}}
                             {{-- <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                         class="far fa-edit"></i></a> --}}

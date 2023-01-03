@@ -88,10 +88,17 @@ is-invalid
                                                     @error('cycle')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
-                                                    <option>C1</option>
-                                                    <option>C2</option>
-                                                    <option>CS</option>
-                                                    <option>FS</option>
+                                                    @if ($hit_data_racking < 80)
+                                                        <option>C1</option>
+                                                        <option>C2</option>
+                                                        <option>CS</option>
+                                                        <option>FS</option>
+                                                    @else
+                                                        <option>C2</option>
+                                                        <option>C1</option>
+                                                        <option>CS</option>
+                                                        <option>FS</option>
+                                                    @endif
                                                 </select>
                                             </div>
                                         </div>

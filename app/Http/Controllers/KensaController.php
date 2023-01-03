@@ -111,9 +111,8 @@ class KensaController extends Controller
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $hit_data_kensa = kensa::where('tanggal_k', '=', $date)->count();
 
-
         $masterdata = MasterData::all();
-        return view('kensa.kensa-tambah', compact('kensa', 'masterdata', 'platings','hit_data_kensa','date'));
+        return view('kensa.kensa-tambah', compact('kensa', 'masterdata', 'platings', 'hit_data_kensa', 'date'));
     }
 
     //simpan data
@@ -248,7 +247,8 @@ class KensaController extends Controller
         $masterdata->save();
 
         // return redirect()->route('kensa')->with('success', 'Data berhasil di update');
-        return redirect()->route('kensa')->with('success', 'Data berhasil di update');
+        Alert::Success('Success!', 'Data Berhasil Di Edit!');
+        return redirect()->route('kensa');
     }
 
     public function printKanban(Request $request)
@@ -358,6 +358,8 @@ class KensaController extends Controller
             $sourceImage->writeImage($filepath . '_' . $i . '.png');
 
             unlink($filepath . '_' . $i . '.pdf');
+
+            ini_set('max_execution_time', 500);
 
             /**
              * PRINTING
