@@ -2,12 +2,12 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <x-application-logo class="w-20 h-20 fill-current text-gray-500 img-circle" />
             </a>
         </x-slot>
 
         <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+        <x-auth-session-status class="mb-1" :status="session('status')" />
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -19,7 +19,7 @@
             <div>
                 <x-label for="username" :value="__('Username')" />
 
-                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required
+                <x-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" placeholder="Username" required
                     autofocus />
             </div>
 
@@ -27,7 +27,7 @@
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />
 
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                <x-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="Password" required
                     autocomplete="current-password" />
             </div>
 
