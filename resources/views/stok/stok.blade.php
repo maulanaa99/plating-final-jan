@@ -33,38 +33,37 @@
         <table id="add-row" class="table table-sm table-hover table-bordered table-striped compact">
             <thead>
                 <tr>
-                    <th class="align-middle text-center">#</th>
-                    <th class="align-middle text-center">Part Number</th>
-                    <th class="align-middle text-center">Part Name</th>
-                    <th class="align-middle text-center">Stok BC</th>
-                    <th class="align-middle text-center">Total OK</th>
-                    <th class="align-middle text-center">Total NG</th>
-                    <th class="align-middle text-center">Stok</th>
-                    <th class="align-middle text-center">Total Kirim</th>
-                    <th class="align-middle text-center">No Kartu</th>
-                    <th class="align-middle text-center">Kirim Painting</th>
-                    <th class="align-middle text-center">Kirim Assy</th>
-                    <th class="align-middle text-center">Kirim PPIC</th>
+                    <th>#</th>
+                    <th>Part Number</th>
+                    <th>Part Name</th>
+                    <th class="text-center">Stok BC</th>
+                    <th class="text-center">Total OK</th>
+                    <th class="text-center">Total NG</th>
+                    <th class="text-center">Stok</th>
+                    <th class="text-center">Total Kirim</th>
+                    <th class="text-center">No Kartu</th>
+                    <th class="text-center">Kirim Painting</th>
+                    <th class="text-center">Kirim Assy</th>
+                    <th class="text-center">Kirim PPIC</th>
                 </tr>
             </thead>
 
             <tbody>
-                @php $no = 1; @endphp
                 @foreach ($stok as $row)
                     <tr>
                         <td style="width:1px; white-space:nowrap;"> <center> {{ $loop->iteration }} </center></td>
                         <td style="width:1px; white-space:nowrap;">{{ $row->no_part }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $row->part_name }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->stok_bc }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->total_ok }} </td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->total_ng }} </td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->stok }} </td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->total_kirim }}</td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->stok_bc }}</td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->total_ok }} </td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->total_ng }} </td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->stok }} </td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->total_kirim }}</td>
                         {{-- <td>{{ $row->getTotal() }} </td> --}}
-                        <td style="width:1px; white-space:nowrap;">{{ $row->no_kartu??0 }} </td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->kirim_painting??0 }} </td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->kirim_assy??0  }} </td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->kirim_ppic??0  }}</td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->no_kartu??0 }} </td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->kirim_painting??0 }} </td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->kirim_assy??0  }} </td>
+                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->kirim_ppic??0  }}</td>
                     </tr>
                 @endforeach
 
@@ -74,15 +73,15 @@
                     <td colspan="3">
                         <center> <b> Total </b> </center>
                     </td>
-                    <td> <b> {{ $sum_stok_bc }}</b></td>
-                    <td> <b> {{ $sum_total_ok }}</b></td>
-                    <td> <b> {{ $sum_total_ng }}</b></td>
-                    <td> <b> {{ $sum_stok }}</b></td>
-                    <td> <b> {{ $sum_total_kirim }} </b> </td>
-                    <td></td>
-                    <td> <b> {{ $sum_kirim_painting }}</b></td>
-                    <td> <b> {{ $sum_kirim_assy }}</b></td>
-                    <td> <b> {{ $sum_kirim_ppic }}</b></td>
+                    <td class="text-center"> <b> {{ $sum_stok_bc }}</b></td>
+                    <td class="text-center"> <b> {{ $sum_total_ok }}</b></td>
+                    <td class="text-center"> <b> {{ $sum_total_ng }}</b></td>
+                    <td class="text-center"> <b> {{ $sum_stok }}</b></td>
+                    <td class="text-center"> <b> {{ $sum_total_kirim }} </b> </td>
+                    <td class="text-center"></td>
+                    <td class="text-center"> <b> {{ $sum_kirim_painting }}</b></td>
+                    <td class="text-center"> <b> {{ $sum_kirim_assy }}</b></td>
+                    <td class="text-center"> <b> {{ $sum_kirim_ppic }}</b></td>
                 </tr>
             </tfoot>
         </table>

@@ -123,7 +123,7 @@ class RackingController_T extends Controller
         $racking->cycle = $request->cycle;
         $racking->created_by = Auth::user()->name;
         $racking->created_at = Carbon::now();
-        $racking->status = Carbon::now();
+        $racking->status = 1;
 
         $racking->save();
 

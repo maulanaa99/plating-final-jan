@@ -52,11 +52,12 @@ class LaporanController extends Controller
 
     public function kensa(Request $request)
     {
-        $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i');
-        $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i');
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i:s');
+        // dd($start_date);
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i:s');
         if ($request->start_date || $request->end_date) {
-            $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i');
-            $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i');
+            $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i:s');
+            $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i:s');
             $kensa = kensa::whereBetween('created_at', [$start_date, $end_date])
                 ->get();
         } else {
@@ -100,11 +101,11 @@ class LaporanController extends Controller
     }
     public function all(Request $request)
     {
-        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
-        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i:s');
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i:s');
         if ($request->start_date || $request->end_date) {
-            $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
-            $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+            $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i:s');
+            $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i:s');
             $alls = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
                 ->join('plating', 'plating.id', '=', 'kensa.id_plating')
                 ->select('plating.*', 'kensa.*')

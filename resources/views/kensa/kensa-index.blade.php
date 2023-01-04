@@ -97,41 +97,41 @@
             <tbody>
                 @foreach ($kensa as $no => $kensha)
                     <tr>
-                        <td style="width:1px; white-space:nowrap;">{{ $no + 1 }}</td>
+                        <td>{{ $no + 1 }}</td>
                         <td style="width:1px; white-space:nowrap;">
                             {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
                             {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->no_bar }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->qty_aktual }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->cycle }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->nikel }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->butsu }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hadare }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hage }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->moyo }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->fukure }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->crack }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->henkei }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hanazaki }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->kizu }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->kaburi }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->shiromoya }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->shimi }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->pitto }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->misto }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->other }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->gores }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->regas }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->silver }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->hike }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->burry }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->others }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ng }}</td>
+                        <td >{{ $kensha->no_bar }}</td>
+                        <td >{{ $kensha->qty_aktual }}</td>
+                        <td >{{ $kensha->total_ok }}</td>
+                        <td >{{ $kensha->cycle }}</td>
+                        <td class="text-center">{{ $kensha->nikel }}</td>
+                        <td class="text-center">{{ $kensha->butsu }}</td>
+                        <td class="text-center">{{ $kensha->hadare }}</td>
+                        <td class="text-center">{{ $kensha->hage }}</td>
+                        <td class="text-center">{{ $kensha->moyo }}</td>
+                        <td class="text-center">{{ $kensha->fukure }}</td>
+                        <td class="text-center">{{ $kensha->crack }}</td>
+                        <td class="text-center">{{ $kensha->henkei }}</td>
+                        <td class="text-center">{{ $kensha->hanazaki }}</td>
+                        <td class="text-center">{{ $kensha->kizu }}</td>
+                        <td class="text-center">{{ $kensha->kaburi }}</td>
+                        <td class="text-center">{{ $kensha->shiromoya }}</td>
+                        <td class="text-center">{{ $kensha->shimi }}</td>
+                        <td class="text-center">{{ $kensha->pitto }}</td>
+                        <td class="text-center">{{ $kensha->misto??0 }}</td>
+                        <td class="text-center">{{ $kensha->other }}</td>
+                        <td class="text-center">{{ $kensha->gores }}</td>
+                        <td class="text-center">{{ $kensha->regas }}</td>
+                        <td class="text-center">{{ $kensha->silver }}</td>
+                        <td class="text-center">{{ $kensha->hike }}</td>
+                        <td class="text-center">{{ $kensha->burry }}</td>
+                        <td class="text-center">{{ $kensha->others }}</td>
+                        <td class="text-center">{{ $kensha->total_ng }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->keterangan }}</td>
+                        <td >{{ $kensha->keterangan }}</td>
                         <td style="width:1px; white-space:nowrap;">
                             <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                     class="far fa-edit"></i></a>
@@ -149,32 +149,33 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6" class="bg-transparent">
+                    <td colspan="7" class="bg-transparent">
                     </td>
-                    <td><b>{{ $sum_nikel }}</b></td>
-                    <td><b>{{ $sum_butsu }}</b></td>
-                    <td><b>{{ $sum_hadare }}</b></td>
-                    <td><b>{{ $sum_hage }}</b></td>
-                    <td><b>{{ $sum_moyo }}</b></td>
-                    <td><b>{{ $sum_fukure }}</b></td>
-                    <td><b>{{ $sum_crack }}</b></td>
-                    <td><b>{{ $sum_henkei }}</b></td>
-                    <td><b>{{ $sum_hanazaki }}</b></td>
-                    <td><b>{{ $sum_kizu }}</b></td>
-                    <td><b>{{ $sum_kaburi }}</b></td>
-                    <td><b>{{ $sum_shiromoya }}</b></td>
-                    <td><b>{{ $sum_shimi }}</b></td>
-                    <td><b>{{ $sum_pitto }}</b></td>
-                    <td><b>{{ $sum_misto }}</b></td>
-                    <td><b>{{ $sum_other }}</b></td>
-                    <td><b>{{ $sum_gores }}</b></td>
-                    <td><b>{{ $sum_regas }}</b></td>
-                    <td><b>{{ $sum_silver }}</b></td>
-                    <td><b>{{ $sum_hike }}</b></td>
-                    <td><b>{{ $sum_burry }}</b></td>
-                    <td><b>{{ $sum_others }}</b></td>
-                    <td><b>{{ $sum_total_ok }}</b></td>
+                    <td class="text-center"><b>{{ $sum_nikel }}</b></td>
+                    <td class="text-center"><b>{{ $sum_butsu }}</b></td>
+                    <td class="text-center"><b>{{ $sum_hadare }}</b></td>
+                    <td class="text-center"><b>{{ $sum_hage }}</b></td>
+                    <td class="text-center"><b>{{ $sum_moyo }}</b></td>
+                    <td class="text-center"><b>{{ $sum_fukure }}</b></td>
+                    <td class="text-center"><b>{{ $sum_crack }}</b></td>
+                    <td class="text-center"><b>{{ $sum_henkei }}</b></td>
+                    <td class="text-center"><b>{{ $sum_hanazaki }}</b></td>
+                    <td class="text-center"><b>{{ $sum_kizu }}</b></td>
+                    <td class="text-center"><b>{{ $sum_kaburi }}</b></td>
+                    <td class="text-center"><b>{{ $sum_shiromoya }}</b></td>
+                    <td class="text-center"><b>{{ $sum_shimi }}</b></td>
+                    <td class="text-center"><b>{{ $sum_pitto }}</b></td>
+                    <td class="text-center"><b>{{ $sum_misto }}</b></td>
+                    <td class="text-center"><b>{{ $sum_other }}</b></td>
+                    <td class="text-center"><b>{{ $sum_gores }}</b></td>
+                    <td class="text-center"><b>{{ $sum_regas }}</b></td>
+                    <td class="text-center"><b>{{ $sum_silver }}</b></td>
+                    <td class="text-center"><b>{{ $sum_hike }}</b></td>
+                    <td class="text-center"><b>{{ $sum_burry }}</b></td>
+                    <td class="text-center"><b>{{ $sum_others }}</b></td>
+                    {{-- <td><b>{{ $sum_total_ok }}</b></td> --}}
                     <td><b>{{ $sum_total_ng }}</b></td>
+                    <td class="text-center">{{ '-' }}</td>
                     <td colspan="3"></td>
                 </tr>
             </tfoot>

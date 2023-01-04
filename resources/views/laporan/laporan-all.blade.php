@@ -25,7 +25,7 @@
         <form action="{{ route('laporan.all') }}" method="GET">
             <div class="row input-daterange">
                 <div class="col-md-5">
-                    <input type="date" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
+                    <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
                 </div>
                 <div class="col-md-1">
                     <center>
@@ -33,7 +33,7 @@
                     </center>
                 </div>
                 <div class="col-md-5">
-                    <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
+                    <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
                 </div>
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Filter</button>
@@ -48,10 +48,10 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Tgl Racking</th>
-                        <th>Tgl Unracking</th>
-                        <th>Tgl Kensa</th>
-                        <th>Part Name</th>
+                        <th class="text-center" >Tgl Racking</th>
+                        <th class="text-center">Tgl Unracking</th>
+                        <th class="text-center">Tgl Kensa</th>
+                        <th class="text-center">Part Name</th>
                         <th>No Bar</th>
                         <th>Channel</th>
                         <th>Chrome</th>
@@ -59,29 +59,29 @@
                         <th>Qty Bar</th>
                         <th>Qty Aktual</th>
                         <th>Cycle</th>
-                        <th>Nikel</th>
-                        <th>Butsu</th>
-                        <th>Hadare</th>
-                        <th>Hage</th>
-                        <th>Moyo</th>
-                        <th>Fukure</th>
-                        <th>Crack</th>
-                        <th>Henkei</th>
-                        <th>Hanazaki</th>
-                        <th>Kizu</th>
-                        <th>Kaburi</th>
-                        <th>Shiromoya</th>
-                        <th>Shimi</th>
-                        <th>Pitto</th>
-                        <th>Other</th>
-                        <th>Gores</th>
-                        <th>Regas</th>
-                        <th>Silver</th>
-                        <th>Hike</th>
-                        <th>Burry</th>
-                        <th>Others</th>
-                        <th>Total OK</th>
-                        <th>Total NG</th>
+                        <th class="text-center">Nikel</th>
+                        <th class="text-center">Butsu</th>
+                        <th class="text-center">Hadare</th>
+                        <th class="text-center">Hage</th>
+                        <th class="text-center">Moyo</th>
+                        <th class="text-center">Fukure</th>
+                        <th class="text-center">Crack</th>
+                        <th class="text-center">Henkei</th>
+                        <th class="text-center">Hanazaki</th>
+                        <th class="text-center">Kizu</th>
+                        <th class="text-center">Kaburi</th>
+                        <th class="text-center">Shiromoya</th>
+                        <th class="text-center">Shimi</th>
+                        <th class="text-center">Pitto</th>
+                        <th class="text-center">Other</th>
+                        <th class="text-center">Gores</th>
+                        <th class="text-center">Regas</th>
+                        <th class="text-center">Silver</th>
+                        <th class="text-center">Hike</th>
+                        <th class="text-center">Burry</th>
+                        <th class="text-center">Others</th>
+                        <th class="text-center">Total OK</th>
+                        <th class="text-center">Total NG</th>
                         <th>% Total OK</th>
                         <th>% Total NG</th>
                     </tr>
@@ -90,42 +90,42 @@
                     @foreach ($alls as $no => $all)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($all->tanggal_r)->format('d-m-Y') }} {{ $all->waktu_in_r }}</td>
-                            <td>{{ \Carbon\Carbon::parse($all->tanggal_u)->format('d-m-Y') }} {{ $all->waktu_in_u }}</td>
-                            <td>{{ \Carbon\Carbon::parse($all->tanggal_k)->format('d-m-Y') }} {{ $all->waktu_k }}</td>
-                            <td>{{ $all->part_name }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ \Carbon\Carbon::parse($all->tanggal_r)->format('d-m-Y') }} {{ $all->waktu_in_r }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ \Carbon\Carbon::parse($all->tanggal_u)->format('d-m-Y') }} {{ $all->waktu_in_u }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ \Carbon\Carbon::parse($all->tanggal_k)->format('d-m-Y') }} {{ $all->waktu_k }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ $all->part_name }}</td>
                             <td>{{ $all->no_bar }}</td>
                             <td>{{ $all->channel }}</td>
                             <td>{{ $all->grade_color }}</td>
                             <td>{{ $all->katalis }}</td>
-                            <td>{{ $all->qty_bar }}</td>
-                            <td>{{ $all->qty_aktual }}</td>
-                            <td>{{ $all->cycle }}</td>
-                            <td>{{ $all->nikel }}</td>
-                            <td>{{ $all->butsu }}</td>
-                            <td>{{ $all->hadare }}</td>
-                            <td>{{ $all->hage }}</td>
-                            <td>{{ $all->moyo }}</td>
-                            <td>{{ $all->fukure }}</td>
-                            <td>{{ $all->crack }}</td>
-                            <td>{{ $all->henkei }}</td>
-                            <td>{{ $all->hanazaki }}</td>
-                            <td>{{ $all->kizu }}</td>
-                            <td>{{ $all->kaburi }}</td>
-                            <td>{{ $all->shiromoya }}</td>
-                            <td>{{ $all->shimi }}</td>
-                            <td>{{ $all->pitto }}</td>
-                            <td>{{ $all->other }}</td>
-                            <td>{{ $all->gores }}</td>
-                            <td>{{ $all->regas }}</td>
-                            <td>{{ $all->silver }}</td>
-                            <td>{{ $all->hike }}</td>
-                            <td>{{ $all->burry }}</td>
-                            <td>{{ $all->others }}</td>
-                            <td>{{ $all->total_ok }}</td>
-                            <td>{{ $all->total_ng }}</td>
-                            <td>{{ $all->p_total_ok }}%</td>
-                            <td>{{ $all->p_total_ng }}%</td>
+                            <td class="text-center">{{ $all->qty_bar }}</td>
+                            <td class="text-center">{{ $all->qty_aktual }}</td>
+                            <td class="text-center">{{ $all->cycle }}</td>
+                            <td class="text-center">{{ $all->nikel }}</td>
+                            <td class="text-center">{{ $all->butsu }}</td>
+                            <td class="text-center">{{ $all->hadare }}</td>
+                            <td class="text-center">{{ $all->hage }}</td>
+                            <td class="text-center">{{ $all->moyo }}</td>
+                            <td class="text-center">{{ $all->fukure }}</td>
+                            <td class="text-center">{{ $all->crack }}</td>
+                            <td class="text-center">{{ $all->henkei }}</td>
+                            <td class="text-center">{{ $all->hanazaki }}</td>
+                            <td class="text-center">{{ $all->kizu }}</td>
+                            <td class="text-center">{{ $all->kaburi }}</td>
+                            <td class="text-center">{{ $all->shiromoya }}</td>
+                            <td class="text-center">{{ $all->shimi }}</td>
+                            <td class="text-center">{{ $all->pitto }}</td>
+                            <td class="text-center">{{ $all->other }}</td>
+                            <td class="text-center">{{ $all->gores }}</td>
+                            <td class="text-center">{{ $all->regas }}</td>
+                            <td class="text-center">{{ $all->silver }}</td>
+                            <td class="text-center">{{ $all->hike }}</td>
+                            <td class="text-center">{{ $all->burry }}</td>
+                            <td class="text-center">{{ $all->others }}</td>
+                            <td class="text-center">{{ $all->total_ok }}</td>
+                            <td class="text-center">{{ $all->total_ng }}</td>
+                            <td class="text-center">{{ $all->p_total_ok }}%</td>
+                            <td class="text-center">{{ $all->p_total_ng }}%</td>
                             {{-- <td style="width:1px; white-space:nowrap;"> --}}
                             {{-- <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                         class="far fa-edit"></i></a> --}}
