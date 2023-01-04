@@ -174,7 +174,7 @@
                     <td class="text-center"><b>{{ $sum_burry }}</b></td>
                     <td class="text-center"><b>{{ $sum_others }}</b></td>
                     {{-- <td><b>{{ $sum_total_ok }}</b></td> --}}
-                    <td><b>{{ $sum_total_ng }}</b></td>
+                    <td class="text-center"><b>{{ $sum_total_ng }}</b></td>
                     <td class="text-center">{{ '-' }}</td>
                     <td colspan="3"></td>
                 </tr>
