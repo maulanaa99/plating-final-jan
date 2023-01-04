@@ -77,13 +77,38 @@
                     <h1 class="text-center"> <b> NG PLATING </b></h1>
                     <div class="row">
                         <?php
-                        $data1 = collect([['type' => 'plating', 'name' => 'Nikel', 'val' => $nikel], ['type' => 'plating', 'name' => 'Butsu', 'val' => $butsu], ['type' => 'plating', 'name' => 'Hadare', 'val' => $hadare], ['type' => 'plating', 'name' => 'Hage', 'val' => $hage], ['type' => 'plating', 'name' => 'Moyo', 'val' => $moyo], ['type' => 'plating', 'name' => 'Fukure', 'val' => $fukure], ['type' => 'plating', 'name' => 'Crack', 'val' => $crack], ['type' => 'plating', 'name' => 'Henkei', 'val' => $henkei], ['type' => 'plating', 'name' => 'Hanazaki', 'val' => $hanazaki], ['type' => 'plating', 'name' => 'Kizu', 'val' => $kizu], ['type' => 'plating', 'name' => 'Kaburi', 'val' => $kaburi], ['type' => 'plating', 'name' => 'Other', 'val' => $other]]);
+                        $data1 = collect([
+                            ["type" => "plating", "name" => "Nikel", "val" => $nikel],
+                            ["type" => "plating","name" => "Butsu", "val" => $butsu],
+                            ["type" => "plating","name" => "Hadare", "val" => $hadare],
+                            ["type" => "plating","name" => "Hage", "val" => $hage],
+                            ["type" => "plating","name" => "Moyo", "val" => $moyo],
+                            ["type" => "plating","name" => "Fukure", "val" => $fukure],
+                            ["type" => "plating","name" => "Crack", "val" => $crack],
+                            ["type" => "plating","name" => "Henkei", "val" => $henkei],
+                            ["type" => "plating","name" => "Hanazaki", "val" => $hanazaki],
+                            ["type" => "plating","name" => "Kizu", "val" => $kizu],
+                            ["type" => "plating","name" => "Kaburi", "val" => $kaburi],
+                            ["type" => "plating","name" => "Shiromoya", "val" => $shiromoya],
+                            ["type" => "plating","name" => "Shimi", "val" => $shimi],
+                            ["type" => "plating","name" => "Pitto", "val" => $pitto],
+                            ["type" => "plating","name" => "Misto", "val" => $misto],
+                            ["type" => "plating","name" => "Other", "val" => $other],
 
-                        $data2 = collect([['type' => 'molding', 'name' => 'Gores', 'val' => $gores], ['type' => 'molding', 'name' => 'Regas', 'val' => $regas], ['type' => 'molding', 'name' => 'Silver', 'val' => $silver], ['type' => 'molding', 'name' => 'Hike', 'val' => $hike], ['type' => 'molding', 'name' => 'Burry', 'val' => $burry], ['type' => 'molding', 'name' => 'Others', 'val' => $others]]);
+                        ]);
+
+                        $data2 = collect([
+                            ["type" => "molding","name" => "Gores", "val" => $gores],
+                            ["type" => "molding","name" => "Regas", "val" => $regas],
+                            ["type" => "molding","name" => "Silver", "val" => $silver],
+                            ["type" => "molding","name" => "Hike", "val" => $hike],
+                            ["type" => "molding","name" => "Burry", "val" => $burry],
+                            ["type" => "molding","name" => "Others", "val" => $others]]
+                        );
 
                         $dataMerge = $data1->merge($data2);
 
-                        $dataSort1 = $dataMerge->sortByDesc('val')->slice(0, 3);
+                        $dataSort1 = $dataMerge->sortByDesc('val')->slice(0,3);
                         ?>
 
                         @foreach ($data1 as $key1 => $d)
@@ -140,36 +165,21 @@
                 <div class="card">
                     <h1 class="text-center"> <b> NG MOLDING </b></h1>
                     <div class="row">
-                        <?php
-                        $data1 = collect([['type' => 'plating', 'name' => 'Nikel', 'val' => $nikel], ['type' => 'plating', 'name' => 'Butsu', 'val' => $butsu], ['type' => 'plating', 'name' => 'Hadare', 'val' => $hadare], ['type' => 'plating', 'name' => 'Hage', 'val' => $hage], ['type' => 'plating', 'name' => 'Moyo', 'val' => $moyo], ['type' => 'plating', 'name' => 'Fukure', 'val' => $fukure], ['type' => 'plating', 'name' => 'Crack', 'val' => $crack], ['type' => 'plating', 'name' => 'Henkei', 'val' => $henkei], ['type' => 'plating', 'name' => 'Hanazaki', 'val' => $hanazaki], ['type' => 'plating', 'name' => 'Kizu', 'val' => $kizu], ['type' => 'plating', 'name' => 'Kaburi', 'val' => $kaburi], ['type' => 'plating', 'name' => 'Other', 'val' => $other]]);
 
-                        $data2 = collect([['type' => 'molding', 'name' => 'Gores', 'val' => $gores], ['type' => 'molding', 'name' => 'Regas', 'val' => $regas], ['type' => 'molding', 'name' => 'Silver', 'val' => $silver], ['type' => 'molding', 'name' => 'Hike', 'val' => $hike], ['type' => 'molding', 'name' => 'Burry', 'val' => $burry], ['type' => 'molding', 'name' => 'Others', 'val' => $others]]);
+                        @foreach($data2 as $key2 => $d2)
+                                <?php
+                                    $p2 = $d2['name'];
+                                    $t2 = $d2['type'];
+                                    $filter = $dataSort1->filter(function($i, $k) use($p2,$t2) {return $i['name'] === $p2 && $i['type'] === $t2;});
+                                ?>
 
-                        $dataMerge = $data1->merge($data2);
-
-                        $dataSort1 = $dataMerge->sortByDesc('val')->slice(0, 3);
-                        ?>
-
-                        @foreach ($data2 as $key2 => $d2)
-                            <?php
-                            $p2 = $d2['name'];
-                            $t2 = $d2['type'];
-                            $filter = $dataSort1->filter(function ($i, $k) use ($p, $t) {
-                                return $i['name'] === $p && $i['type'] === $t && $i['val'] > 0;
-                            });
-                            ?>
-
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <span class="text-center"> {{ $d2['name'] }} </span>
-                                    <input type="text"
-                                        class="form-control {{ $filter->count() === 1 ? 'bg-danger' : 'bg-white' }} border"
-                                        value="{{ number_format($d['val'], 2) }}%" readonly>
-                                    <br><br><br><br><br>
-                                </div>
-                            </div>
-                            <hr>
-                        @endforeach
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <h2>{{ $d2['name'] }}</h2>
+                                            <h1 class="{{ $filter->count() == 1 ? 'bg-danger' : 'bg-white' }} border">{{ number_format( $d2['val'] , 2) }}%</h1>
+                                        </div>
+                                    </div>
+                                @endforeach
 
                     </div>
 

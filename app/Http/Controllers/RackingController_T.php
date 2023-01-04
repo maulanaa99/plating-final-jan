@@ -175,7 +175,7 @@ class RackingController_T extends Controller
 
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $hit_data_racking = racking_t::where('tanggal_r', '=', $date)->count();
-        if ($plating->qty_aktual > 0) {
+        if ($plating->qty_aktual > 1) {
             Alert::Warning('Gagal', 'Part Sudah Di Unracking!');
             return redirect()->route('racking_t.edit', compact('plating', 'hit_data_racking', 'date', 'masterdata', 'previous', 'next', 'id'));
         } else {

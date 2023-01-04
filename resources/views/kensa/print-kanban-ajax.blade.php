@@ -31,7 +31,7 @@
             <div class="col-md-4">
                 <label>Qty Troly <i class="fas fa-boxes"></i></label>
                 <div class="input-group">
-                    <input type="number" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();" required>
+                    <input type="number" id="kirim_assy" name="kirim_assy" class="form-control" onkeyup="sum();" maxlength="3"  required>
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
                     </div>
@@ -45,7 +45,7 @@
             <div class="col-md-4">
                 <label>Qty Troly <i class="fas fa-spray-can"></i></label>
                 <div class="input-group">
-                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control" required
+                    <input type="text" id="kirim_painting" name="kirim_painting" class="form-control" maxlength="3" required
                         onkeyup="sum();">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
@@ -60,7 +60,7 @@
             <div class="col-md-4">
                 <label>Qty Troly <i class="fas fa-search-plus"></i></label>
                 <div class="input-group">
-                    <input type="text" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();" required>
+                    <input type="text" id="kirim_ppic" name="kirim_ppic" class="form-control" onkeyup="sum();" maxlength="3" required>
                     <div class="input-group-prepend">
                         <span class="input-group-text">Pcs </span>
                     </div>
@@ -79,7 +79,7 @@
         </div>
 
 
-        
+
         {{-- <div class="col-md-3">
             <label>Model</label> --}}
             <input type="hidden" id="model" name="model" value="{{ $d->model }}" class="form-control"
@@ -92,7 +92,7 @@
                 readonly>
         {{-- </div> --}}
 
-        
+
 
         @if ($d->stok < $d->qty_trolly)
             <div class="col-md-4">
@@ -159,8 +159,8 @@
                     class="form-control" readonly>
             </div>
         @endif
-        
-        
+
+
     </div>
 @endforeach
 

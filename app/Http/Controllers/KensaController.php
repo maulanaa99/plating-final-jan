@@ -24,7 +24,7 @@ class KensaController extends Controller
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->join('plating', 'plating.id', '=', 'kensa.id_plating')
-            ->select('kensa.*', 'masterdata.stok_bc', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle')
+            ->select('kensa.*', 'masterdata.stok_bc', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle', 'plating.qty_aktual')
             // ->orderBy('tanggal_k', 'desc')->orderBy('waktu_k', 'desc')
             ->where('tanggal_k', '=', $date)
             ->get();
@@ -120,7 +120,8 @@ class KensaController extends Controller
     {
         $masterdata = MasterData::find($request->id_masterdata);
         if ($masterdata->stok_bc < $request->qty_bar) {
-            return redirect()->route('kensa.tambah')->with('errors', 'Gagal!, Stok Kurang');
+            Alert::error('Gagal', 'Stok Kurang!!');
+            return redirect()->route('kensa.tambah');
         }
         kensa::create([
             'tanggal_k' => $request->tanggal_k,
@@ -287,6 +288,7 @@ class KensaController extends Controller
     public function kanbansimpan(Request $request)
     {
         $masterdata = MasterData::find($request->id_masterdata);
+        $pengiriman = pengiriman::all();
         if ($masterdata->stok < $request->kirim_assy) {
             Alert::Warning('Gagal', 'Stok Kurang!');
             return redirect()->route('kensa.printKanban');
@@ -428,6 +430,8 @@ class KensaController extends Controller
         $shimi = $sum_shimi != 0 && $sum_qty_bar != 0 ? (($sum_shimi / $sum_qty_bar) * 100) : 0;
         $sum_pitto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('pitto');
         $pitto = $sum_pitto != 0 && $sum_qty_bar != 0 ? (($sum_pitto / $sum_qty_bar) * 100) : 0;
+        $sum_misto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('misto');
+        $misto = $sum_misto != 0 && $sum_qty_bar != 0 ? (($sum_misto / $sum_qty_bar) * 100) : 0;
         $sum_other = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('other');
         $other = $sum_other != 0 && $sum_qty_bar != 0 ? (($sum_other / $sum_qty_bar) * 100) : 0;
         $sum_gores = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('gores');
@@ -494,6 +498,8 @@ class KensaController extends Controller
             'sum_shimi',
             'pitto',
             'sum_pitto',
+            'misto',
+            'sum_misto',
             'other',
             'sum_other',
             'gores',

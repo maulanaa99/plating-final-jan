@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UnrackingExport;
+use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\Plating;
 use App\Models\unracking_t;
@@ -56,8 +57,33 @@ class UnrackingController_T extends Controller
         $next = unracking_t::where('id', '>', $plating->id)->min('id');
 
         if ($request->qty_aktual > $plating->qty_bar) {
-            Alert::Warning('Gagal', 'Qty Aktual Salah!');
-            return redirect()->route('unracking_t.edit', compact('plating','masterdata','id'));
+            Alert::Warning('Gagal', 'Qty Aktual Salah!!');
+            return redirect()->route('unracking_t.edit', compact('plating', 'masterdata', 'id'));
+        }
+        elseif ($request->qty_aktual == 0) {
+            $plating->tanggal_u = $request->tanggal_u;
+            $plating->waktu_in_u = Carbon::now()->format('H:i:m');
+            $plating->qty_aktual = $request->qty_aktual;
+            $plating->cycle = $request->cycle;
+            $plating->updated_by = Auth::user()->name;
+            $plating->status = '1';
+            $plating->save();
+            $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
+            $masterdata->save();
+        }
+        elseif ($plating->status = '3') {
+            Alert::Warning('Gagal', 'Part Sudah Di Cek!!');
+            return redirect()->route('unracking_t.edit', compact('plating', 'masterdata', 'id'));
+        } elseif ($plating->qty_aktual != '') {
+            $plating->tanggal_u = $request->tanggal_u;
+            $plating->waktu_in_u = Carbon::now()->format('H:i:m');
+            $plating->qty_aktual = $request->qty_aktual;
+            $plating->cycle = $request->cycle;
+            $plating->updated_by = Auth::user()->name;
+            // $plating->status = '1';
+            $plating->save();
+            $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
+            $masterdata->save();
         } else {
             $plating->tanggal_u = $request->tanggal_u;
             $plating->waktu_in_u = Carbon::now()->format('H:i:m');

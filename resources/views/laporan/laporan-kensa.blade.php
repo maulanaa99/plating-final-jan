@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('title')
-    Data Racking
+    Laporan Data Kensa
 @endsection
 
 @push('page-styles')
@@ -17,7 +17,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active"> > Racking</li>
+    <li class="active"> > Laporan > Kensa</li>
 @endsection
 
 @section('content')
@@ -25,7 +25,8 @@
         <form action="{{ route('laporan.kensa') }}" method="GET">
             <div class="row input-daterange">
                 <div class="col-md-5">
-                    <input type="date" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
+                    <input type="datetime-local" class="form-control" name="start_date" id="start_date"
+                        value="{{ $start_date }}">
                 </div>
                 <div class="col-md-1">
                     <center>
@@ -33,7 +34,8 @@
                     </center>
                 </div>
                 <div class="col-md-5">
-                    <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
+                    <input type="datetime-local" class="form-control" name="end_date" id="end_date"
+                        value="{{ $end_date }}">
                 </div>
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Filter</button>
@@ -68,6 +70,7 @@
                         <th>Shiromoya</th>
                         <th>Shimi</th>
                         <th>Pitto</th>
+                        <th>Misto</th>
                         <th>Other</th>
                         <th>Gores</th>
                         <th>Regas</th>
@@ -83,37 +86,36 @@
                 <tbody>
                     @foreach ($kensa as $no => $kensha)
                         <tr>
-                            <td style="width:1px; white-space:nowrap;">{{ $no + 1 }}</td>
-                            <td style="width:1px; white-space:nowrap;">
-                                {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
-                                {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
+                            <td>{{ $no + 1 }}</td>
+                            <td style="width:1px; white-space:nowrap;"> {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }} {{ $kensha->waktu_k}}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->no_bar }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->qty_bar }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->cycle }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->nikel }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->butsu }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->hadare }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->hage }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->moyo }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->fukure }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->crack }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->henkei }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->hanazaki }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->kizu }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->kaburi }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->shiromoya }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->shimi }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->pitto }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->other }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->gores }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->regas }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->silver }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->hike }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->burry }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->others }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ng }}</td>
+                            <td>{{ $kensha->no_bar }}</td>
+                            <td>{{ $kensha->qty_bar }}</td>
+                            <td>{{ $kensha->total_ok }}</td>
+                            <td>{{ $kensha->cycle }}</td>
+                            <td>{{ $kensha->nikel }}</td>
+                            <td>{{ $kensha->butsu }}</td>
+                            <td>{{ $kensha->hadare }}</td>
+                            <td>{{ $kensha->hage }}</td>
+                            <td>{{ $kensha->moyo }}</td>
+                            <td>{{ $kensha->fukure }}</td>
+                            <td>{{ $kensha->crack }}</td>
+                            <td>{{ $kensha->henkei }}</td>
+                            <td>{{ $kensha->hanazaki }}</td>
+                            <td>{{ $kensha->kizu }}</td>
+                            <td>{{ $kensha->kaburi }}</td>
+                            <td>{{ $kensha->shiromoya }}</td>
+                            <td>{{ $kensha->shimi }}</td>
+                            <td>{{ $kensha->pitto }}</td>
+                            <td>{{ $kensha->misto }}</td>
+                            <td>{{ $kensha->other }}</td>
+                            <td>{{ $kensha->gores }}</td>
+                            <td>{{ $kensha->regas }}</td>
+                            <td>{{ $kensha->silver }}</td>
+                            <td>{{ $kensha->hike }}</td>
+                            <td>{{ $kensha->burry }}</td>
+                            <td>{{ $kensha->others }}</td>
+                            <td>{{ $kensha->total_ng }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
                         </tr>
@@ -138,13 +140,20 @@
             $("#add-row").DataTable({
                 "responsive": false,
                 "lengthChange": true,
-                "autoWidth": false,
+                "autoWidth": true,
                 "pageLength": 75,
                 "lengthMenu": [
                     [10, 25, 50, 75, -1],
                     [10, 25, 50, 75, "All"]
                 ],
-                "buttons": ["excel", "pdf", "print","copy"]
+                "buttons": ["excel", "pdf", "print", "copy"],
+                scrollY: "700px",
+                scrollX: true,
+                scrollCollapse: true,
+                paging: true,
+                fixedColumns: {
+                    left: 7,
+                }
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });
     </script>

@@ -103,7 +103,7 @@
                             {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->no_bar }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $kensha->qty_bar }}</td>
+                        <td style="width:1px; white-space:nowrap;">{{ $kensha->qty_aktual }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->total_ok }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->cycle }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->nikel }}</td>
