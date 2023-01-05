@@ -73,6 +73,7 @@
                         <th class="text-center">Shiromoya</th>
                         <th class="text-center">Shimi</th>
                         <th class="text-center">Pitto</th>
+                        <th class="text-center">Misto</th>
                         <th class="text-center">Other</th>
                         <th class="text-center">Gores</th>
                         <th class="text-center">Regas</th>
@@ -115,6 +116,7 @@
                             <td class="text-center">{{ $all->shiromoya }}</td>
                             <td class="text-center">{{ $all->shimi }}</td>
                             <td class="text-center">{{ $all->pitto }}</td>
+                            <td class="text-center">{{ $all->misto }}</td>
                             <td class="text-center">{{ $all->other }}</td>
                             <td class="text-center">{{ $all->gores }}</td>
                             <td class="text-center">{{ $all->regas }}</td>
