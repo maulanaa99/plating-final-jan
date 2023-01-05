@@ -25,7 +25,7 @@
         <form action="{{ route('laporan.all') }}" method="GET">
             <div class="row input-daterange">
                 <div class="col-md-5">
-                    <input type="datetime-local" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
+                    <input type="date" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
                 </div>
                 <div class="col-md-1">
                     <center>
@@ -33,7 +33,7 @@
                     </center>
                 </div>
                 <div class="col-md-5">
-                    <input type="datetime-local" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
+                    <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
                 </div>
                 <div class="col-md-1">
                     <button type="submit" class="btn btn-primary">Filter</button>
