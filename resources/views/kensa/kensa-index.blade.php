@@ -102,10 +102,10 @@
                             {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
                             {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
-                        <td >{{ $kensha->no_bar }}</td>
-                        <td >{{ $kensha->qty_aktual }}</td>
-                        <td >{{ $kensha->total_ok }}</td>
-                        <td >{{ $kensha->cycle }}</td>
+                        <td>{{ $kensha->no_bar }}</td>
+                        <td>{{ $kensha->qty_aktual }}</td>
+                        <td>{{ $kensha->total_ok }}</td>
+                        <td>{{ $kensha->cycle }}</td>
                         <td class="text-center">{{ $kensha->nikel }}</td>
                         <td class="text-center">{{ $kensha->butsu }}</td>
                         <td class="text-center">{{ $kensha->hadare }}</td>
@@ -120,7 +120,7 @@
                         <td class="text-center">{{ $kensha->shiromoya }}</td>
                         <td class="text-center">{{ $kensha->shimi }}</td>
                         <td class="text-center">{{ $kensha->pitto }}</td>
-                        <td class="text-center">{{ $kensha->misto??0 }}</td>
+                        <td class="text-center">{{ $kensha->misto ?? 0 }}</td>
                         <td class="text-center">{{ $kensha->other }}</td>
                         <td class="text-center">{{ $kensha->gores }}</td>
                         <td class="text-center">{{ $kensha->regas }}</td>
@@ -131,18 +131,21 @@
                         <td class="text-center">{{ $kensha->total_ng }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
-                        <td >{{ $kensha->keterangan }}</td>
+                        <td>{{ $kensha->keterangan }}</td>
                         <td style="width:1px; white-space:nowrap;">
                             <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                     class="far fa-edit"></i></a>
-                            <a href="#" data-id="{{ $kensha->id }}"
+                            {{-- <a href="#" data-id="{{ $kensha->id }}"
                                 class="btn btn-icon btn-sm btn-danger swal-confirm"><i class="far fa-trash-alt">
                                     </i>
                                 <form action="{{ route('kensa.delete', $kensha->id) }}" id="delete{{ $kensha->id }}"
                                     method="POST">
                                     @csrf
                                 </form>
-                            </a>
+                            </a> --}}
+                            <button type="button" class="btn btn-danger btn-sm delete-button"
+                                data-id="{{ $kensha->id }}"> <i class="far fa-trash-alt">
+                                </i></button>
                         </td>
                     </tr>
                 @endforeach
@@ -217,7 +220,61 @@
         });
     </script>
 
-    <script>
+<script>
+    $(document).on('click', '.delete-button', function(e) {
+        e.preventDefault();
+
+        var id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus saja!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/kensa/delete/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data Anda telah dihapus.',
+                                'success'
+                            ).then((result) => {
+                                window.location.href = '/kensa';
+                            });
+                        } else {
+                            Swal.fire(
+                                'Gagal!',
+                                'Part sudah di Unracking.',
+                                'error'
+                            )
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Gagal!',
+                            'Terjadi kesalahan saat menghapus data.',
+                            'error'
+                        ).then((result) => {
+                            window.location.href = '/kensa';
+                        });
+                    }
+                });
+            }
+        })
+    });
+</script>
+
+    {{-- <script>
         $(".swal-confirm").click(function(e) {
             id = e.target.dataset.id;
             swal({
@@ -233,5 +290,5 @@
                     } else {}
                 });
         });
-    </script>
+    </script> --}}
 @endpush

@@ -54,7 +54,8 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/iconfonts/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.addons.css') }}">
-    <link rel="shortcut icon" href="{{ asset('assets/dist/img/sri2.jpg') }}" />
+
+    <link rel="shortcut icon" href="{{ asset('assets/dist/img/sri2-bulat.png') }}" />
 
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/sweetalert2/sweetalert2.min.css') }}">

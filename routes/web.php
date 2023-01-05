@@ -99,7 +99,7 @@ Route::controller(KensaController::class)->middleware(['auth'])->group(function 
     Route::get('kensa', 'index')->name('kensa');
     Route::get('kensa/tambah', 'tambah')->name('kensa.tambah');
     Route::post('kensa', 'simpan')->name('kensa.simpan');
-    Route::post('kensa/delete/{id}', 'delete')->name('kensa.delete');
+    Route::delete('kensa/delete/{id}', 'delete')->name('kensa.delete');
     Route::get('kensa/{id}/edit', 'edit')->name('kensa.edit');
     Route::patch('kensa/{id}', 'update')->name('kensa.update');
     Route::get('kensa/export_excel', 'exportexcel')->name('kensa.export');

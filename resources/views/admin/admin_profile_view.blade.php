@@ -47,6 +47,8 @@
                                     {{ $jml_kensa }} Bar
                                 </div>
                             </div>
+                            <a href="{{ route('edit.profile') }}" class="btn btn-rounded btn-warning float-right"> <i
+                                class="fa fa-edit"></i> Edit Profile</a>
                         </div>
                     </div>
                 </div>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UnrackingExport;
-use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\Plating;
 use App\Models\unracking_t;
@@ -76,7 +75,7 @@ class UnrackingController_T extends Controller
         elseif ($plating->status == '3') {
             Alert::Warning('Gagal', 'Part Sudah Di Cek!!');
             return redirect()->route('unracking_t.edit', compact('plating', 'masterdata', 'id'));
-        } 
+        }
         elseif ($plating->qty_aktual != '') {
             $plating->tanggal_u = $request->tanggal_u;
             $plating->waktu_in_u = Carbon::now()->format('H:i:m');
@@ -87,7 +86,7 @@ class UnrackingController_T extends Controller
             $plating->save();
             $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
             $masterdata->save();
-        } 
+        }
         else {
             $plating->tanggal_u = $request->tanggal_u;
             $plating->waktu_in_u = Carbon::now()->format('H:i:m');

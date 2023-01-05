@@ -6,7 +6,7 @@
 @push('page-styles')
     <style>
         h7 {
-            font-size: 48pt;
+            font-size: 45pt;
         }
 
         input[type="text"] {

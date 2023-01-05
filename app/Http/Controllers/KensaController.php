@@ -191,12 +191,20 @@ class KensaController extends Controller
     public function delete($id)
     {
         $kensa = kensa::find($id);
-        $kensa = kensa::where('id_masterdata', '=', $kensa->id_masterdata)->first();
+
+        // $masterdata = kensa::where('id_masterdata', '=', $kensa->id_masterdata)->first();
         $masterdata = MasterData::find($kensa->id_masterdata);
+        $plating = Plating::find($kensa->id_plating);
         $masterdata->stok = $masterdata->stok - $kensa->total_ok;
+        $masterdata->stok_bc = $masterdata->stok_bc + $kensa->total_ok;
+        $plating->status = '2';
+        $plating->save();
         $masterdata->save();
         $kensa->delete();
-        return redirect('kensa')->with('toast_success', 'Data Berhasil dihapus');
+
+        return response()->json([
+            'success' => true
+        ]);
     }
 
     //update data
