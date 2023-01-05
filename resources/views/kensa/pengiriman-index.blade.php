@@ -71,7 +71,11 @@
                         <td>
                             <a href="{{ route('kensa.cetak_kanban', $row->id) }}" class="btn btn-icon btn-sm btn-primary"
                                 target="_blanke"><i class="fas fa-print"></i> Cetak </a>
+                            <button type="button" class="btn btn-danger btn-sm delete-button"
+                                data-id="{{ $row->id }}"> <i class="far fa-trash-alt"> Hapus
+                                </i></button>
                         </td>
+
                     </tr>
                 @endforeach
             </tbody>
@@ -103,7 +107,61 @@
         });
     </script>
 
-    <script>
+<script>
+    $(document).on('click', '.delete-button', function(e) {
+        e.preventDefault();
+
+        var id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus saja!'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    url: '/kensa/pengiriman/delete/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(data) {
+                        if (data.success) {
+                            Swal.fire(
+                                'Terhapus!',
+                                'Data Anda telah dihapus.',
+                                'success'
+                            ).then((result) => {
+                                window.location.href = '/kensa/pengiriman';
+                            });
+                        } else {
+                            Swal.fire(
+                                'Gagal!',
+                                'Part sudah di Unracking.',
+                                'error'
+                            )
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Gagal!',
+                            'Terjadi kesalahan saat menghapus data.',
+                            'error'
+                        ).then((result) => {
+                            window.location.href = '/kensa/pengiriman';
+                        });
+                    }
+                });
+            }
+        })
+    });
+</script>
+
+    {{-- <script>
         $(".swal-confirm").click(function(e) {
             id = e.target.dataset.id;
             swal({
@@ -119,5 +177,5 @@
                     } else {}
                 });
         });
-    </script>
+    </script> --}}
 @endpush

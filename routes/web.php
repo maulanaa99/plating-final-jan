@@ -107,12 +107,22 @@ Route::controller(KensaController::class)->middleware(['auth'])->group(function 
     Route::get('kensa/search', 'search')->name('kensa.search');
     Route::get('kensa/searchdater', 'searchDater')->name('kensa.searchDate');
     Route::get('kensa/pengiriman', 'pengiriman')->name('kensa.pengiriman');
+
+    Route::delete('kensa/pengiriman/delete/{id}', 'pengirimanDelete')->name('pengiriman.delete');
+
     Route::get('kensa/print_kanban', 'printKanban')->name('kensa.printKanban');
     Route::post('kensa/print_kanban/simpan', 'kanbansimpan')->name('kensa.kanban-simpan');
     Route::get('kensa/print_kanban/ajax', 'ajaxKanban')->name('kensa.ajaxKanban');
-    Route::get('kensa/ajax', 'ajax')->name('kensa.ajax');
     Route::get('kensa/print_kanban/cetak_kanban/{id}', 'cetak_kanban')->name('kensa.cetak_kanban');
-    Route::get('kensa/print_kanban/cetak_kanbane/', 'cetak_kanbane')->name('kensa.cetak_kanbane');
+    Route::get('kensa/ajax', 'ajax')->name('kensa.ajax');
+
+
+    Route::get('kensa/print_kanban/custom_kanban/', 'custom_kanban')->name('kensa.custom_kanban');
+    Route::get('kensa/print_kanban/custom_kanban/ajax', 'custom_kanban_ajax')->name('custom.kanban.ajax');
+    Route::get('kensa/print_kanban/custom_kanban/print/{id}', 'custom_kanban_print')->name('custom.kanban.print');
+    Route::post('kensa/print_kanban/custom_kanban/simpan', 'custom_kanban_simpan')->name('custom.kanban-simpan');
+
+
     Route::get('kensa/utama', 'utama')->name('kensa.utama');
 });
 

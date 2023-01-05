@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kanban_Custom;
 use App\Models\kensa;
 use App\Models\MasterData;
 use App\Models\Pengiriman;
@@ -90,6 +91,136 @@ class KensaController extends Controller
             'avg_p_total_ok',
             'avg_p_total_ng',
             'date',
+        ));
+    }
+
+    public function utama(Request $request)
+    {
+        $date = Carbon::parse($request->date)->format('Y-m-d');
+
+        $sum_qty_bar = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('qty_bar');
+        $sum_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ng');
+        $sum_nikel = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('nikel');
+        $nikel = $sum_nikel != 0 && $sum_qty_bar != 0 ? (($sum_nikel / $sum_qty_bar) * 100) : 0;
+        $sum_butsu = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('butsu');
+        $butsu = $sum_butsu != 0 && $sum_qty_bar != 0 ? (($sum_butsu / $sum_qty_bar) * 100) : 0;
+        $sum_hadare = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hadare');
+        $hadare = $sum_hadare != 0 && $sum_qty_bar != 0 ? (($sum_hadare / $sum_qty_bar) * 100) : 0;
+        $sum_hage = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hage');
+        $hage = $sum_hage != 0 && $sum_qty_bar != 0 ? (($sum_hage / $sum_qty_bar) * 100) : 0;
+        $sum_moyo = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('moyo');
+        $moyo = $sum_moyo != 0 && $sum_qty_bar != 0 ? (($sum_moyo / $sum_qty_bar) * 100) : 0;
+        $sum_fukure = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('fukure');
+        $fukure = $sum_fukure != 0 && $sum_qty_bar != 0 ? (($sum_fukure / $sum_qty_bar) * 100) : 0;
+        $sum_crack = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('crack');
+        $crack = $sum_crack != 0 && $sum_qty_bar != 0 ? (($sum_crack / $sum_qty_bar) * 100) : 0;
+        $sum_henkei = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('henkei');
+        $henkei = $sum_henkei != 0 && $sum_qty_bar != 0 ? (($sum_henkei / $sum_qty_bar) * 100) : 0;
+        $sum_hanazaki = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hanazaki');
+        $hanazaki = $sum_hanazaki != 0 && $sum_qty_bar != 0 ? (($sum_hanazaki / $sum_qty_bar) * 100) : 0;
+        $sum_kizu = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kizu');
+        $kizu = $sum_kizu != 0 && $sum_qty_bar != 0 ? (($sum_kizu / $sum_qty_bar) * 100) : 0;
+        $sum_kaburi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kaburi');
+        $kaburi = $sum_kaburi != 0 && $sum_qty_bar != 0 ? (($sum_kaburi / $sum_qty_bar) * 100) : 0;
+        $sum_shiromoya = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shiromoya');
+        $shiromoya = $sum_shiromoya != 0 && $sum_qty_bar != 0 ? (($sum_shiromoya / $sum_qty_bar) * 100) : 0;
+        $sum_shimi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shimi');
+        $shimi = $sum_shimi != 0 && $sum_qty_bar != 0 ? (($sum_shimi / $sum_qty_bar) * 100) : 0;
+        $sum_pitto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('pitto');
+        $pitto = $sum_pitto != 0 && $sum_qty_bar != 0 ? (($sum_pitto / $sum_qty_bar) * 100) : 0;
+        $sum_misto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('misto');
+        $misto = $sum_misto != 0 && $sum_qty_bar != 0 ? (($sum_misto / $sum_qty_bar) * 100) : 0;
+        $sum_other = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('other');
+        $other = $sum_other != 0 && $sum_qty_bar != 0 ? (($sum_other / $sum_qty_bar) * 100) : 0;
+        $sum_gores = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('gores');
+        $gores = $sum_gores != 0 && $sum_qty_bar != 0 ? (($sum_gores / $sum_qty_bar) * 100) : 0;
+        $sum_regas = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('regas');
+        $regas = $sum_regas != 0 && $sum_qty_bar != 0 ? (($sum_regas / $sum_qty_bar) * 100) : 0;
+        $sum_silver = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('silver');
+        $silver = $sum_silver != 0 && $sum_qty_bar != 0 ? (($sum_silver / $sum_qty_bar) * 100) : 0;
+        $sum_hike = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hike');
+        $hike = $sum_hike != 0 && $sum_qty_bar != 0 ? (($sum_hike / $sum_qty_bar) * 100) : 0;
+        $sum_burry = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('burry');
+        $burry = $sum_burry != 0 && $sum_qty_bar != 0 ? (($sum_burry / $sum_qty_bar) * 100) : 0;
+        $sum_others = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('others');
+        $others = $sum_others != 0 && $sum_qty_bar != 0 ? (($sum_others / $sum_qty_bar) * 100) : 0;
+        $sum_total_ok = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ok');
+        $total_ok = $sum_total_ok != 0 && $sum_qty_bar != 0 ? (($sum_total_ok / $sum_qty_bar) * 100) : 0;
+        $total_ng = $sum_total_ng != 0 && $sum_qty_bar != 0 ? (($sum_total_ng / $sum_qty_bar) * 100) : 0;
+        $kensa_today = kensa::where('tanggal_k', '=', $date)->count();
+
+        $cooper_ok = kensa::where('cycle', '=', 'CS')->where('tanggal_k', '=', $date)->sum('total_ok');
+        $cooper_qty_bar = kensa::where('cycle', '=', 'CS')->where('tanggal_k', '=', $date)->sum('qty_bar');
+        $cooper_p = $cooper_ok != 0 && $cooper_qty_bar != 0 ? (($cooper_ok / $cooper_qty_bar) * 100) : 0;
+
+        $final_ok = kensa::where('cycle', '=', 'FS')->where('tanggal_k', '=', $date)->sum('total_ok');
+        $final_qty_bar = kensa::where('cycle', '=', 'FS')->where('tanggal_k', '=', $date)->sum('qty_bar');
+        $final_p = $final_ok != 0 && $final_qty_bar != 0 ? (($final_ok / $final_qty_bar) * 100) : 0;
+
+        $c1_ok = kensa::where('cycle', '=', 'C1')->where('tanggal_k', '=', $date)->sum('total_ok');
+        $c1_qty_bar = kensa::where('cycle', '=', 'C1')->where('tanggal_k', '=', $date)->sum('qty_bar');
+        $c1_p = $c1_ok != 0 && $c1_qty_bar != 0 ? (($c1_ok / $c1_qty_bar) * 100) : 0;
+
+        $c2_ok = kensa::where('cycle', '=', 'C2')->where('tanggal_k', '=', $date)->sum('total_ok');
+        $c2_qty_bar = kensa::where('cycle', '=', 'C2')->where('tanggal_k', '=', $date)->sum('qty_bar');
+        $c2_p = $c2_ok != 0 && $c2_qty_bar != 0 ? (($c2_ok / $c2_qty_bar) * 100) : 0;
+
+        // dd($cooper_p);
+
+        return view('kensa.kensa_menu_utama', compact(
+            'nikel',
+            'sum_nikel',
+            'butsu',
+            'sum_butsu',
+            'hadare',
+            'sum_hadare',
+            'hage',
+            'sum_hage',
+            'moyo',
+            'sum_moyo',
+            'fukure',
+            'sum_fukure',
+            'crack',
+            'sum_crack',
+            'henkei',
+            'sum_henkei',
+            'hanazaki',
+            'sum_hanazaki',
+            'kizu',
+            'sum_kizu',
+            'kaburi',
+            'sum_kaburi',
+            'shiromoya',
+            'sum_shiromoya',
+            'shimi',
+            'sum_shimi',
+            'pitto',
+            'sum_pitto',
+            'misto',
+            'sum_misto',
+            'other',
+            'sum_other',
+            'gores',
+            'sum_gores',
+            'regas',
+            'sum_regas',
+            'silver',
+            'sum_silver',
+            'hike',
+            'sum_hike',
+            'burry',
+            'sum_burry',
+            'others',
+            'sum_others',
+            'total_ok',
+            'total_ng',
+            'date',
+            'sum_qty_bar',
+            'kensa_today',
+            'c2_p',
+            'c1_p',
+            'cooper_p',
+            'final_p'
         ));
     }
 
@@ -340,7 +471,7 @@ class KensaController extends Controller
     {
         $pengiriman = $data['pengiriman'] = Pengiriman::findOrFail($id);
 
-        $filepath = storage_path('app/' . md5($id));
+        $filepath = storage_path('app/' . ' ' . Carbon::now()->format('dmYhis'). ' ' .$pengiriman->part_name);
 
         /**
          * PDF
@@ -404,133 +535,125 @@ class KensaController extends Controller
         return view('kensa.pengiriman-index', compact('pengiriman', 'masterdata', 'date'));
     }
 
-    public function utama(Request $request)
+    public function pengirimanDelete($id)
     {
-        $date = Carbon::parse($request->date)->format('Y-m-d');
+        $pengiriman = pengiriman::find($id);
+        $masterdata = MasterData::find($pengiriman->id_masterdata);
+        $masterdata->stok = $masterdata->stok + ($pengiriman->kirim_assy + $pengiriman->kirim_painting + $pengiriman->kirim_ppic);
+        $masterdata->save();
+        $pengiriman->delete();
 
-        $sum_qty_bar = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('qty_bar');
-        $sum_total_ng = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ng');
-        $sum_nikel = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('nikel');
-        $nikel = $sum_nikel != 0 && $sum_qty_bar != 0 ? (($sum_nikel / $sum_qty_bar) * 100) : 0;
-        $sum_butsu = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('butsu');
-        $butsu = $sum_butsu != 0 && $sum_qty_bar != 0 ? (($sum_butsu / $sum_qty_bar) * 100) : 0;
-        $sum_hadare = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hadare');
-        $hadare = $sum_hadare != 0 && $sum_qty_bar != 0 ? (($sum_hadare / $sum_qty_bar) * 100) : 0;
-        $sum_hage = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hage');
-        $hage = $sum_hage != 0 && $sum_qty_bar != 0 ? (($sum_hage / $sum_qty_bar) * 100) : 0;
-        $sum_moyo = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('moyo');
-        $moyo = $sum_moyo != 0 && $sum_qty_bar != 0 ? (($sum_moyo / $sum_qty_bar) * 100) : 0;
-        $sum_fukure = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('fukure');
-        $fukure = $sum_fukure != 0 && $sum_qty_bar != 0 ? (($sum_fukure / $sum_qty_bar) * 100) : 0;
-        $sum_crack = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('crack');
-        $crack = $sum_crack != 0 && $sum_qty_bar != 0 ? (($sum_crack / $sum_qty_bar) * 100) : 0;
-        $sum_henkei = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('henkei');
-        $henkei = $sum_henkei != 0 && $sum_qty_bar != 0 ? (($sum_henkei / $sum_qty_bar) * 100) : 0;
-        $sum_hanazaki = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hanazaki');
-        $hanazaki = $sum_hanazaki != 0 && $sum_qty_bar != 0 ? (($sum_hanazaki / $sum_qty_bar) * 100) : 0;
-        $sum_kizu = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kizu');
-        $kizu = $sum_kizu != 0 && $sum_qty_bar != 0 ? (($sum_kizu / $sum_qty_bar) * 100) : 0;
-        $sum_kaburi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('kaburi');
-        $kaburi = $sum_kaburi != 0 && $sum_qty_bar != 0 ? (($sum_kaburi / $sum_qty_bar) * 100) : 0;
-        $sum_shiromoya = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shiromoya');
-        $shiromoya = $sum_shiromoya != 0 && $sum_qty_bar != 0 ? (($sum_shiromoya / $sum_qty_bar) * 100) : 0;
-        $sum_shimi = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('shimi');
-        $shimi = $sum_shimi != 0 && $sum_qty_bar != 0 ? (($sum_shimi / $sum_qty_bar) * 100) : 0;
-        $sum_pitto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('pitto');
-        $pitto = $sum_pitto != 0 && $sum_qty_bar != 0 ? (($sum_pitto / $sum_qty_bar) * 100) : 0;
-        $sum_misto = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('misto');
-        $misto = $sum_misto != 0 && $sum_qty_bar != 0 ? (($sum_misto / $sum_qty_bar) * 100) : 0;
-        $sum_other = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('other');
-        $other = $sum_other != 0 && $sum_qty_bar != 0 ? (($sum_other / $sum_qty_bar) * 100) : 0;
-        $sum_gores = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('gores');
-        $gores = $sum_gores != 0 && $sum_qty_bar != 0 ? (($sum_gores / $sum_qty_bar) * 100) : 0;
-        $sum_regas = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('regas');
-        $regas = $sum_regas != 0 && $sum_qty_bar != 0 ? (($sum_regas / $sum_qty_bar) * 100) : 0;
-        $sum_silver = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('silver');
-        $silver = $sum_silver != 0 && $sum_qty_bar != 0 ? (($sum_silver / $sum_qty_bar) * 100) : 0;
-        $sum_hike = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('hike');
-        $hike = $sum_hike != 0 && $sum_qty_bar != 0 ? (($sum_hike / $sum_qty_bar) * 100) : 0;
-        $sum_burry = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('burry');
-        $burry = $sum_burry != 0 && $sum_qty_bar != 0 ? (($sum_burry / $sum_qty_bar) * 100) : 0;
-        $sum_others = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('others');
-        $others = $sum_others != 0 && $sum_qty_bar != 0 ? (($sum_others / $sum_qty_bar) * 100) : 0;
-        $sum_total_ok = DB::table('kensa')->where('tanggal_k', '=', $date)->get()->sum('total_ok');
-        $total_ok = $sum_total_ok != 0 && $sum_qty_bar != 0 ? (($sum_total_ok / $sum_qty_bar) * 100) : 0;
-        $total_ng = $sum_total_ng != 0 && $sum_qty_bar != 0 ? (($sum_total_ng / $sum_qty_bar) * 100) : 0;
-        $kensa_today = kensa::where('tanggal_k', '=', $date)->count();
-
-        $cooper_ok = kensa::where('cycle', '=', 'CS')->where('tanggal_k', '=', $date)->sum('total_ok');
-        $cooper_qty_bar = kensa::where('cycle', '=', 'CS')->where('tanggal_k', '=', $date)->sum('qty_bar');
-        $cooper_p = $cooper_ok != 0 && $cooper_qty_bar != 0 ? (($cooper_ok / $cooper_qty_bar) * 100) : 0;
-
-        $final_ok = kensa::where('cycle', '=', 'FS')->where('tanggal_k', '=', $date)->sum('total_ok');
-        $final_qty_bar = kensa::where('cycle', '=', 'FS')->where('tanggal_k', '=', $date)->sum('qty_bar');
-        $final_p = $final_ok != 0 && $final_qty_bar != 0 ? (($final_ok / $final_qty_bar) * 100) : 0;
-
-        $c1_ok = kensa::where('cycle', '=', 'C1')->where('tanggal_k', '=', $date)->sum('total_ok');
-        $c1_qty_bar = kensa::where('cycle', '=', 'C1')->where('tanggal_k', '=', $date)->sum('qty_bar');
-        $c1_p = $c1_ok != 0 && $c1_qty_bar != 0 ? (($c1_ok / $c1_qty_bar) * 100) : 0;
-
-        $c2_ok = kensa::where('cycle', '=', 'C2')->where('tanggal_k', '=', $date)->sum('total_ok');
-        $c2_qty_bar = kensa::where('cycle', '=', 'C2')->where('tanggal_k', '=', $date)->sum('qty_bar');
-        $c2_p = $c2_ok != 0 && $c2_qty_bar != 0 ? (($c2_ok / $c2_qty_bar) * 100) : 0;
-
-        // dd($cooper_p);
-
-        return view('kensa.kensa_menu_utama', compact(
-            'nikel',
-            'sum_nikel',
-            'butsu',
-            'sum_butsu',
-            'hadare',
-            'sum_hadare',
-            'hage',
-            'sum_hage',
-            'moyo',
-            'sum_moyo',
-            'fukure',
-            'sum_fukure',
-            'crack',
-            'sum_crack',
-            'henkei',
-            'sum_henkei',
-            'hanazaki',
-            'sum_hanazaki',
-            'kizu',
-            'sum_kizu',
-            'kaburi',
-            'sum_kaburi',
-            'shiromoya',
-            'sum_shiromoya',
-            'shimi',
-            'sum_shimi',
-            'pitto',
-            'sum_pitto',
-            'misto',
-            'sum_misto',
-            'other',
-            'sum_other',
-            'gores',
-            'sum_gores',
-            'regas',
-            'sum_regas',
-            'silver',
-            'sum_silver',
-            'hike',
-            'sum_hike',
-            'burry',
-            'sum_burry',
-            'others',
-            'sum_others',
-            'total_ok',
-            'total_ng',
-            'date',
-            'sum_qty_bar',
-            'kensa_today',
-            'c2_p',
-            'c1_p',
-            'cooper_p',
-            'final_p'
-        ));
+        return response()->json([
+            'success' => true
+        ]);
     }
+
+    // public function custom_kanban(Request $request)
+    // {
+    //     $date = Carbon::parse($request->date)->format('Y-m-d');
+    //     $pengiriman = Pengiriman::join('masterdata', 'masterdata.id', '=', 'pengiriman.id_masterdata')
+    //         ->select('pengiriman.*', 'masterdata.part_name', 'masterdata.qty_bar')
+    //         ->get();
+
+    //     $masterdata = MasterData::all();
+
+    //     return view('kensa.custom_kanban', compact('pengiriman', 'masterdata', 'date'));
+    // }
+
+    // public function custom_kanban_ajax(Request $request)
+    // {
+    //     $id_masterdata['id_masterdata'] = $request->id_masterdata;
+    //     $ajax_barang = MasterData::where('id', $id_masterdata)->get();
+
+    //     // $date = Carbon::parse($request->tgl_kanban)->format('Y-m-d');
+
+    //     // $q = $ajax_barang->first()->pengiriman_custom()->where('tgl_kanban', '=', $date)->orderBy('id', 'desc')->first();
+    //     // $kode = $q ? $q->no_kartu + 1 : '01';
+
+    //     return view('kensa.custom_kanban_ajax', compact('ajax_barang'));
+    // }
+
+
+
+    // public function custom_kanban_simpan(Request $request)
+    // {
+    //     $masterdata = MasterData::find($request->id_masterdata);
+    //     $kanban_custom = Kanban_Custom::all();
+
+    //     $kanban_custom = Kanban_Custom::create([
+    //         'tgl_kanban' => $request->tgl_kanban,
+    //         'id_masterdata' => $request->id_masterdata,
+    //         'no_part' => $request->no_part,
+    //         'part_name' => $request->part_name,
+    //         'model' => $request->model,
+    //         'bagian' => $request->bagian,
+    //         'no_kartu' => $request->no_kartu,
+    //         'next_process' => $request->next_process,
+    //         'kirim_painting' => $request->kirim_painting,
+    //         'kirim_assy' => $request->kirim_assy,
+    //         'kirim_ppic' => $request->kirim_ppic,
+    //         'std_qty' => $request->std_qty,
+    //         'created_at' => Carbon::now(),
+    //     ]);
+    //     $masterdata->save();
+
+    //     Alert::success('Success', 'Data Berhasil di Print!');
+    //     return redirect()->route('kensa.custom_kanban',  ['id' => $kanban_custom->id]);
+    // }
+
+    // public function custom_kanban_print($id)
+    // {
+    //     $kanban_custom = $data['kanban_custom'] = Kanban_Custom::findOrFail($id);
+
+    //     $filepath = storage_path('app/kanban_custom' . md5($id). Carbon::now());
+
+    //     /**
+    //      * PDF
+    //      */
+
+    //     $jumlah = $kanban_custom->kirim_assy + $kanban_custom->kirim_painting + $kanban_custom->kirim_ppic;
+    //     $print = ceil($jumlah / $kanban_custom->std_qty);
+    //     $sisa = $jumlah;
+    //     $jml_print = $kanban_custom->no_kartu + $print - 1;
+
+    //     foreach (range($kanban_custom->no_kartu, $jml_print) as $i) {
+    //         $data['no_kartu'] = $i;
+    //         $data['qty'] = $sisa >= $kanban_custom->std_qty ? $kanban_custom->std_qty : $sisa;
+    //         $sisa = $jumlah - $kanban_custom->std_qty;
+
+    //         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('kensa.custom_kanban_print', $data)->setPaper([0.0, 0.0, 226.772, 311.811], 'landscape');
+    //         $pdf->save($filepath . '_' . $i . '.pdf');
+    //         $pdf = new \Spatie\PdfToImage\Pdf($filepath . '_' . $i . '.pdf');
+    //         $pdf->setOutputFormat('png')
+    //             ->width(800)
+    //             ->saveImage($filepath . '_' . $i . '.png');
+
+    //         $sourceImage = new \Imagick($filepath . '_' . $i . '.png');
+    //         $sourceImage->rotateImage(new \ImagickPixel(), 90);
+    //         $sourceImage->writeImage($filepath . '_' . $i . '.png');
+
+    //         unlink($filepath . '_' . $i . '.pdf');
+
+    //         ini_set('max_execution_time', 500);
+
+    //         /**
+    //          * PRINTING
+    //          */
+    //         $connector = new WindowsPrintConnector("TM-T82II");
+    //         $printer = new Printer($connector);
+
+    //         try {
+    //             $tux = EscposImage::load($filepath . '_' . $i . '.png', false);
+    //             $printer->graphics($tux);
+    //             $printer->cut();
+    //         } catch (Exception $e) {
+    //             dd($e->getMessage());
+    //         } finally {
+    //             $printer->close();
+    //         }
+    //     }
+    //     $kanban_custom->no_kartu = $jml_print;
+    //     $kanban_custom->save();
+    //     return redirect()->route('kensa.printKanban')->with('toast_success', 'Data Berhasil Di Print');
+    // }
 }
