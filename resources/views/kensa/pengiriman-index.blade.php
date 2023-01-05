@@ -63,15 +63,15 @@
                         <td>{{ \Carbon\Carbon::parse($row->tgl_kanban)->format('d-m-Y') }}</td>
                         <td>{{ $row->no_part }}</td>
                         <td>{{ $row->part_name }}</td>
-                        <td>{{ $row->no_kartu }}</td>
+                        <td align="center">{{ $row->no_kartu }}</td>
                         <td>{{ $row->next_process }}</td>
-                        <td>{{ $row->kirim_painting }}</td>
-                        <td>{{ $row->kirim_assy }}</td>
-                        <td>{{ $row->kirim_ppic }}</td>
-                        <td>
+                        <td align="center">{{ $row->kirim_painting }}</td>
+                        <td align="center">{{ $row->kirim_assy }}</td>
+                        <td align="center">{{ $row->kirim_ppic }}</td>
+                        <td align="center">
                             <a href="{{ route('kensa.cetak_kanban', $row->id) }}" class="btn btn-icon btn-sm btn-primary"
                                 target="_blanke"><i class="fas fa-print"></i> Cetak </a>
-                            <button type="button" class="btn btn-danger btn-sm delete-button"
+                            <button type="button" class="btn btn-danger btn-sm delete-button "
                                 data-id="{{ $row->id }}"> <i class="far fa-trash-alt"> Hapus
                                 </i></button>
                         </td>

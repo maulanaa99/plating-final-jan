@@ -58,7 +58,7 @@
                         <td>{{ $unrack->qty_bar }}</td>
                         <td>{{ $unrack->qty_aktual }}</td>
                         <td>{{ $unrack->cycle }}</td>
-                        <td>
+                        <td align="center">
                             <a href="{{ route('unracking_t.edit', $unrack->id) }}"
                                 class="btn btn-icon btn-sm btn-warning" target="_blank"><i class="far fa-edit"></i> </a>
 

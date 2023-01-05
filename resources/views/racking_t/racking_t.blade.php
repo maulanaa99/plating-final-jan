@@ -66,7 +66,7 @@
                             <td>{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
                             <td>{{ $rack->cycle }}</td>
                             <td>{{ $rack->created_by }}</td>
-                            <td>
+                            <td align="center">
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>
                                 <button type="button" class="btn btn-danger btn-sm delete-button"
