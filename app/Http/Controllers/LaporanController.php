@@ -110,7 +110,8 @@ class LaporanController extends Controller
                 ->join('plating', 'plating.id', '=', 'kensa.id_plating')
                 ->select('plating.*', 'kensa.*')
                 ->whereBetween('tanggal_k', [$start_date, $end_date])
-                ->orderBy('tanggal_k', 'desc')
+                ->orderBy('tanggal_k', 'asc')
+                ->orderBy('waktu_k', 'asc')
                 ->get();
                 // dd([$start_date, $end_date]);
         } else {
