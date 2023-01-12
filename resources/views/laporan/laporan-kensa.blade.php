@@ -64,10 +64,10 @@
                         <th>Fukure</th>
                         <th>Crack</th>
                         <th>Henkei</th>
-                        <th>Hanazaki</th>
+                        <th>Hana zaki</th>
                         <th>Kizu</th>
                         <th>Kaburi</th>
-                        <th>Shiromoya</th>
+                        <th>Shiro moya</th>
                         <th>Shimi</th>
                         <th>Pitto</th>
                         <th>Misto</th>

@@ -4,17 +4,20 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KensaController;
+use App\Http\Controllers\KensaTrialController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MasterDataController;
 use App\Http\Controllers\MasterKensaController;
 use App\Http\Controllers\PinboshTertinggalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RackingController_T;
+use App\Http\Controllers\RackingTrialController;
 use App\Http\Controllers\RencanaProduksiController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UnrackingController_T;
+use App\Http\Controllers\UnrackingTrialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -144,16 +147,30 @@ Route::get('cariPart', [StokController::class, 'cariPart'])->name('cariPart');
 Route::get('rencana_produksi', [RencanaProduksiController::class, 'index'])->name('rencana_produksi');
 Route::post('rencana_produksi/import_excel', [RencanaProduksiController::class, 'import_excel'])->name('rencana_produksi.import_excel');
 
-Route::get('barang', [BarangController::class, 'index'])->name('barang');
-Route::get('barang/create', [BarangController::class, 'create'])->name('barang.tambah');
-Route::post('barang/simpan', [BarangController::class, 'store'])->name('barang.simpan');
-Route::get('barang/export_excel',[BarangController::class, 'export_excel'])->name('barang.export');
-Route::post('barang/import_excel',[BarangController::class, 'import_excel'])->name('barang.import');
+Route::controller(RackingTrialController::class)->middleware(['auth'])->group(function () {
+    Route::get('racking_trial', 'index')->name('tr.racking');
+    Route::get('racking_trial/tambah', 'tambah')->name('tr.racking.tambah');
+    Route::post('racking_trial', 'simpan')->name('tr.racking.simpan');
+    Route::delete('racking_trial/delete/{id}', 'delete')->name('tr.racking.delete');
+    Route::get('racking_trial/edit/{id}/', 'edit')->name('tr.racking.edit');
+    Route::patch('racking_trial/{id}', 'update')->name('tr.racking.update');
+});
 
-Route::resource('transaksi', TransaksiController::class);
-Route::get('/transaksi/destroy/{id}', [TransaksiController::class, 'destroy']);
+Route::controller(UnrackingTrialController::class)->middleware(['auth'])->group(function () {
+    Route::get('unracking_trial', 'index')->name('tr.unracking');
+    Route::post('unracking_trial', 'simpan')->name('tr.unracking.simpan');
+    Route::get('unracking_trial/edit/{id}', 'edit')->name('tr.unracking.edit');
+    Route::patch('unracking_trial/{id}', 'update')->name('tr.unracking.update');
+});
 
-Route::get('product', [ProductController::class,'index'])->name('product');
-Route::get('product/getDataProduct', [ProductController::class,'getDataProduct'])->name('product.getdata');
+Route::controller(KensaTrialController::class)->middleware(['auth'])->group(function () {
+    Route::get('kensa_trial', 'index')->name('tr.kensa');
+    Route::get('kensa_trial/tambah', 'tambah')->name('tr.kensa.tambah');
+    Route::post('kensa_trial', 'simpan')->name('tr.kensa.simpan');
+    Route::delete('kensa_trial/delete/{id}', 'delete')->name('tr.kensa.delete');
+    Route::get('kensa_trial/{id}/edit', 'edit')->name('tr.kensa.edit');
+    Route::patch('kensa_trial/{id}', 'update')->name('tr.kensa.update');
+});
+
 
 require __DIR__ . '/auth.php';

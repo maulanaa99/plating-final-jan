@@ -24,8 +24,6 @@ class UnrackingController_T extends Controller
     {
         $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
         $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
-        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
-        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
         $plating = Plating::whereBetween('tanggal_r', [$start_date, $end_date])
             ->orderBy('tanggal_r', 'desc')
             ->orderBy('waktu_in_r', 'desc')
@@ -99,7 +97,6 @@ class UnrackingController_T extends Controller
             $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
             $masterdata->save();
         }
-        // dd($request->waktu_in_u);
 
         if (isset($request->next)) {
             return redirect('/unracking_t/edit/' . $request->next);

@@ -67,10 +67,10 @@
                         <th class="text-center">Fukure</th>
                         <th class="text-center">Crack</th>
                         <th class="text-center">Henkei</th>
-                        <th class="text-center">Hanazaki</th>
+                        <th class="text-center">Hana zaki</th>
                         <th class="text-center">Kizu</th>
                         <th class="text-center">Kaburi</th>
-                        <th class="text-center">Shiromoya</th>
+                        <th class="text-center">Shiro moya</th>
                         <th class="text-center">Shimi</th>
                         <th class="text-center">Pitto</th>
                         <th class="text-center">Misto</th>

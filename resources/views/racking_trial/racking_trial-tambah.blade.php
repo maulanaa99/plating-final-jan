@@ -1,4 +1,14 @@
 @extends('layout.master')
+
+@section('title')
+    Tambah Data Trial Racking
+@endsection
+
+@section('breadcrumb')
+    @parent
+    <li class="active"> - >  <a href="#">Trial</a>  > <a href="{{ route('rackingtr') }}">Racking Trial</a> > Tambah</li>
+@endsection
+
 @push('page-styles')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
@@ -10,10 +20,6 @@
         }
     </style>
 @endpush
-
-@section('title')
-    Tambah Data Racking
-@endsection
 
 @section('content')
     <div class="container-fluid">
@@ -27,7 +33,7 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form id="quickForm" action="{{ route('racking_t.simpan') }}" method="POST" class="form-master">
+                    <form id="quickForm" action="{{ route('tr.racking.simpan') }}" method="POST" class="form-master">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-12 col-md-12 col-lg-12">
@@ -36,8 +42,7 @@
                                         <div class="col-md-1">
                                             <div class="form-group">
                                                 <label>No</label>
-                                                <input type="text" value="{{ $hit_data_racking + 1 }}" readonly
-                                                    class="form-control">
+                                                <input type="text" readonly class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -67,38 +72,18 @@ is-invalid
                                         </div>
 
                                         <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Tanggal Lot Produksi Molding</label>
-                                                <input type="date" name="tgl_lot_prod_mldg" value="<?= date('Y-m-d') ?>"
-                                                    class="@error('tgl_lot_prod_mldg')
-is-invalid
-@enderror form-control">
-                                                @error('tgl_lot_prod_mldg')
-                                                    <div class="text-danger">{{ $message }}</div>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
                                             <!-- select -->
                                             <div class="form-group">
-                                                <label>Cycle (Jml Bar = {{ $hit_data_racking }}) </label>
+                                                <label>Cycle</label>
                                                 <select name="cycle"
                                                     class="@error('cycle') is-invalid @enderror form-control">
                                                     @error('cycle')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
-                                                    @if ($hit_data_racking < 80)
-                                                        <option>C1</option>
-                                                        <option>C2</option>
-                                                        <option>CS</option>
-                                                        <option>FS</option>
-                                                    @else
-                                                        <option>C2</option>
-                                                        <option>C1</option>
-                                                        <option>CS</option>
-                                                        <option>FS</option>
-                                                    @endif
+                                                    <option>C1</option>
+                                                    <option>C2</option>
+                                                    <option>CS</option>
+                                                    <option>FS</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -129,8 +114,6 @@ is-invalid
                                                 @enderror
                                             </div>
                                         </div>
-
-                                        {{-- <div id="detail_part"></div> --}}
 
                                         <input type="hidden" id="no_part" name="no_part" value=""
                                             class="form-control typeahead" readonly>
@@ -169,8 +152,6 @@ is-invalid
                                             </div>
                                         </div>
 
-
-
                                         {{-- <div class="container"> --}}
                                         <div class="text-center mt-3">
                                             <button class="btn btn-primary button-prevent" type="submit">
@@ -181,17 +162,9 @@ is-invalid
                                             </button>
                                             <button class="btn btn-danger" type="reset"> <i
                                                     class="fas fa-trash-restore"></i> Reset</button>
-                                            <a href="{{ route('racking_t') }}"
+                                            <a href="{{ route('rackingtr') }}"
                                                 class="btn btn-icon icon-left btn-warning"><i
                                                     class="fas fa-arrow-left"></i> Kembali</a>
-                                            {{-- <button class="btn btn-primary mr-1" type="submit"> <i
-                                                        class="fas fa-save"></i> Submit</button>
-                                                <button class="btn btn-danger" type="reset"> <i
-                                                        class="fas fa-trash-restore"></i> Reset</button>
-                                                <a href="{{ route('racking_t') }}"
-                                                    class="btn btn-icon icon-left btn-warning"><i
-                                                        class="fas fa-arrow-left"></i> Kembali</a> --}}
-                                            {{-- </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -200,12 +173,6 @@ is-invalid
                 </div>
                 <!-- /.card -->
             </div>
-            <!--/.col (left) -->
-            <!-- right column -->
-            <div class="col-md-6">
-
-            </div>
-            <!--/.col (right) -->
         </div>
         <!-- /.row -->
     </div>
@@ -265,21 +232,4 @@ is-invalid
             })
         });
     </script>
-
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $('#id_masterdata').change(function() {
-                var id_masterdata = $('#id_masterdata').val();
-                $.ajax({
-                    type: "GET",
-                    url: "/racking_t/ajax",
-                    data: "id_masterdata=" + id_masterdata,
-                    cache: false,
-                    success: function(data) {
-                        $('#detail_part').html(data);
-                    }
-                });
-            });
-        });
-    </script> --}}
 @endpush
