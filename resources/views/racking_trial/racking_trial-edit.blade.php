@@ -160,6 +160,17 @@
                                                         class="form-control">
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <Label> Keterangan</Label>
+                                                    <input type="text" id="keterangan" name="keterangan"
+                                                        @if (old('keterangan')) value="{{ old('keterangan') }}"
+                                                        @else
+                                                            value="{{ $racking_trial->keterangan }}" @endif
+                                                        class="form-control">
+                                                </div>
+                                            </div>
                                             <div class="text-center mt-3">
                                                 <a href="{{ URL::to('racking_trial/edit/' . $previous) }}"
                                                     class="btn btn-outline-secondary"> <i class="fas fa-arrow-left"></i>
@@ -220,7 +231,7 @@
                     $('#part_name').val(data.part_name);
                     $('#katalis').val(data.katalis);
                     $('#grade_color').val(data.grade_color);
-                    $('#channel').val(data.channel);
+                    // $('#channel').val(data.channel);
                     $('#qty_bar').val(data.qty_bar);
                     $('#stok_bc').val(data.stok_bc);
                 },

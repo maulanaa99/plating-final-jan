@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\kensa;
+use App\Models\KensaTrial;
 use App\Models\Plating;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -99,6 +100,7 @@ class LaporanController extends Controller
         }
         return view('laporan.laporan-kensa', compact('kensa', 'start_date', 'end_date'));
     }
+
     public function all(Request $request)
     {
         $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
@@ -121,5 +123,29 @@ class LaporanController extends Controller
                 ->whereBetween('tanggal_k', [$start_date, $end_date]);
         }
         return view('laporan.laporan-all', compact('alls', 'start_date', 'end_date'));
+    }
+
+    public function trial(Request $request)
+    {
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+        if ($request->start_date || $request->end_date) {
+            $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+            $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+            $trials = KensaTrial::join('masterdata', 'masterdata.id', '=', 'kensa_tr.id_masterdata')
+                ->join('plating_tr', 'plating_tr.id', '=', 'kensa_tr.id_plating')
+                ->select('plating_tr.*', 'kensa_tr.*')
+                ->whereBetween('tanggal_k', [$start_date, $end_date])
+                ->orderBy('tanggal_k', 'asc')
+                ->orderBy('waktu_k', 'asc')
+                ->get();
+                // dd([$start_date, $end_date]);
+        } else {
+            $trials = KensaTrial::join('masterdata', 'masterdata.id', '=', 'kensa_tr.id_masterdata')
+                ->join('plating_tr', 'plating_tr.id', '=', 'kensa_tr.id_plating')
+                ->select('plating_tr.*', 'kensa_tr.*')
+                ->whereBetween('tanggal_k', [$start_date, $end_date]);
+        }
+        return view('laporan.laporan-trial', compact('trials', 'start_date', 'end_date'));
     }
 }

@@ -60,6 +60,7 @@ class KensaController extends Controller
 
         $masterdata = MasterData::all();
 
+
         return view('kensa.kensa-index', compact(
             'kensa',
             'masterdata',
@@ -165,6 +166,9 @@ class KensaController extends Controller
         $c2_qty_bar = kensa::where('cycle', '=', 'C2')->where('tanggal_k', '=', $date)->sum('qty_bar');
         $c2_p = $c2_ok != 0 && $c2_qty_bar != 0 ? (($c2_ok / $c2_qty_bar) * 100) : 0;
 
+        $hit_data_kensa = kensa::where('tanggal_k', '=', $date)->count();
+
+
         // dd($cooper_p);
 
         return view('kensa.kensa_menu_utama', compact(
@@ -220,7 +224,8 @@ class KensaController extends Controller
             'c2_p',
             'c1_p',
             'cooper_p',
-            'final_p'
+            'final_p',
+            'hit_data_kensa'
         ));
     }
 
@@ -471,7 +476,7 @@ class KensaController extends Controller
     {
         $pengiriman = $data['pengiriman'] = Pengiriman::findOrFail($id);
 
-        $filepath = storage_path('app/' . ' ' . Carbon::now()->format('dmYhis'). ' ' .$pengiriman->part_name);
+        $filepath = storage_path('app/' . ' ' . Carbon::now()->format('dmYhis') . ' ' . $pengiriman->part_name);
 
         /**
          * PDF

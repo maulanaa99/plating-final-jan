@@ -17,7 +17,7 @@
                     <i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
-        <form action="{{ route('racking_t') }}" method="GET">
+        <form action="{{ route('tr.racking') }}" method="GET">
             <div class="row">
                 <div class="col-md-4">
                     <label for="">Tanggal</label>
@@ -47,6 +47,7 @@
                         <th class="align-middle text-center">Qty Bar</th>
                         <th class="align-middle text-center">Cycle</th>
                         <th class="align-middle text-center">PIC</th>
+                        <th class="align-middle text-center">Keterangan</th>
                         <th class="align-middle text-center">Action</th>
                     </tr>
                 </thead>
@@ -55,16 +56,17 @@
                     @foreach ($racking_trial as $no => $rack)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
-                            <td>{{ $rack->no_bar }}</td>
+                            <td align="center">{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
+                            <td align="center">{{ $rack->no_bar }}</td>
                             <td>{{ $rack->part_name }}</td>
-                            <td>{{ $rack->no_part }}</td>
-                            <td>{{ $rack->katalis }}</td>
-                            <td>{{ $rack->channel }}</td>
-                            <td>{{ $rack->grade_color }}</td>
-                            <td>{{ $rack->qty_bar }}</td>
-                            <td>{{ $rack->cycle }}</td>
-                            <td>{{ $rack->created_by }}</td>
+                            <td align="center">{{ $rack->no_part }}</td>
+                            <td align="center">{{ $rack->katalis }}</td>
+                            <td align="center">{{ $rack->channel }}</td>
+                            <td align="center">{{ $rack->grade_color }}</td>
+                            <td align="center">{{ $rack->qty_bar }}</td>
+                            <td align="center">{{ $rack->cycle }}</td>
+                            <td align="center">{{ $rack->created_by }}</td>
+                            <td align="center">{{ $rack->keterangan }}</td>
                             <td align="center">
                                 <a href="{{ route('tr.racking.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>
@@ -121,7 +123,7 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: '/racking_trial/delete' + id,
+                        url: '/racking_trial/delete/' + id,
                         type: 'DELETE',
                         data: {
                             _token: '{{ csrf_token() }}'
@@ -149,7 +151,7 @@
                                 'Terjadi kesalahan saat menghapus data.',
                                 'error'
                             ).then((result) => {
-                                window.location.href = '/racking_t';
+                                window.location.href = '/racking_trial';
                             });
                         }
                     });

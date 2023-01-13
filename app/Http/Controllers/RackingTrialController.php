@@ -17,7 +17,7 @@ class RackingTrialController extends Controller
         $date = Carbon::parse($request->date)->format('Y-m-d');
 
         $racking_trial = RackingTrial::join('masterdata', 'masterdata.id', '=', 'plating_tr.id_masterdata')
-            ->select('plating_tr.*', 'masterdata.part_name', 'masterdata.qty_bar', 'masterdata.channel')
+            ->select('plating_tr.*', 'masterdata.part_name', 'masterdata.qty_bar')
             ->where('tanggal_r', '=', $date)
             ->get();
 
@@ -27,15 +27,19 @@ class RackingTrialController extends Controller
     public function tambah(Request $request)
     {
         $date = Carbon::parse($request->date)->format('Y-m-d');
+
         $racking_trial = RackingTrial::join('masterdata', 'masterdata.id', '=', 'plating_tr.id_masterdata')
             ->select('plating_tr.*', 'masterdata.part_name', 'masterdata.qty_bar')
             ->orderBy('tanggal_r', 'desc')
             ->get();
 
+        $hit_data_racking_trial = RackingTrial::where('tanggal_r', '=', $date)->count();
+
         $masterdata = MasterData::all();
         return view('racking_trial.racking_trial-tambah', compact(
             'racking_trial',
             'masterdata',
+            'hit_data_racking_trial'
         ));
     }
     public function simpan(Request $request)
@@ -53,9 +57,10 @@ class RackingTrialController extends Controller
         $racking_trial->grade_color = $request->grade_color;
         $racking_trial->qty_bar = $request->qty_bar;
         $racking_trial->cycle = $request->cycle;
+        $racking_trial->keterangan = $request->keterangan;
         $racking_trial->created_by = Auth::user()->name;
         $racking_trial->created_at = Carbon::now();
-        $racking_trial->status = 1;
+        $racking_trial->status = '4';
 
         $racking_trial->save();
 
@@ -93,6 +98,7 @@ class RackingTrialController extends Controller
         $racking_trial->qty_bar = $request->qty_bar;
         $racking_trial->waktu_in_r = $request->waktu_in_r;
         $racking_trial->cycle = $request->cycle;
+        $racking_trial->keterangan = $request->keterangan;
         $racking_trial->updated_by = Auth::user()->id;
         $racking_trial->updated_at = Carbon::now();
         $racking_trial->save();

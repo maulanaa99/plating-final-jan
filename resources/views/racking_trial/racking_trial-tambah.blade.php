@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
     @parent
-    <li class="active"> - >  <a href="#">Trial</a>  > <a href="{{ route('rackingtr') }}">Racking Trial</a> > Tambah</li>
+    <li class="active"> - >  <a href="#">Trial</a>  > <a href="{{ route('tr.racking') }}">Racking Trial</a> > Tambah</li>
 @endsection
 
 @push('page-styles')
@@ -42,7 +42,7 @@
                                         <div class="col-md-1">
                                             <div class="form-group">
                                                 <label>No</label>
-                                                <input type="text" readonly class="form-control">
+                                                <input type="text" readonly class="form-control" value="{{ $hit_data_racking_trial + 1 }}" >
                                             </div>
                                         </div>
                                         <div class="col-md-5">
@@ -152,6 +152,14 @@ is-invalid
                                             </div>
                                         </div>
 
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <Label> Keterangan</Label>
+                                                <input type="text" id="keterangan" name="keterangan" value="" required
+                                                    class="form-control">
+                                            </div>
+                                        </div>
+
                                         {{-- <div class="container"> --}}
                                         <div class="text-center mt-3">
                                             <button class="btn btn-primary button-prevent" type="submit">
@@ -162,7 +170,7 @@ is-invalid
                                             </button>
                                             <button class="btn btn-danger" type="reset"> <i
                                                     class="fas fa-trash-restore"></i> Reset</button>
-                                            <a href="{{ route('rackingtr') }}"
+                                            <a href="{{ route('tr.racking') }}"
                                                 class="btn btn-icon icon-left btn-warning"><i
                                                     class="fas fa-arrow-left"></i> Kembali</a>
                                         </div>

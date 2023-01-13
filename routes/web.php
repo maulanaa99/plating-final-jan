@@ -134,6 +134,7 @@ Route::controller(LaporanController::class)->middleware(['auth'])->group(functio
     Route::get('laporan/getData', 'getData')->name('laporan.getdata');
     Route::get('laporan/kensa', 'kensa')->name('laporan.kensa');
     Route::get('laporan/all', 'all')->name('laporan.all');
+    Route::get('laporan/trial', 'trial')->name('laporan.trial');
 });
 
 Route::get('stok', [StokController::class, 'index'])->name('stok');

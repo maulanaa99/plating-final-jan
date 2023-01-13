@@ -1,6 +1,6 @@
 <a href="/dashboard" class="brand-link">
-    <img src="{{ asset('assets/dist/img/sri2.jpg') }}" alt="AdminLTE Logo"
-        class="brand-image img-circle elevation-3" style="opacity: .8">
+    <img src="{{ asset('assets/dist/img/sri2.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        style="opacity: .8">
     <span class="brand-text">PT. SAKAE RIKEN IDN</span>
 </a>
 
@@ -8,8 +8,7 @@
 <div class="sidebar">
     <!-- SidebarSearch Form -->
     <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-            data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
 
@@ -45,8 +44,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('stok') }}"
-                    class="nav-link @if (request()->routeIs('stok*')) active @else '' @endif">
+                <a href="{{ route('stok') }}" class="nav-link @if (request()->routeIs('stok*')) active @else '' @endif">
                     <i class="nav-icon fas fa-warehouse"></i>
                     <p>
                         Stock
@@ -156,11 +154,21 @@
                         </a>
                     </li>
                 </ul>
+
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('laporan.trial') }}"
+                            class="nav-link @if (request()->routeIs('laporan.trial')) active @else '' @endif">
+                            <i class="nav-icon far fa-circle nav-icon"></i>
+                            <p>Trial</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="nav-item {{ Route::is('tr*') ? 'active menu-open' : '' }}">
                 <a href="#" class="nav-link {{ Route::is('tr*') ? 'active menu-open' : '' }}">
-                    <i class="nav-icon fas fa-file-excel"></i>
+                    <i class="nav-icon fas fa-exclamation-triangle"></i>
                     <p>
                         Trial
                         <i class="right fas fa-angle-left"></i>
@@ -188,8 +196,8 @@
 
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ route('laporan.all') }}"
-                            class="nav-link @if (request()->routeIs('laporan.all')) active @else '' @endif">
+                        <a href="{{ route('tr.kensa') }}"
+                            class="nav-link @if (request()->routeIs('tr.kensa')) active @else '' @endif">
                             <i class="nav-icon far fa-circle nav-icon"></i>
                             <p>Kensa Trial</p>
                         </a>
