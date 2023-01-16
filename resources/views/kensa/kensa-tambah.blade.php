@@ -516,7 +516,7 @@
                                                         @foreach ($platings as $plating)
                                                             <tr>
                                                                 <td>{{ $plating->id }}</td>
-                                                                <td>{{ $plating->tanggal_r }}</td>
+                                                                <td>{{ $plating->tanggal_u }}</td>
                                                                 <td>{{ $plating->no_bar }}</td>
                                                                 <td>{{ $plating->part_name }}</td>
                                                                 <td>{{ $plating->cycle }}</td>
@@ -526,7 +526,7 @@
                                                                         data-id="{{ $plating->id }}"
                                                                         data-id_masterdata="{{ $plating->id_masterdata }}"
                                                                         data-part_number="{{ $plating->no_part }}"
-                                                                        data-tanggal="{{ $plating->tanggal_r }}"
+                                                                        data-tanggal="{{ $plating->tanggal_u }}"
                                                                         data-no_bar="{{ $plating->no_bar }}"
                                                                         data-part_name="{{ $plating->part_name }}"
                                                                         data-cycle="{{ $plating->cycle }}"
