@@ -94,6 +94,7 @@
                     <th>% Total OK</th>
                     <th>% Total NG</th>
                     <th>Keterangan</th>
+                    <th>PIC</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -142,6 +143,7 @@
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
                         <td>{{ $kensha->keterangan }}</td>
+                        <td>{{ $kensha->created_by }}</td>
                         <td style="width:1px; white-space:nowrap;">
                             <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                     class="far fa-edit"></i></a>

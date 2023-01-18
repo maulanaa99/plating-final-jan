@@ -296,7 +296,7 @@ class KensaController extends Controller
             'p_total_ok' => $request->p_total_ok,
             'p_total_ng' => $request->p_total_ng,
             'keterangan' => $request->keterangan,
-            'created_by' => Auth::user()->id,
+            'created_by' => Auth::user()->name,
             'created_at' => Carbon::now(),
         ]);
 
@@ -386,6 +386,7 @@ class KensaController extends Controller
         $kensa->p_total_ok = $request->p_total_ok;
         $kensa->p_total_ng = $request->p_total_ng;
         $kensa->keterangan = $request->keterangan;
+        $kensa->updated_by = Auth::user()->name;
         $kensa->save();
 
         $masterdata = MasterData::find($kensa->id_masterdata);
