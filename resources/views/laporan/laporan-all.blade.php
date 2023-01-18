@@ -85,6 +85,7 @@
                         <th class="text-center">Total NG</th>
                         <th>% Total OK</th>
                         <th>% Total NG</th>
+                        <th>Keterangan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -128,6 +129,7 @@
                             <td class="text-center">{{ $all->total_ng }}</td>
                             <td class="text-center">{{ $all->p_total_ok }}%</td>
                             <td class="text-center">{{ $all->p_total_ng }}%</td>
+                            <td class="text-center">{{ $all->keterangan }}</td>
                             {{-- <td style="width:1px; white-space:nowrap;"> --}}
                             {{-- <a href="{{ route('kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                         class="far fa-edit"></i></a> --}}
