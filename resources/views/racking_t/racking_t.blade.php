@@ -47,6 +47,7 @@
                         <th class="align-middle text-center">Tgl Lot Prod Mldg</th>
                         <th class="align-middle text-center">Cycle</th>
                         <th class="align-middle text-center">PIC</th>
+                        <th class="align-middle text-center">Kategori</th>
                         <th class="align-middle text-center">Action</th>
                     </tr>
                 </thead>
@@ -66,6 +67,7 @@
                             <td>{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
                             <td>{{ $rack->cycle }}</td>
                             <td>{{ $rack->created_by }}</td>
+                            <td align="center">{{ $rack->kategori }}</td>
                             <td align="center">
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>

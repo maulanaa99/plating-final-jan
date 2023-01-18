@@ -53,12 +53,12 @@ class LaporanController extends Controller
 
     public function kensa(Request $request)
     {
-        $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i:s');
+        $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
         // dd($start_date);
-        $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i:s');
+        $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
         if ($request->start_date || $request->end_date) {
-            $start_date = Carbon::parse($request->start_date)->format('Y-m-d h:i:s');
-            $end_date = Carbon::parse($request->end_date)->format('Y-m-d h:i:s');
+            $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+            $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
             $kensa = kensa::whereBetween('created_at', [$start_date, $end_date])
                 ->get();
         } else {

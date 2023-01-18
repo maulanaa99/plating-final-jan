@@ -58,10 +58,10 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-3">
                                                 <!-- select -->
                                                 <div class="form-group">
-                                                    <label>Cycle (Jml Bar = {{ $hit_data_racking }})</label>
+                                                    <label>Cycle</label>
                                                     <select name="cycle" class="form-control">
                                                         <option value="">----Pilih Cycle----</option>
                                                         <option value="C1"
@@ -76,6 +76,22 @@
                                                         <option value="FS"
                                                             {{ old('cycle', $plating->cycle) == 'FS' ? 'selected' : '' }}>
                                                             FS</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-3">
+                                                <!-- select -->
+                                                <div class="form-group">
+                                                    <label>Kategori</label>
+                                                    <select name="kategori" class="form-control">
+                                                        <option value="">----Pilih Kategori----</option>
+                                                        <option value="PSM"
+                                                            {{ old('kategori', $plating->kategori) == 'PSM' ? 'selected' : '' }}>
+                                                            PSM</option>
+                                                        <option value="PST"
+                                                            {{ old('kategori', $plating->kategori) == 'PST' ? 'selected' : '' }}>
+                                                            PST</option>
                                                     </select>
                                                 </div>
                                             </div>

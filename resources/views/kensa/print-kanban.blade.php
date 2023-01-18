@@ -34,6 +34,9 @@
         input[type="number"]{
             font-size: 24pt;
         }
+        input[type="time"]{
+            font-size: 24pt;
+        }
         .select2-container{
             font-size: 18pt;
         }
@@ -67,13 +70,19 @@
                             <div class="col-12 col-md-12 col-lg-12">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <input type="hidden" value="<?= url('/') ?>" id="base_path" />
                                             <div class="form-group">
                                                 <label>Tanggal Kanban</label>
                                                 <input type="date" name="tgl_kanban" id="tgl_kanban"
                                                     value="<?= date('Y-m-d') ?>" class="form-control">
                                             </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>Jam</label>
+                                            <input type="time" id="waktu_kanban" name="waktu_kanban" value="{{ date('h:i:s') }}"
+                                                class="form-control">
                                         </div>
 
                                         <div class="col-md-6">

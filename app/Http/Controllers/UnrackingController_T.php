@@ -79,6 +79,7 @@ class UnrackingController_T extends Controller
             $plating->qty_aktual = $request->qty_aktual;
             $plating->cycle = $request->cycle;
             $plating->updated_by = Auth::user()->name;
+            $plating->updated_at = Carbon::now();
             // $plating->status = '1';
             $plating->save();
             $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
@@ -89,6 +90,7 @@ class UnrackingController_T extends Controller
             $plating->qty_aktual = $request->qty_aktual;
             $plating->cycle = $request->cycle;
             $plating->updated_by = Auth::user()->name;
+            $plating->updated_at = Carbon::now();
             $plating->status = '2';
             $plating->save();
 

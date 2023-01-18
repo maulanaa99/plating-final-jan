@@ -9,7 +9,7 @@
             margin: auto;
             width: 50%;
             border: 3px solid;
-            border-color:#F4F6F9;
+            border-color: #F4F6F9;
             padding: 10px;
         }
     </style>
@@ -49,7 +49,9 @@
                     <tr>
                         <th>#</th>
                         <th>Tgl Racking</th>
+                        <th>Waktu Racking</th>
                         <th>Tgl Unracking</th>
+                        <th>Waktu Unracking</th>
                         <th>No Bar</th>
                         <th>Part Name</th>
                         <th>Part Number</th>
@@ -67,8 +69,10 @@
                     @foreach ($plating as $no => $rack)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_u)->format('d-m-Y') }} {{ $rack->waktu_in_u }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} </td>
+                            <td>{{ $rack->waktu_in_r }}</td>
+                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_u)->format('d-m-Y') }} </td>
+                            <td>{{ $rack->waktu_in_u }}</td>
                             <td>{{ $rack->no_bar }}</td>
                             <td>{{ $rack->part_name }}</td>
                             <td>{{ $rack->no_part }}</td>

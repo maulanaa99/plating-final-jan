@@ -48,9 +48,12 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th class="text-center" >Tgl Racking</th>
+                        <th class="text-center">Tgl Racking</th>
+                        <th class="text-center">Waktu Racking</th>
                         <th class="text-center">Tgl Unracking</th>
+                        <th class="text-center">Waktu Unracking</th>
                         <th class="text-center">Tgl Kensa</th>
+                        <th class="text-center">Waktu Kensa</th>
                         <th class="text-center">Part Name</th>
                         <th>No Bar</th>
                         <th>Channel</th>
@@ -92,9 +95,15 @@
                     @foreach ($alls as $no => $all)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ \Carbon\Carbon::parse($all->tanggal_r)->format('d-m-Y') }} {{ $all->waktu_in_r }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ \Carbon\Carbon::parse($all->tanggal_u)->format('d-m-Y') }} {{ $all->waktu_in_u }}</td>
-                            <td style="width:1px; white-space:nowrap;">{{ \Carbon\Carbon::parse($all->tanggal_k)->format('d-m-Y') }} {{ $all->waktu_k }}</td>
+                            <td style="width:1px; white-space:nowrap;">
+                                {{ \Carbon\Carbon::parse($all->tanggal_r)->format('d-m-Y') }}</td>
+                            <td style="width:1px; white-space:nowrap;" align="center">{{ $all->waktu_in_r }}</td>
+                            <td style="width:1px; white-space:nowrap;">
+                                {{ \Carbon\Carbon::parse($all->tanggal_u)->format('d-m-Y') }} </td>
+                            <td style="width:1px; white-space:nowrap;" align="center">{{ $all->waktu_in_u }}</td>
+                            <td style="width:1px; white-space:nowrap;">
+                                {{ \Carbon\Carbon::parse($all->tanggal_k)->format('d-m-Y') }} </td>
+                            <td style="width:1px; white-space:nowrap;" align="center">{{ $all->waktu_k }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $all->part_name }}</td>
                             <td>{{ $all->no_bar }}</td>
                             <td>{{ $all->channel }}</td>
@@ -176,7 +185,7 @@
                 scrollCollapse: true,
                 paging: false,
                 fixedColumns: {
-                    left: 6,
+                    left: 8,
                 }
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });

@@ -87,6 +87,7 @@
                     <th>% Total OK</th>
                     <th>% Total NG</th>
                     <th>Keterangan</th>
+                    <th>Approval</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -128,6 +129,12 @@
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
                         <td>{{ $kensha->keterangan }}</td>
+                        <td>
+                            @if (Auth::user()->name == 'Admin')
+                                <a href="" class="btn btn-sm btn-success"> <i class="fa fa-check"></i> </a>
+                                <a href="" class="btn btn-sm btn-danger"> <i class="fa fa-times"></i> </a>
+                            @endif
+                        </td>
                         <td style="width:1px; white-space:nowrap;">
                             <a href="{{ route('tr.kensa.edit', $kensha->id) }}" class="btn btn-icon btn-sm btn-warning"><i
                                     class="far fa-edit"></i></a>

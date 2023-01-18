@@ -45,6 +45,7 @@
                 <tr>
                     <th>#</th>
                     <th>Tanggal Kanban</th>
+                    <th>Jam</th>
                     <th class="align-middle text-center">Part Number</th>
                     <th class="align-middle text-center">Part Name</th>
                     <th>No Kartu</th>
@@ -61,6 +62,7 @@
                     <tr>
                         <td>{{ $no++ }}</td>
                         <td>{{ \Carbon\Carbon::parse($row->tgl_kanban)->format('d-m-Y') }}</td>
+                        <td>{{ $row->waktu_kanban }}</td>
                         <td>{{ $row->no_part }}</td>
                         <td>{{ $row->part_name }}</td>
                         <td align="center">{{ $row->no_kartu }}</td>

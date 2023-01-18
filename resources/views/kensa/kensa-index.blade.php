@@ -55,7 +55,9 @@
                 <tr>
                     <th rowspan="2" class="align-middle text-center">#</th>
                     <th rowspan="2" class="align-middle text-center">Tgl Unracking</th>
+                    <th rowspan="2" class="align-middle text-center">Waktu Unracking</th>
                     <th rowspan="2" class="align-middle text-center">Tgl Kensa</th>
+                    <th rowspan="2" class="align-middle text-center">Waktu Kensa</th>
                     <th rowspan="2" class="align-middle text-center">Part Name</th>
                     <th rowspan="2" class="align-middle text-center">No Bar</th>
                     <th rowspan="2" class="align-middle text-center">Qty Bar</th>
@@ -101,9 +103,13 @@
                         <td>{{ $no + 1 }}</td>
                         <td style="width:1px; white-space:nowrap;">
                             {{ \Carbon\Carbon::parse($kensha->tanggal_u)->format('d-m-Y') }}
+                        </td>
+                        <td style="width:1px; white-space:nowrap;" align="center" >
                             {{ \Carbon\Carbon::parse($kensha->waktu_in_u)->format('H:i:s') }}</td>
                         <td style="width:1px; white-space:nowrap;">
                             {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
+                        </td>
+                        <td style="width:1px; white-space:nowrap;">
                             {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
                         <td>{{ $kensha->no_bar }}</td>
@@ -156,7 +162,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="7" class="bg-transparent">
+                    <td colspan="10" class="bg-transparent">
                     </td>
                     <td class="text-center"><b>{{ $sum_nikel }}</b></td>
                     <td class="text-center"><b>{{ $sum_butsu }}</b></td>
@@ -218,65 +224,65 @@
                 scrollCollapse: true,
                 paging: false,
                 fixedColumns: {
-                    left: 7,
+                    left: 10,
                 }
             });
         });
     </script>
 
-<script>
-    $(document).on('click', '.delete-button', function(e) {
-        e.preventDefault();
+    <script>
+        $(document).on('click', '.delete-button', function(e) {
+            e.preventDefault();
 
-        var id = $(this).data('id');
+            var id = $(this).data('id');
 
-        Swal.fire({
-            title: 'Apakah Anda yakin?',
-            text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, hapus saja!'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    url: '/kensa/delete/' + id,
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(data) {
-                        if (data.success) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak dapat mengembalikan data yang telah dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus saja!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '/kensa/delete/' + id,
+                        type: 'DELETE',
+                        data: {
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: function(data) {
+                            if (data.success) {
+                                Swal.fire(
+                                    'Terhapus!',
+                                    'Data Anda telah dihapus.',
+                                    'success'
+                                ).then((result) => {
+                                    window.location.href = '/kensa';
+                                });
+                            } else {
+                                Swal.fire(
+                                    'Gagal!',
+                                    'Part sudah di Unracking.',
+                                    'error'
+                                )
+                            }
+                        },
+                        error: function() {
                             Swal.fire(
-                                'Terhapus!',
-                                'Data Anda telah dihapus.',
-                                'success'
+                                'Gagal!',
+                                'Terjadi kesalahan saat menghapus data.',
+                                'error'
                             ).then((result) => {
                                 window.location.href = '/kensa';
                             });
-                        } else {
-                            Swal.fire(
-                                'Gagal!',
-                                'Part sudah di Unracking.',
-                                'error'
-                            )
                         }
-                    },
-                    error: function() {
-                        Swal.fire(
-                            'Gagal!',
-                            'Terjadi kesalahan saat menghapus data.',
-                            'error'
-                        ).then((result) => {
-                            window.location.href = '/kensa';
-                        });
-                    }
-                });
-            }
-        })
-    });
-</script>
+                    });
+                }
+            })
+        });
+    </script>
 
     {{-- <script>
         $(".swal-confirm").click(function(e) {

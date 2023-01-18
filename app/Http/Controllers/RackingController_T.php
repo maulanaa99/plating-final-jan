@@ -27,7 +27,7 @@ class RackingController_T extends Controller
             ->leftJoin('masterdata', function ($join) {
                 $join->on('masterdata.id', '=', 'plating.id_masterdata');
             })
-            ->select('plating.id', 'plating.id_masterdata', 'plating.tanggal_r', 'plating.waktu_in_r', 'plating.no_bar', 'plating.no_part', 'plating.part_name', 'plating.katalis', 'plating.channel', 'plating.grade_color', 'plating.qty_bar', 'plating.cycle', 'plating.tgl_lot_prod_mldg', 'plating.created_by')
+            ->select('plating.id', 'plating.id_masterdata', 'plating.tanggal_r', 'plating.waktu_in_r', 'plating.no_bar', 'plating.no_part', 'plating.part_name', 'plating.katalis', 'plating.channel', 'plating.grade_color', 'plating.qty_bar', 'plating.cycle', 'plating.tgl_lot_prod_mldg', 'plating.created_by','plating.kategori')
             ->orderBy('tanggal_r', 'desc')
             ->orderBy('waktu_in_r', 'desc')
             ->where('tanggal_r', '=', $date)
@@ -121,6 +121,7 @@ class RackingController_T extends Controller
         $racking->qty_bar = $request->qty_bar;
         $racking->tgl_lot_prod_mldg = $request->tgl_lot_prod_mldg;
         $racking->cycle = $request->cycle;
+        $racking->kategori = $request->kategori;
         $racking->created_by = Auth::user()->name;
         $racking->created_at = Carbon::now();
         $racking->status = 1;
@@ -191,8 +192,9 @@ class RackingController_T extends Controller
             $plating->waktu_in_r = $request->waktu_in_r;
             $plating->tgl_lot_prod_mldg = $request->tgl_lot_prod_mldg;
             $plating->cycle = $request->cycle;
-            $plating->updated_by = Auth::user()->id;
-            $plating->updated_at = Carbon::now();
+            $plating->kategori = $request->kategori;
+            // $plating->updated_by = Auth::user()->id;
+            // $plating->updated_at = Carbon::now();
             $plating->save();
         }
         Alert::Success('Berhasil', 'Data Berhasil Di Update!');

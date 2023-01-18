@@ -446,6 +446,7 @@ class KensaController extends Controller
         } else {
             $pengiriman = Pengiriman::create([
                 'tgl_kanban' => $request->tgl_kanban,
+                'waktu_kanban' => $request->waktu_kanban,
                 'id_masterdata' => $request->id_masterdata,
                 'no_part' => $request->no_part,
                 'part_name' => $request->part_name,
@@ -553,113 +554,4 @@ class KensaController extends Controller
             'success' => true
         ]);
     }
-
-    // public function custom_kanban(Request $request)
-    // {
-    //     $date = Carbon::parse($request->date)->format('Y-m-d');
-    //     $pengiriman = Pengiriman::join('masterdata', 'masterdata.id', '=', 'pengiriman.id_masterdata')
-    //         ->select('pengiriman.*', 'masterdata.part_name', 'masterdata.qty_bar')
-    //         ->get();
-
-    //     $masterdata = MasterData::all();
-
-    //     return view('kensa.custom_kanban', compact('pengiriman', 'masterdata', 'date'));
-    // }
-
-    // public function custom_kanban_ajax(Request $request)
-    // {
-    //     $id_masterdata['id_masterdata'] = $request->id_masterdata;
-    //     $ajax_barang = MasterData::where('id', $id_masterdata)->get();
-
-    //     // $date = Carbon::parse($request->tgl_kanban)->format('Y-m-d');
-
-    //     // $q = $ajax_barang->first()->pengiriman_custom()->where('tgl_kanban', '=', $date)->orderBy('id', 'desc')->first();
-    //     // $kode = $q ? $q->no_kartu + 1 : '01';
-
-    //     return view('kensa.custom_kanban_ajax', compact('ajax_barang'));
-    // }
-
-
-
-    // public function custom_kanban_simpan(Request $request)
-    // {
-    //     $masterdata = MasterData::find($request->id_masterdata);
-    //     $kanban_custom = Kanban_Custom::all();
-
-    //     $kanban_custom = Kanban_Custom::create([
-    //         'tgl_kanban' => $request->tgl_kanban,
-    //         'id_masterdata' => $request->id_masterdata,
-    //         'no_part' => $request->no_part,
-    //         'part_name' => $request->part_name,
-    //         'model' => $request->model,
-    //         'bagian' => $request->bagian,
-    //         'no_kartu' => $request->no_kartu,
-    //         'next_process' => $request->next_process,
-    //         'kirim_painting' => $request->kirim_painting,
-    //         'kirim_assy' => $request->kirim_assy,
-    //         'kirim_ppic' => $request->kirim_ppic,
-    //         'std_qty' => $request->std_qty,
-    //         'created_at' => Carbon::now(),
-    //     ]);
-    //     $masterdata->save();
-
-    //     Alert::success('Success', 'Data Berhasil di Print!');
-    //     return redirect()->route('kensa.custom_kanban',  ['id' => $kanban_custom->id]);
-    // }
-
-    // public function custom_kanban_print($id)
-    // {
-    //     $kanban_custom = $data['kanban_custom'] = Kanban_Custom::findOrFail($id);
-
-    //     $filepath = storage_path('app/kanban_custom' . md5($id). Carbon::now());
-
-    //     /**
-    //      * PDF
-    //      */
-
-    //     $jumlah = $kanban_custom->kirim_assy + $kanban_custom->kirim_painting + $kanban_custom->kirim_ppic;
-    //     $print = ceil($jumlah / $kanban_custom->std_qty);
-    //     $sisa = $jumlah;
-    //     $jml_print = $kanban_custom->no_kartu + $print - 1;
-
-    //     foreach (range($kanban_custom->no_kartu, $jml_print) as $i) {
-    //         $data['no_kartu'] = $i;
-    //         $data['qty'] = $sisa >= $kanban_custom->std_qty ? $kanban_custom->std_qty : $sisa;
-    //         $sisa = $jumlah - $kanban_custom->std_qty;
-
-    //         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('kensa.custom_kanban_print', $data)->setPaper([0.0, 0.0, 226.772, 311.811], 'landscape');
-    //         $pdf->save($filepath . '_' . $i . '.pdf');
-    //         $pdf = new \Spatie\PdfToImage\Pdf($filepath . '_' . $i . '.pdf');
-    //         $pdf->setOutputFormat('png')
-    //             ->width(800)
-    //             ->saveImage($filepath . '_' . $i . '.png');
-
-    //         $sourceImage = new \Imagick($filepath . '_' . $i . '.png');
-    //         $sourceImage->rotateImage(new \ImagickPixel(), 90);
-    //         $sourceImage->writeImage($filepath . '_' . $i . '.png');
-
-    //         unlink($filepath . '_' . $i . '.pdf');
-
-    //         ini_set('max_execution_time', 500);
-
-    //         /**
-    //          * PRINTING
-    //          */
-    //         $connector = new WindowsPrintConnector("TM-T82II");
-    //         $printer = new Printer($connector);
-
-    //         try {
-    //             $tux = EscposImage::load($filepath . '_' . $i . '.png', false);
-    //             $printer->graphics($tux);
-    //             $printer->cut();
-    //         } catch (Exception $e) {
-    //             dd($e->getMessage());
-    //         } finally {
-    //             $printer->close();
-    //         }
-    //     }
-    //     $kanban_custom->no_kartu = $jml_print;
-    //     $kanban_custom->save();
-    //     return redirect()->route('kensa.printKanban')->with('toast_success', 'Data Berhasil Di Print');
-    // }
 }

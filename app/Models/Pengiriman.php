@@ -12,6 +12,7 @@ class Pengiriman extends Model
     protected $table = 'pengiriman';
     protected $fillable = [
         'tgl_kanban',
+        'waktu_kanban',
         'id_masterdata',
         'no_part',
         'part_name',

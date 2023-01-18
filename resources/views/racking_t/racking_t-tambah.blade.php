@@ -79,10 +79,10 @@ is-invalid
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <!-- select -->
                                             <div class="form-group">
-                                                <label>Cycle (Jml Bar = {{ $hit_data_racking }}) </label>
+                                                <label>Cycle</label>
                                                 <select name="cycle"
                                                     class="@error('cycle') is-invalid @enderror form-control">
                                                     @error('cycle')
@@ -99,6 +99,21 @@ is-invalid
                                                         <option>CS</option>
                                                         <option>FS</option>
                                                     @endif
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <!-- select -->
+                                            <div class="form-group">
+                                                <label>Kategori</label>
+                                                <select name="kategori"
+                                                    class="@error('kategori') is-invalid @enderror form-control">
+                                                    @error('kategori')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                    <option>PSM</option>
+                                                    <option>PST</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -164,8 +179,8 @@ is-invalid
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <Label> Qty Bar</Label>
-                                                <input type="text" id="qty_bar" name="qty_bar" value="" required
-                                                    class="form-control">
+                                                <input type="text" id="qty_bar" name="qty_bar" value=""
+                                                    required class="form-control">
                                             </div>
                                         </div>
 
