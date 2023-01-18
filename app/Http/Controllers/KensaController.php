@@ -25,7 +25,7 @@ class KensaController extends Controller
         $date = Carbon::parse($request->date)->format('Y-m-d');
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->join('plating', 'plating.id', '=', 'kensa.id_plating')
-            ->select('kensa.*', 'masterdata.stok_bc', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle', 'plating.qty_aktual')
+            ->select('kensa.*', 'masterdata.stok_bc', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle', 'plating.qty_aktual', 'plating.tanggal_u', 'plating.waktu_in_u')
             // ->orderBy('tanggal_k', 'desc')->orderBy('waktu_k', 'desc')
             ->where('tanggal_k', '=', $date)
             ->get();
@@ -234,7 +234,7 @@ class KensaController extends Controller
     {
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->join('plating', 'plating.id', '=', 'kensa.id_plating')
-            ->select('kensa.*', 'masterdata.stok_bc', 'plating.id', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle', 'plating.qty_aktual')
+            ->select('kensa.*', 'masterdata.stok_bc', 'plating.id', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle', 'plating.qty_aktual', 'plating.waktu_in_u', 'plating.tanggal_r')
             ->orderBy('tanggal_k', 'desc')
             ->get();
 
@@ -385,6 +385,7 @@ class KensaController extends Controller
         $kensa->total_ng = $request->total_ng;
         $kensa->p_total_ok = $request->p_total_ok;
         $kensa->p_total_ng = $request->p_total_ng;
+        $kensa->keterangan = $request->keterangan;
         $kensa->save();
 
         $masterdata = MasterData::find($kensa->id_masterdata);
@@ -476,7 +477,7 @@ class KensaController extends Controller
     {
         $pengiriman = $data['pengiriman'] = Pengiriman::findOrFail($id);
 
-        $filepath = storage_path('app/' . ' ' . Carbon::now()->format('dmYhis') . ' ' . $pengiriman->part_name);
+        $filepath = storage_path('app/' . ' ' . Carbon::now()->format('dmYhis') . ' ' . md5($id));
 
         /**
          * PDF
@@ -510,7 +511,7 @@ class KensaController extends Controller
             /**
              * PRINTING
              */
-            $connector = new WindowsPrintConnector("TM-T82II");
+            $connector = new WindowsPrintConnector("TM-T82II-Kensa");
             $printer = new Printer($connector);
 
             try {

@@ -418,11 +418,11 @@
                                                         <div class="form-group">
                                                             <Label>Total OK</Label>
                                                             <div class="input-group">
-                                                            <input type="number" id="total_ok" name="total_ok"
-                                                                @if (old('total_ok')) value="{{ old('total_ok') }}"
+                                                                <input type="number" id="total_ok" name="total_ok"
+                                                                    @if (old('total_ok')) value="{{ old('total_ok') }}"
                                                                 @else
                                                                     value="{{ $kensa->total_ok }}" @endif
-                                                                onkeyup="sum();" class="form-control">
+                                                                    onkeyup="sum();" class="form-control">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"> PCS </span>
                                                                 </div>
@@ -480,6 +480,20 @@
 
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-md-6 mt-3">
+                                                        <div class="form-group">
+                                                            <Label>Keterangan</Label>
+                                                            <div class="input-group">
+                                                                <input type="text" id="keterangan" name="keterangan"
+                                                                    @if (old('keterangan')) value="{{ old('keterangan') }}"
+                                                                @else
+                                                                    value="{{ $kensa->keterangan }}" @endif
+                                                                    class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
 

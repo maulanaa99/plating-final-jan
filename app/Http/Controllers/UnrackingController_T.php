@@ -58,8 +58,7 @@ class UnrackingController_T extends Controller
         if ($request->qty_aktual > $plating->qty_bar) {
             Alert::Warning('Gagal', 'Qty Aktual Salah!!');
             return redirect()->route('unracking_t.edit', compact('plating', 'masterdata', 'id'));
-        }
-        elseif ($request->qty_aktual == 0) {
+        } elseif ($request->qty_aktual == 0) {
             $plating->tanggal_u = null;
             $plating->waktu_in_u = null;
             $plating->qty_aktual = null;
@@ -69,12 +68,12 @@ class UnrackingController_T extends Controller
             $plating->save();
             $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
             $masterdata->save();
-        }
-        elseif ($plating->status == '3') {
+        } elseif ($plating->status == '3') {
+            $plating->cycle = $request->cycle;
+            $plating->save();
             Alert::Warning('Gagal', 'Part Sudah Di Cek!!');
             return redirect()->route('unracking_t.edit', compact('plating', 'masterdata', 'id'));
-        }
-        elseif ($plating->qty_aktual != '') {
+        } elseif ($plating->qty_aktual != '') {
             $plating->tanggal_u = $request->tanggal_u;
             $plating->waktu_in_u = Carbon::now()->format('H:i:m');
             $plating->qty_aktual = $request->qty_aktual;
@@ -84,8 +83,7 @@ class UnrackingController_T extends Controller
             $plating->save();
             $masterdata->stok_bc = $masterdata->stok_bc - $qty_aktual_prev + $request->qty_aktual;
             $masterdata->save();
-        }
-        else {
+        } else {
             $plating->tanggal_u = $request->tanggal_u;
             $plating->waktu_in_u = Carbon::now()->format('H:i:m');
             $plating->qty_aktual = $request->qty_aktual;

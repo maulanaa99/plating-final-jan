@@ -54,7 +54,8 @@
             <thead>
                 <tr>
                     <th rowspan="2" class="align-middle text-center">#</th>
-                    <th rowspan="2" class="align-middle text-center">Tanggal</th>
+                    <th rowspan="2" class="align-middle text-center">Tgl Unracking</th>
+                    <th rowspan="2" class="align-middle text-center">Tgl Kensa</th>
                     <th rowspan="2" class="align-middle text-center">Part Name</th>
                     <th rowspan="2" class="align-middle text-center">No Bar</th>
                     <th rowspan="2" class="align-middle text-center">Qty Bar</th>
@@ -99,13 +100,16 @@
                     <tr>
                         <td>{{ $no + 1 }}</td>
                         <td style="width:1px; white-space:nowrap;">
+                            {{ \Carbon\Carbon::parse($kensha->tanggal_u)->format('d-m-Y') }}
+                            {{ \Carbon\Carbon::parse($kensha->waktu_in_u)->format('H:i:s') }}</td>
+                        <td style="width:1px; white-space:nowrap;">
                             {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }}
                             {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
                         <td>{{ $kensha->no_bar }}</td>
                         <td>{{ $kensha->qty_aktual }}</td>
                         <td>{{ $kensha->total_ok }}</td>
-                        <td>{{ $kensha->cycle }}</td>
+                        <td class="text-center">{{ $kensha->cycle }}</td>
                         <td class="text-center">{{ $kensha->nikel }}</td>
                         <td class="text-center">{{ $kensha->butsu }}</td>
                         <td class="text-center">{{ $kensha->hadare }}</td>
