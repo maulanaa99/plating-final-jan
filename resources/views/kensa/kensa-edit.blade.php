@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <style>
         input[type="number"] {
-            width: 90%;
-            height: 70pt;
+            /* width: 90%; */
+            height: 100%;
             font-size: 30pt;
         }
 
@@ -149,19 +149,19 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Nikel</Label>
-                                                            <input type="number" id="nikel" name="nikel"
+                                                            <input type="text" id="nikel" name="nikel"
                                                                 onkeyup="sum()"
                                                                 @if (old('nikel')) value="{{ old('nikel') }}"
                                                             @else
                                                                 value="{{ $kensa->nikel }}" @endif
-                                                                class="form-control">
+                                                                class="form-control number">
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Moyo</Label>
-                                                            <input type="number" id="moyo" name="moyo"
+                                                            <input type="text" id="moyo" name="moyo"
                                                                 @if (old('moyo')) value="{{ old('moyo') }}"
                                                             @else
                                                                 value="{{ $kensa->moyo }}" @endif
@@ -172,7 +172,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Hanazaki</Label>
-                                                            <input type="number" id="hanazaki" name="hanazaki"
+                                                            <input type="text" id="hanazaki" name="hanazaki"
                                                                 @if (old('hanazaki')) value="{{ old('hanazaki') }}"
                                                             @else
                                                                 value="{{ $kensa->hanazaki }}" @endif
@@ -183,7 +183,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Butsu</Label>
-                                                            <input type="number" id="butsu" name="butsu"
+                                                            <input type="text" id="butsu" name="butsu"
                                                                 onkeyup="sum();"
                                                                 @if (old('butsu')) value="{{ old('butsu') }}"
                                                             @else
@@ -195,7 +195,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Fukure</Label>
-                                                            <input type="number" id="fukure" name="fukure"
+                                                            <input type="text" id="fukure" name="fukure"
                                                                 @if (old('fukure')) value="{{ old('fukure') }}"
                                                             @else
                                                                 value="{{ $kensa->fukure }}" @endif
@@ -206,7 +206,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Kizu</Label>
-                                                            <input type="number" id="kizu" name="kizu"
+                                                            <input type="text" id="kizu" name="kizu"
                                                                 @if (old('kizu')) value="{{ old('kizu') }}"
                                                             @else
                                                                 value="{{ $kensa->kizu }}" @endif
@@ -217,7 +217,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Hadare</Label>
-                                                            <input type="number" id="hadare" name="hadare"
+                                                            <input type="text" id="hadare" name="hadare"
                                                                 @if (old('hadare')) value="{{ old('hadare') }}"
                                                             @else
                                                                 value="{{ $kensa->hadare }}" @endif
@@ -228,7 +228,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Crack</Label>
-                                                            <input type="number" id="crack" name="crack"
+                                                            <input type="text" id="crack" name="crack"
                                                                 @if (old('crack')) value="{{ old('crack') }}"
                                                             @else
                                                                 value="{{ $kensa->crack }}" @endif
@@ -239,7 +239,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Kaburi</Label>
-                                                            <input type="number" id="kaburi" name="kaburi"
+                                                            <input type="text" id="kaburi" name="kaburi"
                                                                 @if (old('kaburi')) value="{{ old('kaburi') }}"
                                                             @else
                                                                 value="{{ $kensa->kaburi }}" @endif
@@ -250,7 +250,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Hage</Label>
-                                                            <input type="number" id="hage" name="hage"
+                                                            <input type="text" id="hage" name="hage"
                                                                 @if (old('hage')) value="{{ old('hage') }}"
                                                             @else
                                                                 value="{{ $kensa->hage }}" @endif
@@ -261,7 +261,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Henkei</Label>
-                                                            <input type="number" id="henkei" name="henkei"
+                                                            <input type="text" id="henkei" name="henkei"
                                                                 @if (old('henkei')) value="{{ old('henkei') }}"
                                                             @else
                                                                 value="{{ $kensa->henkei }}" @endif
@@ -272,8 +272,8 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Shiromoya</Label>
-                                                            <input type="number" id="shiromoya" name="shiromoya"
-                                                                onchange="sum();" value="{{ 0 }}"
+                                                            <input type="text" id="shiromoya" name="shiromoya"
+                                                                onkeyup="sum();" value="{{ 0 }}"
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -281,8 +281,8 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Shimi</Label>
-                                                            <input type="number" id="shimi" name="shimi"
-                                                                onchange="sum();" value="{{ 0 }}"
+                                                            <input type="text" id="shimi" name="shimi"
+                                                                onkeyup="sum();" value="{{ 0 }}"
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -290,8 +290,8 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Pitto</Label>
-                                                            <input type="number" id="pitto" name="pitto"
-                                                                onchange="sum();" value="{{ 0 }}"
+                                                            <input type="text" id="pitto" name="pitto"
+                                                                onkeyup="sum();" value="{{ 0 }}"
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -299,8 +299,8 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Misto</Label>
-                                                            <input type="number" id="misto" name="misto"
-                                                                onchange="sum();" value="{{ 0 }}"
+                                                            <input type="text" id="misto" name="misto"
+                                                                onkeyup="sum();" value="{{ 0 }}"
                                                                 class="form-control">
                                                         </div>
                                                     </div>
@@ -308,7 +308,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Other</Label>
-                                                            <input type="number" id="other" name="other"
+                                                            <input type="text" id="other" name="other"
                                                                 @if (old('other')) value="{{ old('other') }}"
                                                             @else
                                                                 value="{{ $kensa->other }}" @endif
@@ -324,7 +324,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Gores</Label>
-                                                            <input type="number" id="gores" name="gores"
+                                                            <input type="text" id="gores" name="gores"
                                                                 @if (old('gores')) value="{{ old('gores') }}"
                                                             @else
                                                                 value="{{ $kensa->gores }}" @endif
@@ -334,7 +334,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Burry</Label>
-                                                            <input type="number" id="burry" name="burry"
+                                                            <input type="text" id="burry" name="burry"
                                                                 @if (old('burry')) value="{{ old('burry') }}"
                                                             @else
                                                                 value="{{ $kensa->burry }}" @endif
@@ -352,7 +352,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Regas</Label>
-                                                            <input type="number" id="regas" name="regas"
+                                                            <input type="text" id="regas" name="regas"
                                                                 @if (old('regas')) value="{{ old('regas') }}"
                                                             @else
                                                                 value="{{ $kensa->regas }}" @endif
@@ -363,7 +363,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Others</Label>
-                                                            <input type="number" id="others" name="others"
+                                                            <input type="text" id="others" name="others"
                                                                 @if (old('others')) value="{{ old('others') }}"
                                                             @else
                                                                 value="{{ $kensa->others }}" @endif
@@ -381,7 +381,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Silver</Label>
-                                                            <input type="number" id="silver" name="silver"
+                                                            <input type="text" id="silver" name="silver"
                                                                 @if (old('silver')) value="{{ old('silver') }}"
                                                             @else
                                                                 value="{{ $kensa->silver }}" @endif
@@ -399,7 +399,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <Label>Hike</Label>
-                                                            <input type="number" id="hike" name="hike"
+                                                            <input type="text" id="hike" name="hike"
                                                                 @if (old('hike')) value="{{ old('hike') }}"
                                                             @else
                                                                 value="{{ $kensa->hike }}" @endif
@@ -570,6 +570,10 @@
             var hanazaki = document.getElementById('hanazaki').value;
             var kizu = document.getElementById('kizu').value;
             var kaburi = document.getElementById('kaburi').value;
+            var shiromoya = document.getElementById('shiromoya').value;
+            var shimi = document.getElementById('shimi').value;
+            var pitto = document.getElementById('pitto').value;
+            var misto = document.getElementById('misto').value;
             var other = document.getElementById('other').value;
             var gores = document.getElementById('gores').value;
             var regas = document.getElementById('regas').value;
@@ -584,7 +588,7 @@
             var result = parseInt(nikel) + parseInt(butsu) + parseInt(hadare) + parseInt(hage) + parseInt(moyo) +
                 parseInt(
                     fukure) + parseInt(crack) + parseInt(henkei) + parseInt(hanazaki) + parseInt(kizu) + parseInt(
-                    kaburi) +
+                    kaburi) + parseInt(shiromoya) + parseInt(shimi) + parseInt(pitto) + parseInt(misto) +
                 parseInt(other) + parseInt(gores) + parseInt(regas) + parseInt(silver) + parseInt(hike) + parseInt(
                     burry) +
                 parseInt(others);

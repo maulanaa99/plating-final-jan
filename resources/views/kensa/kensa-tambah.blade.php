@@ -4,9 +4,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <style>
         input[type="number"] {
-            width: 90%;
-            height: 70pt;
+            /* width: 90%; */
+            height: 100%;
             font-size: 30pt;
+        }
+
+        .jenis-ng{
+            height: 150px; !important
         }
 
         input[type="text"] {
@@ -166,17 +170,17 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label> Nikel :</Label>
-                                                        <input type="number" id="nikel" name="nikel"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
-                                                            class="form-control">
+                                                        <input type="text" id="nikel" name="nikel"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
+                                                            class="form-control jenis-ng">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Moyo :</Label>
-                                                        <input type="number" id="moyo" name="moyo"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="moyo" name="moyo"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -185,8 +189,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Hanazaki :</Label>
-                                                        <input type="number" id="hanazaki" name="hanazaki"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="hanazaki" name="hanazaki"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -196,8 +200,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Butsu :</Label>
-                                                        <input type="number" id="butsu" name="butsu"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="butsu" name="butsu"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -205,8 +209,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Fukure :</Label>
-                                                        <input type="number" id="fukure" name="fukure"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="fukure" name="fukure"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -214,8 +218,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Kizu :</Label>
-                                                        <input type="number" id="kizu" name="kizu"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="kizu" name="kizu"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -225,8 +229,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Hadare :</Label>
-                                                        <input type="number" id="hadare" name="hadare"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="hadare" name="hadare"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -234,8 +238,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Crack :</Label>
-                                                        <input type="number" id="crack" name="crack"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="crack" name="crack"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -243,8 +247,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Kaburi :</Label>
-                                                        <input type="number" id="kaburi" name="kaburi"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="kaburi" name="kaburi"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -256,8 +260,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Hage :</Label>
-                                                        <input type="number" id="hage" name="hage"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="hage" name="hage"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -267,8 +271,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Henkei :</Label>
-                                                        <input type="number" id="henkei" name="henkei"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="henkei" name="henkei"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -276,8 +280,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Shiromoya :</Label>
-                                                        <input type="number" id="shiromoya" name="shiromoya"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="shiromoya" name="shiromoya"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -287,8 +291,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Shimi :</Label>
-                                                        <input type="number" id="shimi" name="shimi"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="shimi" name="shimi"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -296,8 +300,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Pitto :</Label>
-                                                        <input type="number" id="pitto" name="pitto"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="pitto" name="pitto"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -305,8 +309,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Misto :</Label>
-                                                        <input type="number" id="misto" name="misto"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="misto" name="misto"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -314,8 +318,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Other :</Label>
-                                                        <input type="number" id="other" name="other"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="other" name="other"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -329,8 +333,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Gores :</Label>
-                                                        <input type="number" id="gores" name="gores"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="gores" name="gores"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -338,8 +342,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Burry :</Label>
-                                                        <input type="number" id="burry" name="burry"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="burry" name="burry"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -352,8 +356,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Regas :</Label>
-                                                        <input type="number" id="regas" name="regas"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="regas" name="regas"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -361,8 +365,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Others :</Label>
-                                                        <input type="number" id="others" name="others"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="others" name="others"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -376,8 +380,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Silver :</Label>
-                                                        <input type="number" id="silver" name="silver"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="silver" name="silver"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -391,8 +395,8 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <Label>Hike :</Label>
-                                                        <input type="number" id="hike" name="hike"
-                                                            min="0" onchange="sum();" value="{{ 0 }}"
+                                                        <input type="text" id="hike" name="hike"
+                                                            min="0" onkeyup="sum()" value="{{ 0 }}"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -407,7 +411,7 @@
                                                         <Label>Total OK</Label>
                                                         <div class="input-group">
                                                             <input type="text" id="total_ok" name="total_ok" required
-                                                                onchange="sum();" class="form-control">
+                                                                class="form-control">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text">Pcs </span>
                                                             </div>
@@ -433,7 +437,7 @@
                                                         <Label>%Total OK</Label>
                                                         <div class="input-group">
                                                             <input type="text" id="persenok" name="p_total_ok" readonly
-                                                                onchange="sum()" class="form-control">
+                                                                 class="form-control">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"> % </span>
                                                             </div>
@@ -446,7 +450,7 @@
                                                         <Label>%Total NG</Label>
                                                         <div class="input-group">
                                                             <input type="text" id="persenng" name="p_total_ng" readonly
-                                                                onchange="sum()" class="form-control">
+                                                                 class="form-control">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"> % </span>
                                                             </div>
