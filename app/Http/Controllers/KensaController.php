@@ -331,8 +331,8 @@ class KensaController extends Controller
         // $masterdata = kensa::where('id_masterdata', '=', $kensa->id_masterdata)->first();
         $masterdata = MasterData::find($kensa->id_masterdata);
         $plating = Plating::find($kensa->id_plating);
-        $masterdata->stok = $masterdata->stok - $kensa->total_ok;
-        $masterdata->stok_bc = $masterdata->stok_bc + $kensa->total_ok;
+        $masterdata->stok = $masterdata->stok - $kensa->qty_bar;
+        $masterdata->stok_bc = $masterdata->stok_bc + $kensa->qty_bar;
         $plating->status = '2';
         $plating->save();
         $masterdata->save();
