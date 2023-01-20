@@ -47,6 +47,7 @@
                         <th class="align-middle text-center">Cycle</th>
                         <th class="align-middle text-center">PIC</th>
                         <th class="align-middle text-center">Kategori</th>
+                        <th class="align-middle text-center">Keterangan</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -66,6 +67,7 @@
                             <td align="center">{{ $unrack->cycle }}</td>
                             <td align="center">{{ $unrack->updated_by }}</td>
                             <td align="center">{{ $unrack->kategori }}</td>
+                            <td align="center">{{ $unrack->keterangan }}</td>
                             <td align="center">
                                 <a href="{{ route('unracking_t.edit', $unrack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning" target="_blank"><i class="far fa-edit"></i> </a>
