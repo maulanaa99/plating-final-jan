@@ -188,7 +188,7 @@ is-invalid
                                             <div class="form-group">
                                                 <Label> Keterangan</Label>
                                                 <input type="text" id="keterangan" name="keterangan" value=""
-                                                    required class="form-control">
+                                                    class="form-control">
                                             </div>
                                         </div>
 

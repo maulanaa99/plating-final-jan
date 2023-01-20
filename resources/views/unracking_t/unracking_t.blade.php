@@ -60,12 +60,12 @@
                             <td align="center">{{ \Carbon\Carbon::parse($unrack->tanggal_u)->format('d-m-Y') }}</td>
                             <td align="center">{{ $unrack->waktu_in_u }}</td>
                             <td align="center">{{ $unrack->no_bar }}</td>
-                            <td>{{ $unrack->part_name }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ $unrack->part_name }}</td>
                             <td align="center">{{ $unrack->channel }}</td>
                             <td align="center">{{ $unrack->qty_bar }}</td>
                             <td align="center">{{ $unrack->qty_aktual }}</td>
                             <td align="center">{{ $unrack->cycle }}</td>
-                            <td align="center">{{ $unrack->updated_by }}</td>
+                            <td align="center" style="width:1px; white-space:nowrap;">{{ $unrack->updated_by }}</td>
                             <td align="center">{{ $unrack->kategori }}</td>
                             <td align="center">{{ $unrack->keterangan }}</td>
                             <td align="center">
