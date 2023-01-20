@@ -113,9 +113,9 @@
                         <td style="width:1px; white-space:nowrap;">
                             {{ \Carbon\Carbon::parse($kensha->waktu_k)->format('H:i:s') }}</td>
                         <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
-                        <td>{{ $kensha->no_bar }}</td>
-                        <td>{{ $kensha->qty_aktual }}</td>
-                        <td>{{ $kensha->total_ok }}</td>
+                        <td class="text-center">{{ $kensha->no_bar }}</td>
+                        <td class="text-center">{{ $kensha->qty_aktual }}</td>
+                        <td class="text-center">{{ $kensha->total_ok }}</td>
                         <td class="text-center">{{ $kensha->cycle }}</td>
                         <td class="text-center">{{ $kensha->nikel }}</td>
                         <td class="text-center">{{ $kensha->butsu }}</td>
@@ -190,6 +190,7 @@
                     <td class="text-center"><b>{{ $sum_others }}</b></td>
                     {{-- <td><b>{{ $sum_total_ok }}</b></td> --}}
                     <td class="text-center"><b>{{ $sum_total_ng }}</b></td>
+                    <td class="text-center">{{ '-' }}</td>
                     <td class="text-center">{{ '-' }}</td>
                     <td colspan="3"></td>
                 </tr>

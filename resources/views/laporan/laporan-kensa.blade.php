@@ -50,7 +50,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Tanggal</th>
+                        <th>Tgl Kensa</th>
+                        <th>Waktu Kensa</th>
                         <th>Part Name</th>
                         <th>No Bar</th>
                         <th>Qty Bar</th>
@@ -87,35 +88,36 @@
                     @foreach ($kensa as $no => $kensha)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td style="width:1px; white-space:nowrap;"> {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }} {{ $kensha->waktu_k}}</td>
+                            <td style="width:1px; white-space:nowrap;"> {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }} </td>
+                            <td style="width:1px; white-space:nowrap;"> {{ $kensha->waktu_k}} </td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
-                            <td>{{ $kensha->no_bar }}</td>
-                            <td>{{ $kensha->qty_bar }}</td>
-                            <td>{{ $kensha->total_ok }}</td>
-                            <td>{{ $kensha->cycle }}</td>
-                            <td>{{ $kensha->nikel }}</td>
-                            <td>{{ $kensha->butsu }}</td>
-                            <td>{{ $kensha->hadare }}</td>
-                            <td>{{ $kensha->hage }}</td>
-                            <td>{{ $kensha->moyo }}</td>
-                            <td>{{ $kensha->fukure }}</td>
-                            <td>{{ $kensha->crack }}</td>
-                            <td>{{ $kensha->henkei }}</td>
-                            <td>{{ $kensha->hanazaki }}</td>
-                            <td>{{ $kensha->kizu }}</td>
-                            <td>{{ $kensha->kaburi }}</td>
-                            <td>{{ $kensha->shiromoya }}</td>
-                            <td>{{ $kensha->shimi }}</td>
-                            <td>{{ $kensha->pitto }}</td>
-                            <td>{{ $kensha->misto }}</td>
-                            <td>{{ $kensha->other }}</td>
-                            <td>{{ $kensha->gores }}</td>
-                            <td>{{ $kensha->regas }}</td>
-                            <td>{{ $kensha->silver }}</td>
-                            <td>{{ $kensha->hike }}</td>
-                            <td>{{ $kensha->burry }}</td>
-                            <td>{{ $kensha->others }}</td>
-                            <td>{{ $kensha->total_ng }}</td>
+                            <td align="center">{{ $kensha->no_bar }}</td>
+                            <td align="center">{{ $kensha->qty_bar }}</td>
+                            <td align="center">{{ $kensha->total_ok }}</td>
+                            <td align="center">{{ $kensha->cycle }}</td>
+                            <td align="center">{{ $kensha->nikel }}</td>
+                            <td align="center">{{ $kensha->butsu }}</td>
+                            <td align="center">{{ $kensha->hadare }}</td>
+                            <td align="center">{{ $kensha->hage }}</td>
+                            <td align="center">{{ $kensha->moyo }}</td>
+                            <td align="center">{{ $kensha->fukure }}</td>
+                            <td align="center">{{ $kensha->crack }}</td>
+                            <td align="center">{{ $kensha->henkei }}</td>
+                            <td align="center">{{ $kensha->hanazaki }}</td>
+                            <td align="center">{{ $kensha->kizu }}</td>
+                            <td align="center">{{ $kensha->kaburi }}</td>
+                            <td align="center">{{ $kensha->shiromoya }}</td>
+                            <td align="center">{{ $kensha->shimi }}</td>
+                            <td align="center">{{ $kensha->pitto }}</td>
+                            <td align="center">{{ $kensha->misto }}</td>
+                            <td align="center">{{ $kensha->other }}</td>
+                            <td align="center">{{ $kensha->gores }}</td>
+                            <td align="center">{{ $kensha->regas }}</td>
+                            <td align="center">{{ $kensha->silver }}</td>
+                            <td align="center">{{ $kensha->hike }}</td>
+                            <td align="center">{{ $kensha->burry }}</td>
+                            <td align="center">{{ $kensha->others }}</td>
+                            <td align="center">{{ $kensha->total_ng }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
                         </tr>

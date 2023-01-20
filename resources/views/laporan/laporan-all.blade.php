@@ -48,44 +48,44 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th class="text-center">Tgl Racking</th>
-                        <th class="text-center">Waktu Racking</th>
-                        <th class="text-center">Tgl Unracking</th>
-                        <th class="text-center">Waktu Unracking</th>
-                        <th class="text-center">Tgl Kensa</th>
-                        <th class="text-center">Waktu Kensa</th>
-                        <th class="text-center">Part Name</th>
-                        <th>No Bar</th>
-                        <th>Channel</th>
-                        <th>Chrome</th>
-                        <th>Katalis</th>
-                        <th>Qty Bar</th>
-                        <th>Qty Aktual</th>
-                        <th>Cycle</th>
-                        <th class="text-center">Nikel</th>
-                        <th class="text-center">Butsu</th>
-                        <th class="text-center">Hadare</th>
-                        <th class="text-center">Hage</th>
-                        <th class="text-center">Moyo</th>
-                        <th class="text-center">Fukure</th>
-                        <th class="text-center">Crack</th>
-                        <th class="text-center">Henkei</th>
-                        <th class="text-center">Hana zaki</th>
-                        <th class="text-center">Kizu</th>
-                        <th class="text-center">Kaburi</th>
-                        <th class="text-center">Shiro moya</th>
-                        <th class="text-center">Shimi</th>
-                        <th class="text-center">Pitto</th>
-                        <th class="text-center">Misto</th>
-                        <th class="text-center">Other</th>
-                        <th class="text-center">Gores</th>
-                        <th class="text-center">Regas</th>
-                        <th class="text-center">Silver</th>
-                        <th class="text-center">Hike</th>
-                        <th class="text-center">Burry</th>
-                        <th class="text-center">Others</th>
-                        <th class="text-center">Total OK</th>
-                        <th class="text-center">Total NG</th>
+                        <th class="align-middle text-center">Tgl Racking</th>
+                        <th class="align-middle text-center">Waktu Racking</th>
+                        <th class="align-middle text-center">Tgl Unracking</th>
+                        <th class="align-middle text-center">Waktu Unracking</th>
+                        <th class="align-middle text-center">Tgl Kensa</th>
+                        <th class="align-middle text-center">Waktu Kensa</th>
+                        <th class="align-middle text-center">Part Name</th>
+                        <th class="align-middle text-center">No Bar</th>
+                        <th class="align-middle text-center">Channel</th>
+                        <th class="align-middle text-center">Chrome</th>
+                        <th class="align-middle text-center">Katalis</th>
+                        <th class="align-middle text-center">Qty Bar</th>
+                        <th class="align-middle text-center">Qty Aktual</th>
+                        <th class="align-middle text-center">Cycle</th>
+                        <th class="align-middle text-center">Nikel</th>
+                        <th class="align-middle text-center">Butsu</th>
+                        <th class="align-middle text-center">Hadare</th>
+                        <th class="align-middle text-center">Hage</th>
+                        <th class="align-middle text-center">Moyo</th>
+                        <th class="align-middle text-center">Fukure</th>
+                        <th class="align-middle text-center">Crack</th>
+                        <th class="align-middle text-center">Henkei</th>
+                        <th class="align-middle text-center">Hana zaki</th>
+                        <th class="align-middle text-center">Kizu</th>
+                        <th class="align-middle text-center">Kaburi</th>
+                        <th class="align-middle text-center">Shiro moya</th>
+                        <th class="align-middle text-center">Shimi</th>
+                        <th class="align-middle text-center">Pitto</th>
+                        <th class="align-middle text-center">Misto</th>
+                        <th class="align-middle text-center">Other</th>
+                        <th class="align-middle text-center">Gores</th>
+                        <th class="align-middle text-center">Regas</th>
+                        <th class="align-middle text-center">Silver</th>
+                        <th class="align-middle text-center">Hike</th>
+                        <th class="align-middle text-center">Burry</th>
+                        <th class="align-middle text-center">Others</th>
+                        <th class="align-middle text-center">Total OK</th>
+                        <th class="align-middle text-center">Total NG</th>
                         <th>% Total OK</th>
                         <th>% Total NG</th>
                         <th>Keterangan</th>
@@ -105,10 +105,10 @@
                                 {{ \Carbon\Carbon::parse($all->tanggal_k)->format('d-m-Y') }} </td>
                             <td style="width:1px; white-space:nowrap;" align="center">{{ $all->waktu_k }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $all->part_name }}</td>
-                            <td>{{ $all->no_bar }}</td>
-                            <td>{{ $all->channel }}</td>
-                            <td>{{ $all->grade_color }}</td>
-                            <td>{{ $all->katalis }}</td>
+                            <td align="center">{{ $all->no_bar }}</td>
+                            <td align="center">{{ $all->channel }}</td>
+                            <td align="center">{{ $all->grade_color }}</td>
+                            <td align="center">{{ $all->katalis }}</td>
                             <td class="text-center">{{ $all->qty_bar }}</td>
                             <td class="text-center">{{ $all->qty_aktual }}</td>
                             <td class="text-center">{{ $all->cycle }}</td>

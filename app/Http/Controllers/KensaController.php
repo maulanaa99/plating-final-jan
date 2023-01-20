@@ -23,10 +23,17 @@ class KensaController extends Controller
     public function index(Request $request)
     {
         $date = Carbon::parse($request->date)->format('Y-m-d');
+
+        // $start_date = Carbon::parse($request->date)->startOfDay()->format('Y-m-d h:i:s');
+        // $end_date = Carbon::parse($request->date)->endOfDay()->format('Y-m-d h:i:s');
+        // dd($start_date, $end_date);
+
+
+
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->join('plating', 'plating.id', '=', 'kensa.id_plating')
             ->select('kensa.*', 'masterdata.stok_bc', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle', 'plating.qty_aktual', 'plating.tanggal_u', 'plating.waktu_in_u')
-            // ->orderBy('tanggal_k', 'desc')->orderBy('waktu_k', 'desc')
+            ->orderBy('tanggal_k', 'desc')->orderBy('waktu_k', 'desc')
             ->where('tanggal_k', '=', $date)
             ->get();
 
@@ -537,6 +544,7 @@ class KensaController extends Controller
         $pengiriman = Pengiriman::join('masterdata', 'masterdata.id', '=', 'pengiriman.id_masterdata')
             ->select('pengiriman.*', 'masterdata.part_name', 'masterdata.qty_bar')
             ->where('tgl_kanban', '=', $date)
+            ->orderBy('tgl_kanban', 'desc')->orderBy('waktu_kanban', 'desc')
             ->get();
 
         $masterdata = MasterData::all();

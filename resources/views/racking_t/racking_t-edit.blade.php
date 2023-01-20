@@ -1,4 +1,14 @@
 @extends('layout.master')
+
+@section('title')
+    Edit Data Racking
+@endsection
+
+@section('breadcrumb')
+    @parent
+    <li class="active"> > Racking > Edit Data Racking</li>
+@endsection
+
 @push('page-styles')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
@@ -11,7 +21,7 @@
                 <!-- jquery validation -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Data Produksi Racking</small></h3>
+                        <h3 class="card-title">Edit Data Produksi Racking</small></h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->

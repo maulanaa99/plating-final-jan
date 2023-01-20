@@ -13,11 +13,12 @@
     <div class="card-header">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
-            <form action="{{ route('stok') }}" method="GET">
+                <form action="{{ route('stok') }}" method="GET">
                     <div class="row">
                         <div class="col-md-4">
                             <label for="">Tanggal</label>
-                            <input type="date" class="form-control" name="date" id="date" value="{{ $date }}" >
+                            <input type="date" class="form-control" name="date" id="date"
+                                value="{{ $date }}">
                         </div>
                         <div class="col-md-4">
                             <label for="" class="text-white">Filter</label> <br>
@@ -30,58 +31,58 @@
     </div>
 
     <div class="card-body">
-        <table id="add-row" class="table table-sm table-hover table-bordered table-striped compact">
+        <table id="add-row" class="table table-sm table-hover table-bordered table-striped">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Part Number</th>
-                    <th>Part Name</th>
-                    <th class="text-center">Stok BC</th>
-                    <th class="text-center">Total OK</th>
-                    <th class="text-center">Total NG</th>
-                    <th class="text-center">Stok</th>
-                    <th class="text-center">Total Kirim</th>
-                    <th class="text-center">No Kartu</th>
-                    <th class="text-center">Kirim Painting</th>
-                    <th class="text-center">Kirim Assy</th>
-                    <th class="text-center">Kirim PPIC</th>
+                    <th class="align-middle text-center">Part Name</th>
+                    <th class="align-middle text-center">Stok BC</th>
+                    <th class="align-middle text-center">Total OK</th>
+                    <th class="align-middle text-center">Total NG</th>
+                    <th class="align-middle text-center">Stok</th>
+                    <th class="align-middle text-center">Total Kirim</th>
+                    <th class="align-middle text-center">No Kartu</th>
+                    <th class="align-middle text-center">Kirim Painting</th>
+                    <th class="align-middle text-center">Kirim Assy</th>
+                    <th class="align-middle text-center">Kirim PPIC</th>
                 </tr>
             </thead>
 
             <tbody>
                 @foreach ($stok as $row)
                     <tr>
-                        <td style="width:1px; white-space:nowrap;"> <center> {{ $loop->iteration }} </center></td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->no_part }}</td>
-                        <td style="width:1px; white-space:nowrap;">{{ $row->part_name }}</td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->stok_bc }}</td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->total_ok }} </td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->total_ng }} </td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->stok }} </td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->total_kirim }}</td>
+                        <td>
+                            <center> {{ $loop->iteration }} </center>
+                        </td>
+                        <td>{{ $row->part_name }}</td>
+                        <td align="center">{{ $row->stok_bc }}</td>
+                        <td align="center">{{ $row->total_ok }} </td>
+                        <td align="center">{{ $row->total_ng }} </td>
+                        <td align="center">{{ $row->stok }} </td>
+                        <td align="center">{{ $row->total_kirim }}</td>
                         {{-- <td>{{ $row->getTotal() }} </td> --}}
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->no_kartu??0 }} </td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->kirim_painting??0 }} </td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->kirim_assy??0  }} </td>
-                        <td style="width:1px; white-space:nowrap;" class="text-center">{{ $row->kirim_ppic??0  }}</td>
+                        <td align="center">{{ $row->no_kartu ?? 0 }} </td>
+                        <td align="center">{{ $row->kirim_painting ?? 0 }} </td>
+                        <td align="center">{{ $row->kirim_assy ?? 0 }} </td>
+                        <td align="center">{{ $row->kirim_ppic ?? 0 }}</td>
                     </tr>
                 @endforeach
 
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">
+                    <td colspan="2">
                         <center> <b> Total </b> </center>
                     </td>
-                    <td class="text-center"> <b> {{ $sum_stok_bc }}</b></td>
-                    <td class="text-center"> <b> {{ $sum_total_ok }}</b></td>
-                    <td class="text-center"> <b> {{ $sum_total_ng }}</b></td>
-                    <td class="text-center"> <b> {{ $sum_stok }}</b></td>
-                    <td class="text-center"> <b> {{ $sum_total_kirim }} </b> </td>
-                    <td class="text-center"></td>
-                    <td class="text-center"> <b> {{ $sum_kirim_painting }}</b></td>
-                    <td class="text-center"> <b> {{ $sum_kirim_assy }}</b></td>
-                    <td class="text-center"> <b> {{ $sum_kirim_ppic }}</b></td>
+                    <td align="center"> <b> {{ $sum_stok_bc }}</b></td>
+                    <td align="center"> <b> {{ $sum_total_ok }}</b></td>
+                    <td align="center"> <b> {{ $sum_total_ng }}</b></td>
+                    <td align="center"> <b> {{ $sum_stok }}</b></td>
+                    <td align="center"> <b> {{ $sum_total_kirim }} </b> </td>
+                    <td align="center"></td>
+                    <td align="center"> <b> {{ $sum_kirim_painting }}</b></td>
+                    <td align="center"> <b> {{ $sum_kirim_assy }}</b></td>
+                    <td align="center"> <b> {{ $sum_kirim_ppic }}</b></td>
                 </tr>
             </tfoot>
         </table>

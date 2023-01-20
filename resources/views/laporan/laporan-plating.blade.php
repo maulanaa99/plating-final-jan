@@ -54,8 +54,8 @@
                         <th>Waktu Unracking</th>
                         <th>No Bar</th>
                         <th>Part Name</th>
-                        <th>Part Number</th>
                         <th>Katalis</th>
+                        <th>Kategori</th>
                         <th>Channel</th>
                         <th>Grade Color</th>
                         <th>Qty Bar</th>
@@ -69,20 +69,20 @@
                     @foreach ($plating as $no => $rack)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} </td>
-                            <td>{{ $rack->waktu_in_r }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rack->tanggal_u)->format('d-m-Y') }} </td>
-                            <td>{{ $rack->waktu_in_u }}</td>
-                            <td>{{ $rack->no_bar }}</td>
-                            <td>{{ $rack->part_name }}</td>
-                            <td>{{ $rack->no_part }}</td>
-                            <td>{{ $rack->katalis }}</td>
-                            <td>{{ $rack->channel }}</td>
-                            <td>{{ $rack->grade_color }}</td>
-                            <td>{{ $rack->qty_bar }}</td>
-                            <td>{{ $rack->qty_aktual }}</td>
+                            <td align="center">{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} </td>
+                            <td align="center">{{ $rack->waktu_in_r }}</td>
+                            <td align="center">{{ \Carbon\Carbon::parse($rack->tanggal_u)->format('d-m-Y') }} </td>
+                            <td align="center">{{ $rack->waktu_in_u }}</td>
+                            <td align="center">{{ $rack->no_bar }}</td>
+                            <td style="width:1px; white-space:nowrap;">{{ $rack->part_name }}</td>
+                            <td align="center">{{ $rack->katalis }}</td>
+                            <td align="center">{{ $rack->kategori }}</td>
+                            <td align="center">{{ $rack->channel }}</td>
+                            <td align="center">{{ $rack->grade_color }}</td>
+                            <td align="center">{{ $rack->qty_bar }}</td>
+                            <td align="center">{{ $rack->qty_aktual }}</td>
                             <td>{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
-                            <td>{{ $rack->cycle }}</td>
+                            <td align="center">{{ $rack->cycle }}</td>
                         </tr>
                     @endforeach
                 </tbody>

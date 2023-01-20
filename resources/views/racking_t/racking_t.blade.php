@@ -39,15 +39,15 @@
                         <th class="align-middle text-center">Tgl Racking</th>
                         <th class="align-middle text-center">No Bar</th>
                         <th class="align-middle text-center">Part Name</th>
-                        <th class="align-middle text-center">Part Number</th>
                         <th class="align-middle text-center">Katalis</th>
+                        <th class="align-middle text-center">Kategori</th>
                         <th class="align-middle text-center">Channel</th>
                         <th class="align-middle text-center">Chrome</th>
                         <th class="align-middle text-center">Qty Bar</th>
                         <th class="align-middle text-center">Tgl Lot Prod Mldg</th>
                         <th class="align-middle text-center">Cycle</th>
                         <th class="align-middle text-center">PIC</th>
-                        <th class="align-middle text-center">Kategori</th>
+                        <th class="align-middle text-center">Keterangan</th>
                         <th class="align-middle text-center">Action</th>
                     </tr>
                 </thead>
@@ -57,17 +57,17 @@
                         <tr>
                             <td>{{ $no + 1 }}</td>
                             <td>{{ \Carbon\Carbon::parse($rack->tanggal_r)->format('d-m-Y') }} {{ $rack->waktu_in_r }}</td>
-                            <td>{{ $rack->no_bar }}</td>
+                            <td align="center">{{ $rack->no_bar }}</td>
                             <td>{{ $rack->part_name }}</td>
-                            <td>{{ $rack->no_part }}</td>
-                            <td>{{ $rack->katalis }}</td>
-                            <td>{{ $rack->channel }}</td>
-                            <td>{{ $rack->grade_color }}</td>
-                            <td>{{ $rack->qty_bar }}</td>
-                            <td>{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
-                            <td>{{ $rack->cycle }}</td>
-                            <td>{{ $rack->created_by }}</td>
+                            <td align="center">{{ $rack->katalis }}</td>
                             <td align="center">{{ $rack->kategori }}</td>
+                            <td align="center">{{ $rack->channel }}</td>
+                            <td align="center">{{ $rack->grade_color }}</td>
+                            <td align="center">{{ $rack->qty_bar }}</td>
+                            <td align="center">{{ \Carbon\Carbon::parse($rack->tgl_lot_prod_mldg)->format('d-m-Y') }}</td>
+                            <td align="center">{{ $rack->cycle }}</td>
+                            <td>{{ $rack->created_by }}</td>
+                            <td>{{ $rack->keterangan }}</td>
                             <td align="center">
                                 <a href="{{ route('racking_t.edit', $rack->id) }}"
                                     class="btn btn-icon btn-sm btn-warning"><i class="far fa-edit"></i> </a>

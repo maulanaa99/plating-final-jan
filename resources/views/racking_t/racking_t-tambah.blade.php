@@ -176,10 +176,18 @@ is-invalid
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        <div class="col-md-3">
                                             <div class="form-group">
                                                 <Label> Qty Bar</Label>
                                                 <input type="text" id="qty_bar" name="qty_bar" value=""
+                                                    required class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <Label> Keterangan</Label>
+                                                <input type="text" id="keterangan" name="keterangan" value=""
                                                     required class="form-control">
                                             </div>
                                         </div>

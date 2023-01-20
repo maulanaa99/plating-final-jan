@@ -41,6 +41,11 @@
 @section('title')
     Tambah Data Unracking
 @endsection
+
+@section('breadcrumb')
+    @parent
+    <li class="active"> > Unracking > Tambah Data</li>
+@endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">

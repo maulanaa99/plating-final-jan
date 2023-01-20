@@ -1,4 +1,14 @@
 @extends('layout.master')
+
+@section('title')
+    Edit Data Kensa
+@endsection
+
+@section('breadcrumb')
+    @parent
+    <li class="active"> > Kensa > Edit Data</li>
+@endsection
+
 @push('page-styles')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
