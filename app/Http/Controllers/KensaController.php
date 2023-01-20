@@ -28,8 +28,6 @@ class KensaController extends Controller
         // $end_date = Carbon::parse($request->date)->endOfDay()->format('Y-m-d h:i:s');
         // dd($start_date, $end_date);
 
-
-
         $kensa = kensa::join('masterdata', 'masterdata.id', '=', 'kensa.id_masterdata')
             ->join('plating', 'plating.id', '=', 'kensa.id_plating')
             ->select('kensa.*', 'masterdata.stok_bc', 'plating.part_name', 'plating.no_bar', 'plating.qty_bar', 'plating.cycle', 'plating.qty_aktual', 'plating.tanggal_u', 'plating.waktu_in_u')

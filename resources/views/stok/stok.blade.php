@@ -18,7 +18,25 @@
                         <div class="col-md-4">
                             <label for="">Tanggal</label>
                             <input type="date" class="form-control" name="date" id="date"
-                                value="{{ $date }}">
+                                value="">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="text-white">Filter</label> <br>
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </div>
+                </form>
+                <form action="{{ route('stok') }}" method="GET">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Tanggal</label>
+                            <input type="datetime-local" class="form-control" name="start_date" id="start_date"
+                                value="{{ $start_date }}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Tanggal</label>
+                            <input type="datetime-local" class="form-control" name="end_date" id="end_date"
+                                value="{{ $end_date }}">
                         </div>
                         <div class="col-md-4">
                             <label for="" class="text-white">Filter</label> <br>

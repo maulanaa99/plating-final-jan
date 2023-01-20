@@ -22,10 +22,29 @@
 
 @section('content')
     <div class="card-header centering">
+        {{-- <form action="{{ route('laporan.kensa') }}" method="GET">
+            <div class="row input-daterange">
+                <div class="col-md-5">
+                    <input type="date" class="form-control" name="start_date" id="start_date" value="{{ $start_date }}">
+                </div>
+                <div class="col-md-1">
+                    <center>
+                        <font size="5"><b> - </b> </font>
+                    </center>
+                </div>p
+                <div class="col-md-5">
+                    <input type="date" class="form-control" name="end_date" id="end_date" value="{{ $end_date }}">
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form> --}}
+
         <form action="{{ route('laporan.kensa') }}" method="GET">
             <div class="row input-daterange">
                 <div class="col-md-5">
-                    <input type="date" class="form-control" name="start_date" id="start_date"
+                    <input type="datetime-local" class="form-control" name="start_date" id="start_date"
                         value="{{ $start_date }}">
                 </div>
                 <div class="col-md-1">
@@ -34,7 +53,7 @@
                     </center>
                 </div>
                 <div class="col-md-5">
-                    <input type="date" class="form-control" name="end_date" id="end_date"
+                    <input type="datetime-local" class="form-control" name="end_date" id="end_date"
                         value="{{ $end_date }}">
                 </div>
                 <div class="col-md-1">
@@ -42,6 +61,68 @@
                 </div>
             </div>
         </form>
+    </div>
+
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>{{ number_format($total_ok, 2) }}%</h3>
+                        <p>
+                            <font size="5"> Total OK </font>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>{{ number_format($total_ng, 2) }}%</h3>
+                        <p>
+                            <font size="5"> Total NG </font>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>{{ $kensa_today }} Bar</h3>
+                        <p>
+                            <font size="5"> Jumlah Pengecekan </font>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>{{ number_format($kensa_total, 0, '.', '.') }} Pcs</h3>
+                        <p>
+                            <font size="5"> Total Produksi </font>
+                        </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card-body">
@@ -88,8 +169,9 @@
                     @foreach ($kensa as $no => $kensha)
                         <tr>
                             <td>{{ $no + 1 }}</td>
-                            <td style="width:1px; white-space:nowrap;"> {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }} </td>
-                            <td style="width:1px; white-space:nowrap;"> {{ $kensha->waktu_k}} </td>
+                            <td style="width:1px; white-space:nowrap;">
+                                {{ \Carbon\Carbon::parse($kensha->tanggal_k)->format('d-m-Y') }} </td>
+                            <td style="width:1px; white-space:nowrap;"> {{ $kensha->waktu_k }} </td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->part_name }}</td>
                             <td align="center">{{ $kensha->no_bar }}</td>
                             <td align="center">{{ $kensha->qty_bar }}</td>
@@ -120,12 +202,52 @@
                             <td align="center">{{ $kensha->total_ng }}</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ok }} %</td>
                             <td style="width:1px; white-space:nowrap;">{{ $kensha->p_total_ng }} %</td>
+                            {{-- <td style="width:1px; white-space:nowrap;">{{ $kensha->date_time }}</td> --}}
+
                         </tr>
                     @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8" class="bg-transparent"></td>
+                        <td class="text-center"><b>{{ $sum_nikel }}</b></td>
+                        <td class="text-center"><b>{{ $sum_butsu }}</b></td>
+                        <td class="text-center"><b>{{ $sum_hadare }}</b></td>
+                        <td class="text-center"><b>{{ $sum_hage }}</b></td>
+                        <td class="text-center"><b>{{ $sum_moyo }}</b></td>
+                        <td class="text-center"><b>{{ $sum_fukure }}</b></td>
+                        <td class="text-center"><b>{{ $sum_crack }}</b></td>
+                        <td class="text-center"><b>{{ $sum_henkei }}</b></td>
+                        <td class="text-center"><b>{{ $sum_hanazaki }}</b></td>
+                        <td class="text-center"><b>{{ $sum_kizu }}</b></td>
+                        <td class="text-center"><b>{{ $sum_kaburi }}</b></td>
+                        <td class="text-center"><b>{{ $sum_shiromoya }}</b></td>
+                        <td class="text-center"><b>{{ $sum_shimi }}</b></td>
+                        <td class="text-center"><b>{{ $sum_pitto }}</b></td>
+                        <td class="text-center"><b>{{ $sum_misto }}</b></td>
+                        <td class="text-center"><b>{{ $sum_other }}</b></td>
+                        <td class="text-center"><b>{{ $sum_gores }}</b></td>
+                        <td class="text-center"><b>{{ $sum_regas }}</b></td>
+                        <td class="text-center"><b>{{ $sum_silver }}</b></td>
+                        <td class="text-center"><b>{{ $sum_hike }}</b></td>
+                        <td class="text-center"><b>{{ $sum_burry }}</b></td>
+                        <td class="text-center"><b>{{ $sum_others }}</b></td>
+                        <td class="text-center"><b>{{ $sum_total_ng }}</b></td>
+                        <td class="text-center">{{ '-' }}</td>
+                        <td class="text-center">{{ '-' }}</td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
+    {{-- <div class="card-body">
+        <h1>Total OK</h1>
+        <h5>{{ number_format($total_ok,2) }}%</h5>
+        <h1>Total NG</h1>
+        <h5>{{ number_format($total_ng,2) }}%</h5>
+    </div> --}}
+
+
     <br>
     </div>
 @endsection
@@ -152,9 +274,9 @@
                 scrollY: "700px",
                 scrollX: true,
                 scrollCollapse: true,
-                paging: true,
+                paging: false,
                 fixedColumns: {
-                    left: 7,
+                    left: 8,
                 }
             }).buttons().container().appendTo('#add-row_wrapper .col-md-6:eq(0)');
         });

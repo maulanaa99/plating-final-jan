@@ -236,14 +236,14 @@
             type: 'doughnut',
             data: {
                 labels: ['nikel', 'butsu', 'hadare', 'hage', 'moyo', 'fukure', 'crack', 'henkei', 'hanazaki',
-                    'kizu', 'kaburi', 'other', 'gores', 'regas', 'silver', 'hike', 'burry', 'others'
+                    'kizu', 'kaburi', 'shiromoya', 'shimi', 'pitto', 'misto', 'other', 'gores', 'regas', 'silver', 'hike', 'burry', 'others'
                 ],
                 datasets: [{
                     label: '# of Votes',
                     data: [{{ $sum_nikel }}, {{ $sum_butsu }}, {{ $sum_hadare }},
                         {{ $sum_hage }}, {{ $sum_moyo }}, {{ $sum_fukure }},
                         {{ $sum_crack }}, {{ $sum_henkei }}, {{ $sum_hanazaki }},
-                        {{ $sum_kizu }}, {{ $sum_kaburi }}, {{ $sum_other }},
+                        {{ $sum_kizu }}, {{ $sum_kaburi }}, {{ $sum_shiromoya }}, {{ $sum_shimi }}, {{ $sum_pitto }}, {{ $sum_misto }}, {{ $sum_other }},
                         {{ $sum_gores }}, {{ $sum_regas }}, {{ $sum_silver }},
                         {{ $sum_hike }}, {{ $sum_burry }}, {{ $sum_others }}
                     ],
